@@ -1,0 +1,769 @@
+.whySection {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+
+  padding: 140px 8%;
+
+  background:
+    radial-gradient(
+      circle at 78% 35%,
+      rgba(216, 175, 37, 0.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 18% 65%,
+      rgba(255, 255, 255, 0.035),
+      transparent 28%
+    ),
+    #050505;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bgGrid {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+  opacity: 0.12;
+
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+
+  background-size: 42px 42px;
+
+  mask-image: linear-gradient(to bottom, black, transparent 92%);
+}
+
+.bgGlow {
+  position: absolute;
+  right: 8%;
+  top: 30%;
+
+  width: 420px;
+  height: 420px;
+
+  border-radius: 50%;
+  background: rgba(216, 175, 37, 0.08);
+  filter: blur(100px);
+
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: minmax(320px, 0.72fr) minmax(520px, 1.28fr);
+  align-items: start;
+  gap: 90px;
+}
+
+/* =========================
+   Left Column
+========================= */
+
+.leftCol {
+  position: sticky;
+  top: 130px;
+  align-self: start;
+  min-width: 0;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 24px;
+
+  color: var(--gold);
+
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.leftCol h2 {
+  margin-bottom: 34px;
+
+  color: #fff;
+
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: clamp(2.7rem, 4.8vw, 5.4rem);
+  font-weight: 900;
+  line-height: 0.88;
+  letter-spacing: -0.08em;
+}
+
+.leftCol h2 span {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.intro {
+  max-width: 390px;
+  margin-bottom: 34px;
+
+  color: rgba(255, 255, 255, 0.62);
+
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1.72;
+}
+
+.badges {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.badges span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: var(--gold);
+
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.badges span:nth-child(2) {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* =========================
+   Right Column
+========================= */
+
+.rightCol {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.reasonRow {
+  position: relative;
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 28px;
+
+  padding: 34px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  transition:
+    padding 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease,
+    transform 0.35s ease;
+}
+
+.reasonRow:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.reasonRow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+  transform: translateX(-18px);
+
+  background: linear-gradient(
+    90deg,
+    rgba(216, 175, 37, 0.11),
+    transparent 55%
+  );
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.reasonNumber,
+.reasonContent {
+  position: relative;
+  z-index: 2;
+}
+
+.reasonNumber {
+  color: rgba(255, 255, 255, 0.13);
+
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: clamp(1.8rem, 3vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.08em;
+
+  transition: color 0.35s ease;
+}
+
+.reasonContent {
+  min-width: 0;
+}
+
+.reasonContent h3 {
+  margin-bottom: 12px;
+
+  color: #fff;
+
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: clamp(1.15rem, 1.6vw, 1.6rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.05em;
+}
+
+.reasonContent p {
+  max-width: 660px;
+
+  color: rgba(255, 255, 255, 0.58);
+
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.68;
+}
+
+/* =========================
+   CTA Box
+========================= */
+
+.ctaBox {
+  margin-top: 36px;
+  padding: 28px 32px;
+  border-radius: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  border: 1px solid rgba(255, 255, 255, 0.13);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.02)
+    ),
+    rgba(255, 255, 255, 0.025);
+
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
+}
+
+.ctaBox p {
+  color: #fff;
+
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.ctaButton {
+  flex: 0 0 auto;
+
+  min-height: 50px;
+  padding: 15px 28px;
+  border-radius: 999px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  background: #fff;
+  color: #000;
+
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.ctaButton span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+/* =========================
+   Desktop Hover Only
+========================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .reasonRow:hover {
+    padding-left: 22px;
+    border-color: rgba(216, 175, 37, 0.35);
+  }
+
+  .reasonRow:hover::before {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reasonRow:hover .reasonNumber {
+    color: var(--gold);
+  }
+
+  .ctaButton:hover {
+    background: var(--gold);
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(216, 175, 37, 0.22);
+  }
+
+  .ctaButton:hover span {
+    transform: translate(3px, -3px);
+  }
+}
+
+/* =========================
+   Smaller Desktop
+========================= */
+
+@media (max-width: 1240px) and (min-width: 1025px) {
+  .whySection {
+    padding: 116px 6%;
+  }
+
+  .container {
+    grid-template-columns: minmax(285px, 0.78fr) minmax(500px, 1.22fr);
+    gap: 52px;
+  }
+
+  .leftCol h2 {
+    font-size: clamp(2.45rem, 4.1vw, 4.2rem);
+  }
+
+  .intro {
+    font-size: 0.94rem;
+  }
+
+  .reasonRow {
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 21px;
+    padding: 29px 0;
+  }
+
+  .reasonContent h3 {
+    font-size: clamp(1.05rem, 1.4vw, 1.36rem);
+  }
+
+  .reasonContent p {
+    font-size: 0.93rem;
+  }
+
+  .ctaBox {
+    padding: 24px 26px;
+  }
+}
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 1024px) {
+  .whySection {
+    min-height: auto;
+    padding: 96px 6% 90px;
+  }
+
+  .bgGrid {
+    background-size: 36px 36px;
+    opacity: 0.1;
+  }
+
+  .bgGlow {
+    top: 26%;
+    right: -105px;
+
+    width: 330px;
+    height: 330px;
+
+    filter: blur(86px);
+  }
+
+  .container {
+    max-width: 760px;
+
+    grid-template-columns: 1fr;
+    gap: 58px;
+  }
+
+  .leftCol {
+    position: relative;
+    top: auto;
+  }
+
+  .eyebrow {
+    margin-bottom: 19px;
+  }
+
+  .leftCol h2 {
+    max-width: 720px;
+    margin-bottom: 27px;
+
+    font-size: clamp(3rem, 9.4vw, 5.2rem);
+  }
+
+  .intro {
+    max-width: 610px;
+    margin-bottom: 27px;
+
+    font-size: 0.98rem;
+  }
+
+  .badges {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 13px 25px;
+  }
+
+  .reasonRow {
+    grid-template-columns: 60px minmax(0, 1fr);
+    gap: 23px;
+
+    padding: 30px 0;
+  }
+
+  .reasonNumber {
+    font-size: clamp(1.6rem, 4.5vw, 2.5rem);
+  }
+
+  .reasonContent h3 {
+    font-size: clamp(1.12rem, 3vw, 1.45rem);
+  }
+
+  .reasonContent p {
+    font-size: 0.96rem;
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 700px) {
+  .whySection {
+    padding: 72px 16px 66px;
+
+    background:
+      radial-gradient(
+        circle at 84% 26%,
+        rgba(216, 175, 37, 0.08),
+        transparent 29%
+      ),
+      radial-gradient(
+        circle at 14% 82%,
+        rgba(255, 255, 255, 0.03),
+        transparent 26%
+      ),
+      #050505;
+  }
+
+  .bgGrid {
+    opacity: 0.08;
+    background-size: 31px 31px;
+  }
+
+  .bgGlow {
+    top: 22%;
+    right: -128px;
+
+    width: 265px;
+    height: 265px;
+
+    background: rgba(216, 175, 37, 0.07);
+    filter: blur(72px);
+  }
+
+  .container {
+    gap: 38px;
+  }
+
+  .eyebrow {
+    margin-bottom: 15px;
+
+    font-size: 0.62rem;
+    letter-spacing: 1.55px;
+  }
+
+  .leftCol h2 {
+    margin-bottom: 20px;
+
+    font-size: clamp(2.38rem, 12.4vw, 3.45rem);
+    line-height: 0.92;
+    letter-spacing: -0.07em;
+  }
+
+  .intro {
+    margin-bottom: 23px;
+
+    font-size: 0.87rem;
+    line-height: 1.62;
+  }
+
+  .badges {
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .badges span {
+    font-size: 0.62rem;
+    letter-spacing: 1.15px;
+  }
+
+  .rightCol {
+    gap: 10px;
+  }
+
+  .reasonRow {
+    grid-template-columns: 39px minmax(0, 1fr);
+    gap: 12px;
+
+    padding: 18px 14px;
+    border-radius: 14px;
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.038),
+        rgba(255, 255, 255, 0.013)
+      ),
+      rgba(255, 255, 255, 0.014);
+  }
+
+  .reasonRow:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
+  }
+
+  .reasonRow::before {
+    opacity: 1;
+    transform: none;
+
+    background: linear-gradient(
+      90deg,
+      rgba(216, 175, 37, 0.055),
+      transparent 58%
+    );
+  }
+
+  .reasonNumber {
+    padding-top: 2px;
+
+    color: rgba(216, 175, 37, 0.72);
+
+    font-size: 1.17rem;
+    letter-spacing: -0.06em;
+  }
+
+  .reasonContent h3 {
+    margin-bottom: 7px;
+
+    font-size: clamp(0.92rem, 4.2vw, 1.06rem);
+    line-height: 1.22;
+    letter-spacing: -0.045em;
+  }
+
+  .reasonContent p {
+    font-size: 0.78rem;
+    line-height: 1.56;
+  }
+
+  .ctaBox {
+    margin-top: 14px;
+    padding: 20px 16px;
+    border-radius: 15px;
+
+    align-items: stretch;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ctaBox p {
+    font-size: 0.88rem;
+  }
+
+  .ctaButton {
+    width: 100%;
+    min-height: 46px;
+    padding: 13px 18px;
+
+    background: var(--gold);
+
+    font-size: 0.68rem;
+  }
+}
+
+/* =========================
+   Smaller Mobile / iPhone XR
+========================= */
+
+@media (max-width: 430px) {
+  .whySection {
+    padding: 62px 13px 55px;
+  }
+
+  .container {
+    gap: 33px;
+  }
+
+  .eyebrow {
+    font-size: 0.57rem;
+    margin-bottom: 13px;
+  }
+
+  .leftCol h2 {
+    font-size: clamp(2.08rem, 11.8vw, 2.85rem);
+    margin-bottom: 17px;
+  }
+
+  .intro {
+    margin-bottom: 19px;
+
+    font-size: 0.79rem;
+    line-height: 1.57;
+  }
+
+  .badges span {
+    font-size: 0.56rem;
+  }
+
+  .rightCol {
+    gap: 8px;
+  }
+
+  .reasonRow {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 9px;
+
+    padding: 15px 11px;
+    border-radius: 12px;
+  }
+
+  .reasonNumber {
+    font-size: 0.99rem;
+  }
+
+  .reasonContent h3 {
+    font-size: clamp(0.84rem, 3.9vw, 0.94rem);
+  }
+
+  .reasonContent p {
+    font-size: 0.7rem;
+    line-height: 1.5;
+  }
+
+  .ctaBox {
+    margin-top: 12px;
+    padding: 17px 13px;
+  }
+
+  .ctaBox p {
+    font-size: 0.78rem;
+  }
+
+  .ctaButton {
+    min-height: 42px;
+    font-size: 0.61rem;
+  }
+}
+
+/* =========================
+   Extra Small Mobile
+========================= */
+
+@media (max-width: 360px) {
+  .whySection {
+    padding: 54px 10px 48px;
+  }
+
+  .container {
+    gap: 28px;
+  }
+
+  .leftCol h2 {
+    font-size: clamp(1.86rem, 11.4vw, 2.3rem);
+  }
+
+  .intro {
+    font-size: 0.72rem;
+  }
+
+  .badges span {
+    font-size: 0.51rem;
+    letter-spacing: 0.85px;
+  }
+
+  .reasonRow {
+    grid-template-columns: 27px minmax(0, 1fr);
+    gap: 7px;
+
+    padding: 13px 9px;
+  }
+
+  .reasonNumber {
+    font-size: 0.86rem;
+  }
+
+  .reasonContent h3 {
+    font-size: 0.76rem;
+  }
+
+  .reasonContent p {
+    font-size: 0.64rem;
+  }
+
+  .ctaBox {
+    padding: 15px 11px;
+  }
+
+  .ctaBox p {
+    font-size: 0.71rem;
+  }
+
+  .ctaButton {
+    min-height: 39px;
+    padding: 11px 14px;
+
+    font-size: 0.55rem;
+  }
+}
+
+/* =========================
+   Reduced Motion
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .reasonRow,
+  .reasonRow::before,
+  .reasonNumber,
+  .ctaButton,
+  .ctaButton span {
+    transition-duration: 0.01ms !important;
+  }
+}

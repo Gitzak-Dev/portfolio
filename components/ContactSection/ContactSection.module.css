@@ -1,0 +1,329 @@
+.contactSection {
+  position: relative;
+  overflow: hidden;
+  padding: 135px 8%;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(216, 175, 37, 0.1), transparent 28%),
+    radial-gradient(circle at 78% 70%, rgba(255, 255, 255, 0.04), transparent 30%),
+    #050505;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bgGrid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+.bgGlow {
+  position: absolute;
+  right: 8%;
+  top: 22%;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  background: rgba(216, 175, 37, 0.08);
+  filter: blur(110px);
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.9fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: var(--gold);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.leftCol h2 {
+  color: #fff;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: clamp(3.6rem, 7vw, 7.2rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.085em;
+}
+
+.leftCol h2 span {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.leftCol p {
+  max-width: 570px;
+  margin-top: 28px;
+  color: rgba(255, 255, 255, 0.62);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 1.18rem;
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+.emailCard {
+  margin-top: 48px;
+  padding: 26px 30px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
+    rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition:
+    transform 0.32s ease,
+    border-color 0.32s ease,
+    background 0.32s ease;
+}
+
+.emailCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(216, 175, 37, 0.45);
+  background:
+    radial-gradient(circle at 18% 50%, rgba(216, 175, 37, 0.14), transparent 30%),
+    rgba(255, 255, 255, 0.035);
+}
+
+.emailIcon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #000;
+  background: var(--gold);
+  font-size: 1.1rem;
+}
+
+.emailCard small {
+  display: block;
+  margin-bottom: 7px;
+  color: rgba(255, 255, 255, 0.42);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.emailCard strong {
+  color: #fff;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 1.18rem;
+  font-weight: 800;
+}
+
+.formCard {
+  padding: 52px;
+  border-radius: 30px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.018)),
+    rgba(255, 255, 255, 0.028);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 35px 100px rgba(0, 0, 0, 0.36),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.018);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.formCard label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.formGrid label {
+  margin-top: 0 !important;
+}
+
+.formGrid + label {
+  margin-top: 28px;
+}
+
+.formCard span {
+  display: block;
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.42);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.64rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.formCard input,
+.formCard textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  outline: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.035);
+  border-radius: 8px;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 0.96rem;
+  font-weight: 600;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.formCard input {
+  height: 58px;
+  padding: 0 18px;
+}
+
+.formCard textarea {
+  min-height: 132px;
+  padding: 18px;
+  resize: vertical;
+}
+
+.formCard input::placeholder,
+.formCard textarea::placeholder {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.formCard input:focus,
+.formCard textarea:focus {
+  border-color: rgba(216, 175, 37, 0.55);
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: 0 0 0 4px rgba(216, 175, 37, 0.08);
+}
+
+.submitButton {
+  width: 100%;
+  height: 72px;
+  margin-top: 38px;
+  border: 0;
+  border-radius: 999px;
+  color: #000;
+  background: #fff;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.submitButton:hover {
+  transform: translateY(-3px);
+  background: var(--gold);
+  box-shadow: 0 18px 55px rgba(216, 175, 37, 0.22);
+}
+
+.submitButton:disabled {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.statusMessage {
+  margin-top: 18px;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.success {
+  color: var(--gold);
+}
+
+.error {
+  color: #ff6b6b;
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 1100px) {
+  .contactSection {
+    padding: 115px 6%;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    gap: 52px;
+  }
+}
+
+@media (max-width: 700px) {
+  .contactSection {
+    padding: 90px 16px;
+  }
+
+  .leftCol h2 {
+    font-size: clamp(3rem, 15vw, 4.4rem);
+  }
+
+  .leftCol p {
+    font-size: 0.95rem;
+  }
+
+  .emailCard {
+    padding: 20px;
+  }
+
+  .emailCard strong {
+    font-size: 0.92rem;
+    word-break: break-all;
+  }
+
+  .formCard {
+    padding: 24px;
+    border-radius: 22px;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .formGrid label {
+    margin-top: 0 !important;
+  }
+
+  .formCard input {
+    height: 54px;
+  }
+
+  .submitButton {
+    height: 58px;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+  }
+}

@@ -1,0 +1,842 @@
+.expertiseSection {
+  position: relative;
+  overflow: hidden;
+
+  padding: 130px 8% 170px;
+
+  background:
+    radial-gradient(
+      circle at 18% 20%,
+      rgba(216, 175, 37, 0.09),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 82% 72%,
+      rgba(255, 255, 255, 0.035),
+      transparent 32%
+    ),
+    #050505;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bgGrid {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+  opacity: 0.12;
+
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+.bgGlow {
+  position: absolute;
+  left: 50%;
+  bottom: -180px;
+
+  width: 520px;
+  height: 520px;
+
+  border-radius: 50%;
+  background: rgba(216, 175, 37, 0.11);
+  filter: blur(110px);
+
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* =========================
+   Section Heading
+========================= */
+
+.sectionHeader {
+  margin-bottom: 70px;
+}
+
+.sectionHeader span {
+  display: inline-block;
+  margin-bottom: 18px;
+
+  color: var(--gold);
+
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.sectionHeader h2 {
+  color: #fff;
+
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: clamp(3rem, 5.8vw, 6.3rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.075em;
+}
+
+.sectionHeader h2 strong {
+  color: rgba(255, 255, 255, 0.34);
+  font-weight: 900;
+}
+
+/* =========================
+   Cards Grid
+========================= */
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 34px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+
+  min-width: 0;
+  min-height: 660px;
+  padding: 54px 40px 0;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.02)
+    ),
+    rgba(255, 255, 255, 0.025);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  outline: none;
+
+  transition:
+    background 0.45s ease,
+    border-color 0.45s ease,
+    transform 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 22%,
+      rgba(255, 255, 255, 0.22),
+      transparent 25%
+    ),
+    linear-gradient(180deg, var(--gold), #b8890f);
+
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -42%;
+
+  height: 55%;
+  opacity: 0;
+
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.22), transparent);
+
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+
+.card:hover,
+.card:focus-visible,
+.activeCard {
+  transform: translateY(-10px);
+  border-color: rgba(216, 175, 37, 0.7);
+
+  box-shadow:
+    0 35px 100px rgba(0, 0, 0, 0.38),
+    0 0 0 1px rgba(216, 175, 37, 0.15);
+}
+
+.card:hover::before,
+.card:focus-visible::before,
+.activeCard::before {
+  opacity: 1;
+}
+
+.card:hover::after,
+.card:focus-visible::after,
+.activeCard::after {
+  opacity: 1;
+}
+
+.iconBox,
+.cardContent,
+.mockupWrap {
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================
+   Icon
+========================= */
+
+.iconBox {
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #1f1a45;
+
+  font-size: 2.6rem;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+
+  transition:
+    transform 0.45s ease,
+    color 0.45s ease,
+    background 0.45s ease;
+}
+
+.card:hover .iconBox,
+.card:focus-visible .iconBox,
+.activeCard .iconBox {
+  transform: translateY(-8px) scale(1.04);
+  background: #070707;
+  color: var(--gold);
+}
+
+/* =========================
+   Text Content
+========================= */
+
+.cardContent {
+  text-align: center;
+}
+
+.cardContent h3 {
+  margin-bottom: 22px;
+
+  color: #fff;
+
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: clamp(1.7rem, 2.2vw, 2.35rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.06em;
+
+  transition: color 0.45s ease;
+}
+
+.cardContent p {
+  max-width: 330px;
+  margin: 0 auto;
+
+  color: rgba(255, 255, 255, 0.6);
+
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1.7;
+
+  transition: color 0.45s ease;
+}
+
+.cardLink {
+  display: inline-block;
+
+  margin-top: 28px;
+  padding-bottom: 4px;
+
+  color: #fff;
+  border-bottom: 1px solid currentColor;
+
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+
+  transition:
+    color 0.45s ease,
+    transform 0.45s ease;
+}
+
+.card:hover .cardContent h3,
+.card:focus-visible .cardContent h3,
+.activeCard .cardContent h3 {
+  color: #070707;
+}
+
+.card:hover .cardContent p,
+.card:focus-visible .cardContent p,
+.activeCard .cardContent p {
+  color: rgba(0, 0, 0, 0.72);
+}
+
+.card:hover .cardLink,
+.card:focus-visible .cardLink,
+.activeCard .cardLink {
+  color: #070707;
+  transform: translateY(-2px);
+}
+
+/* =========================
+   Mockup
+========================= */
+
+.mockupWrap {
+  position: absolute;
+  left: 50%;
+  bottom: -40px;
+
+  width: 76%;
+  transform: translateX(-50%);
+}
+
+.mockupCard {
+  overflow: hidden;
+
+  border-radius: 18px;
+  background: #fff;
+  color: #090909;
+
+  box-shadow:
+    0 34px 90px rgba(0, 0, 0, 0.34),
+    0 0 70px rgba(255, 255, 255, 0.08);
+}
+
+.mockupTop {
+  height: 38px;
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  background: rgba(0, 0, 0, 0.055);
+}
+
+.mockupTop span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.mockupTop span:nth-child(1) {
+  background: #ff5f57;
+}
+
+.mockupTop span:nth-child(2) {
+  background: #ffbd2e;
+}
+
+.mockupTop span:nth-child(3) {
+  background: #28c840;
+}
+
+.mockupBody {
+  padding: 18px;
+}
+
+.mockupBody small {
+  display: inline-block;
+  margin-bottom: 14px;
+
+  color: rgba(0, 0, 0, 0.5);
+
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.mockupBody h4 {
+  margin-bottom: 18px;
+
+  color: #070707;
+
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.06em;
+}
+
+.mockupTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin-bottom: 24px;
+}
+
+.mockupTags span {
+  padding: 8px 12px;
+  border-radius: 999px;
+
+  color: #070707;
+  background: rgba(216, 175, 37, 0.18);
+  border: 1px solid rgba(216, 175, 37, 0.28);
+
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.mockupLines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mockupLines span {
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.mockupLines span:nth-child(1) {
+  width: 86%;
+}
+
+.mockupLines span:nth-child(2) {
+  width: 64%;
+}
+
+.mockupLines span:nth-child(3) {
+  width: 74%;
+}
+
+/* =========================
+   Large Tablet / Small Desktop
+========================= */
+
+@media (max-width: 1280px) {
+  .expertiseSection {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  .cardsGrid {
+    gap: 20px;
+  }
+
+  .card {
+    min-height: 625px;
+    padding: 46px 26px 0;
+  }
+
+  .iconBox {
+    width: 94px;
+    height: 94px;
+    margin-bottom: 28px;
+    font-size: 2.2rem;
+  }
+
+  .cardContent h3 {
+    font-size: clamp(1.45rem, 2vw, 1.85rem);
+    margin-bottom: 18px;
+  }
+
+  .cardContent p {
+    font-size: 0.94rem;
+  }
+
+  .mockupWrap {
+    width: 82%;
+  }
+}
+
+/* =========================
+   Tablet Layout
+========================= */
+
+@media (max-width: 1024px) {
+  .expertiseSection {
+    padding: 105px 6% 110px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 52px;
+  }
+
+  .sectionHeader h2 {
+    font-size: clamp(2.7rem, 8vw, 5rem);
+  }
+
+  .cardsGrid {
+    max-width: 640px;
+    margin: 0 auto;
+
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .card {
+    min-height: 600px;
+    padding: 44px 34px 0;
+  }
+
+  .iconBox {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 28px;
+    font-size: 2.25rem;
+  }
+
+  .cardContent h3 {
+    font-size: 2rem;
+  }
+
+  .cardContent p {
+    max-width: 430px;
+    font-size: 1rem;
+  }
+
+  .mockupWrap {
+    width: min(78%, 430px);
+  }
+}
+
+/* =========================
+   Mobile Layout
+========================= */
+
+@media (max-width: 640px) {
+  .expertiseSection {
+    padding: 82px 16px 70px;
+
+    background:
+      radial-gradient(
+        circle at 18% 12%,
+        rgba(216, 175, 37, 0.09),
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at 75% 78%,
+        rgba(216, 175, 37, 0.05),
+        transparent 30%
+      ),
+      #050505;
+  }
+
+  .bgGrid {
+    background-size: 32px 32px;
+    opacity: 0.1;
+  }
+
+  .bgGlow {
+    left: 42%;
+    bottom: -90px;
+
+    width: 290px;
+    height: 290px;
+
+    filter: blur(80px);
+  }
+
+  .sectionHeader {
+    margin-bottom: 38px;
+  }
+
+  .sectionHeader span {
+    margin-bottom: 14px;
+    font-size: 0.64rem;
+    letter-spacing: 1.6px;
+  }
+
+  .sectionHeader h2 {
+    font-size: clamp(2.4rem, 12.5vw, 3.4rem);
+    line-height: 0.94;
+    letter-spacing: -0.07em;
+  }
+
+  .cardsGrid {
+    max-width: 100%;
+    gap: 18px;
+  }
+
+  .card {
+    min-height: 0;
+    padding: 30px 18px 18px;
+    border-radius: 20px;
+  }
+
+  .card:hover,
+  .card:focus-visible,
+  .activeCard {
+    transform: translateY(-4px);
+  }
+
+  .iconBox {
+    width: 78px;
+    height: 78px;
+    margin: 0 auto 22px;
+
+    border-radius: 15px;
+    font-size: 1.8rem;
+  }
+
+  .card:hover .iconBox,
+  .card:focus-visible .iconBox,
+  .activeCard .iconBox {
+    transform: translateY(-4px) scale(1.03);
+  }
+
+  .cardContent h3 {
+    margin-bottom: 14px;
+
+    font-size: clamp(1.55rem, 7vw, 1.85rem);
+    line-height: 1.05;
+  }
+
+  .cardContent p {
+    max-width: 100%;
+
+    font-size: 0.92rem;
+    line-height: 1.62;
+  }
+
+  .cardLink {
+    margin-top: 20px;
+
+    font-size: 0.76rem;
+  }
+
+  /*
+    Mobile par mockup absolute nahi rahega.
+    Is se card cut nahi hoga aur poora mockup visible rahega.
+  */
+  .mockupWrap {
+    position: relative;
+    left: auto;
+    bottom: auto;
+
+    width: 100%;
+    margin-top: 28px;
+
+    transform: none;
+  }
+
+  .mockupCard {
+    border-radius: 15px;
+  }
+
+  .mockupTop {
+    height: 32px;
+    padding: 0 13px;
+    gap: 6px;
+  }
+
+  .mockupTop span {
+    width: 8px;
+    height: 8px;
+  }
+
+  .mockupBody {
+    padding: 17px 16px 18px;
+  }
+
+  .mockupBody small {
+    margin-bottom: 10px;
+
+    font-size: 0.56rem;
+    letter-spacing: 0.95px;
+  }
+
+  .mockupBody h4 {
+    margin-bottom: 14px;
+    font-size: 1.15rem;
+  }
+
+  .mockupTags {
+    gap: 6px;
+    margin-bottom: 17px;
+  }
+
+  .mockupTags span {
+    padding: 6px 9px;
+
+    font-size: 0.55rem;
+    letter-spacing: 0.3px;
+  }
+
+  .mockupLines {
+    gap: 7px;
+  }
+
+  .mockupLines span {
+    height: 9px;
+  }
+}
+
+/* =========================
+   Small Phones
+========================= */
+
+@media (max-width: 430px) {
+  .expertiseSection {
+    padding: 72px 13px 58px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 32px;
+  }
+
+  .sectionHeader h2 {
+    font-size: clamp(2.15rem, 11.8vw, 2.85rem);
+  }
+
+  .card {
+    padding: 26px 14px 14px;
+    border-radius: 18px;
+  }
+
+  .iconBox {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 18px;
+    font-size: 1.6rem;
+  }
+
+  .cardContent h3 {
+    margin-bottom: 12px;
+    font-size: 1.48rem;
+  }
+
+  .cardContent p {
+    font-size: 0.85rem;
+    line-height: 1.58;
+  }
+
+  .cardLink {
+    margin-top: 17px;
+    font-size: 0.7rem;
+  }
+
+  .mockupWrap {
+    margin-top: 23px;
+  }
+
+  .mockupBody {
+    padding: 14px;
+  }
+
+  .mockupBody h4 {
+    font-size: 1.04rem;
+  }
+
+  .mockupTags span {
+    padding: 5px 8px;
+    font-size: 0.52rem;
+  }
+}
+
+/* =========================
+   Extra Small Phones
+========================= */
+
+@media (max-width: 360px) {
+  .expertiseSection {
+    padding: 66px 11px 52px;
+  }
+
+  .sectionHeader span {
+    font-size: 0.59rem;
+  }
+
+  .sectionHeader h2 {
+    font-size: clamp(1.92rem, 11.3vw, 2.3rem);
+  }
+
+  .cardsGrid {
+    gap: 15px;
+  }
+
+  .card {
+    padding: 23px 11px 11px;
+  }
+
+  .iconBox {
+    width: 63px;
+    height: 63px;
+    font-size: 1.42rem;
+  }
+
+  .cardContent h3 {
+    font-size: 1.34rem;
+  }
+
+  .cardContent p {
+    font-size: 0.8rem;
+  }
+
+  .mockupBody {
+    padding: 12px;
+  }
+
+  .mockupTags {
+    gap: 5px;
+  }
+
+  .mockupTags span {
+    padding: 5px 7px;
+    font-size: 0.48rem;
+  }
+}
+
+/* =========================
+   Hover Only On Real Mouse
+========================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    transform: translateY(-10px);
+  }
+}
+
+/* =========================
+   Reduced Motion
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card::before,
+  .card::after,
+  .iconBox,
+  .cardContent h3,
+  .cardContent p,
+  .cardLink {
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,1151 @@
+.portfolioSection {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  padding: 130px 8%;
+  background:
+    radial-gradient(
+      circle at 20% 10%,
+      rgba(216, 175, 37, 0.07),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 80% 45%,
+      rgba(255, 255, 255, 0.04),
+      transparent 30%
+    ),
+    #050505;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.portfolioSection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, black, transparent 88%);
+}
+
+.bgGlowOne,
+.bgGlowTwo {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(90px);
+}
+
+.bgGlowOne {
+  width: 380px;
+  height: 380px;
+  left: -120px;
+  top: 180px;
+  background: rgba(216, 175, 37, 0.08);
+}
+
+.bgGlowTwo {
+  width: 420px;
+  height: 420px;
+  right: -160px;
+  top: 420px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+/* =========================
+   Header
+========================= */
+
+.sectionHeader {
+  margin-bottom: 70px;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: var(--gold);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.sectionHeader h2 {
+  margin-bottom: 18px;
+  color: #fff;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: clamp(3.4rem, 6vw, 6.5rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.075em;
+}
+
+.sectionHeader p {
+  max-width: 560px;
+  color: rgba(255, 255, 255, 0.62);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 1.08rem;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+/* =========================
+   Project List
+========================= */
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.projectCard {
+  position: relative;
+  overflow: hidden;
+  min-height: 130px;
+  padding: 34px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.018)
+    ),
+    rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  outline: none;
+  transition:
+    border-color 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+}
+
+.projectCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.projectCard:focus-visible {
+  border-color: rgba(216, 175, 37, 0.48);
+  box-shadow: 0 0 0 2px rgba(216, 175, 37, 0.17);
+}
+
+.activeCard {
+  min-height: 520px;
+  border-color: rgba(255, 255, 255, 0.22);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.075),
+      rgba(255, 255, 255, 0.028)
+    ),
+    rgba(255, 255, 255, 0.035);
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.activeCard::before {
+  opacity: 1;
+}
+
+/* =========================
+   Project Theme Glows
+========================= */
+
+.themeMobile::before {
+  background: radial-gradient(
+    circle at 78% 58%,
+    rgba(76, 245, 192, 0.22),
+    transparent 34%
+  );
+}
+
+.themeAi::before {
+  background: radial-gradient(
+    circle at 78% 58%,
+    rgba(216, 175, 37, 0.24),
+    transparent 34%
+  );
+}
+
+.themeMl::before {
+  background: radial-gradient(
+    circle at 78% 58%,
+    rgba(145, 98, 255, 0.22),
+    transparent 34%
+  );
+}
+
+.themeWeb::before {
+  background: radial-gradient(
+    circle at 78% 58%,
+    rgba(86, 166, 255, 0.22),
+    transparent 34%
+  );
+}
+
+.themeBusiness::before {
+  background: radial-gradient(
+    circle at 78% 58%,
+    rgba(255, 120, 86, 0.18),
+    transparent 34%
+  );
+}
+
+/* =========================
+   Project Top Row
+========================= */
+
+.projectTop {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.projectMeta {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  align-items: center;
+  gap: 22px;
+}
+
+.projectTitleWrap {
+  min-width: 0;
+}
+
+.projectNumber {
+  color: rgba(255, 255, 255, 0.36);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.projectTop h3 {
+  margin-bottom: 8px;
+  color: #fff;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: clamp(1.5rem, 2.2vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.065em;
+}
+
+.projectInfo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.58);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.projectDivider {
+  color: rgba(216, 175, 37, 0.8);
+}
+
+.arrowBtn {
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.035);
+  font-size: 1.2rem;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.activeCard .arrowBtn {
+  color: #000;
+  background: #fff;
+  border-color: #fff;
+  transform: rotate(45deg);
+}
+
+/* =========================
+   Expanded Content
+========================= */
+
+.projectExpanded {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: center;
+  gap: 52px;
+  padding-top: 70px;
+}
+
+.projectDetails {
+  min-width: 0;
+}
+
+.projectDetails p {
+  max-width: 470px;
+  margin-bottom: 26px;
+  color: rgba(255, 255, 255, 0.76);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 1.06rem;
+  font-weight: 500;
+  line-height: 1.72;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.tags span {
+  padding: 9px 15px;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.045);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.caseButton {
+  padding: 15px 24px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.035);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.caseButton span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+/* =========================
+   Preview Card
+========================= */
+
+.previewArea {
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.previewCard {
+  overflow: hidden;
+  width: min(100%, 520px);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.94),
+      rgba(255, 255, 255, 0.78)
+    ),
+    #fff;
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.34),
+    0 0 80px rgba(216, 175, 37, 0.08);
+}
+
+.previewHeader {
+  height: 38px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.previewHeader span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.previewHeader span:nth-child(1) {
+  background: #ff5f57;
+}
+
+.previewHeader span:nth-child(2) {
+  background: #ffbd2e;
+}
+
+.previewHeader span:nth-child(3) {
+  background: #28c840;
+}
+
+/* FULL IMAGE AREA */
+.previewFullMedia {
+  position: relative;
+  height: 340px;
+  width: 100%;
+  background: #fff;
+}
+
+.previewImageFull {
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.45s ease;
+}
+
+.activeCard:hover .previewImageFull {
+  transform: scale(1.02);
+}
+
+/* Fallback */
+.previewHero {
+  min-height: 230px;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 0.9fr;
+  gap: 22px;
+  color: #111;
+}
+
+.previewText {
+  min-width: 0;
+}
+
+.previewHero small {
+  display: block;
+  margin-bottom: 18px;
+  color: rgba(0, 0, 0, 0.48);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.previewHero strong {
+  display: block;
+  max-width: 260px;
+  color: #111;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.08em;
+}
+
+.previewHero p {
+  max-width: 220px;
+  margin-top: 16px;
+  color: rgba(0, 0, 0, 0.55);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.previewVisual {
+  min-height: 185px;
+  border-radius: 18px;
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(255, 255, 255, 0.55),
+      transparent 28%
+    ),
+    linear-gradient(135deg, var(--gold), #111);
+}
+
+.themeMobile .previewVisual {
+  background:
+    radial-gradient(
+      circle at 25% 25%,
+      rgba(255, 255, 255, 0.55),
+      transparent 28%
+    ),
+    linear-gradient(135deg, #4cf5c0, #102d24);
+}
+
+.themeAi .previewVisual {
+  background:
+    radial-gradient(
+      circle at 25% 25%,
+      rgba(255, 255, 255, 0.5),
+      transparent 28%
+    ),
+    linear-gradient(135deg, #d8af25, #171103);
+}
+
+.themeMl .previewVisual {
+  background:
+    radial-gradient(
+      circle at 25% 25%,
+      rgba(255, 255, 255, 0.5),
+      transparent 28%
+    ),
+    linear-gradient(135deg, #9162ff, #160b2d);
+}
+
+.themeWeb .previewVisual {
+  background:
+    radial-gradient(
+      circle at 25% 25%,
+      rgba(255, 255, 255, 0.5),
+      transparent 28%
+    ),
+    linear-gradient(135deg, #56a6ff, #07192f);
+}
+
+.themeBusiness .previewVisual {
+  background:
+    radial-gradient(
+      circle at 25% 25%,
+      rgba(255, 255, 255, 0.5),
+      transparent 28%
+    ),
+    linear-gradient(135deg, #ff7856, #2c0c05);
+}
+
+.previewGrid {
+  padding: 0 30px 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.previewGrid span {
+  height: 70px;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.08),
+    rgba(0, 0, 0, 0.03)
+  );
+}
+
+/* =========================
+   Desktop Hover Effects
+========================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .projectCard:hover {
+    border-color: rgba(255, 255, 255, 0.24);
+    transform: translateY(-2px);
+  }
+
+  .projectCard:hover .arrowBtn {
+    color: #000;
+    background: #fff;
+    border-color: #fff;
+    transform: rotate(45deg);
+  }
+
+  .caseButton:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .caseButton:hover span {
+    transform: translateX(4px);
+  }
+}
+
+/* =========================
+   Small Desktop
+========================= */
+
+@media (max-width: 1200px) {
+  .portfolioSection {
+    padding: 110px 6%;
+  }
+
+  .container {
+    max-width: 1080px;
+  }
+
+  .projectCard {
+    padding: 30px;
+  }
+
+  .projectExpanded {
+    gap: 34px;
+    padding-top: 52px;
+  }
+
+  .previewHero {
+    padding: 24px;
+  }
+
+  .previewGrid {
+    padding: 0 24px 24px;
+  }
+
+  .previewFullMedia {
+    height: 320px;
+  }
+}
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 900px) {
+  .portfolioSection {
+    min-height: auto;
+    padding: 92px 6%;
+  }
+
+  .portfolioSection::before {
+    background-size: 36px 36px;
+    opacity: 0.12;
+  }
+
+  .bgGlowOne {
+    width: 300px;
+    height: 300px;
+    left: -145px;
+    top: 100px;
+  }
+
+  .bgGlowTwo {
+    width: 320px;
+    height: 320px;
+    right: -155px;
+    top: auto;
+    bottom: 90px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 50px;
+  }
+
+  .sectionHeader h2 {
+    font-size: clamp(3rem, 10vw, 5rem);
+  }
+
+  .sectionHeader p {
+    font-size: 0.98rem;
+  }
+
+  .projectList {
+    gap: 18px;
+  }
+
+  .projectCard {
+    min-height: 112px;
+    padding: 26px;
+    border-radius: 20px;
+  }
+
+  .activeCard {
+    min-height: auto;
+  }
+
+  .projectMeta {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .projectNumber {
+    font-size: 1.08rem;
+  }
+
+  .projectTop h3 {
+    font-size: clamp(1.34rem, 4vw, 1.75rem);
+  }
+
+  .arrowBtn {
+    width: 47px;
+    height: 47px;
+  }
+
+  .projectExpanded {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding-top: 40px;
+  }
+
+  .projectDetails p {
+    max-width: 680px;
+    font-size: 0.98rem;
+  }
+
+  .previewArea {
+    justify-content: flex-start;
+  }
+
+  .previewCard {
+    width: min(100%, 620px);
+  }
+
+  .previewFullMedia {
+    height: 360px;
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 640px) {
+  .portfolioSection {
+    padding: 72px 16px 66px;
+    background:
+      radial-gradient(
+        circle at 18% 8%,
+        rgba(216, 175, 37, 0.07),
+        transparent 26%
+      ),
+      radial-gradient(
+        circle at 85% 50%,
+        rgba(255, 255, 255, 0.035),
+        transparent 28%
+      ),
+      #050505;
+  }
+
+  .portfolioSection::before {
+    opacity: 0.09;
+    background-size: 30px 30px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 34px;
+  }
+
+  .eyebrow {
+    margin-bottom: 13px;
+    font-size: 0.62rem;
+    letter-spacing: 1.55px;
+  }
+
+  .sectionHeader h2 {
+    margin-bottom: 13px;
+    font-size: clamp(2.55rem, 13.7vw, 3.55rem);
+    line-height: 0.94;
+  }
+
+  .sectionHeader p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .projectList {
+    gap: 12px;
+  }
+
+  .projectCard {
+    min-height: 92px;
+    padding: 18px 15px;
+    border-radius: 16px;
+  }
+
+  .projectTop {
+    align-items: center;
+    gap: 10px;
+  }
+
+  .projectMeta {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .projectNumber {
+    font-size: 0.84rem;
+  }
+
+  .projectTop h3 {
+    margin-bottom: 5px;
+    font-size: clamp(1rem, 4.75vw, 1.22rem);
+    line-height: 1.12;
+    letter-spacing: -0.05em;
+  }
+
+  .projectInfo {
+    gap: 5px;
+    font-size: clamp(0.61rem, 2.55vw, 0.72rem);
+    line-height: 1.35;
+  }
+
+  .arrowBtn {
+    width: 35px;
+    height: 35px;
+    font-size: 0.86rem;
+  }
+
+  .projectExpanded {
+    gap: 24px;
+    padding-top: 25px;
+  }
+
+  .projectDetails p {
+    margin-bottom: 18px;
+    font-size: 0.82rem;
+    line-height: 1.58;
+  }
+
+  .tags {
+    gap: 7px;
+    margin-bottom: 19px;
+  }
+
+  .tags span {
+    padding: 7px 10px;
+    font-size: 0.62rem;
+  }
+
+  .caseButton {
+    min-height: 43px;
+    padding: 12px 18px;
+    font-size: 0.69rem;
+  }
+
+  .previewCard {
+    width: 100%;
+    border-radius: 16px;
+  }
+
+  .previewHeader {
+    height: 31px;
+    padding: 0 12px;
+    gap: 5px;
+  }
+
+  .previewHeader span {
+    width: 7px;
+    height: 7px;
+  }
+
+  .previewHero {
+    min-height: auto;
+    padding: 17px;
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+
+  .previewHero small {
+    margin-bottom: 10px;
+    font-size: 0.54rem;
+    letter-spacing: 1px;
+  }
+
+  .previewHero strong {
+    max-width: 100%;
+    font-size: clamp(1.25rem, 6vw, 1.58rem);
+    line-height: 1;
+  }
+
+  .previewHero p {
+    margin-top: 10px;
+    font-size: 0.69rem;
+  }
+
+  .previewVisual {
+    min-height: 124px;
+    border-radius: 12px;
+  }
+
+  .previewFullMedia {
+    height: 240px;
+  }
+
+  .previewGrid {
+    padding: 0 17px 17px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 7px;
+  }
+
+  .previewGrid span {
+    height: 38px;
+    border-radius: 8px;
+  }
+}
+
+/* =========================
+   iPhone XR / Small Phones
+========================= */
+
+@media (max-width: 430px) {
+  .portfolioSection {
+    padding: 62px 13px 55px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 29px;
+  }
+
+  .sectionHeader h2 {
+    font-size: clamp(2.28rem, 12.8vw, 3rem);
+  }
+
+  .projectCard {
+    padding: 15px 11px;
+    border-radius: 14px;
+  }
+
+  .projectMeta {
+    grid-template-columns: 27px minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .projectNumber {
+    font-size: 0.75rem;
+  }
+
+  .projectTop h3 {
+    font-size: clamp(0.91rem, 4.4vw, 1.06rem);
+  }
+
+  .projectInfo {
+    font-size: clamp(0.56rem, 2.45vw, 0.65rem);
+  }
+
+  .arrowBtn {
+    width: 31px;
+    height: 31px;
+    font-size: 0.76rem;
+  }
+
+  .projectExpanded {
+    padding-top: 21px;
+    gap: 20px;
+  }
+
+  .projectDetails p {
+    font-size: 0.77rem;
+  }
+
+  .tags span {
+    padding: 6px 8px;
+    font-size: 0.56rem;
+  }
+
+  .caseButton {
+    min-height: 39px;
+    padding: 10px 14px;
+    font-size: 0.63rem;
+  }
+
+  .previewHero {
+    padding: 14px;
+  }
+
+  .previewVisual {
+    min-height: 105px;
+  }
+
+  .previewFullMedia {
+    height: 210px;
+  }
+
+  .previewGrid {
+    padding: 0 14px 14px;
+  }
+
+  .previewGrid span {
+    height: 33px;
+  }
+}
+
+/* =========================
+   Extra Small Phones
+========================= */
+
+@media (max-width: 360px) {
+  .portfolioSection {
+    padding: 54px 10px 47px;
+  }
+
+  .eyebrow {
+    font-size: 0.56rem;
+  }
+
+  .sectionHeader h2 {
+    font-size: clamp(2rem, 12vw, 2.5rem);
+  }
+
+  .sectionHeader p {
+    font-size: 0.76rem;
+  }
+
+  .projectCard {
+    min-height: 82px;
+    padding: 13px 9px;
+  }
+
+  .projectTop {
+    gap: 7px;
+  }
+
+  .projectMeta {
+    grid-template-columns: 23px minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .projectNumber {
+    font-size: 0.67rem;
+  }
+
+  .projectTop h3 {
+    font-size: 0.82rem;
+  }
+
+  .projectInfo {
+    font-size: 0.53rem;
+    gap: 4px;
+  }
+
+  .arrowBtn {
+    width: 27px;
+    height: 27px;
+    font-size: 0.68rem;
+  }
+
+  .projectDetails p {
+    font-size: 0.71rem;
+  }
+
+  .tags {
+    gap: 5px;
+  }
+
+  .tags span {
+    padding: 5px 7px;
+    font-size: 0.51rem;
+  }
+
+  .previewHero strong {
+    font-size: 1.15rem;
+  }
+
+  .previewVisual {
+    min-height: 90px;
+  }
+
+  .previewFullMedia {
+    height: 185px;
+  }
+
+  .previewGrid span {
+    height: 28px;
+  }
+}
+
+/* =========================
+   Reduced Motion
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .projectCard,
+  .projectCard::before,
+  .arrowBtn,
+  .caseButton,
+  .caseButton span,
+  .previewImageFull {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.projectImagePreview {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.projectPreviewImage {
+  object-fit: contain;
+  object-position: center center;
+  background: #ffffff;
+  transition: transform 0.45s ease;
+}
+
+.activeCard:hover .projectPreviewImage {
+  transform: scale(1.015);
+}
+
+/* Better browser mockup size when real image is used */
+.previewCard:has(.projectImagePreview) {
+  width: min(100%, 560px);
+  background: #ffffff;
+}
+
+/* Remove extra fake lower boxes when real image is used */
+.previewCard:has(.projectImagePreview) .previewGrid {
+  display: none;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .projectImagePreview {
+    height: 340px;
+  }
+
+  .previewCard:has(.projectImagePreview) {
+    width: min(100%, 620px);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .projectImagePreview {
+    height: 250px;
+  }
+}
+
+/* Small Phones */
+@media (max-width: 430px) {
+  .projectImagePreview {
+    height: 220px;
+  }
+}
+
+/* Extra Small Phones */
+@media (max-width: 360px) {
+  .projectImagePreview {
+    height: 190px;
+  }
+}
