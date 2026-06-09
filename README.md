@@ -1,36 +1,169 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Stack Spacer — Developer Portfolio
+
+A modern full-stack developer portfolio built to showcase my work in web development, mobile applications, AI automation and machine learning.
+
+## Live Website
+
+[View Stack Spacer Live](https://stackspacer.com)
+
+## Project Preview
+
+![Stack Spacer Portfolio Preview](./public/github-preview.png)
+
+## About the Project
+
+Stack Spacer is a responsive and animated developer portfolio designed to present my technical skills, services and development projects.
+
+The website includes a secure contact-management system, interactive animations and a responsive user interface for desktop, tablet and mobile devices.
+
+## Main Features
+
+- Modern and responsive user interface
+- Animated hero section
+- Desktop and mobile navigation
+- Active navigation highlighting on scroll
+- Interactive service and expertise sections
+- Contact form with backend API
+- Secure administrator login
+- Database-powered contact submissions
+- Mobile, tablet and desktop compatibility
+- Production deployment on a custom domain
+
+## Technology Stack
+
+### Frontend
+
+- Next.js
+- React
+- TypeScript
+- Framer Motion
+- GSAP
+- Three.js
+- CSS
+
+### Backend
+
+- Next.js API Routes
+- Node.js
+- Prisma ORM
+- SQLite
+- Zod Validation
+
+### Development and Deployment
+
+- Git
+- GitHub
+- npm
+- cPanel Node.js Hosting
+- Custom Domain Deployment
 
 ## Getting Started
 
-First, run the development server:
+Clone the repository:
+
+```bash
+git clone git@github.com:Gitzak-Dev/portfolio.git
+cd portfolio
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create your local environment file:
+
+```bash
+cp .env.example .env
+```
+
+Generate the Prisma Client:
+
+```bash
+npx prisma generate
+```
+
+Create or update the database:
+
+```bash
+npx prisma db push
+```
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open the project in your browser:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Variables
 
-## Learn More
+Create a `.env` file based on `.env.example`.
 
-To learn more about Next.js, take a look at the following resources:
+```env
+DATABASE_URL="file:./dev.db"
+ADMIN_USERNAME="your-admin-username"
+ADMIN_PASSWORD="your-secure-password"
+SESSION_SECRET="your-secure-session-secret"
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Never upload your real `.env` file, passwords or session secrets to GitHub.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```text
+app/          Application pages and API routes
+components/   Reusable React components
+data/         Portfolio and application data
+lib/          Shared utilities and backend logic
+prisma/       Prisma schema and database configuration
+public/       Images, icons and public assets
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Production Build
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Create a production build:
+
+```bash
+npm run build
+```
+
+Start the production server:
+
+```bash
+npm run start
+```
+
+## Security
+
+Sensitive information is excluded using `.gitignore`.
+
+The following files should never be committed:
+
+```text
+.env
+.env.local
+node_modules/
+.next/
+*.db
+*.sqlite
+*.log
+```
+
+## Author
+
+**Muhammad Hani**
+
+- Portfolio: [stackspacer.com](https://stackspacer.com)
+- GitHub: [Gitzak-Dev](https://github.com/Gitzak-Dev)
+- LinkedIn: Add your LinkedIn profile URL here
+
+## License
+
+This project is available under the MIT License.
