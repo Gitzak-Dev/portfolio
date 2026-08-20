@@ -1,8 +1,10 @@
-import CustomCursor from "@/components/CustomCursor/CustomCursor";
+// import CustomCursor from "@/components/CustomCursor/CustomCursor";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects, type ProjectTheme } from "@/data/projects";
+import JsonLd from "@/components/seo/JsonLd";
+import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import styles from "./ProjectCasePage.module.css";
 
 type PageProps = {
@@ -40,12 +42,37 @@ export async function generateMetadata({ params }: PageProps) {
   if (!project) {
     return {
       title: "Project Not Found",
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
+  const projectUrl = `/projects/${project.slug}`;
+
   return {
-    title: `${project.title} | Case Study`,
+    title: `${project.title} Case Study | StackSpacer`,
+
     description: project.desc,
+
+    alternates: {
+      canonical: projectUrl,
+    },
+
+    openGraph: {
+      type: "website",
+      url: projectUrl,
+      siteName: "StackSpacer",
+      title: `${project.title} Case Study | StackSpacer`,
+      description: project.desc,
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} Case Study | StackSpacer`,
+      description: project.desc,
+    },
   };
 }
 
@@ -65,29 +92,64 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
     (project as { previewImage?: string }).previewImage ??
     projectVisualMap[project.slug];
 
+  const serviceMap: Record<string, string> = {
+    mobile: "/services/mobile-app-development",
+    ai: "/services/ai-automation",
+    ml: "/services/machine-learning",
+    web: "/services/web-development",
+    business: "/services/web-development",
+  };
+
+  const projectUrl = `/projects/${project.slug}`;
+
+  const breadcrumbs = [
+    { name: "Home", url: "/" },
+    { name: "Projects", url: "/projects" },
+    { name: project.title, url: null },
+  ];
+
+  const creativeWorkSchema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: `${project.title} Case Study`,
+    description: project.desc,
+    author: {
+      "@type": "Organization",
+      name: "StackSpacer",
+      url: "https://stackspacer.com",
+    },
+    url: `https://stackspacer.com${projectUrl}`,
+    about: {
+      "@type": "Service",
+      name: project.category,
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbs
+      .filter((b) => b.url)
+      .map((b, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: b.name,
+        item: `https://stackspacer.com${b.url}`,
+      })),
+  };
+
   return (
     <main className={`${styles.page} ${themeClassMap[project.theme]}`}>
-      <CustomCursor />
+      <JsonLd data={creativeWorkSchema} />
+      <JsonLd data={breadcrumbSchema} />
+
+      {/* <CustomCursor /> */}
       <div id="noise-overlay" />
       <div className={styles.bgGrid} aria-hidden="true" />
       <div className={styles.bgGlowOne} aria-hidden="true" />
       <div className={styles.bgGlowTwo} aria-hidden="true" />
 
-      <header className={styles.caseHeader}>
-        <Link href="/#work" className={styles.backLink}>
-          <span>←</span> Back
-        </Link>
-
-        {/* <a
-          href={project.liveUrl}
-          className={styles.liveLink}
-          target="_blank"
-          rel="noreferrer"
-          data-cursor="dark"
-        >
-          Visit Live Site <span>↗</span>
-        </a> */}
-      </header>
+      <PageBackHeader href="/#work" />
 
       <section className={styles.heroSection}>
         <div className={styles.heroContent}>
@@ -299,7 +361,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
       <section className={styles.voiceSection}>
         <span>Voices</span>
 
-        <blockquote>“{project.testimonial.quote}”</blockquote>
+        <blockquote>{"“" + project.testimonial.quote + "”"}</blockquote>
 
         <p>— {project.testimonial.author}</p>
       </section>
@@ -335,6 +397,35 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
         <Link href="/#contact" className={styles.ctaButton} data-cursor="dark">
           Start a Project <span>→</span>
         </Link>
+
+        {serviceMap[project.theme] && (
+          <div className={styles.serviceLink}>
+            <span className={styles.serviceLabel}>Related Service</span>
+            <Link
+              href={serviceMap[project.theme]}
+              className={styles.serviceLinkButton}
+            >
+              {project.category} →
+            </Link>
+          </div>
+        )}
+
+        {project.insightSlugs && project.insightSlugs.length > 0 && (
+          <div className={styles.insightLink}>
+            <span className={styles.serviceLabel}>Related Reading</span>
+            <div className={styles.insightLinks}>
+              {project.insightSlugs.map((slug) => (
+                <Link
+                  key={slug}
+                  href={`/insights/${slug}`}
+                  className={styles.serviceLinkButton}
+                >
+                  Read Insight →
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
     </main>
   );

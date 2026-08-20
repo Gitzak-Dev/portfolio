@@ -1,0 +1,232 @@
+.page {
+  position: relative;
+  padding-top: 86px;
+  min-height: 100vh;
+}
+
+@media (max-width: 950px) {
+  .page {
+    padding-top: 76px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-top: 68px;
+  }
+}
+
+.banner {
+  position: relative;
+  padding: 80px 8% 0;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.875rem;
+  margin-bottom: 40px;
+  transition: color 0.2s ease;
+}
+
+.backButton:hover {
+  color: #d8af25;
+}
+
+.label {
+  display: inline-block;
+  color: #d8af25;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  color: #fff;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.06em;
+  margin-bottom: 24px;
+}
+
+.hero h1 span {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.intro {
+  max-width: 640px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 1.15rem;
+  line-height: 1.65;
+  font-family: var(--font-plus-jakarta), sans-serif;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 60px 0;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 80px;
+}
+
+.serviceCard {
+  padding: 36px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.serviceCard:hover {
+  border-color: rgba(216, 175, 37, 0.35);
+  transform: translateY(-2px);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.cardHeader h2 {
+  color: #fff;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.cardLink {
+  color: #d8af25;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.cardLink:hover {
+  color: #e2b418;
+}
+
+.cardDesc {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 20px;
+  font-family: var(--font-plus-jakarta), sans-serif;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tags span {
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.75rem;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.ctaSection {
+  text-align: center;
+  padding: 60px 40px;
+  border-radius: 24px;
+  background: rgba(216, 175, 37, 0.04);
+  border: 1px solid rgba(216, 175, 37, 0.15);
+}
+
+.ctaSection h2 {
+  color: #fff;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.ctaSection p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.05rem;
+  margin-bottom: 32px;
+  font-family: var(--font-plus-jakarta), sans-serif;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 36px;
+  border-radius: 100px;
+  background: #d8af25;
+  color: #000;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ctaButton:hover {
+  background: #e2b418;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .banner {
+    padding: 60px 6% 0;
+  }
+
+  .ctaSection {
+    padding: 40px 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .banner {
+    padding: 50px 5% 0;
+  }
+
+  .serviceCard {
+    padding: 24px;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

@@ -1,0 +1,206 @@
+.globalLocations {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 5% 110px;
+  background: #050505;
+  border-top: 1px solid rgba(226, 180, 32, 0.12);
+}
+
+.bgGlow {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  left: 50%;
+  bottom: -280px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(226, 180, 32, 0.16), transparent 68%);
+  pointer-events: none;
+}
+
+.locHeader {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 auto 58px;
+  text-align: center;
+}
+
+.sectionLabel {
+  display: inline-block;
+  margin-bottom: 18px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #e2b420;
+}
+
+.locHeader h2 {
+  margin: 0 0 18px;
+  font-size: clamp(2.45rem, 5vw, 4.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+  color: #ffffff;
+}
+
+.locHeader h2 span {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.locHeader p {
+  max-width: 620px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.locGrid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.locCard {
+  position: relative;
+  overflow: hidden;
+  min-height: 230px;
+  padding: 34px 36px;
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+    rgba(18, 18, 18, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.28);
+  transition: transform 0.32s ease, border-color 0.32s ease, box-shadow 0.32s ease;
+}
+
+.locCard:hover {
+  transform: translateY(-7px);
+  border-color: rgba(226, 180, 32, 0.75);
+  box-shadow: 0 26px 80px rgba(226, 180, 32, 0.12);
+}
+
+.wavingBgFlag {
+  position: absolute;
+  top: -18px;
+  right: -38px;
+  width: 185px;
+  opacity: 0.32;
+  border-radius: 14px;
+  z-index: 0;
+  pointer-events: none;
+  transform-origin: bottom left;
+  animation: flagWave 2.8s ease-in-out infinite alternate;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.35));
+}
+
+.locCard:hover .wavingBgFlag {
+  opacity: 0.52;
+  animation-duration: 0.75s;
+}
+
+.locCard h3 {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 26px;
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+.locDetails {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 18px;
+}
+
+.locItem {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.locItem span {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(226, 180, 32, 0.14);
+  color: #e2b420;
+  font-size: 0.86rem;
+}
+
+.locItem p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+.locItem a {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.locItem a:hover {
+  color: #e2b420;
+}
+
+@keyframes flagWave {
+  0% {
+    transform: rotate(-6deg) skewX(3deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(6deg) skewX(-3deg) translateY(-3px);
+  }
+
+  100% {
+    transform: rotate(-3deg) skewX(1deg) translateY(0);
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .globalLocations {
+    padding: 75px 5% 85px;
+  }
+
+  .locGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .locCard {
+    min-height: 210px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .locHeader {
+    text-align: left;
+  }
+
+  .locHeader p {
+    margin-left: 0;
+  }
+
+  .locCard {
+    padding: 30px 24px;
+    border-radius: 22px;
+  }
+
+  .wavingBgFlag {
+    width: 145px;
+    right: -42px;
+  }
+}
