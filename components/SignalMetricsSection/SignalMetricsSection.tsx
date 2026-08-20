@@ -113,7 +113,7 @@ export default function SignalMetricsSection() {
                   tabIndex={0}
                   className={`${styles.metricCard} ${
                     isActive ? styles.activeCard : ""
-                  } ${item.type === "agent" ? styles.agentCard : ""}`}
+                  }`}
                   onMouseEnter={() => activateCard(index)}
                   onFocus={() => activateCard(index)}
                   onClick={() => activateCard(index)}
@@ -198,9 +198,7 @@ function AnalogyVisual({
 }) {
   return (
     <div
-      className={`${styles.visualBox} ${
-        type === "agent" ? styles.agentVisualBox : ""
-      }`}
+      className={styles.visualBox}
       aria-hidden="true"
     >
       <motion.div
@@ -557,7 +555,7 @@ function RagIllustration({ isActive }: { isActive: boolean }) {
 function AgentIllustration({ isActive }: { isActive: boolean }) {
   return (
     <svg
-      className={`${styles.svgVisual} ${styles.agentSvgVisual}`}
+      className={styles.svgVisual}
       viewBox="0 0 360 230"
       fill="none"
     >

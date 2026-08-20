@@ -1,7 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { pushToDataLayer } from "@/lib/analytics";
+import { siteConfig } from "@/config/site";
 import styles from "./ContactSection.module.css";
 
 type FormState = {
@@ -20,13 +23,15 @@ const initialFormState: FormState = {
 
 export default function ContactSection() {
   const [formData, setFormData] = useState<FormState>(initialFormState);
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
-    "idle"
-  );
+
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+
   const [statusMessage, setStatusMessage] = useState("");
 
   const updateField = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = event.target;
 
@@ -62,8 +67,20 @@ export default function ContactSection() {
         return;
       }
 
+      // GA4 lead event.
+      // Personal form information is NOT included in this event.
+      pushToDataLayer({
+        event: "generate_lead",
+        lead_source: "contact_form",
+        form_name: "main_contact_form",
+      });
+
       setStatus("success");
-      setStatusMessage("Message sent successfully. I will get back to you soon.");
+
+      setStatusMessage(
+        "Message sent successfully. I will get back to you soon.",
+      );
+
       setFormData(initialFormState);
     } catch {
       setStatus("error");
@@ -77,12 +94,27 @@ export default function ContactSection() {
       <div className={styles.bgGlow} aria-hidden="true" />
 
       <div className={styles.container}>
+        {/* Left Column */}
         <motion.div
           className={styles.leftCol}
-          initial={{ opacity: 0, x: -45, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          initial={{
+            opacity: 0,
+            x: -45,
+            filter: "blur(10px)",
+          }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+            filter: "blur(0px)",
+          }}
+          viewport={{
+            once: true,
+            amount: 0.3,
+          }}
+          transition={{
+            duration: 0.75,
+            ease: [0.16, 1, 0.3, 1],
+          }}
         >
           <span className={styles.eyebrow}>// Contact</span>
 
@@ -97,27 +129,45 @@ export default function ContactSection() {
           </p>
 
           <a
-            href="mailto:yourname@example.com"
+            href={`mailto:${siteConfig.email}`}
             className={styles.emailCard}
             data-cursor="dark"
           >
-            <div className={styles.emailIcon}>✉</div>
+            <div className={styles.emailIcon}>&#9993;</div>
 
             <div>
               <small>Email Me</small>
-              <strong>hanidev@gmail.com</strong>
+
+              <strong>{siteConfig.email}</strong>
             </div>
           </a>
         </motion.div>
 
+        {/* Contact Form */}
         <motion.form
           className={styles.formCard}
           onSubmit={submitForm}
-          initial={{ opacity: 0, x: 45, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.75, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+          initial={{
+            opacity: 0,
+            x: 45,
+            filter: "blur(10px)",
+          }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+            filter: "blur(0px)",
+          }}
+          viewport={{
+            once: true,
+            amount: 0.3,
+          }}
+          transition={{
+            duration: 0.75,
+            delay: 0.12,
+            ease: [0.16, 1, 0.3, 1],
+          }}
         >
+          {/* Honeypot - hidden from real users */}
           <input
             className={styles.honeypot}
             type="text"
@@ -126,11 +176,13 @@ export default function ContactSection() {
             onChange={updateField}
             tabIndex={-1}
             autoComplete="off"
+            aria-hidden="true"
           />
 
           <div className={styles.formGrid}>
             <label>
               <span>Name</span>
+
               <input
                 type="text"
                 name="name"
@@ -143,6 +195,7 @@ export default function ContactSection() {
 
             <label>
               <span>Email</span>
+
               <input
                 type="email"
                 name="email"
@@ -156,6 +209,7 @@ export default function ContactSection() {
 
           <label>
             <span>Project Details</span>
+
             <textarea
               name="message"
               value={formData.message}
@@ -164,6 +218,12 @@ export default function ContactSection() {
               required
             />
           </label>
+
+          {/* Privacy Notice */}
+          <p className={styles.privacyNotice}>
+            By submitting this form, you acknowledge our{" "}
+            <Link href="/privacy">Privacy Policy</Link>.
+          </p>
 
           <button
             type="submit"

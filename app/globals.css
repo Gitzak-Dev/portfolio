@@ -47,7 +47,7 @@ footer {
 #noise-overlay {
   position: fixed;
   inset: 0;
-  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  background: url("/noise.svg");
   opacity: 0.035;
   pointer-events: none;
   z-index: 9999;

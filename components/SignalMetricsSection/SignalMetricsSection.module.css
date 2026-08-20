@@ -107,7 +107,7 @@
 
 .metricsGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1.16fr 1fr;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .metricCard {
@@ -131,10 +131,7 @@
   border-right: none;
 }
 
-.agentCard {
-  padding-left: 28px;
-  padding-right: 28px;
-}
+
 
 .metricCard::before {
   content: "";
@@ -278,9 +275,7 @@
     0 18px 48px rgba(0, 0, 0, 0.18);
 }
 
-.agentVisualBox {
-  height: 255px;
-}
+
 
 .visualBox::before {
   content: "";
@@ -331,12 +326,7 @@
   filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.22));
 }
 
-.agentSvgVisual {
-  max-width: 390px;
-  height: 240px;
-  transform: scale(1.08);
-  transform-origin: center;
-}
+
 
 .bottomMeta {
   margin-top: auto;
@@ -433,20 +423,7 @@
     border-bottom: none;
   }
 
-  .agentCard {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
 
-  .agentVisualBox {
-    height: 250px;
-  }
-
-  .agentSvgVisual {
-    max-width: 370px;
-    height: 232px;
-    transform: scale(1.04);
-  }
 
   .content {
     min-height: 175px;
@@ -498,36 +475,7 @@
     border-bottom: none;
   }
 
-  .agentCard {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
 
-  .content {
-    min-height: auto;
-  }
-
-  .visualZone {
-    min-height: 250px;
-  }
-
-  .visualBox {
-    height: 250px;
-  }
-
-  .agentVisualBox {
-    height: 265px;
-  }
-
-  .svgVisual {
-    height: 230px;
-  }
-
-  .agentSvgVisual {
-    max-width: 380px;
-    height: 245px;
-    transform: scale(1.03);
-  }
 
   .progressArea {
     padding: 20px 22px 24px;
@@ -612,18 +560,6 @@
     padding: 24px 18px 22px;
   }
 
-  .agentCard {
-    padding-left: 18px;
-    padding-right: 18px;
-  }
-
-  .topMeta {
-    gap: 6px;
-    margin-bottom: 15px;
-    font-size: 0.63rem;
-    letter-spacing: 1.5px;
-  }
-
   .title {
     margin-bottom: 6px;
     font-size: clamp(1.52rem, 8.5vw, 2rem);
@@ -649,19 +585,7 @@
     padding: 7px;
   }
 
-  .agentVisualBox {
-    height: 225px;
-  }
 
-  .svgVisual {
-    height: 205px;
-  }
-
-  .agentSvgVisual {
-    max-width: 100%;
-    height: 210px;
-    transform: scale(1);
-  }
 
   .footerText {
     font-size: 0.76rem;
@@ -732,18 +656,7 @@
     height: 190px;
   }
 
-  .agentVisualBox {
-    height: 198px;
-  }
 
-  .svgVisual {
-    height: 178px;
-  }
-
-  .agentSvgVisual {
-    height: 184px;
-    transform: scale(1);
-  }
 
   .footerText {
     font-size: 0.71rem;
@@ -800,18 +713,7 @@
     height: 168px;
   }
 
-  .agentVisualBox {
-    height: 174px;
-  }
 
-  .svgVisual {
-    height: 158px;
-  }
-
-  .agentSvgVisual {
-    height: 164px;
-    transform: scale(1);
-  }
 
   .footerText {
     font-size: 0.67rem;

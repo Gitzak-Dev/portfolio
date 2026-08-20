@@ -65,7 +65,7 @@ const HERO_DATA: HeroItem[] = [
     id: 1,
     badge: "MOBILE APP DEVELOPMENT",
     desc: "Clean, scalable mobile apps with smooth UI.\nBuilt for speed, responsiveness, and real users.",
-    image: "/character (1).png",
+    image: "/character-1.webp",
     headline: [
       [
         { text: "Mobile ", tone: "white" },
@@ -165,7 +165,7 @@ const HERO_DATA: HeroItem[] = [
     id: 2,
     badge: "AI DEVELOPMENT",
     desc: "AI tools, chatbots, and workflows that save time.\nSmart automation systems built for modern teams.",
-    image: "/character (2).png",
+    image: "/character-2.webp",
     headline: [
       [
         { text: "AI ", tone: "white" },
@@ -257,7 +257,7 @@ const HERO_DATA: HeroItem[] = [
     id: 3,
     badge: "MACHINE LEARNING",
     desc: "Machine learning models for predictions and decisions.\nTurning raw data into practical business insight.",
-    image: "/character (3).png",
+    image: "/character-3.webp",
     headline: [
       [
         { text: "Machine ", tone: "white" },
@@ -351,7 +351,7 @@ const fadeUpVariants: Variants = {
   hidden: {
     y: 24,
     opacity: 0,
-    filter: "blur(10px)",
+    filter: "blur(4px)",
   },
   visible: {
     y: 0,
@@ -442,6 +442,19 @@ export default function HeroScroll() {
 
   const activeItem = HERO_DATA[activeIndex];
 
+  useEffect(() => {
+    const preloadImg = (src: string) => {
+      const link = document.createElement("link");
+      link.rel = "prefetch";
+      link.as = "image";
+      link.href = src;
+      document.head.appendChild(link);
+    };
+
+    preloadImg("/character-2.webp");
+    preloadImg("/character-3.webp");
+  }, []);
+
   const totalHeadlineChars = activeItem.headline.reduce((lineTotal, line) => {
     return (
       lineTotal +
@@ -523,13 +536,15 @@ export default function HeroScroll() {
                   src={activeItem.image}
                   alt={activeItem.badge}
                   className={styles.characterImage}
-                  initial={{ opacity: 0, scale: 0.85, y: 60, rotate: -4 }}
+                  initial={{ opacity: 1, scale: 0.92, y: 30, rotate: -2 }}
                   animate={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
                   exit={{ opacity: 0, scale: 1.05, y: -50, rotate: 4 }}
                   transition={{
-                    duration: 0.65,
+                    duration: 0.4,
                     ease: [0.16, 1, 0.3, 1],
                   }}
+                  loading="eager"
+                  fetchPriority="high"
                 />
               </AnimatePresence>
 

@@ -13,6 +13,7 @@ export type Project = {
   tags: string[];
   theme: ProjectTheme;
   previewImage?: string;
+  insightSlugs?: string[];
   heroText: string;
   overviewTitle: string;
   overviewText: string;
@@ -65,6 +66,8 @@ export const projects: Project[] = [
     desc: "A clean mobile application interface built with smooth flows, scalable components, and a responsive product experience.",
     tags: ["Flutter", "Dart", "Mobile App", "UI Design", "React Native"],
     theme: "mobile",
+    previewImage: undefined,
+    insightSlugs: ["react-native-vs-flutter"],
     heroText:
       "A mobile-first product experience designed for clean navigation, fast user actions, and scalable app growth.",
     overviewTitle:
@@ -163,6 +166,7 @@ export const projects: Project[] = [
     desc: "An AI-powered workflow system designed to automate repetitive tasks, generate smart responses, and improve team efficiency.",
     tags: ["AI Development", "Automation", "Chatbots"],
     theme: "ai",
+    insightSlugs: ["when-ai-automation-makes-sense", "rag-vs-ai-agents"],
     heroText:
       "A smart automation system built to reduce repetitive work, speed up responses, and simplify business operations.",
     overviewTitle:
@@ -262,6 +266,7 @@ export const projects: Project[] = [
     tags: ["Machine Learning", "Python", "Data"],
     theme: "ml",
     previewImage: "/projects/ml-stock-dashboard.png",
+    insightSlugs: ["machine-learning-for-business"],
     heroText:
       "A machine learning dashboard built to turn raw data into clear predictions, insights, and decision-ready outputs.",
     overviewTitle:
@@ -360,6 +365,7 @@ export const projects: Project[] = [
     desc: "A premium portfolio experience with scroll animation, interactive sections, dynamic motion, and strong visual hierarchy.",
     tags: ["Next.js", "Framer Motion", "CSS"],
     theme: "web",
+    insightSlugs: ["what-nextjs-production-ready"],
     heroText:
       "A premium developer portfolio built with motion, personality, responsive design, and strong visual hierarchy.",
     overviewTitle:
@@ -458,6 +464,7 @@ export const projects: Project[] = [
     desc: "A conversion-focused business website structure with strong landing sections, enquiry flows, and performance-first build.",
     tags: ["Next.js", "Backend", "SEO"],
     theme: "business",
+    insightSlugs: ["what-nextjs-production-ready"],
     heroText:
       "A conversion-focused business website system built to guide visitors from first impression to enquiry.",
     overviewTitle:

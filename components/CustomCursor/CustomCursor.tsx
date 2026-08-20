@@ -9,32 +9,48 @@ export default function CustomCursor() {
   const [isDarkCursor, setIsDarkCursor] = useState(false);
 
   useEffect(() => {
-    const moveCursor = (event: MouseEvent) => {
-      if (!dotRef.current || !outlineRef.current) return;
+    let rafId: number;
+    let lastX = -1;
+    let lastY = -1;
+    let lastIsDark = false;
 
+    const moveCursor = (event: MouseEvent) => {
       const x = event.clientX;
       const y = event.clientY;
 
-      dotRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      outlineRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      if (x === lastX && y === lastY) return;
+      lastX = x;
+      lastY = y;
 
-      const elementUnderCursor = document.elementFromPoint(x, y) as HTMLElement | null;
+      rafId = requestAnimationFrame(() => {
+        if (!dotRef.current || !outlineRef.current) return;
 
-      const shouldBeDark = Boolean(
-        elementUnderCursor?.closest('[data-cursor="dark"]')
-      );
+        dotRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        outlineRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
 
-      setIsDarkCursor(shouldBeDark);
+        const elementUnderCursor = document.elementFromPoint(x, y) as HTMLElement | null;
+
+        const shouldBeDark = Boolean(
+          elementUnderCursor?.closest('[data-cursor="dark"]')
+        );
+
+        if (shouldBeDark !== lastIsDark) {
+          lastIsDark = shouldBeDark;
+          setIsDarkCursor(shouldBeDark);
+        }
+      });
     };
 
     const resetCursor = () => {
       setIsDarkCursor(false);
+      lastIsDark = false;
     };
 
-    window.addEventListener("mousemove", moveCursor);
-    window.addEventListener("mouseleave", resetCursor);
+    window.addEventListener("mousemove", moveCursor, { passive: true });
+    window.addEventListener("mouseleave", resetCursor, { passive: true });
 
     return () => {
+      cancelAnimationFrame(rafId);
       window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("mouseleave", resetCursor);
     };

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "./ServicesShowcase.module.css";
+import Link from "next/link";
 
 const SERVICES = [
   {
@@ -17,6 +18,7 @@ const SERVICES = [
       "app.optimizePerformance();",
       "app.launch('iOS + Android');",
     ],
+    link: "/services/mobile-app-development",
   },
   {
     id: "02",
@@ -30,6 +32,7 @@ const SERVICES = [
       "assistant.generateSmartReplies();",
       "assistant.automateTasks();",
     ],
+    link: "/services/ai-automation",
   },
   {
     id: "03",
@@ -43,6 +46,7 @@ const SERVICES = [
       "model.evaluateAccuracy();",
       "model.predictNextOutcome();",
     ],
+    link: "/services/machine-learning",
   },
   {
     id: "04",
@@ -56,6 +60,7 @@ const SERVICES = [
       "page.optimizeCoreVitals();",
       "page.convertVisitors();",
     ],
+    link: "/services/web-development",
   },
 ] as const;
 
@@ -72,9 +77,20 @@ export default function ServicesShowcase() {
       <div className={styles.container}>
         <motion.div
           className={styles.header}
-          initial={{ opacity: 0, y: 35, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, amount: 0.35 }}
+          initial={{
+            opacity: 0,
+            y: 35,
+            filter: "blur(10px)",
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+          }}
+          viewport={{
+            once: true,
+            amount: 0.35,
+          }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <span className={styles.eyebrow}>// What I Build</span>
@@ -121,7 +137,7 @@ export default function ServicesShowcase() {
                   opacity: 0,
                   x: 45,
                   scale: 0.97,
-                  filter: "blur(10px)",
+                  filter: "blur(4px)",
                 }}
                 animate={{
                   opacity: 1,
@@ -133,7 +149,7 @@ export default function ServicesShowcase() {
                   opacity: 0,
                   x: -35,
                   scale: 0.97,
-                  filter: "blur(10px)",
+                  filter: "blur(4px)",
                 }}
                 transition={{
                   duration: 0.45,
@@ -176,13 +192,21 @@ export default function ServicesShowcase() {
 
                   <div className={styles.mockupFooter}>
                     <span>Ready to launch</span>
-                    <strong>↗</strong>
+                    <Link href={activeService.link}>
+                      <strong>↗</strong>
+                    </Link>
                   </div>
                 </div>
               </motion.div>
             </AnimatePresence>
           </div>
         </div>
+
+        {/* <div className={styles.servicesHubCta}>
+          <Link href="/services" className={styles.servicesHubLink}>
+            View All Services <span>→</span>
+          </Link>
+        </div> */}
       </div>
     </section>
   );

@@ -1,4 +1,7 @@
-import CustomCursor from "@/components/CustomCursor/CustomCursor";
+// import CustomCursor from "@/components/CustomCursor/CustomCursor";
+import JsonLd from "@/components/seo/JsonLd";
+import { siteConfig } from "@/config/site";
+import type { Metadata } from "next";
 import DisableContextMenu from "@/components/DisableContextMenu/DisableContextMenu";
 import Navbar from "@/components/Navbar/Navbar";
 import HeroScroll from "@/components/HeroScroll/HeroScroll";
@@ -11,15 +14,46 @@ import ExpertiseCards from "@/components/ExpertiseCards/ExpertiseCards";
 import SnakeTextSection from "@/components/SnakeTextSection/SnakeTextSection";
 import SignalMetricsSection from "@/components/SignalMetricsSection/SignalMetricsSection";
 import ContactSection from "@/components/ContactSection/ContactSection";
+import GlobalLocationsSection from "@/components/GlobalLocationsSection/GlobalLocationsSection";
 
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    siteName: siteConfig.name,
+  },
+};
 
 export default function Home() {
+  const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteConfig.url}/#website`,
+  url: siteConfig.url,
+  name: siteConfig.name,
+  description: siteConfig.description,
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${siteConfig.url}/#organization`,
+  name: siteConfig.name,
+  url: siteConfig.url,
+  email: siteConfig.email,
+  description: siteConfig.description,
+};
   return (
     <main>
 
-      <DisableContextMenu />
+      <JsonLd data={websiteSchema} />
 
-      <CustomCursor />
+      <JsonLd data={organizationSchema} />
+
+      {/* <DisableContextMenu /> */}
+
+      {/* <CustomCursor /> */}
 
       <Navbar />
 
@@ -41,8 +75,10 @@ export default function Home() {
       <TestimonialsSection />
 
       <WhyChooseMe />
-      
+
       <ContactSection />
+
+      <GlobalLocationsSection />
 
       <Footer />
     </main>
