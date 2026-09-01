@@ -36,12 +36,12 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
 
   title: {
-    default: "StackSpacer | Mobile App, AI & ML Developer",
+    default: "StackSpacer | Web, Mobile App, AI & ML Development",
     template: "%s | StackSpacer",
   },
 
   description:
-    "Mobile app, AI automation, machine learning and Next.js development for startups and businesses.",
+    "StackSpacer builds custom web and mobile apps, AI automation, and machine learning solutions for startups and businesses using modern technologies.",
 
   alternates: { canonical: "/" },
 
@@ -61,16 +61,16 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/",
     siteName: siteConfig.name,
-    title: "StackSpacer | Mobile App, AI & ML Developer",
+    title: "StackSpacer | Web, Mobile App, AI & ML Development",
     description:
-      "Mobile app, AI automation, machine learning and Next.js development.",
+      "StackSpacer builds custom web and mobile apps, AI automation, and machine learning solutions for startups and businesses using modern technologies.",
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "StackSpacer | Mobile App, AI & ML Developer",
+    title: "StackSpacer | Web, Mobile App, AI & ML Development",
     description:
-      "Mobile app, AI automation, machine learning and Next.js development.",
+      "StackSpacer builds custom web and mobile apps, AI automation, and machine learning solutions for startups and businesses using modern technologies.",
   },
 
   robots: {

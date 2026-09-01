@@ -312,10 +312,10 @@ export default function SnakeTextSection() {
             >
               <span className={styles.eyebrow}>{activeQuote.eyebrow}</span>
 
-              <h1>
+              <h2>
                 Code that moves. <br />
                 <strong>{activeQuote.heading}</strong>
-              </h1>
+              </h2>
 
               <p>{activeQuote.paragraph}</p>
             </motion.div>
