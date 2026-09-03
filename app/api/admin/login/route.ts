@@ -9,11 +9,16 @@ export async function POST(request: Request) {
 
   const isValid = checkAdminPassword(password);
 
+  const redirectOrigin =
+    process.env.NODE_ENV === "production"
+      ? "https://stackspacer.com"
+      : new URL(request.url).origin;
+
   if (!isValid) {
-    return NextResponse.redirect(new URL("/admin/login?error=1", request.url));
+    return NextResponse.redirect(new URL("/admin/login?error=1", redirectOrigin));
   }
 
-  const response = NextResponse.redirect(new URL("/admin", request.url));
+  const response = NextResponse.redirect(new URL("/admin", redirectOrigin));
   const token = createAdminToken();
 
   response.cookies.set("admin_session", token, {
