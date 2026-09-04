@@ -38,8 +38,9 @@ const serviceSchema = {
     url: "https://stackspacer.com",
   },
   description:
-    "Cross-platform mobile applications for iOS and Android using React Native.",
+    "Cross-platform mobile applications for iOS and Android using React Native, built for businesses across the United States.",
   serviceType: "Mobile App Development",
+  areaServed: "United States",
 };
 
 const breadcrumbSchema = {
@@ -76,6 +77,11 @@ export default function MobileAppPage() {
             and Android using React Native. Each app is designed with smooth
             user experience, reliable backend integrations, and a structure
             that can grow as the product evolves.
+          </p>
+          <p className={styles.heroDesc}>
+            StackSpacer provides mobile app development services for businesses
+            across the United States, with project communication and delivery
+            coordinated online.
           </p>
           <Link href="/#contact" className={styles.ctaButton}>
             Discuss Your Project <span>↗</span>
@@ -188,9 +194,9 @@ export default function MobileAppPage() {
 
         <section className={styles.section}>
           <h2>Related Reading</h2>
-          <a href="/insights/react-native-vs-flutter" className={styles.relatedReadingLink}>
+            <Link href="/insights/react-native-vs-flutter" className={styles.relatedReadingLink}>
             React Native vs Flutter: Choosing the Right Framework →
-          </a>
+            </Link>
         </section>
 
         <div className={styles.divider} />

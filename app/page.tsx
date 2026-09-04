@@ -2,7 +2,6 @@
 import JsonLd from "@/components/seo/JsonLd";
 import { siteConfig } from "@/config/site";
 import type { Metadata } from "next";
-import DisableContextMenu from "@/components/DisableContextMenu/DisableContextMenu";
 import Navbar from "@/components/Navbar/Navbar";
 import HeroScroll from "@/components/HeroScroll/HeroScroll";
 import StaticSections from "@/components/StaticSections/StaticSections";
@@ -17,11 +16,17 @@ import ContactSection from "@/components/ContactSection/ContactSection";
 import GlobalLocationsSection from "@/components/GlobalLocationsSection/GlobalLocationsSection";
 
 export const metadata: Metadata = {
+  title: "StackSpacer | Web, Mobile App, AI & ML Development for US Businesses",
+  description:
+    "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across the United States.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     siteName: siteConfig.name,
+    title: "StackSpacer | Web, Mobile App, AI & ML Development for US Businesses",
+    description:
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across the United States.",
   },
 };
 
@@ -43,6 +48,10 @@ const organizationSchema = {
   url: siteConfig.url,
   email: siteConfig.email,
   description: siteConfig.description,
+  areaServed: {
+    "@type": "Country",
+    name: "United States",
+  },
 };
   return (
     <main>

@@ -38,9 +38,9 @@ const serviceSchema = {
     url: "https://stackspacer.com",
   },
   description:
-    "Custom web applications built with Next.js, React, and TypeScript for businesses and startups.",
+    "Custom web applications built with Next.js, React, and TypeScript for businesses and startups across the United States.",
   serviceType: "Web Development",
-  areaServed: "Worldwide",
+  areaServed: "United States",
 };
 
 const breadcrumbSchema = {
@@ -77,6 +77,11 @@ export default function WebDevPage() {
             and TypeScript. From high-conversion landing pages and interactive
             dashboards to full business websites, each project is designed for
             speed, clarity, and long-term scalability.
+          </p>
+          <p className={styles.heroDesc}>
+            StackSpacer provides web development services for businesses across
+            the United States, with project communication and delivery
+            coordinated online.
           </p>
           <Link href="/#contact" className={styles.ctaButton}>
             Discuss Your Project <span>↗</span>
@@ -203,9 +208,9 @@ export default function WebDevPage() {
 
         <section className={styles.section}>
           <h2>Related Reading</h2>
-          <a href="/insights/what-nextjs-production-ready" className={styles.relatedReadingLink}>
+            <Link href="/insights/what-nextjs-production-ready" className={styles.relatedReadingLink}>
             What Makes a Next.js Application Production-Ready →
-          </a>
+            </Link>
         </section>
 
         <div className={styles.divider} />

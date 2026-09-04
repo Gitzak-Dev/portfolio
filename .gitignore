@@ -61,3 +61,11 @@ prisma/dev.db-journal
 
 # generated prisma
 /app/generated/prisma
+
+# local tool config
+opencode.json
+
+# local junk / test files
+0)*
+hani-dialerpad/
+test.txt

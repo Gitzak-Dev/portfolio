@@ -38,8 +38,9 @@ const serviceSchema = {
     url: "https://stackspacer.com",
   },
   description:
-    "AI-powered automation systems, chatbots, and workflow tools for businesses.",
+    "AI-powered automation systems, chatbots, and workflow tools for businesses across the United States.",
   serviceType: "AI Automation",
+  areaServed: "United States",
 };
 
 const breadcrumbSchema = {
@@ -76,6 +77,11 @@ export default function AiAutomationPage() {
             workflow tools that reduce repetitive manual work and connect
             business processes more efficiently. Each system is designed to be
             practical, clean, and easy to use.
+          </p>
+          <p className={styles.heroDesc}>
+            StackSpacer provides AI automation services for businesses across
+            the United States, with project communication and delivery
+            coordinated online.
           </p>
           <Link href="/#contact" className={styles.ctaButton}>
             Discuss Your Project <span>↗</span>
@@ -188,12 +194,12 @@ export default function AiAutomationPage() {
         <section className={styles.section}>
           <h2>Related Reading</h2>
           <div className={styles.relatedReadingLinks}>
-            <a href="/insights/when-ai-automation-makes-sense" className={styles.relatedReadingLink}>
-              When AI Automation Makes Sense (And When It Doesn't) →
-            </a>
-            <a href="/insights/rag-vs-ai-agents" className={styles.relatedReadingLink}>
+            <Link href="/insights/when-ai-automation-makes-sense" className={styles.relatedReadingLink}>
+              When AI Automation Makes Sense (And When It Doesn&apos;t) →
+            </Link>
+            <Link href="/insights/rag-vs-ai-agents" className={styles.relatedReadingLink}>
               RAG vs AI Agents: Architecture Choices for Different Problems →
-            </a>
+            </Link>
           </div>
         </section>
 

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
 import { projects } from "@/data/projects";
+import { cities } from "@/data/locations";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
@@ -56,9 +57,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.6,
     },
+    { url: `${baseUrl}/locations`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/privacy`, changeFrequency: "yearly", priority: 0.5 },
     { url: `${baseUrl}/terms`, changeFrequency: "yearly", priority: 0.5 },
   ];
+
+  const cityPages: MetadataRoute.Sitemap = cities.map((city) => ({
+    url: `${baseUrl}/locations/${city.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
 
   const projectPages: MetadataRoute.Sitemap = projects.map((project) => ({
     url: `${baseUrl}/projects/${project.slug}`,
@@ -66,7 +74,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...projectPages].map((item) => ({
+  return [...staticPages, ...cityPages, ...projectPages].map((item) => ({
     ...item,
     lastModified: new Date(),
   }));

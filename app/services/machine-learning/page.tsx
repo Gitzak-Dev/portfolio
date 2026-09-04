@@ -38,8 +38,9 @@ const serviceSchema = {
     url: "https://stackspacer.com",
   },
   description:
-    "Machine learning models and data-driven dashboards for predictions and business insight.",
+    "Machine learning models and data-driven dashboards for predictions and business insight across the United States.",
   serviceType: "Machine Learning",
+  areaServed: "United States",
 };
 
 const breadcrumbSchema = {
@@ -75,6 +76,11 @@ export default function MLPage() {
             StackSpacer builds machine learning systems that turn raw data into
             clear predictions, actionable insight, and decision-ready outputs.
             Each model is designed for practical usability — not complexity.
+          </p>
+          <p className={styles.heroDesc}>
+            StackSpacer provides machine learning development services for
+            businesses across the United States, with project communication and
+            delivery coordinated online.
           </p>
           <Link href="/#contact" className={styles.ctaButton}>
             Discuss Your Project <span>↗</span>
@@ -185,9 +191,9 @@ export default function MLPage() {
 
         <section className={styles.section}>
           <h2>Related Reading</h2>
-          <a href="/insights/machine-learning-for-business" className={styles.relatedReadingLink}>
+            <Link href="/insights/machine-learning-for-business" className={styles.relatedReadingLink}>
             Machine Learning for Business: From Data to Decisions →
-          </a>
+            </Link>
         </section>
 
         <div className={styles.divider} />
