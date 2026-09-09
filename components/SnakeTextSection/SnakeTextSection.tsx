@@ -266,26 +266,55 @@ export default function SnakeTextSection() {
   }, [activeQuote.words]);
 
   useEffect(() => {
-    const quoteInterval = window.setInterval(() => {
-      setQuoteIndex((prev) => (prev + 1) % QUOTES.length);
-      setActivePathIndex(0);
-      setHoveredIndex(null);
-    }, QUOTE_CHANGE_TIME);
+    const section = document.getElementById("build-together");
+    if (!section) return;
 
-    return () => {
-      window.clearInterval(quoteInterval);
+    let isVisible = false;
+    let isTabVisible = document.visibilityState === "visible";
+    let snakeTimer: number | null = null;
+    let quoteTimer: number | null = null;
+
+    const startTimers = () => {
+      if (snakeTimer || quoteTimer) return;
+      snakeTimer = window.setInterval(() => {
+        setActivePathIndex((prev) => (prev + 1) % totalLetters);
+      }, SPEED);
+      quoteTimer = window.setInterval(() => {
+        setQuoteIndex((prev) => (prev + 1) % QUOTES.length);
+        setActivePathIndex(0);
+        setHoveredIndex(null);
+      }, QUOTE_CHANGE_TIME);
     };
-  }, []);
 
-  useEffect(() => {
-    if (!totalLetters) return;
+    const stopTimers = () => {
+      if (snakeTimer) { window.clearInterval(snakeTimer); snakeTimer = null; }
+      if (quoteTimer) { window.clearInterval(quoteTimer); quoteTimer = null; }
+    };
 
-    const interval = window.setInterval(() => {
-      setActivePathIndex((prev) => (prev + 1) % totalLetters);
-    }, SPEED);
+    const syncTimers = () => {
+      if (isVisible && isTabVisible) startTimers();
+      else stopTimers();
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        syncTimers();
+      },
+      { threshold: 0.1, rootMargin: "100px" }
+    );
+    observer.observe(section);
+
+    const onVisibility = () => {
+      isTabVisible = document.visibilityState === "visible";
+      syncTimers();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
-      window.clearInterval(interval);
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+      stopTimers();
     };
   }, [totalLetters]);
 

@@ -28,10 +28,11 @@ export default function CustomCursor() {
         dotRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
         outlineRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
 
-        const elementUnderCursor = document.elementFromPoint(x, y) as HTMLElement | null;
+        const target =
+          event.target instanceof Element ? event.target : null;
 
         const shouldBeDark = Boolean(
-          elementUnderCursor?.closest('[data-cursor="dark"]')
+          target?.closest('[data-cursor="dark"]')
         );
 
         if (shouldBeDark !== lastIsDark) {

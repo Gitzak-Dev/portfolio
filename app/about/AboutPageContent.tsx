@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
 import Link from "next/link";
 import styles from "./AboutPage.module.css";
 
@@ -87,43 +86,11 @@ const expertise = [
   },
 ];
 
-const stagger = {
-  hidden: { opacity: 0, y: 24, filter: "blur(4px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.65,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
-  },
-};
-
-const headerStagger: Variants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.65,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
-  },
-};
-
 export default function AboutPageContent({
   featuredProjects,
 }: AboutPageContentProps) {
   return (
-    <motion.div
-      className={styles.content}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.25 }}
-      variants={headerStagger}
-    >
+    <div className={styles.content}>
       {/* Hero */}
       <section className={styles.hero}>
         <div className={styles.heroGlow} aria-hidden="true" />
@@ -145,22 +112,14 @@ export default function AboutPageContent({
       <section className={styles.section}>
         <h2>What StackSpacer Builds</h2>
         <div className={styles.grid}>
-          {services.map((item, i) => (
-            <motion.article
-              key={item.title}
-              className={styles.card}
-              variants={stagger}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
+          {services.map((item) => (
+            <article key={item.title} className={styles.card}>
               <h3>{item.title}</h3>
               <p>{item.desc}</p>
               <Link href={item.link} className={styles.cardLink}>
                 Learn more <span className={styles.arrow}>→</span>
               </Link>
-            </motion.article>
+            </article>
           ))}
         </div>
       </section>
@@ -169,22 +128,17 @@ export default function AboutPageContent({
       <section className={styles.section}>
         <h2>How StackSpacer Works</h2>
         <div className={styles.reasons}>
-          {reasons.map((item, i) => (
-            <motion.article
+          {reasons.map((item) => (
+            <article
               key={item.num}
               className={`${styles.reason} ${
                 item.num === "05" ? styles.reasonFull : ""
               }`}
-              variants={stagger}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
             >
               <span className={styles.reasonNum}>{item.num}</span>
               <h3>{item.title}</h3>
               <p>{item.desc}</p>
-            </motion.article>
+            </article>
           ))}
         </div>
       </section>
@@ -193,16 +147,8 @@ export default function AboutPageContent({
       <section className={`${styles.section} ${styles.wideSection}`}>
         <h2>Core Expertise</h2>
         <div className={styles.expertiseGrid}>
-          {expertise.map((item, i) => (
-            <motion.article
-              key={item.title}
-              className={styles.expertiseCard}
-              variants={stagger}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
+          {expertise.map((item) => (
+            <article key={item.title} className={styles.expertiseCard}>
               <h3>{item.title}</h3>
               <p>{item.desc}</p>
               <div className={styles.tags}>
@@ -215,7 +161,7 @@ export default function AboutPageContent({
               <Link href={item.link} className={styles.cardLink}>
                 Explore {item.title} <span className={styles.arrow}>→</span>
               </Link>
-            </motion.article>
+            </article>
           ))}
         </div>
       </section>
@@ -224,23 +170,15 @@ export default function AboutPageContent({
       <section className={`${styles.section} ${styles.wideSection}`}>
         <h2>Selected Projects</h2>
         <div className={styles.projectGrid}>
-          {featuredProjects.map((project, i) => (
-            <motion.div
-              key={project.slug}
-              className={styles.projectCard}
-              variants={stagger}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
+          {featuredProjects.map((project) => (
+            <div key={project.slug} className={styles.projectCard}>
               <span className={styles.projectTag}>{project.category}</span>
               <h3>{project.title}</h3>
               <p>{project.desc}</p>
               <strong className={styles.projectCta}>
                 View Case Study →
               </strong>
-            </motion.div>
+            </div>
           ))}
         </div>
         <Link href="/projects" className={styles.seeAllLink}>
@@ -260,6 +198,6 @@ export default function AboutPageContent({
           Discuss Your Project <span>↗</span>
         </Link>
       </section>
-    </motion.div>
+    </div>
   );
 }

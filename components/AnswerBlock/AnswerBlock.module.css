@@ -1,0 +1,139 @@
+.answerSection {
+  position: relative;
+  overflow: hidden;
+
+  padding: 80px 8% 90px;
+
+  background: #050505;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.heading {
+  color: #fff;
+
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+  margin-bottom: 20px;
+}
+
+.answer {
+  color: rgba(255, 255, 255, 0.6);
+
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: normal;
+}
+
+.answer strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.goldDivider {
+  width: 48px;
+  height: 2px;
+  margin: 0 auto 28px;
+
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.serviceList {
+  list-style: none;
+  padding: 0;
+  margin: 28px auto 0;
+  max-width: 520px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 12px;
+}
+
+.serviceList li {
+  padding: 8px 18px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* =========================
+   Tablet
+   ========================= */
+
+@media (max-width: 1024px) {
+  .answerSection {
+    padding: 64px 6% 72px;
+  }
+}
+
+/* =========================
+   Mobile
+   ========================= */
+
+@media (max-width: 700px) {
+  .answerSection {
+    padding: 52px 16px 58px;
+  }
+
+  .goldDivider {
+    margin-bottom: 22px;
+  }
+
+  .heading {
+    font-size: clamp(1.3rem, 5vw, 1.7rem);
+    margin-bottom: 16px;
+  }
+
+  .serviceList {
+    gap: 8px 10px;
+  }
+
+  .serviceList li {
+    padding: 7px 14px;
+    font-size: 0.75rem;
+  }
+}
+
+/* =========================
+   Small Phones
+   ========================= */
+
+@media (max-width: 430px) {
+  .answerSection {
+    padding: 44px 13px 50px;
+  }
+
+  .heading {
+    font-size: clamp(1.15rem, 4.8vw, 1.5rem);
+  }
+
+  .serviceList li {
+    padding: 6px 12px;
+    font-size: 0.7rem;
+  }
+}

@@ -14,6 +14,8 @@ import SnakeTextSection from "@/components/SnakeTextSection/SnakeTextSection";
 import SignalMetricsSection from "@/components/SignalMetricsSection/SignalMetricsSection";
 import ContactSection from "@/components/ContactSection/ContactSection";
 import GlobalLocationsSection from "@/components/GlobalLocationsSection/GlobalLocationsSection";
+import AnswerBlock from "@/components/AnswerBlock/AnswerBlock";
+import HomepageFaq from "@/components/HomepageFaq/HomepageFaq";
 
 export const metadata: Metadata = {
   title: "StackSpacer | Web, Mobile App, AI & ML Development for US Businesses",
@@ -53,12 +55,61 @@ const organizationSchema = {
     name: "United States",
   },
 };
+
+const faqPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What does StackSpacer do?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "StackSpacer builds custom mobile applications, AI automation systems, machine learning solutions, and modern web applications for startups and businesses across the United States.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What services does StackSpacer offer?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "We offer mobile app development, AI automation, machine learning, and web development. Each service is tailored to the specific goals and requirements of the project.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Does StackSpacer work with startups?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. We work with startups and established businesses, building custom software solutions based on each project's requirements.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Where does StackSpacer operate?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "We serve clients across the United States.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How can I contact StackSpacer?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "You can reach StackSpacer through the contact form on this page or by email at hanidev@gmail.com.",
+      },
+    },
+  ],
+};
   return (
     <main>
 
       <JsonLd data={websiteSchema} />
 
       <JsonLd data={organizationSchema} />
+
+      <JsonLd data={faqPageSchema} />
 
       {/* <DisableContextMenu /> */}
 
@@ -72,6 +123,8 @@ const organizationSchema = {
 
       <HeroScroll />
 
+      <AnswerBlock />
+
       <ExpertiseCards/>
 
       <SignalMetricsSection />
@@ -84,6 +137,8 @@ const organizationSchema = {
       <TestimonialsSection />
 
       <WhyChooseMe />
+
+      <HomepageFaq />
 
       <ContactSection />
 

@@ -54,19 +54,59 @@ export default function SignalMetricsSection() {
   const [userSelected, setUserSelected] = useState(false);
 
   useEffect(() => {
-    if (userSelected) {
-      const resumeTimer = window.setTimeout(() => {
-        setUserSelected(false);
-      }, 4400);
+    const section = document.getElementById("signal-metrics");
+    if (!section) return;
 
-      return () => window.clearTimeout(resumeTimer);
-    }
+    let isVisible = false;
+    let isTabVisible = document.visibilityState === "visible";
+    let cycleTimer: number | null = null;
 
-    const interval = window.setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % items.length);
-    }, 2800);
+    const startCycle = () => {
+      if (cycleTimer) return;
+      cycleTimer = window.setInterval(() => {
+        setActiveIndex((prev) => (prev + 1) % items.length);
+      }, 2800);
+    };
 
-    return () => window.clearInterval(interval);
+    const stopCycle = () => {
+      if (cycleTimer) { window.clearInterval(cycleTimer); cycleTimer = null; }
+    };
+
+    const syncTimer = () => {
+      if (isVisible && isTabVisible && !userSelected) startCycle();
+      else stopCycle();
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        syncTimer();
+      },
+      { threshold: 0.1, rootMargin: "100px" }
+    );
+    observer.observe(section);
+
+    const onVisibility = () => {
+      isTabVisible = document.visibilityState === "visible";
+      syncTimer();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
+    syncTimer();
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+      stopCycle();
+    };
+  }, [userSelected]);
+
+  useEffect(() => {
+    if (!userSelected) return;
+    const timer = window.setTimeout(() => {
+      setUserSelected(false);
+    }, 4400);
+    return () => window.clearTimeout(timer);
   }, [userSelected]);
 
   const activateCard = (index: number) => {
