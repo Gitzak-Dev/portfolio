@@ -102,6 +102,7 @@
 .floatingIcon {
   position: absolute;
   transform: translate(-50%, -50%);
+  animation: heroIconFloat var(--icon-duration, 4s) var(--icon-delay, 0s) ease-in-out infinite;
 
   width: 76px;
   min-height: 74px;
@@ -959,10 +960,30 @@
 }
 
 /* =========================
-   Reduced Motion
+   Floating Icon Animation (CSS keyframes replacing Framer Motion)
 ========================= */
 
+@keyframes heroIconFloat {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  25% {
+    transform: translate(calc(-50% + 4px), calc(-50% - 8px)) rotate(3deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  75% {
+    transform: translate(calc(-50% - 4px), calc(-50% - 8px)) rotate(-3deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .floatingIcon {
+    animation: none;
+  }
+
   .badge::after {
     animation: none;
   }
@@ -974,6 +995,10 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* =========================
+   Reduced Motion
+========================= */
 
 
 /* =========================================================

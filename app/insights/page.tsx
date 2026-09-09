@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import JsonLd from "@/components/seo/JsonLd";
+import Link from "next/link";
 import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import { insights } from "@/data/insights";
 import styles from "./InsightsPage.module.css";
@@ -58,9 +58,9 @@ export default function InsightsPage() {
             businesses. Get in touch and we&apos;ll get back to you within 24
             hours.
           </p>
-          <a href="/#contact" className={styles.ctaButton}>
+          <Link href="/#contact" className={styles.ctaButton}>
             Discuss Your Project <span>↗</span>
-          </a>
+          </Link>
         </section>
       </div>
     </main>

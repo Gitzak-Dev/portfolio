@@ -4,22 +4,6 @@ import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import { projects } from "@/data/projects";
 import ProjectsPageContent from "./ProjectsPageContent";
 
-const themeClassMap: Record<string, string> = {
-  mobile: "themeMobile",
-  ai: "themeAi",
-  ml: "themeMl",
-  web: "themeWeb",
-  business: "themeBusiness",
-};
-
-const projectVisualMap: Record<string, string> = {
-  "mobile-app-dashboard": "/project-visuals/mobile-app-dashboard.png",
-  "ai-automation-suite": "/project-visuals/ai-human-analogy.png",
-  "ml-prediction-system": "/projects/ml-stock-dashboard.png",
-  "developer-portfolio": "/project-visuals/developer-portfolio.png",
-  "business-website-system": "/project-visuals/business-website-system.png",
-};
-
 export const metadata: Metadata = {
   title: "Projects | StackSpacer",
   description:

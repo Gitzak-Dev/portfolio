@@ -5,7 +5,6 @@ import type { Metadata } from "next";
 import {
   Plus_Jakarta_Sans,
   Space_Grotesk,
-  Cormorant_Garamond,
 } from "next/font/google";
 import CustomCursor from "@/components/CustomCursor/CustomCursor";
 import { siteConfig } from "@/config/site";
@@ -23,13 +22,6 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
   weight: ["400", "500", "600", "700"],
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  variable: "--font-editorial",
-  weight: ["500", "600", "700"],
-  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -138,7 +130,7 @@ export default function RootLayout({
       </head>
 
       <body
-        className={`${plusJakarta.variable} ${spaceGrotesk.variable} ${cormorant.variable}`}
+        className={`${plusJakarta.variable} ${spaceGrotesk.variable}`}
       >
         {/* STEP 4 — GTM loads after consent defaults */}
         <GoogleTagManager gtmId={gtmId} />

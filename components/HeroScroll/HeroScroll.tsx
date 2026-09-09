@@ -503,28 +503,19 @@ export default function HeroScroll() {
                     const Icon = item.Icon;
 
                     return (
-                      <motion.div
+                      <div
                         key={item.label}
                         className={styles.floatingIcon}
                         style={{
                           left: item.x,
                           top: item.y,
-                        }}
-                        animate={{
-                          y: [0, -8, 0],
-                          x: [0, 4, 0],
-                          rotate: [0, 3, -3, 0],
-                        }}
-                        transition={{
-                          duration: item.duration,
-                          delay: item.delay,
-                          repeat: Infinity,
-                          ease: "easeInOut",
+                          ["--icon-duration" as string]: `${item.duration}s`,
+                          ["--icon-delay" as string]: `${item.delay}s`,
                         }}
                       >
                         <Icon />
                         <span>{item.label}</span>
-                      </motion.div>
+                      </div>
                     );
                   })}
                 </motion.div>

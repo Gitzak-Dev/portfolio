@@ -219,7 +219,7 @@ const sections = [
         <p>
           Unless expressly included in a written quotation, third-party
           subscriptions, licences, usage fees, hosting costs, domain fees, API
-          charges, and similar costs remain the client's responsibility.
+          charges, and similar costs remain the client&apos;s responsibility.
         </p>
       </>
     ),
