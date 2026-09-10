@@ -1,10 +1,41 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import styles from "./Navbar.module.css";
 import Link from "next/link";
+import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
+
+type BackConfig = { href: string; label: string };
+
+const BACK_MAP: Record<string, BackConfig> = {
+  "/about": { href: "/", label: "Back" },
+  "/services": { href: "/", label: "Back" },
+  "/services/web-development": { href: "/services", label: "Back" },
+  "/services/mobile-app-development": { href: "/services", label: "Back" },
+  "/services/ai-automation": { href: "/services", label: "Back" },
+  "/services/machine-learning": { href: "/services", label: "Back" },
+  "/projects": { href: "/", label: "Back" },
+  "/insights": { href: "/", label: "Back" },
+  "/locations": { href: "/", label: "Home" },
+  "/privacy": { href: "/", label: "Back" },
+  "/terms": { href: "/", label: "Back" },
+};
+
+function getBackConfig(pathname: string): BackConfig | null {
+  const exact = BACK_MAP[pathname];
+  if (exact) return exact;
+
+  if (pathname.startsWith("/projects/")) return { href: "/#work", label: "Back" };
+  if (pathname.startsWith("/insights/")) return { href: "/insights", label: "Back" };
+  if (pathname.startsWith("/locations/")) return { href: "/locations", label: "Locations" };
+
+  return null;
+}
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const backConfig = getBackConfig(pathname);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -103,6 +134,14 @@ export default function Navbar() {
         <Link href="/" className={styles.logo} onClick={handleLogoClick}>
           Stack <span>Spacer</span>
         </Link>
+
+        {backConfig && (
+          <PageBackHeader
+            href={backConfig.href}
+            label={backConfig.label}
+            inline
+          />
+        )}
 
         <nav className={styles.navLinks} aria-label="Primary navigation">
           <a

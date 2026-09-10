@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import { insights } from "@/data/insights";
 import styles from "./InsightsPage.module.css";
 
@@ -24,8 +23,6 @@ export const metadata: Metadata = {
 export default function InsightsPage() {
   return (
     <main className={styles.page}>
-      <PageBackHeader href="/" />
-
       <div className={styles.container}>
         <section className={styles.hero}>
           <span className={styles.label}>// Insights</span>

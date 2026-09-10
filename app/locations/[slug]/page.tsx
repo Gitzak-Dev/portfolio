@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/seo/JsonLd";
-import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import { cities, getCityBySlug } from "@/data/locations";
 import Link from "next/link";
 import styles from "./CityPage.module.css";
@@ -109,8 +108,6 @@ export default async function CityPage({ params }: PageProps) {
     <main>
       <JsonLd data={webPageSchema} />
       <JsonLd data={breadcrumbSchema} />
-      <PageBackHeader href="/locations" label="Locations" />
-
       <div className={styles.container}>
         <header className={styles.hero}>
           <div className={styles.label}>{"// " + city.name}</div>

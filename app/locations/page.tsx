@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
-import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import { cities } from "@/data/locations";
 import styles from "./LocationsPage.module.css";
 
@@ -64,8 +63,6 @@ export default function LocationsPage() {
   return (
     <main>
       <JsonLd data={locationSchema} />
-      <PageBackHeader href="/" label="Home" />
-
       <div className={styles.container}>
         <header className={styles.hero}>
           <div className={styles.label}>{"// Locations"}</div>

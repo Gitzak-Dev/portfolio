@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import styles from "./TermsPage.module.css";
-import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions | StackSpacer",
@@ -424,7 +423,6 @@ export default function TermsPage() {
     <main className={styles.page}>
       <div className={styles.glow} />
 
-      <PageBackHeader href="/" />
       <div className={styles.container}>
         <header className={styles.hero}>
           <div className={styles.label}>// TERMS & CONDITIONS</div>

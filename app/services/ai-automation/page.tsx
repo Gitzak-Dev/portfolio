@@ -1,7 +1,6 @@
 ﻿import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
-import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import styles from "./AiAutomationPage.module.css";
 
 export const metadata: Metadata = {
@@ -59,7 +58,6 @@ const breadcrumbSchema = {
 export default function AiAutomationPage() {
   return (
     <main className={styles.page}>
-      <PageBackHeader href="/services" />
       <JsonLd data={serviceSchema} />
       <JsonLd data={breadcrumbSchema} />
 

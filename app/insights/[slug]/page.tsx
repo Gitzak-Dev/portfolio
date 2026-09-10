@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/seo/JsonLd";
-import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import { insights } from "@/data/insights";
 import styles from "./InsightPage.module.css";
 
@@ -104,8 +103,6 @@ export default async function InsightPage({ params }: PageProps) {
     <main className={styles.page}>
       <JsonLd data={articleSchema} />
       <JsonLd data={breadcrumbSchema} />
-      <PageBackHeader href="/insights" />
-
       <article className={styles.container}>
         <span className={styles.category}>{insight.category}</span>
         <h1>{insight.title}</h1>

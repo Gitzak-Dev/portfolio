@@ -1,6 +1,5 @@
 ﻿import type { Metadata } from "next";
 import Link from "next/link";
-import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import styles from "./ServicesPage.module.css";
 
 export const metadata: Metadata = {
@@ -56,7 +55,6 @@ const serviceLinks: Array<{
 export default function ServicesPage() {
   return (
     <main className={styles.page}>
-      <PageBackHeader href="/" />
       <div className={styles.glow} aria-hidden="true" />
 
       <div className={styles.container}>

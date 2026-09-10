@@ -4,7 +4,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects, type ProjectTheme } from "@/data/projects";
 import JsonLd from "@/components/seo/JsonLd";
-import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import styles from "./ProjectCasePage.module.css";
 
 type PageProps = {
@@ -148,8 +147,6 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
       <div className={styles.bgGrid} aria-hidden="true" />
       <div className={styles.bgGlowOne} aria-hidden="true" />
       <div className={styles.bgGlowTwo} aria-hidden="true" />
-
-      <PageBackHeader href="/#work" />
 
       <section className={styles.heroSection}>
         <div className={styles.heroContent}>

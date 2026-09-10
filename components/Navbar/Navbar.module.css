@@ -65,11 +65,14 @@
    Desktop Navigation
 ========================= */
 
-.navLinks {
-  display: flex;
+.backItem {
+  display: inline-flex;
   align-items: center;
-  gap: 38px;
+  flex-shrink: 0;
+  margin-left: 24px;
 }
+
+
 
 .navLinks a {
   position: relative;
