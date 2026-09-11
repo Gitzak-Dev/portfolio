@@ -68,16 +68,13 @@ const HERO_DATA: HeroItem[] = [
     image: "/character-1.webp",
     headline: [
       [
-        { text: "Mobile ", tone: "white" },
-        { text: "Application", tone: "white" },
-      ],
-      [
-        { text: "Developer ", tone: "accent" },
-        { text: "building", tone: "white" },
+        { text: "StackSpacer ", tone: "white" },
+        { text: "builds", tone: "accent" },
       ],
       [
         { text: "clean ", tone: "white" },
-        { text: "apps.", tone: "white" },
+        { text: "mobile ", tone: "white" },
+        { text: "applications.", tone: "white" },
       ],
     ],
     stats: [
@@ -168,14 +165,12 @@ const HERO_DATA: HeroItem[] = [
     image: "/character-2.webp",
     headline: [
       [
+        { text: "StackSpacer ", tone: "white" },
+        { text: "creates", tone: "accent" },
+      ],
+      [
+        { text: "smart ", tone: "white" },
         { text: "AI ", tone: "white" },
-        { text: "Developer", tone: "white" },
-      ],
-      [
-        { text: "creating ", tone: "accent" },
-        { text: "smart", tone: "accent" },
-      ],
-      [
         { text: "automation ", tone: "white" },
         { text: "systems.", tone: "white" },
       ],
@@ -260,16 +255,13 @@ const HERO_DATA: HeroItem[] = [
     image: "/character-3.webp",
     headline: [
       [
-        { text: "Machine ", tone: "white" },
-        { text: "Learning", tone: "white" },
+        { text: "StackSpacer ", tone: "white" },
+        { text: "develops", tone: "accent" },
       ],
       [
-        { text: "Developer ", tone: "accent" },
-        { text: "turning", tone: "white" },
-      ],
-      [
-        { text: "data ", tone: "white" },
-        { text: "insight.", tone: "white" },
+        { text: "machine ", tone: "white" },
+        { text: "learning ", tone: "white" },
+        { text: "models.", tone: "white" },
       ],
     ],
     stats: [

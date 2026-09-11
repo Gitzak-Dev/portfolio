@@ -10,7 +10,8 @@ export default function AnswerBlock() {
           <strong>StackSpacer</strong> is a developer-led software studio building
           custom mobile applications, AI
           automation systems, machine learning solutions, and modern web
-          applications for businesses across the United States.
+          applications for businesses across the United States. Clients work
+          directly with the developer rather than through an agency layer.
         </p>
         <ul className={styles.serviceList}>
           <li>Web applications</li>
