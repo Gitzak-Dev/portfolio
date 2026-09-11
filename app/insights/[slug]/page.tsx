@@ -27,7 +27,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${insight.title} | StackSpacer`,
+    title: insight.title,
     description: insight.description,
     alternates: {
       canonical: `/insights/${slug}`,
@@ -71,12 +71,49 @@ export default async function InsightPage({ params }: PageProps) {
       "@type": "WebPage",
       "@id": `${baseUrl}/insights/${insight.slug}`,
     },
+    author: {
+      "@type": "Organization",
+      "@id": `${baseUrl}/#organization`,
+      name: "StackSpacer",
+    },
     publisher: {
       "@type": "Organization",
+      "@id": `${baseUrl}/#organization`,
       name: "StackSpacer",
       url: baseUrl,
     },
   };
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${baseUrl}/#organization`,
+    name: "StackSpacer",
+    url: baseUrl,
+    email: "hanidev@gmail.com",
+    description:
+      "StackSpacer builds mobile apps, AI automation systems, machine learning solutions, and modern web applications for startups and businesses.",
+    areaServed: {
+      "@type": "Country",
+      name: "United States",
+    },
+  };
+
+  const faqSchema =
+    insight.faqs && insight.faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: insight.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -106,6 +143,8 @@ export default async function InsightPage({ params }: PageProps) {
   return (
     <main className={styles.page}>
       <JsonLd data={articleSchema} />
+      {faqSchema && <JsonLd data={faqSchema} />}
+      <JsonLd data={organizationSchema} />
       <JsonLd data={breadcrumbSchema} />
       <PageBackHeader href="/insights" />
 
