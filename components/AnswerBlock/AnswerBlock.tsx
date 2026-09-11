@@ -7,7 +7,8 @@ export default function AnswerBlock() {
         <div className={styles.goldDivider} />
         <h2 className={styles.heading}>What StackSpacer builds</h2>
         <p className={styles.answer}>
-          <strong>StackSpacer</strong> builds custom mobile applications, AI
+          <strong>StackSpacer</strong> is a developer-led software studio building
+          custom mobile applications, AI
           automation systems, machine learning solutions, and modern web
           applications for businesses across the United States.
         </p>
