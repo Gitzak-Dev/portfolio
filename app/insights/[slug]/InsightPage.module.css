@@ -216,6 +216,66 @@
 }
 
 /* =========================
+   Sources Section
+========================= */
+
+.sourceSection {
+  margin-bottom: 56px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sourceSection h2 {
+  color: #fff;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.sourceList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sourceItem {
+  margin: 0;
+}
+
+.sourceLink {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.sourceLink:hover {
+  color: #d8af25;
+  text-decoration: underline;
+}
+
+.sourceLink::after {
+  content: "↗";
+  font-size: 0.75em;
+  opacity: 0.5;
+  transition: opacity 0.25s ease;
+}
+
+.sourceLink:hover::after {
+  opacity: 1;
+}
+
+/* =========================
    CTA Section
 ========================= */
 

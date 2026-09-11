@@ -185,6 +185,26 @@ export default async function InsightPage({ params }: PageProps) {
           </section>
         )}
 
+        {insight.sources && insight.sources.length > 0 && (
+          <aside className={styles.sourceSection} aria-labelledby="article-sources">
+            <h2 id="article-sources">Sources</h2>
+            <ul className={styles.sourceList}>
+              {insight.sources.map((source, index) => (
+                <li key={source.href} className={styles.sourceItem}>
+                  <a
+                    href={source.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.sourceLink}
+                  >
+                    {source.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
+
         {(insight.relatedService ||
           insight.relatedProjects.length > 0 ||
           (insight.relatedInsights && insight.relatedInsights.length > 0)) && (

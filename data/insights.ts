@@ -3,6 +3,11 @@ export type InsightSection = {
   paragraphs: string[];
 };
 
+export type InsightSource = {
+  label: string;
+  href: string;
+};
+
 export type InsightFAQ = {
   question: string;
   answer: string;
@@ -16,6 +21,7 @@ export type Insight = {
   standfirst: string;
   sections: InsightSection[];
   faqs?: InsightFAQ[];
+  sources?: InsightSource[];
   relatedService: string;
   relatedProjects: string[];
   relatedInsights?: string[];
@@ -113,6 +119,24 @@ export const insights: Insight[] = [
     updatedAt: "2026-08-21",
     ctaText: "Start Your Web Project",
     ctaHref: "/#contact",
+    sources: [
+      {
+        label: "Next.js — Server Components",
+        href: "https://nextjs.org/docs/app/getting-started/server-and-client-components",
+      },
+      {
+        label: "Next.js — Image Component",
+        href: "https://nextjs.org/docs/app/api-reference/components/image",
+      },
+      {
+        label: "web.dev — Core Web Vitals",
+        href: "https://web.dev/articles/vitals",
+      },
+      {
+        label: "Next.js — Metadata API",
+        href: "https://nextjs.org/docs/app/api-reference/file-conventions/metadata",
+      },
+    ],
   },
   {
     slug: "react-native-vs-flutter",
@@ -385,6 +409,12 @@ export const insights: Insight[] = [
     updatedAt: "2026-08-21",
     ctaText: "Start Your Automation Project",
     ctaHref: "/#contact",
+    sources: [
+      {
+        label: "Lewis et al. — Retrieval-Augmented Generation",
+        href: "https://arxiv.org/abs/2005.11401",
+      },
+    ],
   },
   {
     slug: "machine-learning-for-business",
