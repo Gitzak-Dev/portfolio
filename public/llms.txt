@@ -1,0 +1,37 @@
+# StackSpacer
+
+> StackSpacer provides custom web development, mobile app development, AI automation, and machine learning solutions for businesses across the United States.
+
+## Services
+
+- [Software Development Services](https://stackspacer.com/services)
+- [Web Development](https://stackspacer.com/services/web-development)
+- [Mobile App Development](https://stackspacer.com/services/mobile-app-development)
+- [AI Automation](https://stackspacer.com/services/ai-automation)
+- [Machine Learning](https://stackspacer.com/services/machine-learning)
+
+## Insights
+
+- [Technical Insights](https://stackspacer.com/insights)
+- [What Makes a Next.js Application Production-Ready](https://stackspacer.com/insights/what-nextjs-production-ready)
+- [React Native vs Flutter](https://stackspacer.com/insights/react-native-vs-flutter)
+- [When AI Automation Makes Sense](https://stackspacer.com/insights/when-ai-automation-makes-sense)
+- [RAG vs AI Agents](https://stackspacer.com/insights/rag-vs-ai-agents)
+- [Machine Learning for Business](https://stackspacer.com/insights/machine-learning-for-business)
+
+## Projects
+
+- [Projects](https://stackspacer.com/projects)
+
+## Service Areas
+
+- [United States Service Areas](https://stackspacer.com/locations)
+
+## About
+
+- [About StackSpacer](https://stackspacer.com/about)
+
+## Discovery
+
+- [Sitemap](https://stackspacer.com/sitemap.xml)
+- [Robots](https://stackspacer.com/robots.txt)
