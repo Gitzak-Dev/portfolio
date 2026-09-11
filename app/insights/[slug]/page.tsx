@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/seo/JsonLd";
+import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import { insights } from "@/data/insights";
 import styles from "./InsightPage.module.css";
 
@@ -37,7 +38,8 @@ export async function generateMetadata({
       siteName: "StackSpacer",
       title: `${insight.title} | StackSpacer`,
       description: insight.description,
-      publishedTime: undefined,
+      publishedTime: insight.publishedAt,
+      modifiedTime: insight.updatedAt,
     },
     twitter: {
       card: "summary_large_image",
@@ -63,6 +65,8 @@ export default async function InsightPage({ params }: PageProps) {
     headline: insight.title,
     description: insight.description,
     url: `${baseUrl}/insights/${insight.slug}`,
+    datePublished: insight.publishedAt,
+    dateModified: insight.updatedAt,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${baseUrl}/insights/${insight.slug}`,
@@ -103,10 +107,21 @@ export default async function InsightPage({ params }: PageProps) {
     <main className={styles.page}>
       <JsonLd data={articleSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <PageBackHeader href="/insights" />
+
       <article className={styles.container}>
         <span className={styles.category}>{insight.category}</span>
         <h1>{insight.title}</h1>
         <p className={styles.standfirst}>{insight.standfirst}</p>
+        <p className={styles.metaDate}>
+          <time dateTime={insight.publishedAt}>
+            Published {new Date(insight.publishedAt + "T00:00:00").toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+          </time>
+          {" · "}
+          <time dateTime={insight.updatedAt}>
+            Updated {new Date(insight.updatedAt + "T00:00:00").toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+          </time>
+        </p>
 
         <div className={styles.body}>
           {insight.sections.map((section, index) => (

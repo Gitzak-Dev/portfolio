@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import styles from "./PrivacyPage.module.css";
 
 export const metadata: Metadata = {
@@ -459,6 +460,7 @@ export default function PrivacyPage() {
     <main className={styles.page}>
       <div className={styles.glow} />
 
+      <PageBackHeader href="/" />
       <div className={styles.container}>
         <header className={styles.hero}>
           <div className={styles.label}>// PRIVACY POLICY</div>

@@ -1,9 +1,10 @@
 ﻿import type { Metadata } from "next";
 import Link from "next/link";
+import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import styles from "./ServicesPage.module.css";
 
 export const metadata: Metadata = {
-  title: "Services | StackSpacer",
+  title: "Custom Software Development Services | StackSpacer",
   description:
     "Custom web development, mobile apps, AI automation, and machine learning systems. StackSpacer builds digital products for startups and businesses.",
   alternates: {
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/services",
     siteName: "StackSpacer",
-    title: "Services | StackSpacer",
+    title: "Custom Software Development Services | StackSpacer",
     description:
       "Custom web development, mobile apps, AI automation, and machine learning systems. StackSpacer builds digital products for startups and businesses.",
   },
@@ -55,6 +56,7 @@ const serviceLinks: Array<{
 export default function ServicesPage() {
   return (
     <main className={styles.page}>
+      <PageBackHeader href="/" />
       <div className={styles.glow} aria-hidden="true" />
 
       <div className={styles.container}>

@@ -53,6 +53,22 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.metaDate {
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 0.82rem;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-top: 16px;
+  margin-bottom: 0;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.metaDate time {
+  color: rgba(255, 255, 255, 0.45);
+}
+
 /* =========================
    Article Body
 ========================= */

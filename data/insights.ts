@@ -19,6 +19,8 @@ export type Insight = {
   relatedService: string;
   relatedProjects: string[];
   relatedInsights?: string[];
+  publishedAt: string;
+  updatedAt: string;
   ctaText: string;
   ctaHref: string;
 };
@@ -107,6 +109,8 @@ export const insights: Insight[] = [
     relatedService: "/services/web-development",
     relatedProjects: ["developer-portfolio", "business-website-system"],
     relatedInsights: ["react-native-vs-flutter"],
+    publishedAt: "2026-08-21",
+    updatedAt: "2026-08-21",
     ctaText: "Start Your Web Project",
     ctaHref: "/#contact",
   },
@@ -199,6 +203,8 @@ export const insights: Insight[] = [
     relatedService: "/services/mobile-app-development",
     relatedProjects: ["mobile-app-dashboard"],
     relatedInsights: ["what-nextjs-production-ready"],
+    publishedAt: "2026-08-21",
+    updatedAt: "2026-08-21",
     ctaText: "Start Your Mobile App",
     ctaHref: "/#contact",
   },
@@ -276,6 +282,8 @@ export const insights: Insight[] = [
     relatedService: "/services/ai-automation",
     relatedProjects: ["ai-automation-suite"],
     relatedInsights: ["rag-vs-ai-agents"],
+    publishedAt: "2026-08-21",
+    updatedAt: "2026-08-21",
     ctaText: "Start Your Automation Project",
     ctaHref: "/#contact",
   },
@@ -373,6 +381,8 @@ export const insights: Insight[] = [
     relatedService: "/services/ai-automation",
     relatedProjects: ["ai-automation-suite"],
     relatedInsights: ["when-ai-automation-makes-sense"],
+    publishedAt: "2026-08-21",
+    updatedAt: "2026-08-21",
     ctaText: "Start Your Automation Project",
     ctaHref: "/#contact",
   },
@@ -463,6 +473,8 @@ export const insights: Insight[] = [
     relatedService: "/services/machine-learning",
     relatedProjects: ["ml-prediction-system"],
     relatedInsights: ["when-ai-automation-makes-sense"],
+    publishedAt: "2026-08-21",
+    updatedAt: "2026-08-21",
     ctaText: "Start Your ML Project",
     ctaHref: "/#contact",
   },

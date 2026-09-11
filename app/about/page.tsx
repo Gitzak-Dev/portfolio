@@ -1,5 +1,6 @@
 ﻿import type { Metadata } from "next";
 import JsonLd from "@/components/seo/JsonLd";
+import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import { projects } from "@/data/projects";
 import AboutPageContent from "./AboutPageContent";
 
@@ -51,6 +52,7 @@ export default function AboutPage() {
   return (
     <main>
       <JsonLd data={aboutSchema} />
+      <PageBackHeader href="/" />
       <AboutPageContent featuredProjects={featuredProjects} />
     </main>
   );

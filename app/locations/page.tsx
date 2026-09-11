@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
+import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import { cities } from "@/data/locations";
 import styles from "./LocationsPage.module.css";
 
 export const metadata: Metadata = {
-  title: "Locations | StackSpacer — US City Service Areas",
+  title: "Software Development Across the United States | StackSpacer",
   description:
     "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across the United States. Explore our city service areas.",
   alternates: {
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/locations",
     siteName: "StackSpacer",
-    title: "Locations | StackSpacer — US City Service Areas",
+    title: "Software Development Across the United States | StackSpacer",
     description:
       "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across the United States.",
   },
@@ -63,6 +64,8 @@ export default function LocationsPage() {
   return (
     <main>
       <JsonLd data={locationSchema} />
+      <PageBackHeader href="/" label="Home" />
+
       <div className={styles.container}>
         <header className={styles.hero}>
           <div className={styles.label}>{"// Locations"}</div>
@@ -124,7 +127,7 @@ export default function LocationsPage() {
                 className={styles.serviceLink}
               >
                 <span className={styles.serviceName}>{service.name}</span>
-                <span className={styles.serviceArrow}>→</span>
+                <span className={styles.serviceArrow}>ÔåÆ</span>
               </Link>
             ))}
           </div>
@@ -139,7 +142,7 @@ export default function LocationsPage() {
             hours.
           </p>
           <Link href="/#contact" className={styles.ctaButton}>
-            Discuss Your Project <span>↗</span>
+            Discuss Your Project <span>Ôåù</span>
           </Link>
         </section>
       </div>
