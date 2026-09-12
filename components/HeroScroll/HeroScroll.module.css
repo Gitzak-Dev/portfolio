@@ -276,6 +276,11 @@
   overflow-wrap: normal;
 }
 
+.word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 .typedChar {
   display: inline-block;
 

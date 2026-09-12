@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Fragment } from "react";
 import {
   AnimatePresence,
   motion,
@@ -363,42 +363,64 @@ function TypedHeadline({
     <h1 className={styles.typedHeading}>
       {lines.map((line, lineIndex) => (
         <span className={styles.typedLine} key={`line-${lineIndex}`}>
-          {line.map((part, partIndex) => (
-            <span
-              key={`part-${lineIndex}-${partIndex}`}
-              className={
-                part.tone === "accent"
-                  ? styles.typedAccent
-                  : styles.typedWhite
-              }
-            >
-              {Array.from(part.text).map((char, charIndex) => {
-                const currentCharIndex = globalCharIndex++;
+          {line.map((part, partIndex) => {
+            const toneClass =
+              part.tone === "accent"
+                ? styles.typedAccent
+                : styles.typedWhite;
 
-                const isVisible = currentCharIndex < visibleCount;
-                const isNext =
-                  currentCharIndex >= visibleCount &&
-                  currentCharIndex < visibleCount + 7;
+            const chunks = part.text.match(/[^ ]+| +/g) || [];
+
+            return chunks.map((chunk, chunkIdx) => {
+              const isSpace = chunk === " ";
+
+              if (isSpace) {
+                globalCharIndex += chunk.length;
 
                 return (
-                  <span
-                    key={`${lineIndex}-${partIndex}-${charIndex}`}
-                    className={`${styles.typedChar} ${
-                      isVisible
-                        ? styles.charVisible
-                        : isNext
-                        ? styles.charNext
-                        : styles.charHidden
-                    }`}
-                  >
-                    {char === " " ? "\u00A0" : char}
-                  </span>
+                  <Fragment key={`space-${lineIndex}-${partIndex}-${chunkIdx}`}>
+                    {" "}
+                  </Fragment>
                 );
-              })}
-            </span>
-          ))}
+              }
+
+              const words = chunk.split("");
+
+              return (
+                <span
+                  key={`word-${lineIndex}-${partIndex}-${chunkIdx}`}
+                  className={styles.word}
+                >
+                  {words.map((char, charIdx) => {
+                    const currentCharIndex = globalCharIndex++;
+
+                    const isVisible =
+                      currentCharIndex < visibleCount;
+                    const isNext =
+                      currentCharIndex >= visibleCount &&
+                      currentCharIndex < visibleCount + 7;
+
+                    return (
+                      <span
+                        key={`${lineIndex}-${partIndex}-${chunkIdx}-${charIdx}`}
+                        className={`${styles.typedChar} ${
+                          isVisible
+                            ? styles.charVisible
+                            : isNext
+                            ? styles.charNext
+                            : styles.charHidden
+                        }`}
+                      >
+                        {char}
+                      </span>
+                    );
+                  })}
+                </span>
+              );
+            });
+          })}
         </span>
-      ))}     
+      ))}
     </h1>
   );
 }
