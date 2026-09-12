@@ -229,7 +229,7 @@
 .typedHeading {
   position: relative;
 
-  max-width: 900px;
+  max-width: 100%;
   margin-top: 18px;
 
   color: #fff;
@@ -250,7 +250,7 @@
 
 .typedLine {
   display: block;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .typedWhite,

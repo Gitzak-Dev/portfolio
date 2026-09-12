@@ -64,7 +64,7 @@ const HERO_DATA: HeroItem[] = [
   {
     id: 1,
     badge: "MOBILE APP DEVELOPMENT",
-    desc: "Clean, scalable mobile apps with smooth UI.\nBuilt for speed, responsiveness, and real users.",
+    desc: "Mobile experiences designed for clear navigation and everyday use.\nResponsive interfaces built around practical user flows.",
     image: "/character-1.webp",
     headline: [
       [
@@ -72,9 +72,7 @@ const HERO_DATA: HeroItem[] = [
         { text: "builds", tone: "accent" },
       ],
       [
-        { text: "clean ", tone: "white" },
-        { text: "mobile ", tone: "white" },
-        { text: "applications.", tone: "white" },
+        { text: "mobile applications.", tone: "white" },
       ],
     ],
     stats: [
@@ -161,7 +159,7 @@ const HERO_DATA: HeroItem[] = [
   {
     id: 2,
     badge: "AI DEVELOPMENT",
-    desc: "AI tools, chatbots, and workflows that save time.\nSmart automation systems built for modern teams.",
+    desc: "AI tools and automated workflows for practical business tasks.\nChatbots and automation designed around how teams work.",
     image: "/character-2.webp",
     headline: [
       [
@@ -169,10 +167,7 @@ const HERO_DATA: HeroItem[] = [
         { text: "creates", tone: "accent" },
       ],
       [
-        { text: "smart ", tone: "white" },
-        { text: "AI ", tone: "white" },
-        { text: "automation ", tone: "white" },
-        { text: "systems.", tone: "white" },
+        { text: "AI automation systems.", tone: "white" },
       ],
     ],
     stats: [
@@ -251,7 +246,7 @@ const HERO_DATA: HeroItem[] = [
   {
     id: 3,
     badge: "MACHINE LEARNING",
-    desc: "Machine learning models for predictions and decisions.\nTurning raw data into practical business insight.",
+    desc: "Machine learning for prediction, analysis, and decision support.\nModels that turn business data into useful signals.",
     image: "/character-3.webp",
     headline: [
       [
@@ -259,9 +254,7 @@ const HERO_DATA: HeroItem[] = [
         { text: "develops", tone: "accent" },
       ],
       [
-        { text: "machine ", tone: "white" },
-        { text: "learning ", tone: "white" },
-        { text: "models.", tone: "white" },
+        { text: "machine learning models.", tone: "white" },
       ],
     ],
     stats: [
