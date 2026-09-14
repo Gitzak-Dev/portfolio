@@ -69,7 +69,7 @@ const HERO_DATA: HeroItem[] = [
     headline: [
       [
         { text: "StackSpacer ", tone: "white" },
-        { text: "builds", tone: "accent" },
+        { text: "Builds", tone: "accent" },
       ],
       [
         { text: "mobile applications.", tone: "white" },
@@ -164,7 +164,7 @@ const HERO_DATA: HeroItem[] = [
     headline: [
       [
         { text: "StackSpacer ", tone: "white" },
-        { text: "creates", tone: "accent" },
+        { text: "Creates", tone: "accent" },
       ],
       [
         { text: "AI automation systems.", tone: "white" },
@@ -251,7 +251,7 @@ const HERO_DATA: HeroItem[] = [
     headline: [
       [
         { text: "StackSpacer ", tone: "white" },
-        { text: "develops", tone: "accent" },
+        { text: "Develops", tone: "accent" },
       ],
       [
         { text: "machine learning models.", tone: "white" },
