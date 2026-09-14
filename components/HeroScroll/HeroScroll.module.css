@@ -1,7 +1,7 @@
 .heroSection {
   position: relative;
-  height: 300vh;
-  height: 300svh;
+  height: 400vh;
+  height: 400svh;
 
   background:
     radial-gradient(
@@ -235,7 +235,7 @@
   color: #fff;
   font-family: var(--font-space-grotesk), sans-serif;
   font-style: normal !important;
-  font-size: clamp(3.1rem, 3.8vw, 5rem);
+  font-size: clamp(1.125rem, 2vw, 2.25rem);
   font-weight: 600;
   line-height: 1.02;
   letter-spacing: -0.075em;
@@ -250,7 +250,7 @@
 
 .typedLine {
   display: block;
-  white-space: normal;
+  white-space: nowrap;
 }
 
 .typedWhite,
@@ -552,10 +552,6 @@
     font-size: 1.08rem;
   }
 
-  .typedHeading {
-    font-size: clamp(3.05rem, 5.2vw, 5rem);
-  }
-
   .description {
     font-size: 0.94rem;
   }
@@ -575,7 +571,7 @@
 
 @media (max-width: 820px) {
   .heroSection {
-    height: 300svh;
+    height: 400svh;
   }
 
   .stickyWrap {
@@ -679,18 +675,12 @@
   }
 
   .typedHeading {
-    width: 100%;
-    max-width: 100%;
     margin-top: 5px;
 
-    font-size: clamp(1.72rem, 7.45vw, 3.05rem);
-    line-height: 0.95;
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
     letter-spacing: -0.04em;
   }
 
-  .typedLine {
-    white-space: nowrap;
-  }
 
   .description {
     max-width: 100%;
@@ -794,8 +784,7 @@
   }
 
   .typedHeading {
-    font-size: clamp(1.67rem, 7.35vw, 2.2rem);
-    line-height: 0.95;
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
   }
 
   .description {
@@ -859,7 +848,7 @@
   }
 
   .typedHeading {
-    font-size: clamp(1.48rem, 7.1vw, 1.7rem);
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
   }
 
   .description {
@@ -930,8 +919,7 @@
 
   .typedHeading {
     margin-top: 2px;
-    font-size: clamp(1.42rem, 6.8vw, 2.02rem);
-    line-height: 0.93;
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
   }
 
   .description {
@@ -1095,7 +1083,7 @@
   }
 
   .typedHeading {
-    font-size: clamp(1.72rem, 7.4vw, 3.05rem);
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
   }
 
   .description {
@@ -1157,8 +1145,7 @@
   }
 
   .typedHeading {
-    font-size: clamp(1.62rem, 7.2vw, 2.15rem);
-    line-height: 0.96;
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
   }
 
   .description {
@@ -1216,7 +1203,7 @@
   }
 
   .typedHeading {
-    font-size: clamp(1.42rem, 7vw, 1.66rem);
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
   }
 
   .description {

@@ -428,7 +428,9 @@ function TypedHeadline({
 export default function HeroScroll() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [targetIndex, setTargetIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(0);
+  const lastActiveChangeRef = useRef<number>(0);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -437,15 +439,41 @@ export default function HeroScroll() {
 
   useEffect(() => {
     return scrollYProgress.on("change", (latest) => {
-      if (latest < 0.33) {
-        setActiveIndex(0);
-      } else if (latest < 0.66) {
-        setActiveIndex(1);
+      if (latest < 0.30) {
+        setTargetIndex(0);
+      } else if (latest < 0.65) {
+        setTargetIndex(1);
       } else {
-        setActiveIndex(2);
+        setTargetIndex(2);
       }
     });
   }, [scrollYProgress]);
+
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+
+    const tick = () => {
+      const now = performance.now();
+      const elapsed = now - lastActiveChangeRef.current;
+      const remaining = Math.max(0, 1300 - elapsed);
+
+      if (targetIndex !== activeIndex) {
+        timer = setTimeout(() => {
+          if (targetIndex !== activeIndex) {
+            lastActiveChangeRef.current = performance.now();
+            const nextIndex = activeIndex + Math.sign(targetIndex - activeIndex);
+            setActiveIndex(nextIndex);
+          }
+        }, remaining);
+      }
+    };
+
+    tick();
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [targetIndex, activeIndex]);
 
   const activeItem = HERO_DATA[activeIndex];
 
