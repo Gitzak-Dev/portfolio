@@ -371,53 +371,60 @@ function TypedHeadline({
 
             const chunks = part.text.match(/[^ ]+| +/g) || [];
 
-            return chunks.map((chunk, chunkIdx) => {
-              const isSpace = chunk === " ";
+            return (
+              <span
+                key={`part-${lineIndex}-${partIndex}`}
+                className={toneClass}
+              >
+                {chunks.map((chunk, chunkIdx) => {
+                  const isSpace = chunk === " ";
 
-              if (isSpace) {
-                globalCharIndex += chunk.length;
-
-                return (
-                  <Fragment key={`space-${lineIndex}-${partIndex}-${chunkIdx}`}>
-                    {" "}
-                  </Fragment>
-                );
-              }
-
-              const words = chunk.split("");
-
-              return (
-                <span
-                  key={`word-${lineIndex}-${partIndex}-${chunkIdx}`}
-                  className={styles.word}
-                >
-                  {words.map((char, charIdx) => {
-                    const currentCharIndex = globalCharIndex++;
-
-                    const isVisible =
-                      currentCharIndex < visibleCount;
-                    const isNext =
-                      currentCharIndex >= visibleCount &&
-                      currentCharIndex < visibleCount + 7;
+                  if (isSpace) {
+                    globalCharIndex += chunk.length;
 
                     return (
-                      <span
-                        key={`${lineIndex}-${partIndex}-${chunkIdx}-${charIdx}`}
-                        className={`${styles.typedChar} ${
-                          isVisible
-                            ? styles.charVisible
-                            : isNext
-                            ? styles.charNext
-                            : styles.charHidden
-                        }`}
-                      >
-                        {char}
-                      </span>
+                      <Fragment key={`space-${lineIndex}-${partIndex}-${chunkIdx}`}>
+                        {" "}
+                      </Fragment>
                     );
-                  })}
-                </span>
-              );
-            });
+                  }
+
+                  const words = chunk.split("");
+
+                  return (
+                    <span
+                      key={`word-${lineIndex}-${partIndex}-${chunkIdx}`}
+                      className={styles.word}
+                    >
+                      {words.map((char, charIdx) => {
+                        const currentCharIndex = globalCharIndex++;
+
+                        const isVisible =
+                          currentCharIndex < visibleCount;
+                        const isNext =
+                          currentCharIndex >= visibleCount &&
+                          currentCharIndex < visibleCount + 7;
+
+                        return (
+                          <span
+                            key={`${lineIndex}-${partIndex}-${chunkIdx}-${charIdx}`}
+                            className={`${styles.typedChar} ${
+                              isVisible
+                                ? styles.charVisible
+                                : isNext
+                                ? styles.charNext
+                                : styles.charHidden
+                            }`}
+                          >
+                            {char}
+                          </span>
+                        );
+                      })}
+                    </span>
+                  );
+                })}
+              </span>
+            );
           })}
         </span>
       ))}
