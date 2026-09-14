@@ -235,7 +235,7 @@
   color: #fff;
   font-family: var(--font-space-grotesk), sans-serif;
   font-style: normal !important;
-  font-size: clamp(1.125rem, 2vw, 2.25rem);
+  font-size: clamp(1.125rem, 2.1vw, 2.5rem);
   font-weight: 600;
   line-height: 1.02;
   letter-spacing: -0.075em;
