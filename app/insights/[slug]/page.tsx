@@ -2,22 +2,21 @@
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/seo/JsonLd";
 import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
-import { insights } from "@/data/insights";
+import { getPublishedInsightBySlug, getStaticInsights, getPublishedDbInsights } from "@/lib/insightsRepository";
 import styles from "./InsightPage.module.css";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return insights.map((insight) => ({ slug: insight.slug }));
-}
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const insight = insights.find((i) => i.slug === slug);
+  const insight = await getPublishedInsightBySlug(slug);
 
   if (!insight) {
     return {
@@ -26,9 +25,12 @@ export async function generateMetadata({
     };
   }
 
+  const seoTitle = insight.seoTitle ?? insight.title;
+  const seoDescription = insight.seoDescription ?? insight.description;
+
   return {
-    title: insight.title,
-    description: insight.description,
+    title: `${seoTitle} | StackSpacer`,
+    description: seoDescription,
     alternates: {
       canonical: `/insights/${slug}`,
     },
@@ -36,26 +38,33 @@ export async function generateMetadata({
       type: "article",
       url: `/insights/${slug}`,
       siteName: "StackSpacer",
-      title: `${insight.title} | StackSpacer`,
-      description: insight.description,
+      title: `${seoTitle} | StackSpacer`,
+      description: seoDescription,
       publishedTime: insight.publishedAt,
       modifiedTime: insight.updatedAt,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${insight.title} | StackSpacer`,
-      description: insight.description,
+      title: `${seoTitle} | StackSpacer`,
+      description: seoDescription,
     },
   };
 }
 
 export default async function InsightPage({ params }: PageProps) {
   const { slug } = await params;
-  const insight = insights.find((i) => i.slug === slug);
+  const insight = await getPublishedInsightBySlug(slug);
 
   if (!insight) {
     notFound();
   }
+
+  const [staticIns] = await Promise.all([
+    getStaticInsights(),
+    getPublishedDbInsights(),
+  ]);
+
+  const allResolved = [...staticIns];
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://stackspacer.com";
 
@@ -240,7 +249,7 @@ export default async function InsightPage({ params }: PageProps) {
                 </a>
               ))}
               {insight.relatedInsights?.map((relatedSlug) => {
-                const related = insights.find((i) => i.slug === relatedSlug);
+                const related = allResolved.find((i) => i.slug === relatedSlug);
                 if (!related) return null;
                 return (
                   <a

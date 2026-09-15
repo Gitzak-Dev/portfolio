@@ -152,6 +152,37 @@
   box-shadow: 0 0 0 4px rgba(216, 175, 37, 0.08);
 }
 
+.searchBoxInput {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 12px;
+  outline: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.searchBoxInput::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.searchBoxInput:focus {
+  border-color: rgba(216, 175, 37, 0.54);
+  box-shadow: 0 0 0 4px rgba(216, 175, 37, 0.08);
+}
+
+.searchBoxInput textarea,
+.searchBoxInput select {
+  height: auto;
+  min-height: 48px;
+  padding: 10px 16px;
+  resize: vertical;
+}
+
 .searchForm button,
 .clearButton {
   height: 48px;

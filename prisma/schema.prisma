@@ -15,3 +15,25 @@ model ContactSubmission {
   status    String   @default("new")
   createdAt DateTime @default(now())
 }
+
+model BlogPost {
+  id                    String   @id @default(cuid())
+  slug                  String   @unique
+  title                 String
+  description           String
+  category              String
+  standfirst            String?
+  contentJson           String
+  faqsJson              String?
+  sourcesJson           String?
+  relatedService        String?
+  relatedProjectsJson   String   @default("[]")
+  relatedInsightsJson   String   @default("[]")
+  status                String   @default("draft")
+  publishedAt           DateTime?
+  contentUpdatedAt      DateTime?
+  createdAt             DateTime @default(now())
+  recordUpdatedAt       DateTime @updatedAt
+  seoTitle              String?
+  seoDescription        String?
+}

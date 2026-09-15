@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
-import { insights } from "@/data/insights";
+import { getPublishedInsights } from "@/lib/insightsRepository";
 import styles from "./InsightsPage.module.css";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Insights | StackSpacer",
@@ -21,7 +24,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function InsightsPage() {
+export default async function InsightsPage() {
+  const insights = await getPublishedInsights();
+
   return (
     <main className={styles.page}>
       <PageBackHeader href="/" />
