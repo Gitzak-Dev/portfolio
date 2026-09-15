@@ -222,6 +222,25 @@ export default async function AdminDashboardPage({
         </div>
       </section>
 
+      {/* Blog Posts quick-access card */}
+      <section className={styles.blogNavCard}>
+        <div className={styles.blogNavInner}>
+          <span className={styles.blogNavLabel}>// Quick Access</span>
+          <div className={styles.blogNavContent}>
+            <h2>Blog Posts</h2>
+            <p>Manage published insights, drafts, and create new content without code edits.</p>
+          </div>
+          <div className={styles.blogNavActions}>
+            <a href="/admin/blogs" className={styles.blogNavButton} data-cursor="dark">
+              Blog Posts <span>→</span>
+            </a>
+            <a href="/admin/blogs/new" className={styles.blogNavSecondary} data-cursor="dark">
+              + New Post
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section className={styles.toolbar}>
         <form className={styles.searchForm} action="/admin" method="GET">
           {activeStatus !== "all" && (
