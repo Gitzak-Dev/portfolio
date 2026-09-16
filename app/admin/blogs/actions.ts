@@ -8,7 +8,6 @@ import { prisma } from "@/lib/prisma";
 import { verifyAdminToken } from "@/lib/adminAuth";
 import {
   isInsightSlugTaken,
-  getReservedSlugs,
   getValidServiceSlugs,
   getValidProjectSlugs,
 } from "@/lib/insightsRepository";
@@ -303,6 +302,148 @@ export async function unpublishBlogPost(formData: FormData) {
   revalidatePath("/admin/blogs");
   revalidatePath("/insights");
   redirect("/admin/blogs");
+}
+
+// Client-callable variant: creates a draft post and returns result instead of redirecting.
+export async function createBlogPostClient(data: {
+  title: string;
+  slug: string;
+  category: string;
+  description: string;
+  standfirst?: string;
+  contentJson: string;
+  faqsJson?: string;
+  sourcesJson?: string;
+  relatedService?: string;
+  relatedProjectsJson: string;
+  relatedInsightsJson: string;
+  seoTitle?: string;
+  seoDescription?: string;
+}): Promise<{ success: boolean; error?: string }> {
+  await requireAdmin();
+
+  const parsed = blogPostSchema.safeParse(data);
+  if (!parsed.success) {
+    return { success: false, error: "Validation error." };
+  }
+
+  const slug = parsed.data.slug;
+  if (!slugRegex.test(slug)) {
+    return { success: false, error: "Slug must be lowercase letters, numbers, and hyphens only." };
+  }
+
+  const taken = await isInsightSlugTaken(slug);
+  if (taken) {
+    return { success: false, error: "This slug is already in use." };
+  }
+
+  try {
+    const validated = await validateContentFields(parsed.data);
+    await prisma.blogPost.create({
+      data: {
+        slug,
+        title: parsed.data.title,
+        description: parsed.data.description,
+        category: parsed.data.category,
+        standfirst: parsed.data.standfirst ?? null,
+        contentJson: JSON.stringify(validated.sections),
+        faqsJson: validated.faqs !== null ? JSON.stringify(validated.faqs) : null,
+        sourcesJson: validated.sources !== null ? JSON.stringify(validated.sources) : null,
+        relatedService: parsed.data.relatedService ?? null,
+        relatedProjectsJson: JSON.stringify(validated.relatedProjects),
+        relatedInsightsJson: JSON.stringify(validated.relatedInsights),
+        status: "draft",
+        seoTitle: parsed.data.seoTitle ?? null,
+        seoDescription: parsed.data.seoDescription ?? null,
+      },
+    });
+    revalidatePath("/admin/blogs");
+    return { success: true };
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : "Failed to create post.";
+    return { success: false, error: msg };
+  }
+}
+
+// Client-callable variant: updates an existing post and returns result instead of redirecting.
+export async function updateBlogPostClient(id: string, data: {
+  title: string;
+  slug: string;
+  category: string;
+  description: string;
+  standfirst?: string;
+  contentJson: string;
+  faqsJson?: string;
+  sourcesJson?: string;
+  relatedService?: string;
+  relatedProjectsJson: string;
+  relatedInsightsJson: string;
+  seoTitle?: string;
+  seoDescription?: string;
+}): Promise<{ success: boolean; error?: string }> {
+  await requireAdmin();
+
+  const existing = await prisma.blogPost.findUnique({ where: { id } });
+  if (!existing) return { success: false, error: "Post not found." };
+
+  const parsed = blogPostSchema.safeParse(data);
+  if (!parsed.success) {
+    return { success: false, error: "Validation error." };
+  }
+
+  const currentSlug = existing.slug;
+  const newSlug = parsed.data.slug;
+  const isPublished = existing.status === "published";
+
+  if (newSlug !== currentSlug) {
+    if (isPublished) {
+      return { success: false, error: "Cannot change slug after publication." };
+    }
+    const taken = await isInsightSlugTaken(newSlug);
+    if (taken && newSlug !== currentSlug) {
+      return { success: false, error: "This slug is already in use." };
+    }
+  }
+
+  try {
+    const validated = await validateContentFields(parsed.data);
+
+    const hasContentChange =
+      JSON.stringify(validated.sections) !== existing.contentJson ||
+      (validated.faqs !== null ? JSON.stringify(validated.faqs ?? []) : "[]") !== (existing.faqsJson ?? "[]") ||
+      (validated.sources !== null ? JSON.stringify(validated.sources ?? []) : "[]") !== (existing.sourcesJson ?? "[]");
+
+    const updateData: Record<string, unknown> = {
+      title: parsed.data.title,
+      slug: newSlug,
+      category: parsed.data.category,
+      description: parsed.data.description,
+      standfirst: parsed.data.standfirst ?? null,
+      contentJson: JSON.stringify(validated.sections),
+      relatedProjectsJson: JSON.stringify(validated.relatedProjects),
+      relatedInsightsJson: JSON.stringify(validated.relatedInsights),
+      relatedService: parsed.data.relatedService ?? null,
+      seoTitle: parsed.data.seoTitle ?? null,
+      seoDescription: parsed.data.seoDescription ?? null,
+    };
+
+    if (hasContentChange) {
+      updateData.contentUpdatedAt = new Date();
+    }
+
+    const faqsChanged = (validated.faqs !== null ? JSON.stringify(validated.faqs ?? []) : "[]") !== (existing.faqsJson ?? "[]");
+    const sourcesChanged = (validated.sources !== null ? JSON.stringify(validated.sources ?? []) : "[]") !== (existing.sourcesJson ?? "[]");
+    if (faqsChanged) updateData.faqsJson = validated.faqs !== null ? JSON.stringify(validated.faqs) : null;
+    if (sourcesChanged) updateData.sourcesJson = validated.sources !== null ? JSON.stringify(validated.sources) : null;
+
+    await prisma.blogPost.update({ where: { id }, data: updateData });
+    revalidatePath("/admin/blogs");
+    revalidatePath(`/admin/blogs/${id}/edit`);
+    return { success: true };
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : "Failed to update post.";
+    return { success: false, error: msg };
+  }
 }
 
 // Client-callable variants (for BlogSubmissionsClient)
