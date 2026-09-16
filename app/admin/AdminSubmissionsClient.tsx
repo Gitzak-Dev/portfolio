@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback, useId } from "react";
 import type { ContactSubmissionItem } from "./page";
 import styles from "./AdminDashboard.module.css";
 
@@ -11,6 +11,194 @@ type AdminSubmissionsClientProps = {
   updateSubmissionStatus: ServerAction;
   deleteSubmission: ServerAction;
 };
+
+type StatusDropdownProps = {
+  currentStatus: string;
+  onStatusChange: (newStatus: string) => void;
+};
+
+function StatusDropdown({ currentStatus, onStatusChange }: StatusDropdownProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const listboxId = useId();
+  const options = ["new", "read", "replied"] as const;
+
+  const openMenu = useCallback(() => {
+    setIsOpen(true);
+    const currentIndex = options.indexOf(currentStatus as (typeof options)[number]);
+    setSelectedIndex(currentIndex >= 0 ? currentIndex : 0);
+  }, [currentStatus, options]);
+
+  const closeMenu = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  const selectOption = useCallback(
+    (value: string) => {
+      onStatusChange(value);
+      closeMenu();
+    },
+    [onStatusChange, closeMenu]
+  );
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (containerRef.current && !containerRef.current.contains(target)) {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, closeMenu]);
+
+  const handleTriggerClick = () => {
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    switch (event.key) {
+      case "ArrowDown":
+        event.preventDefault();
+        if (!isOpen) {
+          openMenu();
+        } else {
+          setSelectedIndex((prev) => (prev + 1) % options.length);
+        }
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        if (!isOpen) {
+          openMenu();
+        } else {
+          setSelectedIndex((prev) => (prev - 1 + options.length) % options.length);
+        }
+        break;
+      case "Enter":
+      case " ":
+        event.preventDefault();
+        if (isOpen) {
+          selectOption(options[selectedIndex]);
+        } else {
+          openMenu();
+        }
+        break;
+      case "Escape":
+        event.preventDefault();
+        closeMenu();
+        break;
+    }
+  };
+
+  const handleOptionKeyDown = (
+    event: React.KeyboardEvent<HTMLDivElement>,
+    index: number
+  ) => {
+    switch (event.key) {
+      case "ArrowDown":
+        event.preventDefault();
+        setSelectedIndex((prev) => (prev + 1) % options.length);
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        setSelectedIndex((prev) => (prev - 1 + options.length) % options.length);
+        break;
+      case "Enter":
+      case " ":
+        event.preventDefault();
+        selectOption(options[index]);
+        break;
+      case "Escape":
+        event.preventDefault();
+        closeMenu();
+        triggerRef.current?.focus();
+        break;
+    }
+  };
+
+  const displayLabel =
+    currentStatus === "new"
+      ? "NEW"
+      : currentStatus === "read"
+      ? "READ"
+      : "REPLIED";
+
+  return (
+    <div ref={containerRef} className={styles.statusDropdownWrapper}>
+      <button
+        ref={triggerRef}
+        type="button"
+        className={`${styles.statusTrigger} ${isOpen ? styles.statusTriggerOpen : ""}`}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-controls={listboxId}
+        onClick={handleTriggerClick}
+        onKeyDown={handleKeyDown}
+      >
+        <span className={styles.statusTriggerLabel}>{displayLabel}</span>
+        <svg
+          className={styles.statusChevron}
+          width="10"
+          height="6"
+          viewBox="0 0 10 6"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1 1L5 5L9 1"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+
+      {isOpen && (
+        <div
+          id={listboxId}
+          role="listbox"
+          className={styles.statusDropdownMenu}
+          aria-label="Submission status"
+        >
+          {options.map((option, index) => {
+            const isSelected = option === currentStatus;
+            const isFocused = index === selectedIndex;
+            const label = option === "new" ? "NEW" : option === "read" ? "READ" : "REPLIED";
+
+            return (
+              <div
+                key={option}
+                role="option"
+                aria-selected={isSelected}
+                tabIndex={-1}
+                className={`${styles.statusOption} ${
+                  isSelected ? styles.statusOptionSelected : ""
+                } ${isFocused ? styles.statusOptionFocused : ""}`}
+                onClick={() => selectOption(option)}
+                onMouseMove={() => setSelectedIndex(index)}
+                onKeyDown={(e) => handleOptionKeyDown(e, index)}
+              >
+                {label}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function AdminSubmissionsClient({
   submissions,
@@ -23,12 +211,22 @@ export default function AdminSubmissionsClient({
   const [deleteTarget, setDeleteTarget] =
     useState<ContactSubmissionItem | null>(null);
 
+  const [localStatuses, setLocalStatuses] = useState<Record<string, string>>({});
+
   const closeDetailModal = () => {
     setSelectedSubmission(null);
   };
 
   const closeDeleteModal = () => {
     setDeleteTarget(null);
+  };
+
+  const getLocalStatus = (item: ContactSubmissionItem) => {
+    return localStatuses[item.id] ?? item.status;
+  };
+
+  const handleStatusChange = (id: string, newStatus: string) => {
+    setLocalStatuses((prev) => ({ ...prev, [id]: newStatus }));
   };
 
   return (
@@ -93,11 +291,16 @@ export default function AdminSubmissionsClient({
                 <form action={updateSubmissionStatus}>
                   <input type="hidden" name="id" value={item.id} />
 
-                  <select name="status" defaultValue={item.status}>
-                    <option value="new">New</option>
-                    <option value="read">Read</option>
-                    <option value="replied">Replied</option>
-                  </select>
+                  <StatusDropdown
+                    currentStatus={getLocalStatus(item)}
+                    onStatusChange={(newStatus) => handleStatusChange(item.id, newStatus)}
+                  />
+
+                  <input
+                    type="hidden"
+                    name="status"
+                    value={getLocalStatus(item)}
+                  />
 
                   <button type="submit" data-cursor="dark">
                     Update
@@ -126,7 +329,7 @@ export default function AdminSubmissionsClient({
           >
             <div className={styles.modalTop}>
               <div>
-                <span>// Submission Detail</span>
+                <span>{'// Submission Detail'}</span>
 
                 <h2>{selectedSubmission.name}</h2>
               </div>
@@ -197,7 +400,7 @@ export default function AdminSubmissionsClient({
             className={styles.deleteModal}
             onClick={(event) => event.stopPropagation()}
           >
-            <span>// Delete Confirmation</span>
+            <span>{'// Delete Confirmation'}</span>
 
             <h2>Delete this submission?</h2>
 
