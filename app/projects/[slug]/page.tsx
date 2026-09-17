@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects, type ProjectTheme } from "@/data/projects";
+import { insights as staticInsights } from "@/data/insights";
 import JsonLd from "@/components/seo/JsonLd";
 import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import styles from "./ProjectCasePage.module.css";
@@ -99,6 +100,10 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
     web: "/services/web-development",
     business: "/services/web-development",
   };
+
+  const insightById = new Map(
+    staticInsights.map((i) => [i.slug, i.title])
+  );
 
   const projectUrl = `/projects/${project.slug}`;
 
@@ -414,15 +419,22 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
           <div className={styles.insightLink}>
             <span className={styles.serviceLabel}>Related Reading</span>
             <div className={styles.insightLinks}>
-              {project.insightSlugs.map((slug) => (
-                <Link
-                  key={slug}
-                  href={`/insights/${slug}`}
-                  className={styles.serviceLinkButton}
-                >
-                  Read Insight →
-                </Link>
-              ))}
+              {project.insightSlugs
+                .map((slug) => {
+                  const title = insightById.get(slug);
+                  if (!title) return null;
+                  return (
+                    <Link
+                      key={slug}
+                      href={`/insights/${slug}`}
+                      className={styles.insightCard}
+                    >
+                      <span className={styles.insightCardTitle}>{title}</span>
+                      <span className={styles.insightCardArrow}>→</span>
+                    </Link>
+                  );
+                })
+                .filter(Boolean)}
             </div>
           </div>
         )}

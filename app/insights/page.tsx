@@ -43,15 +43,17 @@ export default async function InsightsPage() {
         <section className={styles.grid} aria-label="Insight articles">
           {insights.map((insight) => (
             <article key={insight.slug} className={styles.card}>
-              <span className={styles.category}>{insight.category}</span>
-              <h2 className={styles.title}>{insight.title}</h2>
-              <p className={styles.description}>{insight.description}</p>
-              <a
+              <Link
                 href={`/insights/${insight.slug}`}
-                className={styles.cardLink}
+                className={styles.cardLinkWrap}
               >
-                Read Insight <span className={styles.arrow}>→</span>
-              </a>
+                <span className={styles.category}>{insight.category}</span>
+                <h2 className={styles.title}>{insight.title}</h2>
+                <p className={styles.description}>{insight.description}</p>
+                <span className={styles.cardLink}>
+                  Read Insight <span className={styles.arrow}>→</span>
+                </span>
+              </Link>
             </article>
           ))}
         </section>

@@ -141,6 +141,19 @@
   transform: translateX(4px);
 }
 
+.cardLinkWrap {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.cardLinkWrap:focus-visible {
+  outline: 2px solid rgba(216, 175, 37, 0.54);
+  outline-offset: -2px;
+  border-radius: 20px;
+}
+
 /* =========================
    CTA Section
 ========================= */
