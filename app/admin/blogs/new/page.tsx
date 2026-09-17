@@ -1,6 +1,9 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { prisma } from "@/lib/prisma";
 import { verifyAdminToken } from "@/lib/adminAuth";
+import { getAdminRelatedInsightOptions } from "@/lib/insightsRepository";
+import { projects as canonicalProjects } from "@/data/projects";
 import BlogPostForm from "../BlogPostForm";
 import styles from "../../AdminDashboard.module.css";
 
@@ -18,6 +21,9 @@ async function requireAdmin() {
 export default async function AdminBlogNewPage() {
   await requireAdmin();
 
+  const insightOptions = await getAdminRelatedInsightOptions();
+  const projectOptions = canonicalProjects.map((p) => ({ slug: p.slug, title: p.title }));
+
   return (
     <main className={styles.adminPage}>
       <header className={styles.header}>
@@ -31,7 +37,7 @@ export default async function AdminBlogNewPage() {
       </header>
 
       <div style={{ maxWidth: "860px", margin: "0 auto" }}>
-        <BlogPostForm />
+        <BlogPostForm projectOptions={projectOptions} insightOptions={insightOptions} />
       </div>
     </main>
   );

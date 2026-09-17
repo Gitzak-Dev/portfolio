@@ -2,6 +2,8 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { verifyAdminToken } from "@/lib/adminAuth";
+import { getAdminRelatedInsightOptions } from "@/lib/insightsRepository";
+import { projects as canonicalProjects } from "@/data/projects";
 import { publishBlogPost, unpublishBlogPost } from "../../actions";
 import BlogEditForm from "../../BlogEditForm";
 import styles from "../../../AdminDashboard.module.css";
@@ -31,6 +33,8 @@ export default async function AdminBlogEditPage({ params }: PageProps) {
   }
 
   const isPublished = post.status === "published";
+  const insightOptions = await getAdminRelatedInsightOptions(post.slug);
+  const projectOptions = canonicalProjects.map((p) => ({ slug: p.slug, title: p.title }));
 
   return (
     <main className={styles.adminPage}>
@@ -83,6 +87,8 @@ export default async function AdminBlogEditPage({ params }: PageProps) {
           }}
           isPublished={isPublished}
           excludeInsightSlug={post.slug}
+          projectOptions={projectOptions}
+          insightOptions={insightOptions}
         />
       </div>
     </main>

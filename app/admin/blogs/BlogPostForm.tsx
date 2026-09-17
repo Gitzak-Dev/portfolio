@@ -436,7 +436,13 @@ function RelatedSelector({
 
 // ── Main Form ────────────────────────────────────────────────────────────────
 
-export default function BlogPostForm() {
+export default function BlogPostForm({
+  projectOptions,
+  insightOptions,
+}: {
+  projectOptions: Array<{ slug: string; title: string }>;
+  insightOptions: Array<{ slug: string; title: string }>;
+}) {
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [isSlugManual, setIsSlugManual] = useState(false);
@@ -620,26 +626,14 @@ export default function BlogPostForm() {
 
         <RelatedSelector
           label="Related Projects"
-          options={[
-            { slug: "mobile-app-dashboard", title: "Mobile App Dashboard" },
-            { slug: "ai-automation-suite", title: "AI Automation Suite" },
-            { slug: "ml-prediction-system", title: "ML Prediction System" },
-            { slug: "developer-portfolio", title: "Developer Portfolio" },
-            { slug: "business-website-system", title: "Business Website System" },
-          ]}
+          options={projectOptions}
           selected={relatedProjects}
           onChange={setRelatedProjects}
         />
 
         <RelatedSelector
           label="Related Insights"
-          options={[
-            { slug: "what-nextjs-production-ready", title: "What Makes a Next.js Application Production-Ready" },
-            { slug: "react-native-vs-flutter", title: "React Native vs Flutter" },
-            { slug: "when-ai-automation-makes-sense", title: "When AI Automation Makes Sense" },
-            { slug: "rag-vs-ai-agents", title: "RAG vs AI Agents" },
-            { slug: "machine-learning-for-business", title: "Machine Learning for Business" },
-          ]}
+          options={insightOptions}
           selected={relatedInsights}
           onChange={setRelatedInsights}
         />

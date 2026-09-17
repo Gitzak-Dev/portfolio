@@ -262,22 +262,26 @@ export default async function InsightPage({ params }: PageProps) {
                   );
                 })
                 .filter((row): row is NonNullable<typeof row> => row !== null)}
-              {insight.relatedInsights?.map((relatedSlug) => {
-                const related = allResolved.find((i) => i.slug === relatedSlug);
-                if (!related) return null;
-                return (
-                  <a
-                    key={relatedSlug}
-                    href={`/insights/${relatedSlug}`}
-                    className={styles.relatedLink}
-                  >
-                    <span className={styles.relatedType}>Insight</span>
-                    <span className={styles.relatedTitle}>
-                      {related.title} →
-                    </span>
-                  </a>
-                );
-              })}
+              {insight.relatedInsights
+                ?.map((relatedSlug) => {
+                  // Omit self-references (current article linked to itself)
+                  if (relatedSlug === slug) return null;
+                  const related = allResolved.find((i) => i.slug === relatedSlug);
+                  if (!related) return null;
+                  return (
+                    <a
+                      key={relatedSlug}
+                      href={`/insights/${relatedSlug}`}
+                      className={styles.relatedLink}
+                    >
+                      <span className={styles.relatedType}>Insight</span>
+                      <span className={styles.relatedTitle}>
+                        {related.title} →
+                      </span>
+                    </a>
+                  );
+                })
+                .filter((row): row is NonNullable<typeof row> => row !== null)}
             </div>
           </section>
         )}

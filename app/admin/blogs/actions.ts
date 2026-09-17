@@ -272,18 +272,16 @@ export async function publishBlogPost(formData: FormData) {
   if (!existing) redirect("/admin/blogs");
   if (existing.status === "published") redirect("/admin/blogs");
 
-  const now = new Date();
-  await prisma.blogPost.update({
-    where: { id },
-    data: {
-      status: "published",
-      publishedAt: existing.publishedAt ?? now,
-      contentUpdatedAt: now,
-    },
-  });
-  revalidatePath("/admin/blogs");
-  revalidatePath("/insights");
-  redirect("/admin/blogs");
+  try {
+    await setBlogPostPublished(existing);
+    revalidatePath("/admin/blogs");
+    revalidatePath("/insights");
+    revalidatePath(`/insights/${existing.slug}`);
+    revalidatePath("/sitemap.xml");
+    redirect("/admin/blogs");
+  } catch {
+    redirect("/admin/blogs");
+  }
 }
 
 export async function unpublishBlogPost(formData: FormData) {
@@ -295,13 +293,16 @@ export async function unpublishBlogPost(formData: FormData) {
   const existing = await prisma.blogPost.findUnique({ where: { id } });
   if (!existing || existing.status !== "published") redirect("/admin/blogs");
 
-  await prisma.blogPost.update({
-    where: { id },
-    data: { status: "draft" },
-  });
-  revalidatePath("/admin/blogs");
-  revalidatePath("/insights");
-  redirect("/admin/blogs");
+  try {
+    await setBlogPostUnpublished(existing);
+    revalidatePath("/admin/blogs");
+    revalidatePath("/insights");
+    revalidatePath(`/insights/${existing.slug}`);
+    revalidatePath("/sitemap.xml");
+    redirect("/admin/blogs");
+  } catch {
+    redirect("/admin/blogs");
+  }
 }
 
 // Client-callable variant: creates a draft post and returns result instead of redirecting.
@@ -439,11 +440,43 @@ export async function updateBlogPostClient(id: string, data: {
     await prisma.blogPost.update({ where: { id }, data: updateData });
     revalidatePath("/admin/blogs");
     revalidatePath(`/admin/blogs/${id}/edit`);
+    revalidatePath("/insights");
+    revalidatePath(`/insights/${existing.slug}`);
+    revalidatePath("/sitemap.xml");
     return { success: true };
   } catch (e) {
     const msg = e instanceof Error ? e.message : "Failed to update post.";
     return { success: false, error: msg };
   }
+}
+
+// ── Canonical publication internals (non-exported) ───────────────────────────
+
+/**
+ * Core logic shared by both form-based and client-callable publish paths.
+ * Sets status→published, preserves existing publishedAt on first-publish.
+ * Does NOT touch contentUpdatedAt — publishing is not a substantive content edit.
+ */
+async function setBlogPostPublished(existing: { id: string; slug: string; publishedAt: Date | null }) {
+  const now = new Date();
+  await prisma.blogPost.update({
+    where: { id: existing.id },
+    data: {
+      status: "published",
+      publishedAt: existing.publishedAt ?? now,
+    },
+  });
+}
+
+/**
+ * Core logic shared by both form-based and client-callable unpublish paths.
+ * Sets status→draft. Preserves publishedAt and contentUpdatedAt.
+ */
+async function setBlogPostUnpublished(existing: { id: string; slug: string }) {
+  await prisma.blogPost.update({
+    where: { id: existing.id },
+    data: { status: "draft" },
+  });
 }
 
 // Client-callable variants (for BlogSubmissionsClient)
@@ -473,12 +506,11 @@ export async function unpublishBlogPostById(id: string) {
   if (existing.status !== "published") return { success: true };
 
   try {
-    await prisma.blogPost.update({
-      where: { id },
-      data: { status: "draft" },
-    });
+    await setBlogPostUnpublished(existing);
     revalidatePath("/admin/blogs");
     revalidatePath("/insights");
+    revalidatePath(`/insights/${existing.slug}`);
+    revalidatePath("/sitemap.xml");
     return { success: true };
   } catch {
     return { success: false, error: "Failed to unpublish post." };
@@ -493,15 +525,8 @@ export async function publishBlogPostById(id: string) {
   if (!existing) return { success: false, error: "Post not found." };
   if (existing.status === "published") return { success: true };
 
-  const now = new Date();
   try {
-    await prisma.blogPost.update({
-      where: { id },
-      data: {
-        status: "published",
-        publishedAt: existing.publishedAt ?? now,
-      },
-    });
+    await setBlogPostPublished(existing);
     revalidatePath("/admin/blogs");
     revalidatePath("/insights");
     revalidatePath(`/insights/${existing.slug}`);

@@ -217,3 +217,41 @@ export function getValidServiceSlugs(): Set<string> {
 export function getValidProjectSlugs(): Set<string> {
   return VALID_PROJECT_SLUGS;
 }
+
+/**
+ * Server-only helper: returns slugs+titles for the admin related-insights selector.
+ * Includes all static insights + published CMS insights.
+ * Optionally excludes one slug (e.g. the article currently being edited).
+ */
+export async function getAdminRelatedInsightOptions(
+  excludeSlug?: string
+): Promise<Array<{ slug: string; title: string }>> {
+  const cmsPosts = await prisma.blogPost.findMany({
+    where: {
+      status: "published",
+      publishedAt: { not: null },
+    },
+    select: { slug: true, title: true },
+  });
+
+  const seen = new Set<string>();
+  const result: Array<{ slug: string; title: string }> = [];
+
+  // Static insights first (deterministic)
+  for (const ins of staticInsights) {
+    if (excludeSlug && ins.slug === excludeSlug) continue;
+    if (seen.has(ins.slug)) continue;
+    seen.add(ins.slug);
+    result.push({ slug: ins.slug, title: ins.title });
+  }
+
+  // Published CMS insights
+  for (const post of cmsPosts) {
+    if (post.slug === excludeSlug) continue;
+    if (seen.has(post.slug)) continue;
+    seen.add(post.slug);
+    result.push({ slug: post.slug, title: post.title });
+  }
+
+  return result;
+}
