@@ -504,6 +504,7 @@
   overflow-y: auto;
   border-radius: 28px;
   padding: 34px;
+  position: relative;
   background:
     radial-gradient(circle at 24% 20%, rgba(216, 175, 37, 0.12), transparent 34%),
     linear-gradient(135deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
@@ -525,6 +526,10 @@
   gap: 22px;
 }
 
+.modalTopContent {
+  padding-right: 52px;
+}
+
 .modalTop span,
 .deleteModal > span {
   display: block;
@@ -541,23 +546,37 @@
 .deleteModal h2 {
   color: #fff;
   font-family: var(--font-plus-jakarta), sans-serif;
-  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-size: clamp(1.3rem, 3vw, 2rem);
   font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.07em;
+  line-height: 1.18;
+  letter-spacing: -0.04em;
 }
 
 .closeModalButton {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border: 0;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: #000;
   background: var(--gold);
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+
+.closeModalButton:hover {
+  background: rgba(216, 175, 37, 0.85);
+  transform: scale(1.08);
+}
+
+.closeModalButton:focus-visible {
+  outline: 2px solid rgba(216, 175, 37, 0.54);
+  outline-offset: 2px;
 }
 
 .detailGrid {
@@ -942,6 +961,7 @@
 
 .editButton {
   height: 42px;
+  min-width: 80px;
   padding: 0 17px;
   border: 0;
   border-radius: 999px;
@@ -956,10 +976,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
 }
 
 .editButton:hover {
   background: rgba(216, 175, 37, 0.85);
+}
+
+.editButton:focus-visible {
+  outline: 2px solid rgba(216, 175, 37, 0.54);
+  outline-offset: 2px;
 }
 
 .publishButton {

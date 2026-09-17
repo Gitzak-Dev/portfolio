@@ -484,3 +484,30 @@ export async function unpublishBlogPostById(id: string) {
     return { success: false, error: "Failed to unpublish post." };
   }
 }
+
+// Client-callable publish action for the confirmation modal flow.
+export async function publishBlogPostById(id: string) {
+  await requireAdmin();
+
+  const existing = await prisma.blogPost.findUnique({ where: { id } });
+  if (!existing) return { success: false, error: "Post not found." };
+  if (existing.status === "published") return { success: true };
+
+  const now = new Date();
+  try {
+    await prisma.blogPost.update({
+      where: { id },
+      data: {
+        status: "published",
+        publishedAt: existing.publishedAt ?? now,
+      },
+    });
+    revalidatePath("/admin/blogs");
+    revalidatePath("/insights");
+    revalidatePath(`/insights/${existing.slug}`);
+    revalidatePath("/sitemap.xml");
+    return { success: true };
+  } catch {
+    return { success: false, error: "Failed to publish post." };
+  }
+}
