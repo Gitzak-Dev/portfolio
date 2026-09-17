@@ -1,7 +1,7 @@
 # STACKSPACER — DEVELOPMENT CLOSEOUT
 
-**Date:** 2026-09-05
-**Status:** DEVELOPMENT COMPLETE
+**Date:** 2026-09-18
+**Status:** FEATURE COMPLETE / PRODUCTION ACCEPTED
 **Framework:** Next.js 16.2.6 / React 19 / TypeScript
 **Runtime:** Node 22 (production)
 **Hosting:** Hostinger Passenger
@@ -16,7 +16,7 @@
 
 ## Route Inventory
 
-**34 public sitemap URLs**
+**35 public sitemap URLs**
 
 | Route | Status |
 |---|---|
@@ -29,8 +29,8 @@
 | `/services/machine-learning` | ✓ Static |
 | `/projects` | ✓ Static |
 | `/projects/[slug]` (5) | ✓ SSG |
-| `/insights` | ✓ Static |
-| `/insights/[slug]` (5) | ✓ SSG |
+| `/insights` | ✓ Dynamic (5 static + 1 CMS) |
+| `/insights/[slug]` (6) | ✓ Dynamic (5 static + 1 CMS) |
 | `/locations` | ✓ Static |
 | `/locations/[slug]` (12 Wave 1) | ✓ SSG |
 | `/privacy` | ✓ Static |
@@ -39,6 +39,58 @@
 **Private routes:**
 - `/admin` → 307 to `/admin/login` (password-protected, noindex)
 - `/api/*` → disallowed by robots.txt
+
+### Fresh Live Route Sweep (2026-09-18)
+
+- 35/35 public sitemap URLs returned HTTP 200
+- No 404 responses on public routes
+- No 500 responses
+- No redirect loops
+- Homepage returned HTTP 200
+- `sitemap.xml` returned HTTP 200; 35 unique URLs, all `https://stackspacer.com`
+- `robots.txt` returned HTTP 200
+- `llms.txt` returned HTTP 200; 16/16 links resolved successfully
+
+---
+
+## Build Confirmation
+
+- Final local webpack build: PASS
+- TypeScript type-check: PASS
+- Next.js generated build result: 36/36 routes (7 dynamic / 19 static / 10 SSG)
+- Production BUILD_ID: `SGtcOXxVg7oLXjGL45P2e`
+- Production source sync: 12/12 files MATCH (2 project files reconciled 2026-09-18)
+
+---
+
+## Source Drift
+
+- 12 critical files compared between local (HEAD 14fc231) and production via SHA256
+- Result: 12/12 MATCH
+- Blocking drift: NONE
+- Reconciled 2026-09-18: `app/projects/[slug]/page.tsx` + `ProjectCasePage.module.css`
+- Backup preserved at: `/home/u318730766/backups/stackspacer-final-source-sync-20260918-0100/`
+
+---
+
+## Hero Closeout
+
+**Status: CLOSED**
+
+Preserved production state:
+
+- Gold action words: Builds / Creates / Develops
+- Theme gold: #d8af25
+- Exactly 2 visual H1 lines
+- Word-safe heading rendering
+- Desktop/tablet H1: `clamp(1.125rem, 2.3vw, 2.75rem)`
+- Mobile H1: `clamp(1rem, 3.5vw, 1.25rem)`
+- Hero track: 400vh / 400svh
+- Thresholds: 0.30 / 0.65
+- Sequential stage progression preserved
+- Minimum stage interval: 1300ms
+- Typewriter: 22ms, 2 chars/tick
+- User real-device visual/scroll acceptance: PASS
 
 ---
 
@@ -70,23 +122,63 @@
 
 | Component | Status |
 |---|---|
-| GTM (GTM-WPTNGVFR) | ✓ Complete |
-| GA4 (G-NKP6BWG546) | ✓ Complete |
+| GTM (GTM-WPTNGVFR) | ✓ PRESERVED |
+| GA4 (G-NKP6BWG546) | ✓ PRESERVED |
+| Historical GA4 IDs (G-8WJDNKNXMQ, G-HV7KZ50M16) | Not active |
 | Consent Mode | ✓ Complete (analytics=denied, all ad*=denied default) |
 | `generate_lead` | ✓ Fires on successful contact form only |
 | `email_click` | ✓ Handled by GTM (no React onClick) |
 | No PII to GA4 | ✓ Verified |
 | Admin routes excluded from analytics | ✓ Verified |
+| Consent architecture hydration-safe | ✓ Verified |
+| Google Ads | HOLD — not implemented |
+
+---
+
+## Blog CMS (LIVE)
+
+**Published article:** `AI Automation for Small Businesses: What Should You Automate First?`
+- Slug: `ai-automation-for-small-businesses-what-should-you-automate-first`
+- Status: published
+- Published at: 2026-09-17
+- Content untouched since publication
+
+**Admin capabilities:**
+- Authenticated admin-only access (`/admin/blogs`)
+- New Post → structured content sections, FAQs, sources, related service/projects/insights
+- Save Draft (client-callable server action)
+- Edit existing posts (slug locked after first publication)
+- Publish (first-publish `publishedAt` preserved; `contentUpdatedAt` NOT modified by status change)
+- Unpublish (preserves `publishedAt`; `contentUpdatedAt` NOT modified)
+- Delete draft only
+- Canonical project selectors from `data/projects.ts`
+- Static + published-CMS insight selectors from `lib/insightsRepository.ts`
+- Self-reference protection on edit
+- SEO title/description preview
+- Automatic public `/insights` appearance on publish
+- Automatic sitemap inclusion on publish
+- Draft/unpublished articles remain non-public
+
+**Fixes applied during development:**
+- Publish confirmation modal wrong-handler bug (draft → delete instead of publish) — fixed
+- Publish/unpublish logic canonicalized via shared `setBlogPostPublished` / `setBlogPostUnpublished` cores
+- Edit button CSS specificity fix (`.submissionCard a` overriding `.editButton`) — fixed
+- Modal close button layout fix — fixed
+- Canonical project/insight selectors replacing hardcoded lists — fixed
+- Public Related Reading service/project title resolution — fixed
+- Whole-card clickable `/insights` cards — fixed
+- Project page "Read Insight →" replaced with title-aware `.insightCard` — fixed
 
 ---
 
 ## Database
 
 - **Provider:** Prisma + SQLite
-- **Schema:** `ContactSubmission` (id, name, email, message, status, createdAt)
+- **Schema:** `ContactSubmission` (id, name, email, message, status, createdAt) + `BlogPost`
 - **Status:** Operational
 - **Migration baseline:** Intentionally deferred (not required for current operation)
 - **No migrations run in this session**
+- **BlogPost data untouched during final closeout**
 
 ---
 
@@ -138,7 +230,7 @@ touch /home/u318730766/domains/stackspacer.com/nodejs/tmp/restart.txt
 | Phase 1C attribution (UTM/gclid) | HOLD |
 | Wave 2 / Wave 3 city pages | HOLD — pending GSC data |
 | P2 website content | HOLD — pending GSC data |
-| IndexNow | DEFERRED |
+| IndexNow | DEFERRED — no key obtained, no code created |
 | sameAs schema | BLOCKED — pending verified owner profile URLs |
 | Prisma migration baseline | HIGH-RISK DEFERRED |
 | www → non-www redirect | OPTIONAL future polish |
@@ -151,8 +243,8 @@ touch /home/u318730766/domains/stackspacer.com/nodejs/tmp/restart.txt
 |---|---|
 | GitHub push | ✓ Committed locally; push completed |
 | Verified LinkedIn/GitHub/X URLs | PENDING — required before sameAs schema |
-| GSC indexing | MONITORING (34 URLs discovered) |
-| Bing indexing | MONITORING (34 URLs discovered) |
+| GSC indexing | ✓ SETUP COMPLETE / MONITORING ONGOING (34 URLs discovered) |
+| Bing indexing | ✓ SETUP COMPLETE / MONITORING ONGOING (34 URLs discovered) |
 | Authority backlinks | OWNER OPERATIONS |
 
 ---
@@ -200,6 +292,26 @@ Wave 2 approval criteria:
 
 ## Final State
 
-**STACKSPACER WEBSITE DEVELOPMENT: 100% COMPLETE**
+**STACKSPACER WEBSITE DEVELOPMENT: COMPLETE / CLOSED**
 
-The website is technically complete, stable, documented, and ready to enter monitoring-only mode.
+Final production closeout audit completed on 2026-09-18.
+
+All development blocking criteria passed.
+
+**Final HEAD:** `14fc231` — fix: whole-card clickable insights + title-aware project related reading
+
+**Production BUILD_ID:** `SGtcOXxVg7oLXjGL45P2e`
+
+**Public URL count:** 35 (updated from 34 — CMS article added to sitemap)
+
+**P0 blockers:** NONE
+**P1 high-severity issues:** NONE
+**P2 meaningful defects:** NONE
+**P3 remaining items:** Owner responsive visual QA (mobile/tablet), Wave 2 city pages pending GSC data
+
+The website now enters:
+
+MONITORING / SEO GROWTH / AUTHORITY PHASE
+
+**Owner-responsive QA still required:**
+- Mobile/tablet visual confirmation of: `/insights` full-card click area, project Related Reading cards, admin modal on small screens
