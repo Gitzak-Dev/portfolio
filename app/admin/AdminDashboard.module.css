@@ -959,7 +959,7 @@
   background: var(--gold);
 }
 
-.editButton {
+.cardActions a.editButton {
   height: 42px;
   min-width: 80px;
   padding: 0 17px;
@@ -979,13 +979,14 @@
   gap: 6px;
   cursor: pointer;
   transition: background 0.15s ease;
+  margin-top: 0;
 }
 
-.editButton:hover {
+.cardActions a.editButton:hover {
   background: rgba(216, 175, 37, 0.85);
 }
 
-.editButton:focus-visible {
+.cardActions a.editButton:focus-visible {
   outline: 2px solid rgba(216, 175, 37, 0.54);
   outline-offset: 2px;
 }

@@ -3,7 +3,15 @@ import { notFound } from "next/navigation";
 import JsonLd from "@/components/seo/JsonLd";
 import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import { getPublishedInsightBySlug, getStaticInsights, getPublishedDbInsights } from "@/lib/insightsRepository";
+import { projects as canonicalProjects } from "@/data/projects";
 import styles from "./InsightPage.module.css";
+
+const SERVICE_LABELS: Record<string, string> = {
+  "web-development": "Web Development",
+  "mobile-app-development": "Mobile App Development",
+  "ai-automation": "AI Automation",
+  "machine-learning": "Machine Learning",
+};
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -65,6 +73,7 @@ export default async function InsightPage({ params }: PageProps) {
   ]);
 
   const allResolved = [...staticIns];
+  const projectById = new Map(canonicalProjects.map((p) => [p.slug, p]));
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://stackspacer.com";
 
@@ -227,27 +236,32 @@ export default async function InsightPage({ params }: PageProps) {
                 >
                   <span className={styles.relatedType}>Service</span>
                   <span className={styles.relatedTitle}>
-                    {insight.relatedService
-                      .split("/")
-                      .filter(Boolean)
-                      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-                      .join(" ")}
+                    {(() => {
+                      const slug = insight.relatedService.split("/").pop() ?? "";
+                      return SERVICE_LABELS[slug] ?? slug.replace(/-/g, " ");
+                    })()}
                     →
                   </span>
                 </a>
               )}
-              {insight.relatedProjects.map((projectSlug) => (
-                <a
-                  key={projectSlug}
-                  href={`/projects/${projectSlug}`}
-                  className={styles.relatedLink}
-                >
-                  <span className={styles.relatedType}>Project</span>
-                  <span className={styles.relatedTitle}>
-                    View Case Study →
-                  </span>
-                </a>
-              ))}
+              {insight.relatedProjects
+                .map((projectSlug) => {
+                  const proj = projectById.get(projectSlug);
+                  if (!proj) return null;
+                  return (
+                    <a
+                      key={projectSlug}
+                      href={`/projects/${projectSlug}`}
+                      className={styles.relatedLink}
+                    >
+                      <span className={styles.relatedType}>Project</span>
+                      <span className={styles.relatedTitle}>
+                        {proj.title} →
+                      </span>
+                    </a>
+                  );
+                })
+                .filter((row): row is NonNullable<typeof row> => row !== null)}
               {insight.relatedInsights?.map((relatedSlug) => {
                 const related = allResolved.find((i) => i.slug === relatedSlug);
                 if (!related) return null;
