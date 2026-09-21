@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
 import { projects } from "@/data/projects";
-import { cities } from "@/data/locations";
+import { cities, states } from "@/data/locations";
 import { prisma } from "@/lib/prisma";
 import { insights as staticInsights } from "@/data/insights";
 
@@ -19,8 +19,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     orderBy: { publishedAt: "desc" },
     select: { slug: true },
   });
-
-  const dbInsightSlugs = new Set(dbPosts.map((p) => p.slug));
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${baseUrl}/`, changeFrequency: "weekly", priority: 1.0 },
@@ -63,21 +61,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
-  const cityPages: MetadataRoute.Sitemap = cities.map((city) => ({
-    url: `${baseUrl}/locations/${city.slug}`,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
+  const locationPages: MetadataRoute.Sitemap = [...cities, ...states].map(
+    (loc) => ({
+      url: `${baseUrl}/locations/${loc.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.6 as const,
+    })
+  );
 
   const projectPages: MetadataRoute.Sitemap = projects.map((project) => ({
     url: `${baseUrl}/projects/${project.slug}`,
-    changeFrequency: "monthly",
-    priority: 0.8,
+    changeFrequency: "monthly" as const,
+    priority: 0.8 as const,
   }));
 
   // Deduplicate by URL
   const seen = new Set<string>();
-  const all = [...staticPages, ...cityPages, ...projectPages];
+  const all = [...staticPages, ...locationPages, ...projectPages];
   return all.filter((item) => {
     if (seen.has(item.url)) return false;
     seen.add(item.url);

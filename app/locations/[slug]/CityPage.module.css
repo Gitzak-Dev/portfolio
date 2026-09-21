@@ -1,6 +1,6 @@
 .page {
   position: relative;
-  padding: 86px 8% 0;
+  padding: 100px 8% 0;
   min-height: 100vh;
 }
 
@@ -44,14 +44,15 @@
   line-height: 1.7;
   max-width: 680px;
   font-family: var(--font-plus-jakarta), sans-serif;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
 }
 
 .cityMeta {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
 }
 
 .cityMeta span {
@@ -63,6 +64,22 @@
   border-radius: 100px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.parentStateLink {
+  margin-top: 20px;
+}
+
+.parentStateLink a {
+  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.parentStateLink a:hover {
+  color: #d8af25;
 }
 
 .intro {
@@ -171,7 +188,17 @@
 .faq {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
+}
+
+.faqItem {
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.faqItem:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .faqItem h3 {
@@ -179,7 +206,7 @@
   font-family: var(--font-plus-jakarta), sans-serif;
   font-size: 1.05rem;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .faqItem p {
@@ -193,23 +220,30 @@
 .relatedLinks {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .relatedLink {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   color: #d8af25;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
   text-decoration: none;
   font-family: var(--font-space-grotesk), sans-serif;
-  transition: color 0.25s ease;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
 }
 
 .relatedLink:hover {
   color: #e2b418;
+  border-color: rgba(216, 175, 37, 0.3);
+  background: rgba(216, 175, 37, 0.04);
+  transform: translateX(4px);
 }
 
 .ctaSection {
@@ -253,16 +287,24 @@
   transform: translateY(-2px);
 }
 
-@media (max-width: 700px) {
-  .page {
-    padding: 76px 6% 0;
-  }
-
+@media (max-width: 900px) {
   .servicesGrid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .page {
+    padding: 80px 6% 0;
   }
 
   .hero h1 {
     font-size: clamp(1.8rem, 7vw, 2.8rem);
+  }
+
+  .cityMeta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 }

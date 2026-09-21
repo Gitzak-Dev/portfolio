@@ -2,13 +2,13 @@
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
 import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
-import { cities } from "@/data/locations";
+import { cities, states } from "@/data/locations";
 import styles from "./LocationsPage.module.css";
 
 export const metadata: Metadata = {
   title: "Software Development Across the United States | StackSpacer",
   description:
-    "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across the United States. Explore our city service areas.",
+    "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across the United States. Explore our city service areas and state coverage.",
   alternates: {
     canonical: "/locations",
   },
@@ -70,7 +70,7 @@ export default function LocationsPage() {
         <header className={styles.hero}>
           <div className={styles.label}>{"// Locations"}</div>
           <h1>
-            Serving Businesses <br />
+            Software Development <br />
             <span>Across the United States</span>
           </h1>
           <p className={styles.heroDesc}>
@@ -84,7 +84,7 @@ export default function LocationsPage() {
         <div className={styles.divider} />
 
         <section className={styles.section}>
-          <h2>Service Areas</h2>
+          <h2>Featured Cities</h2>
           <p className={styles.sectionIntro}>
             StackSpacer currently serves businesses in the following United
             States cities. Each city page describes how our services apply to
@@ -103,8 +103,34 @@ export default function LocationsPage() {
                   <span className={styles.cityState}>{city.stateAbbrev}</span>
                 </div>
                 <p className={styles.cityPreview}>
-                  {city.introParagraphs[0].slice(0, 120)}...
+                  {city.introParagraphs[0].slice(0, 110)}...
                 </p>
+                <span className={styles.cardArrow}>→</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <div className={styles.divider} />
+
+        <section className={styles.section}>
+          <h2>Explore by State</h2>
+          <p className={styles.sectionIntro}>
+            StackSpacer provides remote software development services to
+            businesses in all 50 states. Click any state to learn how our
+            services apply.
+          </p>
+
+          <div className={styles.stateGrid}>
+            {states.map((state) => (
+              <Link
+                key={state.slug}
+                href={`/locations/${state.slug}`}
+                className={styles.stateCard}
+              >
+                <span className={styles.stateName}>{state.name}</span>
+                <span className={styles.stateCode}>{state.stateCode}</span>
+                <span className={styles.stateArrow}>→</span>
               </Link>
             ))}
           </div>
@@ -115,8 +141,8 @@ export default function LocationsPage() {
         <section className={styles.section}>
           <h2>Our Services</h2>
           <p className={styles.sectionIntro}>
-            Each city page links to our four core service areas. These national
-            pages provide detailed information about what we build.
+            Each location page links to our four core service areas. These
+            national pages provide detailed information about what we build.
           </p>
 
           <div className={styles.serviceLinks}>
@@ -127,7 +153,7 @@ export default function LocationsPage() {
                 className={styles.serviceLink}
               >
                 <span className={styles.serviceName}>{service.name}</span>
-                <span className={styles.serviceArrow}>ÔåÆ</span>
+                <span className={styles.serviceArrow}>→</span>
               </Link>
             ))}
           </div>
@@ -142,7 +168,7 @@ export default function LocationsPage() {
             hours.
           </p>
           <Link href="/#contact" className={styles.ctaButton}>
-            Discuss Your Project <span>Ôåù</span>
+            Discuss Your Project <span>↗</span>
           </Link>
         </section>
       </div>

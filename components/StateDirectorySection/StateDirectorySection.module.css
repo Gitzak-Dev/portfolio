@@ -1,0 +1,135 @@
+.stateDirectory {
+  position: relative;
+  padding: 80px 5% 90px;
+  background: #050505;
+  border-top: 1px solid rgba(226, 180, 32, 0.1);
+}
+
+.stateDirectoryInner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stateDirectoryHeader {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.sectionLabel {
+  display: inline-block;
+  margin-bottom: 18px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #e2b420;
+  font-family: var(--font-space-grotesk), sans-serif;
+}
+
+.stateDirectoryHeader h2 {
+  margin: 0 0 16px;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+  color: #ffffff;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-weight: 900;
+}
+
+.stateDirectoryHeader h2 span {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.sectionDesc {
+  max-width: 520px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 1rem;
+  line-height: 1.65;
+  font-family: var(--font-plus-jakarta), sans-serif;
+}
+
+.stateGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.stateLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-decoration: none;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
+}
+
+.stateLink:hover {
+  border-color: rgba(226, 180, 32, 0.35);
+  background: rgba(226, 180, 32, 0.04);
+  transform: translateY(-1px);
+}
+
+.stateLink:focus-visible {
+  outline: 2px solid #d8af25;
+  outline-offset: 2px;
+}
+
+.stateName {
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  flex: 1;
+}
+
+.stateCode {
+  color: rgba(255, 255, 255, 0.3);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.stateArrow {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.8rem;
+  transition: color 0.2s ease;
+}
+
+.stateLink:hover .stateArrow {
+  color: #d8af25;
+}
+
+@media (max-width: 1100px) {
+  .stateGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .stateGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stateDirectory {
+    padding: 60px 5% 70px;
+  }
+}
+
+@media (max-width: 600px) {
+  .stateGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .stateDirectoryHeader {
+    text-align: left;
+  }
+
+  .sectionDesc {
+    margin: 0;
+  }
+}

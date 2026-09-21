@@ -13,6 +13,7 @@ import ExpertiseCards from "@/components/ExpertiseCards/ExpertiseCards";
 import SnakeTextSection from "@/components/SnakeTextSection/SnakeTextSection";
 import SignalMetricsSection from "@/components/SignalMetricsSection/SignalMetricsSection";
 import ContactSection from "@/components/ContactSection/ContactSection";
+import StateDirectorySection from "@/components/StateDirectorySection/StateDirectorySection";
 import GlobalLocationsSection from "@/components/GlobalLocationsSection/GlobalLocationsSection";
 import AnswerBlock from "@/components/AnswerBlock/AnswerBlock";
 import HomepageFaq from "@/components/HomepageFaq/HomepageFaq";
@@ -141,6 +142,8 @@ const faqPageSchema = {
       <HomepageFaq />
 
       <ContactSection />
+
+      <StateDirectorySection />
 
       <GlobalLocationsSection />
 

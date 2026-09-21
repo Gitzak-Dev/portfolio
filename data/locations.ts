@@ -4,14 +4,28 @@ export type CityServiceArea =
   | "ai-automation"
   | "machine-learning";
 
+export type LocationType = "city" | "state";
+
 export type CityFAQ = {
   question: string;
   answer: string;
 };
 
+export type StateFAQ = {
+  question: string;
+  answer: string;
+};
+
+export type ServiceUseCase = {
+  service: string;
+  slug: CityServiceArea;
+  desc: string;
+};
+
 export type CityData = {
   slug: string;
   name: string;
+  type: "city";
   state: string;
   stateAbbrev: string;
   introParagraphs: string[];
@@ -19,80 +33,62 @@ export type CityData = {
   faqs: CityFAQ[];
   relatedInsights: string[];
   relatedProjects: string[];
-  serviceUseCases: {
-    service: string;
-    slug: CityServiceArea;
-    desc: string;
-  }[];
+  serviceUseCases: ServiceUseCase[];
 };
+
+export type StateData = {
+  slug: string;
+  name: string;
+  type: "state";
+  stateCode: string;
+  heroTitle: string;
+  introParagraphs: string[];
+  marketContext: string[];
+  majorCities: string[];
+  faqs: StateFAQ[];
+  relatedInsights: string[];
+  relatedProjects: string[];
+  serviceUseCases: ServiceUseCase[];
+  seoTitle: string;
+  seoDescription: string;
+};
+
+export type LocationData = CityData | StateData;
 
 export const cities: CityData[] = [
   {
     slug: "new-york-city",
     name: "New York City",
+    type: "city",
     state: "New York",
     stateAbbrev: "NY",
     introParagraphs: [
       "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses in New York City and across the United States. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
-      "New York City is home to a dense mix of finance firms, media companies, professional service practices, and technology startups. Each of these sectors has different digital needs — from client-facing web platforms to internal automation tools. StackSpacer builds solutions that fit the pace and scale of a city where decisions move fast and technical quality matters.",
+      "New York City is home to a dense mix of finance firms, media companies, professional service practices, and technology startups. Each of these sectors has different digital needs from client-facing web platforms to internal automation tools. StackSpacer builds solutions that fit the pace and scale of a city where decisions move fast and technical quality matters.",
     ],
     industryContext: [
       "The New York City business landscape spans financial services, media and publishing, professional and legal services, e-commerce, and a growing technology sector. Companies here often need digital systems that handle high transaction volumes, integrate with legacy platforms, and present a polished experience to clients and partners.",
-      "Many New York-based businesses are also navigating regulatory requirements, data security expectations, and the need for reliable uptime. StackSpacer focuses on building systems that meet those baseline expectations — clean architecture, secure integrations, and clear documentation that internal teams or future developers can maintain.",
+      "Many New York-based businesses are also navigating regulatory requirements, data security expectations, and the need for reliable uptime. StackSpacer focuses on building systems that meet those baseline expectations clean architecture, secure integrations, and clear documentation that internal teams or future developers can maintain.",
     ],
     faqs: [
-      {
-        question: "Can StackSpacer work with businesses in New York City?",
-        answer:
-          "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in New York City, with project communication and delivery coordinated online.",
-      },
-      {
-        question: "How does remote development work for a New York-based business?",
-        answer:
-          "StackSpacer uses structured discovery calls, clear project timelines, and regular progress updates. Most clients work across Eastern Time business hours, and all deliverables are shared through version-controlled repositories with full documentation.",
-      },
-      {
-        question: "What types of New York businesses does StackSpacer work with?",
-        answer:
-          "StackSpacer works with startups, professional service firms, media companies, e-commerce businesses, and technology companies across New York City and the surrounding area. The focus is on businesses that need custom software rather than template-based solutions.",
-      },
-      {
-        question: "Can StackSpacer handle projects with strict security or compliance requirements?",
-        answer:
-          "Yes. StackSpacer builds systems with security and data handling best practices in mind. For projects involving sensitive data or regulated industries, development approaches are discussed during the discovery phase to ensure alignment with your requirements.",
-      },
+      { question: "Can StackSpacer work with businesses in New York City?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in New York City, with project communication and delivery coordinated online." },
+      { question: "How does remote development work for a New York-based business?", answer: "StackSpacer uses structured discovery calls, clear project timelines, and regular progress updates. Most clients work across Eastern Time business hours, and all deliverables are shared through version-controlled repositories with full documentation." },
+      { question: "What types of New York businesses does StackSpacer work with?", answer: "StackSpacer works with startups, professional service firms, media companies, e-commerce businesses, and technology companies across New York City and the surrounding area. The focus is on businesses that need custom software rather than template-based solutions." },
+      { question: "Can StackSpacer handle projects with strict security or compliance requirements?", answer: "Yes. StackSpacer builds systems with security and data handling best practices in mind. For projects involving sensitive data or regulated industries, development approaches are discussed during the discovery phase to ensure alignment with your requirements." },
     ],
-    relatedInsights: [
-      "what-nextjs-production-ready",
-      "when-ai-automation-makes-sense",
-    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
     relatedProjects: ["business-website-system", "ai-automation-suite"],
     serviceUseCases: [
-      {
-        service: "Web Development",
-        slug: "web-development",
-        desc: "Business websites, dashboards, and web applications built with Next.js and React for New York-based teams.",
-      },
-      {
-        service: "Mobile App Development",
-        slug: "mobile-app-development",
-        desc: "Cross-platform iOS and Android apps built with React Native for consumer and enterprise use.",
-      },
-      {
-        service: "AI Automation",
-        slug: "ai-automation",
-        desc: "AI chatbots, workflow automation, and prompt-driven tools that reduce manual work for New York businesses.",
-      },
-      {
-        service: "Machine Learning",
-        slug: "machine-learning",
-        desc: "Prediction models, classification systems, and data dashboards for data-driven decision making.",
-      },
+      { service: "Web Development", slug: "web-development", desc: "Business websites, dashboards, and web applications built with Next.js and React for New York-based teams." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Cross-platform iOS and Android apps built with React Native for consumer and enterprise use." },
+      { service: "AI Automation", slug: "ai-automation", desc: "AI chatbots, workflow automation, and prompt-driven tools that reduce manual work for New York businesses." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models, classification systems, and data dashboards for data-driven decision making." },
     ],
   },
   {
     slug: "los-angeles",
     name: "Los Angeles",
+    type: "city",
     state: "California",
     stateAbbrev: "CA",
     introParagraphs: [
@@ -101,61 +97,27 @@ export const cities: CityData[] = [
     ],
     industryContext: [
       "The Los Angeles market includes entertainment and media production, e-commerce and direct-to-consumer brands, health and wellness technology, professional services, and a growing number of technology startups. Businesses here often need digital products that feel polished and perform well on mobile devices.",
-      "Many Los Angeles-based companies operate with lean teams and value developers who can move quickly while maintaining clean, maintainable code. StackSpacer's approach focuses on practical systems that ship fast and can be extended as the business grows.",
+      "Many Los Angeles-based companies operate with lean teams and value developers who can move quickly while maintaining clean, maintainable code. StackSpacer approach focuses on practical systems that ship fast and can be extended as the business grows.",
     ],
     faqs: [
-      {
-        question: "Can StackSpacer work with businesses in Los Angeles?",
-        answer:
-          "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Los Angeles, with project communication and delivery coordinated online.",
-      },
-      {
-        question: "What industries does StackSpacer serve in the Los Angeles area?",
-        answer:
-          "StackSpacer works with businesses across media, e-commerce, health tech, professional services, and technology. The common thread is a need for custom digital products rather than off-the-shelf solutions.",
-      },
-      {
-        question: "How do project timelines work with remote teams?",
-        answer:
-          "StackSpacer provides clear timelines during discovery and shares regular progress updates. Most Los Angeles-based clients work within Pacific Time business hours for calls and reviews.",
-      },
-      {
-        question: "Can StackSpacer work with existing design or brand guidelines?",
-        answer:
-          "Yes. StackSpacer builds within existing brand systems and design guidelines. If you have a design team or brand guide, development follows those standards directly.",
-      },
+      { question: "Can StackSpacer work with businesses in Los Angeles?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Los Angeles, with project communication and delivery coordinated online." },
+      { question: "What industries does StackSpacer serve in the Los Angeles area?", answer: "StackSpacer works with businesses across media, e-commerce, health tech, professional services, and technology. The common thread is a need for custom digital products rather than off-the-shelf solutions." },
+      { question: "How do project timelines work with remote teams?", answer: "StackSpacer provides clear timelines during discovery and shares regular progress updates. Most Los Angeles-based clients work within Pacific Time business hours for calls and reviews." },
+      { question: "Can StackSpacer work with existing design or brand guidelines?", answer: "Yes. StackSpacer builds within existing brand systems and design guidelines. If you have a design team or brand guide, development follows those standards directly." },
     ],
-    relatedInsights: [
-      "react-native-vs-flutter",
-      "when-ai-automation-makes-sense",
-    ],
+    relatedInsights: ["react-native-vs-flutter", "when-ai-automation-makes-sense"],
     relatedProjects: ["mobile-app-dashboard", "business-website-system"],
     serviceUseCases: [
-      {
-        service: "Web Development",
-        slug: "web-development",
-        desc: "High-performance websites and web applications for Los Angeles businesses using Next.js and React.",
-      },
-      {
-        service: "Mobile App Development",
-        slug: "mobile-app-development",
-        desc: "iOS and Android apps built with React Native for consumer and enterprise audiences.",
-      },
-      {
-        service: "AI Automation",
-        slug: "ai-automation",
-        desc: "AI-powered tools and workflow automation for media, e-commerce, and service businesses.",
-      },
-      {
-        service: "Machine Learning",
-        slug: "machine-learning",
-        desc: "Data models and dashboards that turn business data into actionable insight.",
-      },
+      { service: "Web Development", slug: "web-development", desc: "High-performance websites and web applications for Los Angeles businesses using Next.js and React." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "iOS and Android apps built with React Native for consumer and enterprise audiences." },
+      { service: "AI Automation", slug: "ai-automation", desc: "AI-powered tools and workflow automation for media, e-commerce, and service businesses." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models and dashboards that turn business data into actionable insight." },
     ],
   },
   {
     slug: "chicago",
     name: "Chicago",
+    type: "city",
     state: "Illinois",
     stateAbbrev: "IL",
     introParagraphs: [
@@ -167,58 +129,24 @@ export const cities: CityData[] = [
       "Businesses in the Chicago area often operate with a practical, results-oriented approach to technology. StackSpacer focuses on building systems that solve specific business problems rather than adding unnecessary complexity.",
     ],
     faqs: [
-      {
-        question: "Can StackSpacer work with businesses in Chicago?",
-        answer:
-          "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Chicago, with project communication and delivery coordinated online.",
-      },
-      {
-        question: "What types of projects does StackSpacer handle for Chicago clients?",
-        answer:
-          "StackSpacer handles custom web applications, mobile apps, AI automation systems, and machine learning projects for businesses across finance, logistics, healthcare, manufacturing, and professional services.",
-      },
-      {
-        question: "How does StackSpacer handle projects for regulated industries?",
-        answer:
-          "StackSpacer follows security and data handling best practices throughout development. Projects involving regulated data are scoped during discovery to ensure the approach matches your compliance requirements.",
-      },
-      {
-        question: "Can StackSpacer integrate with existing enterprise systems?",
-        answer:
-          "Yes. StackSpacer has experience integrating custom systems with existing APIs, databases, and business platforms through structured connectors and workflow triggers.",
-      },
+      { question: "Can StackSpacer work with businesses in Chicago?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Chicago, with project communication and delivery coordinated online." },
+      { question: "What types of projects does StackSpacer handle for Chicago clients?", answer: "StackSpacer handles custom web applications, mobile apps, AI automation systems, and machine learning projects for businesses across finance, logistics, healthcare, manufacturing, and professional services." },
+      { question: "How does StackSpacer handle projects for regulated industries?", answer: "StackSpacer follows security and data handling best practices throughout development. Projects involving regulated data are scoped during discovery to ensure the approach matches your compliance requirements." },
+      { question: "Can StackSpacer integrate with existing enterprise systems?", answer: "Yes. StackSpacer has experience integrating custom systems with existing APIs, databases, and business platforms through structured connectors and workflow triggers." },
     ],
-    relatedInsights: [
-      "what-nextjs-production-ready",
-      "machine-learning-for-business",
-    ],
+    relatedInsights: ["what-nextjs-production-ready", "machine-learning-for-business"],
     relatedProjects: ["business-website-system", "ml-prediction-system"],
     serviceUseCases: [
-      {
-        service: "Web Development",
-        slug: "web-development",
-        desc: "Business websites, dashboards, and web platforms for Chicago-based enterprises and startups.",
-      },
-      {
-        service: "Mobile App Development",
-        slug: "mobile-app-development",
-        desc: "Cross-platform mobile apps for logistics, healthcare, and service businesses.",
-      },
-      {
-        service: "AI Automation",
-        slug: "ai-automation",
-        desc: "Workflow automation and AI tools for operational efficiency in Chicago businesses.",
-      },
-      {
-        service: "Machine Learning",
-        slug: "machine-learning",
-        desc: "Prediction and classification models for data-driven decision making.",
-      },
+      { service: "Web Development", slug: "web-development", desc: "Business websites, dashboards, and web platforms for Chicago-based enterprises and startups." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Cross-platform mobile apps for logistics, healthcare, and service businesses." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Workflow automation and AI tools for operational efficiency in Chicago businesses." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction and classification models for data-driven decision making." },
     ],
   },
   {
     slug: "houston",
     name: "Houston",
+    type: "city",
     state: "Texas",
     stateAbbrev: "TX",
     introParagraphs: [
@@ -230,58 +158,24 @@ export const cities: CityData[] = [
       "Houston-based businesses often value practical, reliable technology solutions over experimental approaches. StackSpacer focuses on building systems that are functional, well-documented, and maintainable over the long term.",
     ],
     faqs: [
-      {
-        question: "Can StackSpacer work with businesses in Houston?",
-        answer:
-          "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Houston, with project communication and delivery coordinated online.",
-      },
-      {
-        question: "What industries does StackSpacer support in Houston?",
-        answer:
-          "StackSpacer works with businesses in energy, healthcare, logistics, professional services, and technology across the Houston market.",
-      },
-      {
-        question: "Can StackSpacer build systems that integrate with industrial or operational software?",
-        answer:
-          "Yes. StackSpacer builds integrations with existing APIs, databases, and operational platforms. The feasibility of specific integrations is assessed during the discovery phase.",
-      },
-      {
-        question: "How does StackSpacer handle projects for Houston's energy and healthcare sectors?",
-        answer:
-          "StackSpacer follows security best practices and structures projects around your data handling requirements. Specific compliance needs are discussed during discovery to ensure the approach is appropriate.",
-      },
+      { question: "Can StackSpacer work with businesses in Houston?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Houston, with project communication and delivery coordinated online." },
+      { question: "What industries does StackSpacer support in Houston?", answer: "StackSpacer works with businesses in energy, healthcare, logistics, professional services, and technology across the Houston market." },
+      { question: "Can StackSpacer build systems that integrate with industrial or operational software?", answer: "Yes. StackSpacer builds integrations with existing APIs, databases, and operational platforms. The feasibility of specific integrations is assessed during the discovery phase." },
+      { question: "How does StackSpacer handle projects for Houstons energy and healthcare sectors?", answer: "StackSpacer follows security best practices and structures projects around your data handling requirements. Specific compliance needs are discussed during discovery to ensure the approach is appropriate." },
     ],
-    relatedInsights: [
-      "when-ai-automation-makes-sense",
-      "machine-learning-for-business",
-    ],
+    relatedInsights: ["when-ai-automation-makes-sense", "machine-learning-for-business"],
     relatedProjects: ["ai-automation-suite", "ml-prediction-system"],
     serviceUseCases: [
-      {
-        service: "Web Development",
-        slug: "web-development",
-        desc: "Web platforms and business websites for Houston-based energy, healthcare, and service companies.",
-      },
-      {
-        service: "Mobile App Development",
-        slug: "mobile-app-development",
-        desc: "Mobile apps for field operations, logistics tracking, and client-facing services.",
-      },
-      {
-        service: "AI Automation",
-        slug: "ai-automation",
-        desc: "Automation tools for operational workflows, reporting, and data processing.",
-      },
-      {
-        service: "Machine Learning",
-        slug: "machine-learning",
-        desc: "Predictive models and data dashboards for operational and business insight.",
-      },
+      { service: "Web Development", slug: "web-development", desc: "Web platforms and business websites for Houston-based energy, healthcare, and service companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations, logistics tracking, and client-facing services." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for operational workflows, reporting, and data processing." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Predictive models and data dashboards for operational and business insight." },
     ],
   },
   {
     slug: "phoenix",
     name: "Phoenix",
+    type: "city",
     state: "Arizona",
     stateAbbrev: "AZ",
     introParagraphs: [
@@ -293,58 +187,24 @@ export const cities: CityData[] = [
       "Businesses in Phoenix often value developers who can deliver practical results quickly. StackSpacer focuses on clean, maintainable code and clear project communication throughout the engagement.",
     ],
     faqs: [
-      {
-        question: "Can StackSpacer work with businesses in Phoenix?",
-        answer:
-          "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Phoenix, with project communication and delivery coordinated online.",
-      },
-      {
-        question: "What types of Phoenix businesses does StackSpacer work with?",
-        answer:
-          "StackSpacer works with healthcare organizations, technology companies, manufacturing firms, and professional service businesses across the Phoenix market.",
-      },
-      {
-        question: "Can StackSpacer help with digital transformation projects?",
-        answer:
-          "Yes. StackSpacer builds custom systems that replace manual processes, automate workflows, and improve data visibility for businesses undergoing digital transformation.",
-      },
-      {
-        question: "How quickly can StackSpacer start a project for a Phoenix-based business?",
-        answer:
-          "Timeline depends on project scope and complexity. StackSpacer typically begins with a discovery phase to understand your requirements before providing a detailed project plan.",
-      },
+      { question: "Can StackSpacer work with businesses in Phoenix?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Phoenix, with project communication and delivery coordinated online." },
+      { question: "What types of Phoenix businesses does StackSpacer work with?", answer: "StackSpacer works with healthcare organizations, technology companies, manufacturing firms, and professional service businesses across the Phoenix market." },
+      { question: "Can StackSpacer help with digital transformation projects?", answer: "Yes. StackSpacer builds custom systems that replace manual processes, automate workflows, and improve data visibility for businesses undergoing digital transformation." },
+      { question: "How quickly can StackSpacer start a project for a Phoenix-based business?", answer: "Timeline depends on project scope and complexity. StackSpacer typically begins with a discovery phase to understand your requirements before providing a detailed project plan." },
     ],
-    relatedInsights: [
-      "what-nextjs-production-ready",
-      "rag-vs-ai-agents",
-    ],
+    relatedInsights: ["what-nextjs-production-ready", "rag-vs-ai-agents"],
     relatedProjects: ["business-website-system", "ai-automation-suite"],
     serviceUseCases: [
-      {
-        service: "Web Development",
-        slug: "web-development",
-        desc: "Business websites and web applications for Phoenix-based companies.",
-      },
-      {
-        service: "Mobile App Development",
-        slug: "mobile-app-development",
-        desc: "Cross-platform mobile apps for consumer and enterprise use in Phoenix.",
-      },
-      {
-        service: "AI Automation",
-        slug: "ai-automation",
-        desc: "AI tools and workflow automation for Phoenix businesses looking to improve efficiency.",
-      },
-      {
-        service: "Machine Learning",
-        slug: "machine-learning",
-        desc: "Data models and dashboards for predictive insight and decision support.",
-      },
+      { service: "Web Development", slug: "web-development", desc: "Business websites and web applications for Phoenix-based companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Cross-platform mobile apps for consumer and enterprise use in Phoenix." },
+      { service: "AI Automation", slug: "ai-automation", desc: "AI tools and workflow automation for Phoenix businesses looking to improve efficiency." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models and dashboards for predictive insight and decision support." },
     ],
   },
   {
     slug: "philadelphia",
     name: "Philadelphia",
+    type: "city",
     state: "Pennsylvania",
     stateAbbrev: "PA",
     introParagraphs: [
@@ -356,58 +216,24 @@ export const cities: CityData[] = [
       "Philadelphia-based businesses often value developers who understand the balance between technical quality and practical business outcomes. StackSpacer focuses on building systems that are both well-engineered and directly useful to the business.",
     ],
     faqs: [
-      {
-        question: "Can StackSpacer work with businesses in Philadelphia?",
-        answer:
-          "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Philadelphia, with project communication and delivery coordinated online.",
-      },
-      {
-        question: "What industries does StackSpacer serve in the Philadelphia area?",
-        answer:
-          "StackSpacer works with healthcare, education, finance, professional services, and technology companies across the Philadelphia market.",
-      },
-      {
-        question: "Can StackSpacer work with healthcare or education organizations?",
-        answer:
-          "Yes. StackSpacer builds systems for healthcare and education organizations with appropriate security and data handling practices. Specific requirements are discussed during the discovery phase.",
-      },
-      {
-        question: "How does StackSpacer handle project communication with Philadelphia clients?",
-        answer:
-          "StackSpacer provides regular updates, scheduled check-ins, and clear documentation. Most Philadelphia-based clients work within Eastern Time business hours.",
-      },
+      { question: "Can StackSpacer work with businesses in Philadelphia?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Philadelphia, with project communication and delivery coordinated online." },
+      { question: "What industries does StackSpacer serve in the Philadelphia area?", answer: "StackSpacer works with healthcare, education, finance, professional services, and technology companies across the Philadelphia market." },
+      { question: "Can StackSpacer work with healthcare or education organizations?", answer: "Yes. StackSpacer builds systems for healthcare and education organizations with appropriate security and data handling practices. Specific requirements are discussed during the discovery phase." },
+      { question: "How does StackSpacer handle project communication with Philadelphia clients?", answer: "StackSpacer provides regular updates, scheduled check-ins, and clear documentation. Most Philadelphia-based clients work within Eastern Time business hours." },
     ],
-    relatedInsights: [
-      "when-ai-automation-makes-sense",
-      "machine-learning-for-business",
-    ],
+    relatedInsights: ["when-ai-automation-makes-sense", "machine-learning-for-business"],
     relatedProjects: ["business-website-system", "ai-automation-suite"],
     serviceUseCases: [
-      {
-        service: "Web Development",
-        slug: "web-development",
-        desc: "Websites and web platforms for Philadelphia businesses and organizations.",
-      },
-      {
-        service: "Mobile App Development",
-        slug: "mobile-app-development",
-        desc: "Cross-platform mobile apps for healthcare, education, and service businesses.",
-      },
-      {
-        service: "AI Automation",
-        slug: "ai-automation",
-        desc: "AI tools and automation for operational efficiency in Philadelphia organizations.",
-      },
-      {
-        service: "Machine Learning",
-        slug: "machine-learning",
-        desc: "Data models and dashboards for insight and decision support.",
-      },
+      { service: "Web Development", slug: "web-development", desc: "Websites and web platforms for Philadelphia businesses and organizations." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Cross-platform mobile apps for healthcare, education, and service businesses." },
+      { service: "AI Automation", slug: "ai-automation", desc: "AI tools and automation for operational efficiency in Philadelphia organizations." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models and dashboards for insight and decision support." },
     ],
   },
   {
     slug: "san-francisco",
     name: "San Francisco",
+    type: "city",
     state: "California",
     stateAbbrev: "CA",
     introParagraphs: [
@@ -419,59 +245,24 @@ export const cities: CityData[] = [
       "San Francisco-based companies often work with multiple development partners and expect clear communication, clean code, and reliable delivery. StackSpacer focuses on being a dependable extension of your technical team rather than adding overhead.",
     ],
     faqs: [
-      {
-        question: "Can StackSpacer work with businesses in San Francisco?",
-        answer:
-          "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in San Francisco, with project communication and delivery coordinated online.",
-      },
-      {
-        question: "What types of San Francisco companies does StackSpacer work with?",
-        answer:
-          "StackSpacer works with technology startups, SaaS companies, fintech firms, and established technology companies across the San Francisco Bay Area and beyond.",
-      },
-      {
-        question: "Can StackSpacer handle complex technical integrations?",
-        answer:
-          "Yes. StackSpacer builds integrations with existing APIs, databases, cloud platforms, and third-party services. Complex integration requirements are scoped during the discovery phase.",
-      },
-      {
-        question: "How does StackSpacer approach AI and machine learning projects?",
-        answer:
-          "StackSpacer evaluates whether AI or machine learning is the right tool for your problem during discovery. The focus is on practical solutions that deliver measurable value rather than technology for its own sake.",
-      },
+      { question: "Can StackSpacer work with businesses in San Francisco?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in San Francisco, with project communication and delivery coordinated online." },
+      { question: "What types of San Francisco companies does StackSpacer work with?", answer: "StackSpacer works with technology startups, SaaS companies, fintech firms, and established technology companies across the San Francisco Bay Area and beyond." },
+      { question: "Can StackSpacer handle complex technical integrations?", answer: "Yes. StackSpacer builds integrations with existing APIs, databases, cloud platforms, and third-party services. Complex integration requirements are scoped during the discovery phase." },
+      { question: "How does StackSpacer approach AI and machine learning projects?", answer: "StackSpacer evaluates whether AI or machine learning is the right tool for your problem during discovery. The focus is on practical solutions that deliver measurable value rather than technology for its own sake." },
     ],
-    relatedInsights: [
-      "what-nextjs-production-ready",
-      "rag-vs-ai-agents",
-      "when-ai-automation-makes-sense",
-    ],
+    relatedInsights: ["what-nextjs-production-ready", "rag-vs-ai-agents", "when-ai-automation-makes-sense"],
     relatedProjects: ["ai-automation-suite", "ml-prediction-system", "developer-portfolio"],
     serviceUseCases: [
-      {
-        service: "Web Development",
-        slug: "web-development",
-        desc: "Next.js web applications and platforms for San Francisco technology companies.",
-      },
-      {
-        service: "Mobile App Development",
-        slug: "mobile-app-development",
-        desc: "React Native apps for consumer and enterprise technology products.",
-      },
-      {
-        service: "AI Automation",
-        slug: "ai-automation",
-        desc: "AI agents, chatbots, and workflow automation for technology companies.",
-      },
-      {
-        service: "Machine Learning",
-        slug: "machine-learning",
-        desc: "ML models and prediction systems for data-driven technology products.",
-      },
+      { service: "Web Development", slug: "web-development", desc: "Next.js web applications and platforms for San Francisco technology companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "React Native apps for consumer and enterprise technology products." },
+      { service: "AI Automation", slug: "ai-automation", desc: "AI agents, chatbots, and workflow automation for technology companies." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "ML models and prediction systems for data-driven technology products." },
     ],
   },
   {
     slug: "san-jose",
     name: "San Jose",
+    type: "city",
     state: "California",
     stateAbbrev: "CA",
     introParagraphs: [
@@ -483,58 +274,24 @@ export const cities: CityData[] = [
       "Businesses in San Jose typically evaluate developers on technical depth and reliability. StackSpacer focuses on writing clean, well-structured code that your team can review, extend, and maintain.",
     ],
     faqs: [
-      {
-        question: "Can StackSpacer work with businesses in San Jose?",
-        answer:
-          "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in San Jose, with project communication and delivery coordinated online.",
-      },
-      {
-        question: "What types of San Jose companies does StackSpacer work with?",
-        answer:
-          "StackSpacer works with SaaS companies, technology startups, semiconductors firms, and AI/ML companies across the San Jose and Silicon Valley area.",
-      },
-      {
-        question: "Can StackSpacer support product launch timelines?",
-        answer:
-          "Yes. StackSpacer structures projects to meet product launch timelines with clear milestones and regular progress updates. Discovery helps establish realistic schedules before development begins.",
-      },
-      {
-        question: "Does StackSpacer work with existing engineering teams?",
-        answer:
-          "Yes. StackSpacer can integrate with existing engineering teams as a supplemental resource, working within your codebase, processes, and development standards.",
-      },
+      { question: "Can StackSpacer work with businesses in San Jose?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in San Jose, with project communication and delivery coordinated online." },
+      { question: "What types of San Jose companies does StackSpacer work with?", answer: "StackSpacer works with SaaS companies, technology startups, semiconductor firms, and AI/ML companies across the San Jose and Silicon Valley area." },
+      { question: "Can StackSpacer support product launch timelines?", answer: "Yes. StackSpacer structures projects to meet product launch timelines with clear milestones and regular progress updates. Discovery helps establish realistic schedules before development begins." },
+      { question: "Does StackSpacer work with existing engineering teams?", answer: "Yes. StackSpacer can integrate with existing engineering teams as a supplemental resource, working within your codebase, processes, and development standards." },
     ],
-    relatedInsights: [
-      "what-nextjs-production-ready",
-      "rag-vs-ai-agents",
-    ],
+    relatedInsights: ["what-nextjs-production-ready", "rag-vs-ai-agents"],
     relatedProjects: ["ai-automation-suite", "ml-prediction-system"],
     serviceUseCases: [
-      {
-        service: "Web Development",
-        slug: "web-development",
-        desc: "Next.js applications and web platforms for Silicon Valley companies.",
-      },
-      {
-        service: "Mobile App Development",
-        slug: "mobile-app-development",
-        desc: "Cross-platform mobile apps for technology products and platforms.",
-      },
-      {
-        service: "AI Automation",
-        slug: "ai-automation",
-        desc: "AI agents, automation workflows, and prompt engineering for technology companies.",
-      },
-      {
-        service: "Machine Learning",
-        slug: "machine-learning",
-        desc: "ML pipelines, prediction models, and data dashboards for data-intensive products.",
-      },
+      { service: "Web Development", slug: "web-development", desc: "Next.js applications and web platforms for Silicon Valley companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Cross-platform mobile apps for technology products and platforms." },
+      { service: "AI Automation", slug: "ai-automation", desc: "AI agents, automation workflows, and prompt engineering for technology companies." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "ML pipelines, prediction models, and data dashboards for data-intensive products." },
     ],
   },
   {
     slug: "seattle",
     name: "Seattle",
+    type: "city",
     state: "Washington",
     stateAbbrev: "WA",
     introParagraphs: [
@@ -546,58 +303,24 @@ export const cities: CityData[] = [
       "Seattle-based businesses often value developers who understand both the technical and business sides of a project. StackSpacer focuses on building systems that are practical, well-documented, and aligned with your business goals.",
     ],
     faqs: [
-      {
-        question: "Can StackSpacer work with businesses in Seattle?",
-        answer:
-          "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Seattle, with project communication and delivery coordinated online.",
-      },
-      {
-        question: "What industries does StackSpacer support in Seattle?",
-        answer:
-          "StackSpacer works with e-commerce, cloud computing, health technology, aerospace, and professional service businesses across the Seattle market.",
-      },
-      {
-        question: "Can StackSpacer build systems that integrate with cloud platforms?",
-        answer:
-          "Yes. StackSpacer builds integrations with cloud platforms including AWS, Azure, and Google Cloud, as well as with existing APIs and backend services.",
-      },
-      {
-        question: "How does StackSpacer handle projects for Seattle's technology companies?",
-        answer:
-          "StackSpacer follows structured development practices with clear milestones, version-controlled code, and regular communication. Projects are scoped during discovery to match your technical requirements and timeline.",
-      },
+      { question: "Can StackSpacer work with businesses in Seattle?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Seattle, with project communication and delivery coordinated online." },
+      { question: "What industries does StackSpacer support in Seattle?", answer: "StackSpacer works with e-commerce, cloud computing, health technology, aerospace, and professional service businesses across the Seattle market." },
+      { question: "Can StackSpacer build systems that integrate with cloud platforms?", answer: "Yes. StackSpacer builds integrations with cloud platforms including AWS, Azure, and Google Cloud, as well as with existing APIs and backend services." },
+      { question: "How does StackSpacer handle projects for Seattles technology companies?", answer: "StackSpacer follows structured development practices with clear milestones, version-controlled code, and regular communication. Projects are scoped during discovery to match your technical requirements and timeline." },
     ],
-    relatedInsights: [
-      "what-nextjs-production-ready",
-      "when-ai-automation-makes-sense",
-    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
     relatedProjects: ["business-website-system", "ai-automation-suite"],
     serviceUseCases: [
-      {
-        service: "Web Development",
-        slug: "web-development",
-        desc: "Web applications and platforms for Seattle technology and e-commerce companies.",
-      },
-      {
-        service: "Mobile App Development",
-        slug: "mobile-app-development",
-        desc: "Cross-platform mobile apps for consumer and enterprise products.",
-      },
-      {
-        service: "AI Automation",
-        slug: "ai-automation",
-        desc: "AI tools and automation for operational efficiency in Seattle businesses.",
-      },
-      {
-        service: "Machine Learning",
-        slug: "machine-learning",
-        desc: "Prediction models and data dashboards for technology and data-driven businesses.",
-      },
+      { service: "Web Development", slug: "web-development", desc: "Web applications and platforms for Seattle technology and e-commerce companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Cross-platform mobile apps for consumer and enterprise products." },
+      { service: "AI Automation", slug: "ai-automation", desc: "AI tools and automation for operational efficiency in Seattle businesses." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models and data dashboards for technology and data-driven businesses." },
     ],
   },
   {
     slug: "dallas",
     name: "Dallas",
+    type: "city",
     state: "Texas",
     stateAbbrev: "TX",
     introParagraphs: [
@@ -609,121 +332,53 @@ export const cities: CityData[] = [
       "Dallas-based businesses often value practical technology solutions that deliver measurable results. StackSpacer focuses on building systems that solve specific business problems with clean, maintainable code.",
     ],
     faqs: [
-      {
-        question: "Can StackSpacer work with businesses in Dallas?",
-        answer:
-          "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Dallas, with project communication and delivery coordinated online.",
-      },
-      {
-        question: "What industries does StackSpacer work with in Dallas?",
-        answer:
-          "StackSpacer works with energy, technology, healthcare, finance, and professional service businesses across the Dallas market.",
-      },
-      {
-        question: "Can StackSpacer help Dallas businesses with AI automation?",
-        answer:
-          "Yes. StackSpacer builds AI chatbots, workflow automation systems, and prompt-driven tools that help Dallas businesses reduce manual work and improve operational efficiency.",
-      },
-      {
-        question: "How does StackSpacer handle project communication with Dallas clients?",
-        answer:
-          "StackSpacer provides regular updates and scheduled check-ins. Most Dallas-based clients work within Central Time business hours for calls and project reviews.",
-      },
+      { question: "Can StackSpacer work with businesses in Dallas?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Dallas, with project communication and delivery coordinated online." },
+      { question: "What industries does StackSpacer work with in Dallas?", answer: "StackSpacer works with energy, technology, healthcare, finance, and professional service businesses across the Dallas market." },
+      { question: "Can StackSpacer help Dallas businesses with AI automation?", answer: "Yes. StackSpacer builds AI chatbots, workflow automation systems, and prompt-driven tools that help Dallas businesses reduce manual work and improve operational efficiency." },
+      { question: "How does StackSpacer handle project communication with Dallas clients?", answer: "StackSpacer provides regular updates and scheduled check-ins. Most Dallas-based clients work within Central Time business hours for calls and project reviews." },
     ],
-    relatedInsights: [
-      "when-ai-automation-makes-sense",
-      "machine-learning-for-business",
-    ],
+    relatedInsights: ["when-ai-automation-makes-sense", "machine-learning-for-business"],
     relatedProjects: ["ai-automation-suite", "ml-prediction-system"],
     serviceUseCases: [
-      {
-        service: "Web Development",
-        slug: "web-development",
-        desc: "Business websites and web platforms for Dallas-based companies.",
-      },
-      {
-        service: "Mobile App Development",
-        slug: "mobile-app-development",
-        desc: "Cross-platform mobile apps for Dallas businesses and organizations.",
-      },
-      {
-        service: "AI Automation",
-        slug: "ai-automation",
-        desc: "AI tools and workflow automation for Dallas businesses looking to improve efficiency.",
-      },
-      {
-        service: "Machine Learning",
-        slug: "machine-learning",
-        desc: "Prediction models and data dashboards for Dallas-based data-driven businesses.",
-      },
+      { service: "Web Development", slug: "web-development", desc: "Business websites and web platforms for Dallas-based companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Cross-platform mobile apps for Dallas businesses and organizations." },
+      { service: "AI Automation", slug: "ai-automation", desc: "AI tools and workflow automation for Dallas businesses looking to improve efficiency." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models and data dashboards for Dallas-based data-driven businesses." },
     ],
   },
   {
     slug: "austin",
     name: "Austin",
+    type: "city",
     state: "Texas",
     stateAbbrev: "TX",
     introParagraphs: [
       "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses in Austin and across the United States. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
-      "Austin is a growing technology hub with a strong startup ecosystem, a presence from major technology companies, and a diverse business community. The city's tech-forward culture means businesses here often have high expectations for digital quality and innovation.",
+      "Austin is a growing technology hub with a strong startup ecosystem, a presence from major technology companies, and a diverse business community. The citys tech-forward culture means businesses here often have high expectations for digital quality and innovation.",
     ],
     industryContext: [
       "The Austin market includes technology startups, established tech companies, creative agencies, healthcare organizations, and a growing number of companies in fintech and clean technology. Many of these organizations need custom software that can scale with their growth.",
       "Austin-based businesses often value developers who can move quickly without sacrificing code quality. StackSpacer focuses on clean architecture and reusable components that support long-term product development.",
     ],
     faqs: [
-      {
-        question: "Can StackSpacer work with businesses in Austin?",
-        answer:
-          "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Austin, with project communication and delivery coordinated online.",
-      },
-      {
-        question: "What types of Austin companies does StackSpacer work with?",
-        answer:
-          "StackSpacer works with technology startups, fintech companies, creative agencies, healthcare organizations, and established tech companies across the Austin market.",
-      },
-      {
-        question: "Can StackSpacer support fast-moving startup timelines?",
-        answer:
-          "Yes. StackSpacer structures projects with clear milestones and agile delivery to support the fast pace of startup development. Discovery helps establish realistic timelines before work begins.",
-      },
-      {
-        question: "Does StackSpacer have experience with Austin's technology ecosystem?",
-        answer:
-          "StackSpacer has worked with technology companies across the United States, including businesses in Austin's startup and enterprise technology sectors. The focus is on delivering quality software regardless of location.",
-      },
+      { question: "Can StackSpacer work with businesses in Austin?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Austin, with project communication and delivery coordinated online." },
+      { question: "What types of Austin companies does StackSpacer work with?", answer: "StackSpacer works with technology startups, fintech companies, creative agencies, healthcare organizations, and established tech companies across the Austin market." },
+      { question: "Can StackSpacer support fast-moving startup timelines?", answer: "Yes. StackSpacer structures projects with clear milestones and agile delivery to support the fast pace of startup development. Discovery helps establish realistic timelines before work begins." },
+      { question: "Does StackSpacer have experience with Austins technology ecosystem?", answer: "StackSpacer has worked with technology companies across the United States, including businesses in Austins startup and enterprise technology sectors. The focus is on delivering quality software regardless of location." },
     ],
-    relatedInsights: [
-      "what-nextjs-production-ready",
-      "rag-vs-ai-agents",
-    ],
+    relatedInsights: ["what-nextjs-production-ready", "rag-vs-ai-agents"],
     relatedProjects: ["developer-portfolio", "ai-automation-suite"],
     serviceUseCases: [
-      {
-        service: "Web Development",
-        slug: "web-development",
-        desc: "Next.js websites and web applications for Austin startups and technology companies.",
-      },
-      {
-        service: "Mobile App Development",
-        slug: "mobile-app-development",
-        desc: "React Native apps for Austin-based consumer and enterprise products.",
-      },
-      {
-        service: "AI Automation",
-        slug: "ai-automation",
-        desc: "AI tools and automation for Austin businesses seeking operational efficiency.",
-      },
-      {
-        service: "Machine Learning",
-        slug: "machine-learning",
-        desc: "ML models and dashboards for data-driven Austin companies.",
-      },
+      { service: "Web Development", slug: "web-development", desc: "Next.js websites and web applications for Austin startups and technology companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "React Native apps for Austin-based consumer and enterprise products." },
+      { service: "AI Automation", slug: "ai-automation", desc: "AI tools and automation for Austin businesses seeking operational efficiency." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "ML models and dashboards for data-driven Austin companies." },
     ],
   },
   {
     slug: "miami",
     name: "Miami",
+    type: "city",
     state: "Florida",
     stateAbbrev: "FL",
     introParagraphs: [
@@ -735,57 +390,1637 @@ export const cities: CityData[] = [
       "Miami-based businesses often value developers who understand the importance of mobile-first experiences and multilingual capabilities. StackSpacer builds systems that are performant on mobile devices and can accommodate diverse user bases.",
     ],
     faqs: [
-      {
-        question: "Can StackSpacer work with businesses in Miami?",
-        answer:
-          "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Miami, with project communication and delivery coordinated online.",
-      },
-      {
-        question: "What industries does StackSpacer support in Miami?",
-        answer:
-          "StackSpacer works with financial services, hospitality, e-commerce, real estate technology, and technology companies across the Miami market.",
-      },
-      {
-        question: "Can StackSpacer build multilingual or international-facing applications?",
-        answer:
-          "Yes. StackSpacer builds applications that support multiple languages and international audiences. Localization requirements are discussed during the discovery phase.",
-      },
-      {
-        question: "How does StackSpacer handle projects for Miami's hospitality and real estate sectors?",
-        answer:
-          "StackSpacer builds customer-facing platforms, booking systems, and data dashboards for hospitality and real estate businesses. Each project is scoped based on your specific requirements and audience needs.",
-      },
+      { question: "Can StackSpacer work with businesses in Miami?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses in Miami, with project communication and delivery coordinated online." },
+      { question: "What industries does StackSpacer support in Miami?", answer: "StackSpacer works with financial services, hospitality, e-commerce, real estate technology, and technology companies across the Miami market." },
+      { question: "Can StackSpacer build multilingual or international-facing applications?", answer: "Yes. StackSpacer builds applications that support multiple languages and international audiences. Localization requirements are discussed during the discovery phase." },
+      { question: "How does StackSpacer handle projects for Miamis hospitality and real estate sectors?", answer: "StackSpacer builds customer-facing platforms, booking systems, and data dashboards for hospitality and real estate businesses. Each project is scoped based on your specific requirements and audience needs." },
     ],
-    relatedInsights: [
-      "react-native-vs-flutter",
-      "when-ai-automation-makes-sense",
-    ],
+    relatedInsights: ["react-native-vs-flutter", "when-ai-automation-makes-sense"],
     relatedProjects: ["mobile-app-dashboard", "business-website-system"],
     serviceUseCases: [
-      {
-        service: "Web Development",
-        slug: "web-development",
-        desc: "Websites and web platforms for Miami-based hospitality, real estate, and finance companies.",
-      },
-      {
-        service: "Mobile App Development",
-        slug: "mobile-app-development",
-        desc: "Cross-platform mobile apps for consumer-facing Miami businesses.",
-      },
-      {
-        service: "AI Automation",
-        slug: "ai-automation",
-        desc: "AI chatbots and automation tools for Miami hospitality and service businesses.",
-      },
-      {
-        service: "Machine Learning",
-        slug: "machine-learning",
-        desc: "Data models and dashboards for Miami-based finance and real estate companies.",
-      },
+      { service: "Web Development", slug: "web-development", desc: "Websites and web platforms for Miami-based hospitality, real estate, and finance companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Cross-platform mobile apps for consumer-facing Miami businesses." },
+      { service: "AI Automation", slug: "ai-automation", desc: "AI chatbots and automation tools for Miami hospitality and service businesses." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models and dashboards for Miami-based finance and real estate companies." },
     ],
   },
 ];
 
+export const states: StateData[] = [
+  {
+    slug: "alabama",
+    name: "Alabama",
+    type: "state",
+    stateCode: "AL",
+    heroTitle: "Software Development in Alabama ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Alabama. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Alabama's economy spans healthcare, manufacturing, aerospace, and agriculture. Businesses across these sectors increasingly need custom digital tools to modernize operations, automate routine tasks, and make better decisions from their data.",
+    ],
+    marketContext: [
+      "The Alabama business landscape includes major healthcare systems, aerospace manufacturers, automotive suppliers, and a growing number of technology companies. Huntsville's tech corridor and Birmingham's healthcare sector drive significant demand for custom software solutions.",
+      "Alabama-based businesses often value practical, results-oriented technology partners. StackSpacer focuses on building systems that are functional, well-documented, and aligned with each client's specific operational needs.",
+    ],
+    majorCities: ["Birmingham", "Huntsville", "Montgomery", "Tuscaloosa", "Hoover"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Alabama?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses across Alabama, with all project communication and delivery coordinated online." },
+      { question: "What industries does StackSpacer serve in Alabama?", answer: "StackSpacer works with healthcare systems, aerospace and manufacturing companies, agricultural technology firms, and professional services across Alabama." },
+      { question: "How does remote development work for an Alabama-based business?", answer: "StackSpacer coordinates all project communication online, working within Central Time business hours. Regular progress updates and scheduled check-ins keep projects on track." },
+      { question: "Can StackSpacer integrate with existing hospital or manufacturing systems?", answer: "Yes. StackSpacer builds integrations with existing APIs, databases, and operational platforms. Integration feasibility is assessed during the discovery phase." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Business websites and web platforms for Alabama healthcare, manufacturing, and service companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Cross-platform mobile apps for field operations and client-facing services in Alabama." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Workflow automation and AI tools for operational efficiency across Alabama businesses." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models and data dashboards for data-driven decision making in Alabama." },
+    ],
+    seoTitle: "Software Development in Alabama | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Alabama.",
+  },
+  {
+    slug: "alaska",
+    name: "Alaska",
+    type: "state",
+    stateCode: "AK",
+    heroTitle: "Software Development in Alaska ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Alaska. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Alaska's economy is shaped by tourism, fisheries, energy, and transportation. Businesses across these industries need digital tools that work reliably in remote environments and support both local and global operations.",
+    ],
+    marketContext: [
+      "Alaska-based businesses face unique challenges including dispersed populations, seasonal operations, and reliance on infrastructure that spans vast distances. Digital solutions that improve connectivity, streamline operations, and reach wider audiences are in steady demand.",
+      "Companies in Alaska often value partners who understand the importance of resilience and simplicity in system design. StackSpacer builds practical solutions that work consistently, whether used in Anchorage or rural communities.",
+    ],
+    majorCities: ["Anchorage", "Fairbanks", "Juneau", "Wasilla", "Kenai"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Alaska?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Alaska, with all coordination handled remotely." },
+      { question: "What types of Alaskan businesses does StackSpacer serve?", answer: "StackSpacer works with tourism operators, fishing and logistics companies, healthcare providers, and government contractors across Alaska." },
+      { question: "Does StackSpacer build systems that work in remote areas?", answer: "Yes. StackSpacer designs systems for reliability and low-bandwidth compatibility, ensuring solutions work consistently even in areas with limited connectivity." },
+      { question: "How does StackSpacer handle time zone differences with Alaska clients?", answer: "StackSpacer accommodates Alaska Time business hours for calls and reviews. All project communication is asynchronous where possible, with regular synchronous check-ins scheduled at mutual convenience." },
+    ],
+    relatedInsights: ["react-native-vs-flutter", "what-nextjs-production-ready"],
+    relatedProjects: ["mobile-app-dashboard", "business-website-system"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Websites and booking platforms for Alaska tourism, hospitality, and service businesses." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations, logistics tracking, and remote workforce management in Alaska." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for scheduling, customer service, and operational workflows in Alaskan businesses." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models for fisheries management, weather forecasting support, and operational analytics." },
+    ],
+    seoTitle: "Software Development in Alaska | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Alaska.",
+  },
+  {
+    slug: "arizona",
+    name: "Arizona",
+    type: "state",
+    stateCode: "AZ",
+    heroTitle: "Software Development in Arizona ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Arizona. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Arizona has a diverse and growing economy with strengths in technology, healthcare, logistics, and professional services. The state's proximity to major Western markets and its expanding urban corridors make it an active region for digital investment.",
+    ],
+    marketContext: [
+      "The Arizona business ecosystem includes pharmaceutical and biotech companies, defense and aerospace contractors, e-commerce logistics hubs, and a growing number of technology startups. Phoenix and Tucson are the primary centers of innovation and commercial activity.",
+      "Arizona-based businesses range from established enterprises modernizing legacy systems to fast-growing startups building new products. StackSpacer serves both segments with pragmatic development approaches tailored to each client's stage and goals.",
+    ],
+    majorCities: ["Phoenix", "Tucson", "Mesa", "Scottsdale", "Chandler"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Arizona?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses across Arizona, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Arizona?", answer: "StackSpacer works with technology companies, healthcare systems, defense contractors, logistics firms, and professional services across Arizona." },
+      { question: "Can StackSpacer help Arizona businesses with digital transformation?", answer: "Yes. StackSpacer builds custom systems that replace manual processes, automate workflows, and improve data visibility for organizations undergoing digital transformation." },
+      { question: "How does StackSpacer structure projects for Arizona-based clients?", answer: "Projects begin with discovery to understand requirements and timeline. StackSpacer provides regular progress updates and schedules check-ins within Mountain Time business hours." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "rag-vs-ai-agents"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Business websites and web platforms for Arizona technology, healthcare, and service companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Cross-platform mobile apps for consumer and enterprise use across Arizona." },
+      { service: "AI Automation", slug: "ai-automation", desc: "AI tools and workflow automation for Arizona businesses looking to improve operational efficiency." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models and dashboards for predictive insight and decision support in Arizona." },
+    ],
+    seoTitle: "Software Development in Arizona | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Arizona.",
+  },
+  {
+    slug: "arkansas",
+    name: "Arkansas",
+    type: "state",
+    stateCode: "AR",
+    heroTitle: "Software Development in Arkansas ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Arkansas. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Arkansas has a growing technology sector anchored by Fort Smith's emerging tech corridor, Walmart's global headquarters in Bentonville, and an expanding portfolio of logistics and manufacturing companies.",
+    ],
+    marketContext: [
+      "The Arkansas business landscape includes retail and e-commerce, agriculture technology, healthcare, and professional services. Walmart's influence drives significant demand for supply chain digitization, data analytics, and customer-facing digital tools among Arkansas-based suppliers and partners.",
+      "Arkansas businesses often value practical technology partnerships that deliver measurable improvements. StackSpacer focuses on building systems that solve real operational problems with clean, maintainable code.",
+    ],
+    majorCities: ["Little Rock", "Fort Smith", "Fayetteville", "Rogers", "North Little Rock"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Arkansas?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Arkansas, with all project work coordinated online." },
+      { question: "What industries does StackSpacer serve in Arkansas?", answer: "StackSpacer works with retail and e-commerce, agriculture technology, healthcare, logistics, and professional service businesses across Arkansas." },
+      { question: "Can StackSpacer build supply chain or logistics software?", answer: "Yes. StackSpacer has experience building inventory management systems, logistics tracking platforms, and supplier integration tools for Arkansas-based companies." },
+      { question: "How does StackSpacer approach projects for Arkansas clients?", answer: "StackSpacer begins with discovery to understand your operational context and goals. Projects are scoped with clear milestones and regular progress updates shared throughout development." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ml-prediction-system"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Business websites and platform development for Arkansas retail, logistics, and service companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Cross-platform mobile apps for field teams and customer-facing services in Arkansas." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for inventory management, customer support, and operational workflows in Arkansas." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for demand forecasting and operational analytics in Arkansas businesses." },
+    ],
+    seoTitle: "Software Development in Arkansas | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Arkansas.",
+  },
+  {
+    slug: "california",
+    name: "California",
+    type: "state",
+    stateCode: "CA",
+    heroTitle: "Software Development in California ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across California. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "California is the largest technology market in the United States, home to Silicon Valley, major entertainment studios, advanced agriculture operations, and thousands of startups across every sector. The bar for technical quality is high, and StackSpacer builds to that standard.",
+    ],
+    marketContext: [
+      "California's economy spans technology, entertainment, biotechnology, clean energy, agriculture, and international trade. Companies here expect sophisticated digital products from consumer apps with millions of users to enterprise platforms handling complex data flows. StackSpacer serves both the startup scene and the established enterprises that anchor the state's economy.",
+      "Many California businesses operate at pace and demand partners who can move quickly without compromising code quality. StackSpacer approach emphasizes clean architecture, thorough testing, and clear documentation fundamentals that matter especially in markets where the technical bar is exceptionally high.",
+    ],
+    majorCities: ["Los Angeles", "San Francisco", "San Jose", "San Diego", "Sacramento", "Fresno"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in California?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses across California, with project coordination handled entirely online." },
+      { question: "What types of California companies does StackSpacer work with?", answer: "StackSpacer works with technology startups, entertainment companies, biotech firms, e-commerce brands, agricultural businesses, and professional services across California." },
+      { question: "Can StackSpacer handle high-scale or complex technical projects?", answer: "Yes. StackSpacer builds systems designed for scalability and maintainability. Complex requirements are scoped during discovery to ensure the approach matches your technical bar." },
+      { question: "How does StackSpacer work with California's fast-paced tech environment?", answer: "StackSpacer structures projects with agile milestones and regular progress updates. Most California-based clients work within Pacific Time business hours for synchronous collaboration." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "rag-vs-ai-agents", "when-ai-automation-makes-sense"],
+    relatedProjects: ["ai-automation-suite", "ml-prediction-system", "mobile-app-dashboard"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "High-performance web applications and platforms for California technology and media companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Cross-platform iOS and Android apps for consumer and enterprise audiences in California." },
+      { service: "AI Automation", slug: "ai-automation", desc: "AI agents, chatbots, and workflow automation for California's technology and entertainment sectors." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "ML models and prediction systems for data-intensive products and analytics platforms." },
+    ],
+    seoTitle: "Software Development in California | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across California.",
+  },
+  {
+    slug: "colorado",
+    name: "Colorado",
+    type: "state",
+    stateCode: "CO",
+    heroTitle: "Software Development in Colorado ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Colorado. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Colorado has a vibrant technology sector centered around Denver and Boulder, with strong presence in aerospace, telecommunications, outdoor recreation, and clean energy. The state attracts companies that value both technical excellence and a practical approach to product development.",
+    ],
+    marketContext: [
+      "The Colorado business ecosystem includes telecommunications giants, aerospace and defense contractors, outdoor and recreational brands, and a dense cluster of technology startups. Denver and Boulder serve as innovation hubs where traditional industries intersect with new technology companies.",
+      "Colorado-based businesses often prioritize sustainability, user experience, and brand authenticity in their digital products. StackSpacer builds systems that align with these values clean code, thoughtful design, and solutions that scale with the business.",
+    ],
+    majorCities: ["Denver", "Boulder", "Colorado Springs", "Aurora", "Fort Collins"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Colorado?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses across Colorado, with all coordination handled online." },
+      { question: "What industries does StackSpacer serve in Colorado?", answer: "StackSpacer works with aerospace and defense, telecommunications, outdoor recreation brands, technology startups, and healthcare organizations across Colorado." },
+      { question: "Can StackSpacer build products for consumer-facing outdoor and recreation brands?", answer: "Yes. StackSpacer has experience building e-commerce platforms, booking systems, and mobile apps for brands in the outdoor, travel, and recreation sectors." },
+      { question: "How does StackSpacer handle projects for Colorado's technology companies?", answer: "StackSpacer follows structured development practices with clear milestones. Most Colorado-based clients work within Mountain Time business hours for calls and reviews." },
+    ],
+    relatedInsights: ["react-native-vs-flutter", "what-nextjs-production-ready"],
+    relatedProjects: ["mobile-app-dashboard", "developer-portfolio"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Websites and web platforms for Colorado technology, outdoor recreation, and service companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Consumer and enterprise mobile apps for Colorado's technology and lifestyle brands." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for customer service, data processing, and operational workflows in Colorado." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models and analytics dashboards for aerospace, telecom, and tech companies in Colorado." },
+    ],
+    seoTitle: "Software Development in Colorado | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Colorado.",
+  },
+  {
+    slug: "connecticut",
+    name: "Connecticut",
+    type: "state",
+    stateCode: "CT",
+    heroTitle: "Software Development in Connecticut ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Connecticut. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Connecticut's economy is anchored by insurance and financial services, healthcare, advanced manufacturing, and a growing fintech sector. Businesses across these industries need reliable digital systems to serve clients, manage operations, and compete in an increasingly digital marketplace.",
+    ],
+    marketContext: [
+      "The Connecticut business landscape includes major insurance carriers, pharmaceutical and healthcare organizations, defense contractors, and a rising number of fintech startups. Hartford and the Yale corridor in New Haven are key centers of economic activity and innovation.",
+      "Connecticut businesses often value precision, regulatory awareness, and long-term reliability in their technology partners. StackSpacer builds systems with those qualities in mind secure, well-documented, and structured for sustained operation.",
+    ],
+    majorCities: ["Bridgeport", "New Haven", "Hartford", "Stamford", "Norwalk"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Connecticut?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Connecticut, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Connecticut?", answer: "StackSpacer works with insurance and financial services, healthcare, pharmaceuticals, fintech, and manufacturing companies across Connecticut." },
+      { question: "Can StackSpacer build systems for regulated industries like insurance or healthcare?", answer: "Yes. StackSpacer follows security and data handling best practices throughout development. Projects in regulated sectors are scoped carefully during discovery to ensure alignment with compliance requirements." },
+      { question: "How does StackSpacer support Connecticut's financial services sector?", answer: "StackSpacer builds web platforms, data dashboards, and automation tools for insurance carriers, wealth management firms, and fintech companies across Connecticut." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms and dashboards for Connecticut insurance, finance, and healthcare companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for client-facing services and internal operations in Connecticut businesses." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Workflow automation and AI tools for insurance processing and customer service in Connecticut." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models for risk assessment, fraud detection, and customer analytics in Connecticut finance." },
+    ],
+    seoTitle: "Software Development in Connecticut | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Connecticut.",
+  },
+  {
+    slug: "delaware",
+    name: "Delaware",
+    type: "state",
+    stateCode: "DE",
+    heroTitle: "Software Development in Delaware ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Delaware. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Delaware's economy is shaped by its role as a corporate registration hub, its proximity to major Northeast markets, and growing sectors in cybersecurity, healthcare, and advanced manufacturing.",
+    ],
+    marketContext: [
+      "Many of the United States' largest corporations are incorporated in Delaware, creating a steady demand for legal technology, compliance software, and corporate administration platforms. The state also has a growing cybersecurity sector and healthcare systems serving the Mid-Atlantic region.",
+      "Delaware businesses range from mid-sized professional service firms to subsidiaries of major corporations. StackSpacer serves these organizations with practical digital solutions that support compliance, operations, and growth.",
+    ],
+    majorCities: ["Wilmington", "Dover", "Newark", "Bear", "Middletown"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Delaware?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Delaware, with all project coordination handled online." },
+      { question: "What industries does StackSpacer serve in Delaware?", answer: "StackSpacer works with corporate services, cybersecurity firms, healthcare organizations, and professional services across Delaware." },
+      { question: "Can StackSpacer build compliance or corporate administration software?", answer: "Yes. StackSpacer has experience building platforms for corporate record management, compliance tracking, and administrative workflows." },
+      { question: "How does StackSpacer work with Delaware's professional services sector?", answer: "StackSpacer builds web platforms, document management systems, and client portals for law firms, accounting practices, and corporate service providers in Delaware." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms and client portals for Delaware corporate services and professional firms." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field services and client communication in Delaware businesses." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for document processing, compliance tracking, and administrative workflows." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data analytics and prediction models for risk and compliance applications in Delaware." },
+    ],
+    seoTitle: "Software Development in Delaware | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Delaware.",
+  },
+  {
+    slug: "florida",
+    name: "Florida",
+    type: "state",
+    stateCode: "FL",
+    heroTitle: "Software Development in Florida ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Florida. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Florida has one of the largest and most diverse economies in the United States. The state is a global leader in tourism and hospitality, a major center for healthcare and life sciences, and a growing hub for fintech, aerospace, and international trade.",
+    ],
+    marketContext: [
+      "The Florida business ecosystem includes hospitality and real estate, healthcare and senior services, international trade and logistics, fintech companies, and aerospace and defense contractors. Miami serves as a gateway to Latin American markets, while Orlando and Tampa drive tourism and healthcare innovation. Jacksonville and Pensacola anchor aerospace and naval operations.",
+      "Florida-based businesses often need digital solutions that serve diverse, multilingual audiences and handle seasonal demand fluctuations. StackSpacer builds systems that are performant on mobile devices, scalable during peak periods, and culturally attuned to Florida's international character.",
+    ],
+    majorCities: ["Miami", "Orlando", "Tampa", "Jacksonville", "Fort Lauderdale", "Cape Coral"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Florida?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning development services for businesses across Florida, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Florida?", answer: "StackSpacer works with hospitality and tourism, healthcare and life sciences, fintech, aerospace, real estate, and international trade businesses across Florida." },
+      { question: "Can StackSpacer build multilingual or international-facing applications?", answer: "Yes. StackSpacer builds applications that support multiple languages and international audiences, which is especially relevant for Florida's connections to Latin America and the Caribbean." },
+      { question: "How does StackSpacer handle seasonal demand for Florida businesses?", answer: "StackSpacer designs systems with scalability in mind, ensuring platforms can handle demand fluctuations common in tourism, hospitality, and seasonal industries." },
+    ],
+    relatedInsights: ["react-native-vs-flutter", "when-ai-automation-makes-sense"],
+    relatedProjects: ["mobile-app-dashboard", "business-website-system"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Booking platforms, websites, and portals for Florida hospitality, real estate, and service businesses." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Consumer and enterprise mobile apps for Florida's tourism, healthcare, and trade sectors." },
+      { service: "AI Automation", slug: "ai-automation", desc: "AI tools and automation for guest services, scheduling, and operational workflows in Florida." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Demand forecasting, pricing optimization, and analytics dashboards for Florida businesses." },
+    ],
+    seoTitle: "Software Development in Florida | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Florida.",
+  },
+  {
+    slug: "georgia",
+    name: "Georgia",
+    type: "state",
+    stateCode: "GA",
+    heroTitle: "Software Development in Georgia ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Georgia. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Georgia has one of the fastest-growing economies in the Southeast, anchored by Atlanta's role as a logistics and media hub, a thriving film and entertainment industry, and a diversifying technology sector.",
+    ],
+    marketContext: [
+      "The Georgia business landscape includes global logistics and transportation companies, film and media production, healthcare systems, banking and financial services, and a growing number of technology startups. Atlanta is home to Fortune 500 headquarters and a rapidly expanding tech ecosystem.",
+      "Georgia-based businesses range from multinational corporations to small businesses digitizing their operations. StackSpacer serves this broad spectrum with solutions that range from enterprise platforms to lightweight digital tools for local companies.",
+    ],
+    majorCities: ["Atlanta", "Augusta", "Savannah", "Columbus", "Macon"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Georgia?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Georgia, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Georgia?", answer: "StackSpacer works with logistics and transportation, film and media, healthcare, financial services, and technology companies across Georgia." },
+      { question: "Can StackSpacer build systems for Georgia's film and media industry?", answer: "Yes. StackSpacer builds production management tools, distribution platforms, and audience engagement systems for Georgia's entertainment and media sector." },
+      { question: "How does StackSpacer support Georgia's logistics and transportation sector?", answer: "StackSpacer builds tracking platforms, routing optimization tools, and warehouse management systems for Georgia's major logistics and distribution companies." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["ai-automation-suite", "business-website-system"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Websites and platforms for Georgia's media, logistics, and service industries." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for fleet management, production workflows, and customer engagement in Georgia." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for production scheduling, route optimization, and customer service in Georgia." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Predictive models for demand forecasting and operational analytics in Georgia businesses." },
+    ],
+    seoTitle: "Software Development in Georgia | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Georgia.",
+  },
+  {
+    slug: "hawaii",
+    name: "Hawaii",
+    type: "state",
+    stateCode: "HI",
+    heroTitle: "Software Development in Hawaii ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Hawaii. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Hawaii's economy is predominantly driven by tourism, agriculture, military operations, and emerging technology sectors. Businesses across these industries need digital tools to reach global audiences, manage operations efficiently, and adapt to the unique challenges of operating in an island ecosystem.",
+    ],
+    marketContext: [
+      "The Hawaii business landscape includes resort and hospitality operators, agricultural producers, marine and environmental technology companies, and a growing number of remote-friendly startups. The islands face distinctive challenges including supply chain complexity, environmental sensitivity, and the need to serve both locals and international visitors.",
+      "Hawaii-based businesses often seek digital solutions that respect the local environment and community while reaching a global audience. StackSpacer builds systems that are efficient, sustainable, and designed for the realities of island commerce.",
+    ],
+    majorCities: ["Honolulu", "Hilo", "Kailua", "Kahului", "Lihue"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Hawaii?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Hawaii, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Hawaii?", answer: "StackSpacer works with tourism and hospitality, agriculture, environmental technology, military contractors, and professional services across Hawaii." },
+      { question: "Can StackSpacer build booking or reservation platforms for Hawaii businesses?", answer: "Yes. StackSpacer builds booking systems, tour management platforms, and hospitality apps tailored to Hawaii's tourism sector." },
+      { question: "How does StackSpacer handle projects for Hawaii's unique market?", answer: "StackSpacer designs solutions that account for Hawaii's geographic isolation, seasonal demand patterns, and dual audience of residents and visitors. Projects are scoped with these factors in mind." },
+    ],
+    relatedInsights: ["react-native-vs-flutter", "what-nextjs-production-ready"],
+    relatedProjects: ["mobile-app-dashboard", "business-website-system"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Websites and booking platforms for Hawaii's tourism, hospitality, and service businesses." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for tour operators, hotels, and activity providers across Hawaii." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for guest communication, scheduling, and operational efficiency in Hawaii." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Demand forecasting and pricing models for Hawaii's tourism and hospitality sector." },
+    ],
+    seoTitle: "Software Development in Hawaii | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Hawaii.",
+  },
+  {
+    slug: "idaho",
+    name: "Idaho",
+    type: "state",
+    stateCode: "ID",
+    heroTitle: "Software Development in Idaho ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Idaho. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Idaho has emerged as one of the fastest-growing states for technology migration and startup formation. Boise and the Treasure Valley now host a growing number of technology companies, alongside Idaho's traditional strengths in agriculture, manufacturing, and forestry.",
+    ],
+    marketContext: [
+      "The Idaho business landscape includes agriculture and food processing, technology companies, outdoor recreation brands, healthcare providers, and a growing startup community drawn to the state's business-friendly environment. Boise has become a notable hub for tech talent relocation.",
+      "Idaho-based businesses range from family-owned farms digitizing their operations to fast-growing technology companies. StackSpacer serves both segments with solutions scaled to each organization's size and ambition.",
+    ],
+    majorCities: ["Boise", "Nampa", "Meridian", "Idaho Falls", "Pocatello"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Idaho?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Idaho, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Idaho?", answer: "StackSpacer works with agriculture technology, manufacturing, outdoor recreation brands, healthcare, and technology startups across Idaho." },
+      { question: "Can StackSpacer help Idaho businesses with agriculture technology?", answer: "Yes. StackSpacer builds digital tools for precision agriculture, supply chain tracking, and farm management platforms for Idaho's agricultural sector." },
+      { question: "How does StackSpacer support Idaho's growing tech sector?", answer: "StackSpacer builds web applications, mobile apps, and data platforms for Idaho's technology startups and growing tech companies, supporting the state's expanding innovation ecosystem." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Websites and platforms for Idaho's agriculture, outdoor recreation, and technology companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations, recreation bookings, and business management in Idaho." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for agricultural operations, customer service, and business workflows in Idaho." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models for crop monitoring, yield prediction, and operational analytics in Idaho agriculture." },
+    ],
+    seoTitle: "Software Development in Idaho | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Idaho.",
+  },
+  {
+    slug: "illinois",
+    name: "Illinois",
+    type: "state",
+    stateCode: "IL",
+    heroTitle: "Software Development in Illinois ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Illinois. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Illinois has one of the largest and most diversified economies in the United States. Chicago anchors the state as a global center for finance, logistics, and professional services, while suburban and rural Illinois supports manufacturing, agriculture, and healthcare industries.",
+    ],
+    marketContext: [
+      "The Illinois business landscape includes financial services, shipping and logistics, manufacturing, healthcare systems, and a growing technology sector. Chicago is a major derivatives trading hub and home to numerous Fortune 500 headquarters. Outside the Chicago metro, agricultural technology, food processing, and industrial manufacturing remain economic pillars.",
+      "Illinois-based businesses value practical, reliable technology solutions. StackSpacer serves both the financial and logistics enterprises of Chicago and the manufacturing and agricultural companies throughout the state with systems built for durability and clarity.",
+    ],
+    majorCities: ["Chicago", "Aurora", "Naperville", "Springfield", "Rockford"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Illinois?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Illinois, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Illinois?", answer: "StackSpacer works with finance, logistics, manufacturing, healthcare, and professional services across Illinois." },
+      { question: "Can StackSpacer build systems for Illinois financial services companies?", answer: "Yes. StackSpacer builds web platforms, data dashboards, and automation tools for finance and trading companies in Chicago and across Illinois." },
+      { question: "How does StackSpacer support Illinois' manufacturing sector?", answer: "StackSpacer builds operational dashboards, supply chain tracking systems, and industrial IoT interfaces for Illinois manufacturing companies." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "machine-learning-for-business"],
+    relatedProjects: ["business-website-system", "ml-prediction-system"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms and dashboards for Illinois finance, logistics, and manufacturing companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations, logistics tracking, and client services in Illinois." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for supply chain, customer service, and operational workflows in Illinois." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Predictive models for demand forecasting and operational analytics across Illinois industries." },
+    ],
+    seoTitle: "Software Development in Illinois | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Illinois.",
+  },
+  {
+    slug: "indiana",
+    name: "Indiana",
+    type: "state",
+    stateCode: "IN",
+    heroTitle: "Software Development in Indiana ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Indiana. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Indiana has a strong manufacturing heritage and a growing technology sector. Indianapolis serves as a center for healthcare, logistics, and professional services, while South Bend and Fort Wayne anchor manufacturing and life sciences innovation.",
+    ],
+    marketContext: [
+      "The Indiana business landscape includes advanced manufacturing, healthcare and pharmaceuticals, logistics and distribution, agriculture, and a developing startup ecosystem. Cummins, Eli Lilly, and Hoosier energy companies drive significant demand for digital transformation across the state.",
+      "Indiana businesses often value straightforward, results-focused technology partnerships. StackSpacer builds systems that solve real problems from factory floor dashboards to customer-facing e-commerce platforms.",
+    ],
+    majorCities: ["Indianapolis", "Fort Wayne", "Evansville", "South Bend", "Carmel"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Indiana?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Indiana, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Indiana?", answer: "StackSpacer works with manufacturing, healthcare, logistics, agriculture, and professional services across Indiana." },
+      { question: "Can StackSpacer build systems for Indiana's manufacturing sector?", answer: "Yes. StackSpacer builds operational dashboards, equipment monitoring systems, and supply chain platforms for Indiana manufacturers." },
+      { question: "How does StackSpacer support Indiana healthcare organizations?", answer: "StackSpacer builds patient portals, scheduling systems, and data dashboards for Indiana hospitals and healthcare networks." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms and dashboards for Indiana manufacturing, healthcare, and service companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations and client services across Indiana businesses." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for manufacturing workflows, patient scheduling, and operational efficiency in Indiana." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for equipment maintenance, supply chain optimization, and operational analytics." },
+    ],
+    seoTitle: "Software Development in Indiana | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Indiana.",
+  },
+  {
+    slug: "iowa",
+    name: "Iowa",
+    type: "state",
+    stateCode: "IA",
+    heroTitle: "Software Development in Iowa ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Iowa. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Iowa's economy is rooted in agriculture, insurance, and manufacturing, with Des Moines serving as a major insurance and financial services hub. The state is also home to growing technology companies and agricultural innovation firms.",
+    ],
+    marketContext: [
+      "The Iowa business landscape includes agricultural technology, insurance and financial services, food processing, renewable energy, and a growing number of technology startups. Des Moines is one of the nation's leading insurance centers, and the state's agricultural sector continues to invest heavily in precision farming and data analytics.",
+      "Iowa businesses tend to value reliability, pragmatism, and long-term partnerships. StackSpacer builds systems that reflect these priorities stable, well-documented, and designed to grow with the business.",
+    ],
+    majorCities: ["Des Moines", "Cedar Rapids", "Davenport", "Sioux City", "Iowa City"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Iowa?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Iowa, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Iowa?", answer: "StackSpacer works with agriculture technology, insurance, food processing, renewable energy, and professional services across Iowa." },
+      { question: "Can StackSpacer build precision agriculture or agtech software?", answer: "Yes. StackSpacer builds data platforms, field monitoring tools, and agricultural management systems for Iowa's technology-driven farming sector." },
+      { question: "How does StackSpacer support Iowa's insurance industry?", answer: "StackSpacer builds policy management platforms, claims processing systems, and customer portals for Iowa-based insurance companies." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Iowa's agriculture, insurance, and manufacturing sectors." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations, crop monitoring, and insurance claims in Iowa." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for insurance processing, agricultural operations, and business workflows in Iowa." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Yield prediction models, weather analytics, and insurance risk models for Iowa businesses." },
+    ],
+    seoTitle: "Software Development in Iowa | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Iowa.",
+  },
+  {
+    slug: "kansas",
+    name: "Kansas",
+    type: "state",
+    stateCode: "KS",
+    heroTitle: "Software Development in Kansas ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Kansas. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Kansas has a diverse economy spanning aviation, agriculture, healthcare, and logistics. Wichita is a major center for aircraft manufacturing, while Kansas City anchors healthcare and distribution operations.",
+    ],
+    marketContext: [
+      "The Kansas business landscape includes aerospace and aviation manufacturing, agriculture and food processing, healthcare systems, energy companies, and logistics firms. Boeing and Spirit AeroSystems anchor the aviation sector in Wichita, while Kansas City's medical district and distribution centers drive commercial activity.",
+      "Kansas businesses often value practical, no-nonsense technology solutions. StackSpacer builds systems that are functional, durable, and aligned with each client's operational reality.",
+    ],
+    majorCities: ["Kansas City", "Wichita", "Overland Park", "Topeka", "Olathe"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Kansas?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Kansas, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Kansas?", answer: "StackSpacer works with aerospace and aviation, agriculture, healthcare, energy, and logistics across Kansas." },
+      { question: "Can StackSpacer build systems for Kansas' aviation industry?", answer: "Yes. StackSpacer builds operational dashboards, parts tracking systems, and maintenance management platforms for Kansas aviation and aerospace companies." },
+      { question: "How does StackSpacer support Kansas healthcare organizations?", answer: "StackSpacer builds patient portals, scheduling platforms, and data dashboards for Kansas hospitals and healthcare networks." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Kansas aviation, healthcare, and logistics companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations and maintenance tracking in Kansas aviation and manufacturing." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for supply chain, scheduling, and operational workflows in Kansas." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Predictive maintenance models and operational analytics for Kansas aviation and manufacturing." },
+    ],
+    seoTitle: "Software Development in Kansas | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Kansas.",
+  },
+  {
+    slug: "kentucky",
+    name: "Kentucky",
+    type: "state",
+    stateCode: "KY",
+    heroTitle: "Software Development in Kentucky ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Kentucky. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Kentucky's economy spans automotive manufacturing, healthcare, bourbon and agriculture, and logistics. Louisville serves as a major international shipping hub, while Lexington anchors healthcare and equine industries.",
+    ],
+    marketContext: [
+      "The Kentucky business landscape includes automotive and advanced manufacturing plants, healthcare systems, logistics and distribution centers, agriculture and food processing, and a growing number of technology companies. Toyota's major manufacturing facility and Amazon's logistics operations are among the state's largest employers.",
+      "Kentucky businesses value practical technology solutions that improve efficiency and reduce costs. StackSpacer builds systems that support both large manufacturers and the small businesses that serve them.",
+    ],
+    majorCities: ["Louisville", "Lexington", "Bowling Green", "Owensboro", "Covington"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Kentucky?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Kentucky, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Kentucky?", answer: "StackSpacer works with automotive manufacturing, healthcare, logistics, agriculture, and professional services across Kentucky." },
+      { question: "Can StackSpacer build systems for Kentucky's manufacturing sector?", answer: "Yes. StackSpacer builds operational dashboards, production tracking systems, and supplier portals for Kentucky manufacturers." },
+      { question: "How does StackSpacer support Kentucky logistics companies?", answer: "StackSpacer builds warehouse management systems, shipment tracking platforms, and logistics optimization tools for Kentucky's distribution and shipping sector." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Kentucky manufacturing, healthcare, and logistics companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for fleet management, warehouse operations, and field services in Kentucky." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for production scheduling, logistics tracking, and operational workflows in Kentucky." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for supply chain optimization and manufacturing analytics in Kentucky." },
+    ],
+    seoTitle: "Software Development in Kentucky | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Kentucky.",
+  },
+  {
+    slug: "louisiana",
+    name: "Louisiana",
+    type: "state",
+    stateCode: "LA",
+    heroTitle: "Software Development in Louisiana ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Louisiana. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Louisiana's economy is shaped by energy, maritime commerce, healthcare, and tourism. New Orleans drives culture and tourism, while Baton Rouge and the Mississippi River corridor anchor energy and industrial operations.",
+    ],
+    marketContext: [
+      "The Louisiana business landscape includes petroleum and chemical manufacturing, port and maritime logistics, healthcare systems, tourism and hospitality, and agricultural production. The state's Gulf Coast position makes it a critical node for international shipping and energy distribution.",
+      "Louisiana-based businesses often need technology solutions that account for environmental complexity, regulatory requirements, and the needs of both industrial and consumer-facing operations.",
+    ],
+    majorCities: ["New Orleans", "Baton Rouge", "Shreveport", "Lafayette", "Lake Charles"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Louisiana?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Louisiana, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Louisiana?", answer: "StackSpacer works with energy and petrochemicals, maritime logistics, healthcare, tourism, and agriculture across Louisiana." },
+      { question: "Can StackSpacer build systems for Louisiana's energy sector?", answer: "Yes. StackSpacer builds operational dashboards, safety monitoring systems, and data platforms for Louisiana's energy and petrochemical companies." },
+      { question: "How does StackSpacer support Louisiana's tourism industry?", answer: "StackSpacer builds booking platforms, event management systems, and customer engagement tools for Louisiana's hospitality and tourism businesses." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Louisiana's energy, tourism, and logistics sectors." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations, tourism services, and maritime logistics in Louisiana." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for operations monitoring, customer service, and workflow management in Louisiana." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Predictive models for energy operations, weather forecasting, and tourism demand in Louisiana." },
+    ],
+    seoTitle: "Software Development in Louisiana | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Louisiana.",
+  },
+  {
+    slug: "maine",
+    name: "Maine",
+    type: "state",
+    stateCode: "ME",
+    heroTitle: "Software Development in Maine ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Maine. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Maine's economy is shaped by tourism, healthcare, seafood and agriculture, and a growing remote-work population. The state offers a distinctive business environment where digital tools can bridge geographic isolation and seasonal demand.",
+    ],
+    marketContext: [
+      "The Maine business landscape includes healthcare systems, tourism and hospitality, fishing and aquaculture, outdoor recreation, and a growing number of technology and creative professionals drawn to the state. Portland is the primary urban center and commercial hub.",
+      "Maine-based businesses often need digital solutions that serve both residents and seasonal visitors. StackSpacer builds systems that are accessible, efficient, and designed for the realities of running a business in a seasonal and geographically dispersed market.",
+    ],
+    majorCities: ["Portland", "Bangor", "Augusta", "Lewiston", "South Portland"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Maine?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Maine, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Maine?", answer: "StackSpacer works with tourism and hospitality, healthcare, seafood and agriculture, outdoor recreation, and professional services across Maine." },
+      { question: "Can StackSpacer build systems for Maine's tourism industry?", answer: "Yes. StackSpacer builds booking platforms, visitor information systems, and seasonal business management tools for Maine's tourism sector." },
+      { question: "How does StackSpacer support Maine healthcare providers?", answer: "StackSpacer builds patient portals, telehealth platforms, and scheduling systems for Maine's hospitals and clinical practices." },
+    ],
+    relatedInsights: ["react-native-vs-flutter", "what-nextjs-production-ready"],
+    relatedProjects: ["mobile-app-dashboard", "business-website-system"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Websites and booking platforms for Maine's tourism, healthcare, and service businesses." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for outdoor recreation, tourism services, and healthcare access in Maine." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for seasonal staffing, guest communication, and operational workflows in Maine." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Demand forecasting and seasonal planning models for Maine's tourism and hospitality sector." },
+    ],
+    seoTitle: "Software Development in Maine | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Maine.",
+  },
+  {
+    slug: "maryland",
+    name: "Maryland",
+    type: "state",
+    stateCode: "MD",
+    heroTitle: "Software Development in Maryland ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Maryland. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Maryland's economy is strongly influenced by its proximity to Washington, D.C., with major presence in federal contracting, biotechnology, cybersecurity, and healthcare. The state hosts NASA's Goddard Space Flight Center and numerous defense contractors.",
+    ],
+    marketContext: [
+      "The Maryland business landscape includes government contractors, biotechnology and life sciences companies, cybersecurity firms, healthcare organizations, and educational institutions. Montgomery County and Howard County form a significant biotech corridor, while Anne Arundel County hosts major defense and technology employers.",
+      "Maryland-based businesses often require technology solutions that meet federal security standards and support mission-critical operations. StackSpacer builds systems with security, reliability, and compliance as foundational requirements.",
+    ],
+    majorCities: ["Baltimore", "Germantown", "Silver Spring", "Waldorf", "Frederick"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Maryland?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Maryland, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Maryland?", answer: "StackSpacer works with government contracting, biotechnology, cybersecurity, healthcare, and education across Maryland." },
+      { question: "Can StackSpacer build systems that meet federal security requirements?", answer: "Yes. StackSpacer builds systems following federal security best practices. Projects involving government contracts are scoped to meet applicable compliance requirements during discovery." },
+      { question: "How does StackSpacer support Maryland's biotechnology sector?", answer: "StackSpacer builds data management platforms, research collaboration tools, and web portals for Maryland's biotech and life sciences companies." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Maryland's government contractors, biotech, and healthcare companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations and secure communications in Maryland's defense and biotech sectors." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for research workflows, data processing, and operational efficiency in Maryland." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models for biomedical research, cybersecurity threat detection, and operational analytics." },
+    ],
+    seoTitle: "Software Development in Maryland | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Maryland.",
+  },
+  {
+    slug: "massachusetts",
+    name: "Massachusetts",
+    type: "state",
+    stateCode: "MA",
+    heroTitle: "Software Development in Massachusetts ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Massachusetts. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Massachusetts is home to one of the world's most concentrated technology and biotechnology ecosystems. Boston and Cambridge anchor a dense network of universities, research hospitals, biotech companies, and technology firms.",
+    ],
+    marketContext: [
+      "The Massachusetts business landscape is dominated by biotechnology and life sciences, higher education, healthcare, financial services, and technology. The Route 128 corridor and Innovation District in Boston are global centers for biomedical innovation. The state is also home to major financial services companies and a thriving venture-backed startup scene.",
+      "Massachusetts-based organizations expect the highest technical standards. StackSpacer builds systems that meet those expectations with attention to architecture, testing, documentation, and long-term maintainability.",
+    ],
+    majorCities: ["Boston", "Cambridge", "Worcester", "Springfield", "Lowell"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Massachusetts?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Massachusetts, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Massachusetts?", answer: "StackSpacer works with biotechnology, healthcare, higher education, financial services, and technology companies across Massachusetts." },
+      { question: "Can StackSpacer build systems for Massachusetts biotech companies?", answer: "Yes. StackSpacer builds data management platforms, research collaboration tools, and clinical trial management systems for Massachusetts biotech and life sciences companies." },
+      { question: "How does StackSpacer meet the technical bar in Massachusetts?", answer: "StackSpacer follows rigorous development standards including code review, automated testing, and comprehensive documentation standards expected by Massachusetts' technically sophisticated client base." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "rag-vs-ai-agents", "when-ai-automation-makes-sense"],
+    relatedProjects: ["ai-automation-suite", "ml-prediction-system", "developer-portfolio"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms and research portals for Massachusetts biotech, education, and technology companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for healthcare, research, and enterprise use across Massachusetts." },
+      { service: "AI Automation", slug: "ai-automation", desc: "AI tools and automation for research workflows, clinical operations, and data processing in Massachusetts." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "ML models for biomedical research, drug discovery support, and healthcare analytics in Massachusetts." },
+    ],
+    seoTitle: "Software Development in Massachusetts | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Massachusetts.",
+  },
+  {
+    slug: "michigan",
+    name: "Michigan",
+    type: "state",
+    stateCode: "MI",
+    heroTitle: "Software Development in Michigan ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Michigan. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Michigan's economy is historically rooted in automotive manufacturing but has diversified significantly. The state is now a center for mobility technology, advanced manufacturing, healthcare, and a growing startup ecosystem in Detroit and Ann Arbor.",
+    ],
+    marketContext: [
+      "The Michigan business landscape includes automotive and mobility companies, advanced manufacturing, healthcare systems, higher education, and a revitalizing technology sector in Detroit. Ann Arbor hosts University of Michigan research and a growing cleantech and autonomous vehicle ecosystem. Grand Rapids anchors furniture, healthcare, and brewing industry innovation.",
+      "Michigan businesses value engineers who understand both legacy systems and emerging technology. StackSpacer builds solutions that respect manufacturing heritage while enabling digital innovation.",
+    ],
+    majorCities: ["Detroit", "Grand Rapids", "Ann Arbor", "Lansing", "Dearborn"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Michigan?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Michigan, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Michigan?", answer: "StackSpacer works with automotive and mobility, advanced manufacturing, healthcare, education, and technology across Michigan." },
+      { question: "Can StackSpacer build systems for Michigan's automotive industry?", answer: "Yes. StackSpacer builds software for mobility companies, autonomous vehicle teams, and automotive suppliers across Michigan's evolving transportation sector." },
+      { question: "How does StackSpacer support Michigan's manufacturing sector?", answer: "StackSpacer builds operational dashboards, quality control systems, and supply chain platforms for Michigan manufacturers." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Michigan's automotive, manufacturing, and healthcare sectors." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for fleet management, quality control, and mobility services in Michigan." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for production lines, supply chain, and customer service in Michigan manufacturing." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for manufacturing quality, autonomous vehicle testing, and operational analytics." },
+    ],
+    seoTitle: "Software Development in Michigan | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Michigan.",
+  },
+  {
+    slug: "minnesota",
+    name: "Minnesota",
+    type: "state",
+    stateCode: "MN",
+    heroTitle: "Software Development in Minnesota ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Minnesota. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Minnesota has a strong and diversified economy anchored by healthcare, retail, agriculture, and technology. Minneapolis and St. Paul form the Twin Cities metro, home to numerous Fortune 500 companies and a thriving startup community.",
+    ],
+    marketContext: [
+      "The Minnesota business landscape includes major healthcare systems, retail and e-commerce companies, agricultural technology, financial services, and a growing technology sector. Target Corporation, Best Buy, 3M, and UnitedHealth Group are headquartered in the state, driving demand for digital transformation across industries.",
+      "Minnesota-based businesses value practical, people-centered technology solutions. StackSpacer builds systems that are reliable, intuitive, and designed to serve both employees and customers effectively.",
+    ],
+    majorCities: ["Minneapolis", "St. Paul", "Rochester", "Duluth", "Bloomington"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Minnesota?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Minnesota, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Minnesota?", answer: "StackSpacer works with healthcare, retail and e-commerce, agriculture, financial services, and technology across Minnesota." },
+      { question: "Can StackSpacer build systems for Minnesota's healthcare sector?", answer: "Yes. StackSpacer builds patient portals, scheduling systems, and data dashboards for Minnesota's major healthcare systems and clinical networks." },
+      { question: "How does StackSpacer support Minnesota's retail and e-commerce companies?", answer: "StackSpacer builds e-commerce platforms, inventory management systems, and customer experience tools for Minnesota's retail sector." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Minnesota's healthcare, retail, and technology companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for patient access, retail loyalty, and field operations in Minnesota." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for customer service, scheduling, and operational workflows in Minnesota." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for patient outcomes, retail demand, and operational analytics in Minnesota." },
+    ],
+    seoTitle: "Software Development in Minnesota | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Minnesota.",
+  },
+  {
+    slug: "mississippi",
+    name: "Mississippi",
+    type: "state",
+    stateCode: "MS",
+    heroTitle: "Software Development in Mississippi ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Mississippi. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Mississippi's economy includes healthcare, manufacturing, agriculture, and a growing technology sector. Jackson serves as the state capital and primary business center, while the coastal area supports logistics and tourism.",
+    ],
+    marketContext: [
+      "The Mississippi business landscape includes healthcare systems, manufacturing and industrial companies, agriculture and seafood production, logistics and transportation, and a developing technology sector. The state's Gulf Coast provides significant maritime commerce activity, while inland regions are anchored by agriculture and light manufacturing.",
+      "Mississippi businesses often value straightforward, practical technology partnerships. StackSpacer builds systems that are functional, affordable, and designed to deliver real operational improvement.",
+    ],
+    majorCities: ["Jackson", "Gulfport", "Biloxi", "Hattiesburg", "Tupelo"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Mississippi?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Mississippi, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Mississippi?", answer: "StackSpacer works with healthcare, manufacturing, agriculture, logistics, and professional services across Mississippi." },
+      { question: "Can StackSpacer build systems for Mississippi healthcare providers?", answer: "Yes. StackSpacer builds patient portals, telehealth platforms, and scheduling systems for Mississippi hospitals and clinics." },
+      { question: "How does StackSpacer support Mississippi's manufacturing sector?", answer: "StackSpacer builds operational dashboards, equipment monitoring systems, and supply chain platforms for Mississippi manufacturers." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Mississippi healthcare, manufacturing, and service businesses." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations, healthcare access, and logistics in Mississippi." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for operational workflows, patient scheduling, and customer service in Mississippi." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for manufacturing analytics, healthcare outcomes, and operational efficiency." },
+    ],
+    seoTitle: "Software Development in Mississippi | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Mississippi.",
+  },
+  {
+    slug: "missouri",
+    name: "Missouri",
+    type: "state",
+    stateCode: "MO",
+    heroTitle: "Software Development in Missouri ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Missouri. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Missouri has a diverse economy spanning healthcare, aviation, logistics, agriculture, and technology. Kansas City and St. Louis are the state's primary commercial centers, each with distinct industry strengths.",
+    ],
+    marketContext: [
+      "The Missouri business landscape includes healthcare systems, aviation and aerospace manufacturing, logistics and distribution, agriculture and food processing, and a growing startup ecosystem. Kansas City is a major logistics and communications hub, while St. Louis anchors healthcare and brewing industry innovation.",
+      "Missouri businesses value practical technology solutions that deliver measurable results. StackSpacer builds systems that are reliable, cost-effective, and aligned with each client's operational goals.",
+    ],
+    majorCities: ["Kansas City", "St. Louis", "Springfield", "Columbia", "Independence"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Missouri?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Missouri, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Missouri?", answer: "StackSpacer works with healthcare, aviation, logistics, agriculture, and technology across Missouri." },
+      { question: "Can StackSpacer build systems for Missouri's aviation sector?", answer: "Yes. StackSpacer builds operational platforms and data systems for Boeing and other aviation companies in the St. Louis area." },
+      { question: "How does StackSpacer support Missouri logistics companies?", answer: "StackSpacer builds warehouse management systems, shipment tracking platforms, and distribution optimization tools for Missouri's logistics sector." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Missouri's healthcare, aviation, and logistics companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for logistics tracking, field operations, and healthcare access in Missouri." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for distribution workflows, patient scheduling, and operational efficiency in Missouri." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for supply chain optimization, aviation maintenance, and healthcare analytics." },
+    ],
+    seoTitle: "Software Development in Missouri | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Missouri.",
+  },
+  {
+    slug: "montana",
+    name: "Montana",
+    type: "state",
+    stateCode: "MT",
+    heroTitle: "Software Development in Montana ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Montana. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Montana's economy is shaped by tourism, agriculture, energy, and healthcare. The state's natural beauty drives a significant tourism sector, while rural communities rely on healthcare access and agricultural technology.",
+    ],
+    marketContext: [
+      "The Montana business landscape includes tourism and outdoor recreation, agriculture and ranching, energy production, healthcare providers, and a growing remote-work population. Glacier National Park and Yellowstone's gateway communities drive seasonal tourism, while Missoula and Bozeman attract technology and creative professionals.",
+      "Montana businesses often need solutions that work in areas with limited connectivity and serve both year-round residents and seasonal visitors. StackSpacer builds systems that are lightweight, resilient, and accessible.",
+    ],
+    majorCities: ["Billings", "Missoula", "Great Falls", "Bozeman", "Butte"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Montana?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Montana, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Montana?", answer: "StackSpacer works with tourism, agriculture, energy, healthcare, and outdoor recreation across Montana." },
+      { question: "Can StackSpacer build systems for Montana's tourism industry?", answer: "Yes. StackSpacer builds booking platforms, visitor information systems, and seasonal business tools for Montana's tourism sector." },
+      { question: "How does StackSpacer support Montana healthcare providers?", answer: "StackSpacer builds telehealth platforms, patient portals, and scheduling systems for Montana's rural and regional healthcare providers." },
+    ],
+    relatedInsights: ["react-native-vs-flutter", "what-nextjs-production-ready"],
+    relatedProjects: ["mobile-app-dashboard", "business-website-system"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Websites and booking platforms for Montana tourism, agriculture, and service businesses." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for outdoor recreation, telehealth access, and tourism services in Montana." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for seasonal operations, guest communication, and healthcare scheduling in Montana." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Demand forecasting and seasonal planning models for Montana's tourism and agriculture sectors." },
+    ],
+    seoTitle: "Software Development in Montana | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Montana.",
+  },
+  {
+    slug: "nebraska",
+    name: "Nebraska",
+    type: "state",
+    stateCode: "NE",
+    heroTitle: "Software Development in Nebraska ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Nebraska. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Nebraska's economy is anchored by agriculture, logistics, insurance, and healthcare. Omaha serves as a major insurance and logistics hub, while Lincoln anchors state government and education.",
+    ],
+    marketContext: [
+      "The Nebraska business landscape includes agricultural technology, insurance and financial services, logistics and transportation, healthcare systems, and manufacturing. UPS and Werner Enterprises have major operations in the state, and Nebraska is home to one of the largest insurance industry workforces in the country.",
+      "Nebraska businesses value dependability and practicality. StackSpacer builds systems that are straightforward, reliable, and designed to improve day-to-day operations.",
+    ],
+    majorCities: ["Omaha", "Lincoln", "Bellevue", "Grand Island", "Kearney"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Nebraska?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Nebraska, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Nebraska?", answer: "StackSpacer works with agriculture, logistics, insurance, healthcare, and manufacturing across Nebraska." },
+      { question: "Can StackSpacer build systems for Nebraska's logistics companies?", answer: "Yes. StackSpacer builds fleet management platforms, shipment tracking systems, and warehouse management tools for Nebraska's logistics sector." },
+      { question: "How does StackSpacer support Nebraska agriculture businesses?", answer: "StackSpacer builds precision agriculture tools, supply chain platforms, and farm management systems for Nebraska's agricultural sector." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Nebraska's agriculture, logistics, and insurance companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for fleet tracking, field operations, and logistics management in Nebraska." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for logistics workflows, insurance processing, and agricultural operations in Nebraska." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for crop yields, freight routing, and operational analytics in Nebraska." },
+    ],
+    seoTitle: "Software Development in Nebraska | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Nebraska.",
+  },
+  {
+    slug: "nevada",
+    name: "Nevada",
+    type: "state",
+    stateCode: "NV",
+    heroTitle: "Software Development in Nevada ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Nevada. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Nevada's economy is dominated by hospitality and tourism, with Las Vegas serving as the global entertainment and convention capital. Reno and the northern part of the state have growing technology and manufacturing sectors.",
+    ],
+    marketContext: [
+      "The Nevada business landscape includes casinos and hospitality, convention and event management, logistics and warehousing, technology companies, and healthcare. Las Vegas drives the majority of tourism revenue, while Reno anchors gaming, manufacturing, and emerging tech companies. Nevada is also a growing hub for data centers and semiconductor manufacturing.",
+      "Nevada businesses need digital solutions that handle massive scale during events and conventions, serve international audiences, and support both consumer and enterprise operations.",
+    ],
+    majorCities: ["Las Vegas", "Henderson", "Reno", "North Las Vegas", "Sparks"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Nevada?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Nevada, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Nevada?", answer: "StackSpacer works with hospitality and gaming, logistics, technology, healthcare, and retail across Nevada." },
+      { question: "Can StackSpacer build systems for Nevada's hospitality industry?", answer: "Yes. StackSpacer builds booking platforms, guest experience systems, and operational dashboards for Nevada's hospitality and gaming companies." },
+      { question: "How does StackSpacer support Nevada's growing technology sector?", answer: "StackSpacer builds web applications, data platforms, and automation tools for Nevada's technology companies and data center operators." },
+    ],
+    relatedInsights: ["react-native-vs-flutter", "what-nextjs-production-ready"],
+    relatedProjects: ["mobile-app-dashboard", "business-website-system"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Nevada's hospitality, gaming, and logistics companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for guest services, loyalty programs, and event management in Nevada." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for guest communication, operations, and customer service in Nevada hospitality." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Demand forecasting, dynamic pricing, and operational analytics for Nevada's hospitality sector." },
+    ],
+    seoTitle: "Software Development in Nevada | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Nevada.",
+  },
+  {
+    slug: "new-hampshire",
+    name: "New Hampshire",
+    type: "state",
+    stateCode: "NH",
+    heroTitle: "Software Development in New Hampshire ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across New Hampshire. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "New Hampshire's economy includes healthcare, education, manufacturing, and a growing technology sector. The state's proximity to Boston and its business-friendly environment attract companies seeking a quieter base with access to talent.",
+    ],
+    marketContext: [
+      "The New Hampshire business landscape includes major healthcare systems, pharmaceutical companies, advanced manufacturing, insurance firms, and technology startups. Manchester and Nashua form the state's primary commercial corridor, while Concord serves as the state capital and government center.",
+      "New Hampshire businesses value discretion, reliability, and long-term partnerships. StackSpacer builds systems that reflect these qualities with focus on security, performance, and maintainability.",
+    ],
+    majorCities: ["Manchester", "Nashua", "Concord", "Derry", "Rochester"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in New Hampshire?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across New Hampshire, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in New Hampshire?", answer: "StackSpacer works with healthcare, education, manufacturing, insurance, and technology across New Hampshire." },
+      { question: "Can StackSpacer build systems for New Hampshire's healthcare providers?", answer: "Yes. StackSpacer builds patient portals, telehealth platforms, and scheduling systems for New Hampshire hospitals and clinical networks." },
+      { question: "How does StackSpacer support New Hampshire's manufacturing sector?", answer: "StackSpacer builds operational dashboards, quality management systems, and supply chain platforms for New Hampshire manufacturers." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for New Hampshire healthcare, manufacturing, and service companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for patient access and field operations in New Hampshire businesses." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for healthcare workflows, manufacturing operations, and customer service in New Hampshire." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for operational efficiency and healthcare analytics in New Hampshire." },
+    ],
+    seoTitle: "Software Development in New Hampshire | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across New Hampshire.",
+  },
+  {
+    slug: "new-jersey",
+    name: "New Jersey",
+    type: "state",
+    stateCode: "NJ",
+    heroTitle: "Software Development in New Jersey ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across New Jersey. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "New Jersey's economy is anchored by pharmaceuticals, financial services, logistics, and telecommunications. The state's location between New York City and Philadelphia gives it access to major markets while offering a distinct business environment.",
+    ],
+    marketContext: [
+      "The New Jersey business landscape includes pharmaceutical and biotechnology companies, financial services firms, logistics and distribution centers, telecommunications providers, and a growing technology sector. Newark and Princeton are major employment centers, and the state's port system is one of the busiest on the East Coast.",
+      "New Jersey businesses often require technology solutions that meet strict regulatory standards and support complex operations. StackSpacer builds systems with compliance, security, and scalability as core principles.",
+    ],
+    majorCities: ["Newark", "Jersey City", "Paterson", "Elizabeth", "Trenton"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in New Jersey?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across New Jersey, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in New Jersey?", answer: "StackSpacer works with pharmaceuticals, financial services, logistics, telecommunications, and technology across New Jersey." },
+      { question: "Can StackSpacer build systems for New Jersey's pharmaceutical companies?", answer: "Yes. StackSpacer builds clinical trial management platforms, compliance tracking systems, and data management tools for New Jersey's pharmaceutical and biotech sector." },
+      { question: "How does StackSpacer support New Jersey's logistics and distribution sector?", answer: "StackSpacer builds warehouse management systems, shipment tracking platforms, and supply chain optimization tools for New Jersey logistics companies." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for New Jersey pharmaceuticals, finance, and logistics companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations and supply chain management in New Jersey." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for clinical workflows, compliance tracking, and logistics operations in New Jersey." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models for drug discovery support, risk analytics, and supply chain optimization in New Jersey." },
+    ],
+    seoTitle: "Software Development in New Jersey | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across New Jersey.",
+  },
+  {
+    slug: "new-mexico",
+    name: "New Mexico",
+    type: "state",
+    stateCode: "NM",
+    heroTitle: "Software Development in New Mexico ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across New Mexico. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "New Mexico's economy includes energy, healthcare, tourism, aerospace, and a growing technology sector. The state's federal research laboratories and military installations drive significant technical employment.",
+    ],
+    marketContext: [
+      "The New Mexico business landscape includes energy production, healthcare systems, tourism and hospitality, aerospace and defense contractors, and technology companies. Albuquerque and Santa Fe are the state's primary urban centers, while Los Alamos and Sandia host major federal research facilities.",
+      "New Mexico businesses often need technology solutions that work across dispersed populations and support both government and private sector operations. StackSpacer builds systems that are secure, reliable, and designed for the state's unique geography.",
+    ],
+    majorCities: ["Albuquerque", "Santa Fe", "Las Cruces", "Rio Rancho", "Roswell"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in New Mexico?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across New Mexico, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in New Mexico?", answer: "StackSpacer works with energy, healthcare, tourism, aerospace, and technology across New Mexico." },
+      { question: "Can StackSpacer build systems for New Mexico's energy sector?", answer: "Yes. StackSpacer builds operational dashboards, monitoring systems, and data platforms for New Mexico's energy and utilities companies." },
+      { question: "How does StackSpacer support New Mexico's aerospace and defense sector?", answer: "StackSpacer builds data management systems, collaboration platforms, and operational tools for New Mexico's aerospace and defense contractors." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for New Mexico's energy, healthcare, and tourism sectors." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations and remote workforce management in New Mexico." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for energy operations, patient scheduling, and tourism workflows in New Mexico." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models for energy forecasting, healthcare analytics, and operational efficiency in New Mexico." },
+    ],
+    seoTitle: "Software Development in New Mexico | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across New Mexico.",
+  },
+  {
+    slug: "new-york",
+    name: "New York",
+    type: "state",
+    stateCode: "NY",
+    heroTitle: "Software Development in New York ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across New York. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "New York State has one of the largest and most diversified economies in the United States. New York City anchors global finance, media, and technology, while upstate New York supports manufacturing, agriculture, healthcare, and education.",
+    ],
+    marketContext: [
+      "The New York business landscape includes financial services, media and entertainment, healthcare systems, higher education, advanced manufacturing, and technology. Beyond NYC, Rochester, Buffalo, Albany, and Syracuse each serve as regional economic centers with distinct industry profiles.",
+      "New York-based businesses range from global enterprises to small companies and startups. StackSpacer serves organizations of all sizes across the state with solutions scaled to each client's needs and ambitions.",
+    ],
+    majorCities: ["New York City", "Buffalo", "Rochester", "Albany", "Syracuse", "Yonkers"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in New York?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across New York State, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in New York?", answer: "StackSpacer works with financial services, media, healthcare, education, manufacturing, and technology across New York State." },
+      { question: "Can StackSpacer build systems for New York's financial services sector?", answer: "Yes. StackSpacer builds web platforms, data dashboards, and automation tools for banks, insurance companies, and fintech firms across New York." },
+      { question: "How does StackSpacer support upstate New York businesses?", answer: "StackSpacer serves manufacturing, healthcare, agriculture, and technology companies throughout upstate New York with practical digital solutions." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense", "rag-vs-ai-agents"],
+    relatedProjects: ["business-website-system", "ai-automation-suite", "ml-prediction-system"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms and dashboards for New York financial services, media, and technology companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for enterprise operations and client services across New York businesses." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for financial workflows, media production, and operational efficiency in New York." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models and data analytics for finance, healthcare, and business operations in New York." },
+    ],
+    seoTitle: "Software Development in New York | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across New York.",
+  },
+  {
+    slug: "north-carolina",
+    name: "North Carolina",
+    type: "state",
+    stateCode: "NC",
+    heroTitle: "Software Development in North Carolina ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across North Carolina. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "North Carolina has a rapidly growing economy anchored by the Research Triangle, major healthcare systems, financial services, and a diversifying technology sector. The state attracts companies with its combination of talent, lower costs, and quality of life.",
+    ],
+    marketContext: [
+      "The North Carolina business landscape includes biotechnology and life sciences, banking and financial services, healthcare systems, advanced manufacturing, and technology companies. Raleigh, Durham, and Chapel Hill form the Research Triangle Park region, one of the largest research parks in the United States.",
+      "North Carolina businesses value innovation paired with practical execution. StackSpacer builds systems that support both the cutting-edge research ecosystem and the traditional industries that continue to drive the state's economy.",
+    ],
+    majorCities: ["Charlotte", "Raleigh", "Durham", "Greensboro", "Asheville"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in North Carolina?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across North Carolina, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in North Carolina?", answer: "StackSpacer works with biotechnology, banking, healthcare, advanced manufacturing, and technology across North Carolina." },
+      { question: "Can StackSpacer build systems for North Carolina's biotech and life sciences sector?", answer: "Yes. StackSpacer builds data management platforms, research collaboration tools, and clinical operations systems for North Carolina's biotech companies." },
+      { question: "How does StackSpacer support North Carolina's financial services sector?", answer: "StackSpacer builds web platforms, data dashboards, and automation tools for banks and fintech companies across North Carolina." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for North Carolina biotech, finance, and healthcare companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for research operations, patient access, and enterprise use in North Carolina." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for clinical workflows, banking operations, and manufacturing efficiency in North Carolina." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models for biomedical research, financial analytics, and operational intelligence in North Carolina." },
+    ],
+    seoTitle: "Software Development in North Carolina | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across North Carolina.",
+  },
+  {
+    slug: "north-dakota",
+    name: "North Dakota",
+    type: "state",
+    stateCode: "ND",
+    heroTitle: "Software Development in North Dakota ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across North Dakota. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "North Dakota's economy is shaped by energy production, agriculture, and healthcare. The Bakken oil field revolution transformed the state's economy, and agriculture remains a fundamental pillar alongside growing technology adoption.",
+    ],
+    marketContext: [
+      "The North Dakota business landscape includes energy and petroleum, agriculture and food processing, healthcare systems, logistics, and a growing number of technology companies. Bismarck and Fargo are the state's primary commercial centers.",
+      "North Dakota businesses value straightforward, effective technology solutions. StackSpacer builds systems that are reliable, practical, and designed to improve operations in the state's resource-driven economy.",
+    ],
+    majorCities: ["Fargo", "Bismarck", "Grand Forks", "Minot", "West Fargo"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in North Dakota?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across North Dakota, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in North Dakota?", answer: "StackSpacer works with energy, agriculture, healthcare, logistics, and professional services across North Dakota." },
+      { question: "Can StackSpacer build systems for North Dakota's energy sector?", answer: "Yes. StackSpacer builds operational dashboards, monitoring systems, and data platforms for North Dakota's energy and petroleum companies." },
+      { question: "How does StackSpacer support North Dakota agriculture businesses?", answer: "StackSpacer builds precision agriculture tools, supply chain platforms, and farm management systems for North Dakota's agricultural sector." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for North Dakota's energy, agriculture, and healthcare sectors." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations, equipment monitoring, and logistics in North Dakota." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for energy operations, agricultural workflows, and healthcare scheduling in North Dakota." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for energy production, crop yields, and operational analytics in North Dakota." },
+    ],
+    seoTitle: "Software Development in North Dakota | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across North Dakota.",
+  },
+  {
+    slug: "ohio",
+    name: "Ohio",
+    type: "state",
+    stateCode: "OH",
+    heroTitle: "Software Development in Ohio ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Ohio. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Ohio has a diversified economy spanning manufacturing, healthcare, logistics, agriculture, and technology. The state is home to major automotive, insurance, and retail companies, along with a growing number of technology startups.",
+    ],
+    marketContext: [
+      "The Ohio business landscape includes advanced manufacturing, healthcare systems, insurance and financial services, logistics and distribution, and technology companies. Columbus, Cleveland, Cincinnati, and Toledo each serve as regional economic hubs with distinct industry concentrations.",
+      "Ohio businesses value dependable technology partners who understand both traditional industries and emerging sectors. StackSpacer builds systems that support Ohio's manufacturing heritage while enabling digital innovation.",
+    ],
+    majorCities: ["Columbus", "Cleveland", "Cincinnati", "Toledo", "Akron"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Ohio?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Ohio, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Ohio?", answer: "StackSpacer works with manufacturing, healthcare, logistics, insurance, and technology across Ohio." },
+      { question: "Can StackSpacer build systems for Ohio's manufacturing sector?", answer: "Yes. StackSpacer builds operational dashboards, quality management systems, and supply chain platforms for Ohio manufacturers." },
+      { question: "How does StackSpacer support Ohio healthcare organizations?", answer: "StackSpacer builds patient portals, scheduling systems, and data dashboards for Ohio hospitals and healthcare networks." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Ohio manufacturing, healthcare, and logistics companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations, quality control, and healthcare access in Ohio." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for manufacturing workflows, patient scheduling, and logistics optimization in Ohio." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for equipment maintenance, healthcare outcomes, and supply chain optimization in Ohio." },
+    ],
+    seoTitle: "Software Development in Ohio | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Ohio.",
+  },
+  {
+    slug: "oklahoma",
+    name: "Oklahoma",
+    type: "state",
+    stateCode: "OK",
+    heroTitle: "Software Development in Oklahoma ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Oklahoma. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Oklahoma's economy is anchored by energy, aviation, agriculture, and healthcare. The state has a growing technology sector, particularly in OKC and Tulsa, with strengths in aerospace and renewable energy.",
+    ],
+    marketContext: [
+      "The Oklahoma business landscape includes energy and petroleum, aerospace and aviation manufacturing, agriculture and food processing, healthcare systems, and a growing technology sector. Oklahoma City and Tulsa are the state's primary commercial centers.",
+      "Oklahoma businesses value practical technology solutions that deliver results. StackSpacer builds systems that are functional, reliable, and designed to support both traditional industries and emerging sectors.",
+    ],
+    majorCities: ["Oklahoma City", "Tulsa", "Norman", "Broken Arrow", "Lawton"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Oklahoma?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Oklahoma, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Oklahoma?", answer: "StackSpacer works with energy, aviation, agriculture, healthcare, and technology across Oklahoma." },
+      { question: "Can StackSpacer build systems for Oklahoma's aviation sector?", answer: "Yes. StackSpacer builds operational platforms, parts tracking systems, and maintenance management tools for Oklahoma's aerospace and aviation companies." },
+      { question: "How does StackSpacer support Oklahoma's energy sector?", answer: "StackSpacer builds monitoring dashboards, data platforms, and operational tools for Oklahoma's energy and petroleum companies." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Oklahoma's energy, aviation, and healthcare sectors." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations, aviation maintenance, and healthcare access in Oklahoma." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for energy operations, aviation workflows, and healthcare scheduling in Oklahoma." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for equipment maintenance, energy production, and operational analytics in Oklahoma." },
+    ],
+    seoTitle: "Software Development in Oklahoma | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Oklahoma.",
+  },
+  {
+    slug: "oregon",
+    name: "Oregon",
+    type: "state",
+    stateCode: "OR",
+    heroTitle: "Software Development in Oregon ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Oregon. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Oregon has a diverse economy spanning technology, manufacturing, agriculture, healthcare, and outdoor recreation. Portland is a major tech and creative hub, while the state's coastal and rural areas support tourism and agriculture.",
+    ],
+    marketContext: [
+      "The Oregon business landscape includes technology companies, outdoor recreation brands, healthcare systems, agriculture and food processing, and clean energy companies. Portland anchors the technology sector, with Nintendo of America, Intel, and numerous startups based in the area.",
+      "Oregon businesses often prioritize sustainability, user experience, and design quality. StackSpacer builds systems that align with these values clean code, thoughtful interfaces, and solutions that scale.",
+    ],
+    majorCities: ["Portland", "Salem", "Eugene", "Gresham", "Hillsboro"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Oregon?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Oregon, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Oregon?", answer: "StackSpacer works with technology, outdoor recreation, healthcare, agriculture, and clean energy across Oregon." },
+      { question: "Can StackSpacer build systems for Oregon's outdoor recreation brands?", answer: "Yes. StackSpacer builds e-commerce platforms, booking systems, and mobile apps for Oregon's outdoor and recreation companies." },
+      { question: "How does StackSpacer support Oregon's technology sector?", answer: "StackSpacer builds web applications, data platforms, and automation tools for Oregon's technology companies and startups." },
+    ],
+    relatedInsights: ["react-native-vs-flutter", "what-nextjs-production-ready"],
+    relatedProjects: ["mobile-app-dashboard", "developer-portfolio"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Oregon's technology, outdoor recreation, and healthcare companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for consumer and enterprise use across Oregon's tech and lifestyle sectors." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for customer service, operations, and creative workflows in Oregon." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models and analytics dashboards for Oregon's technology and healthcare companies." },
+    ],
+    seoTitle: "Software Development in Oregon | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Oregon.",
+  },
+  {
+    slug: "pennsylvania",
+    name: "Pennsylvania",
+    type: "state",
+    stateCode: "PA",
+    heroTitle: "Software Development in Pennsylvania ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Pennsylvania. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Pennsylvania has a diversified economy with strengths in healthcare, education, financial services, manufacturing, and technology. Philadelphia and Pittsburgh are the state's two major innovation hubs.",
+    ],
+    marketContext: [
+      "The Pennsylvania business landscape includes major healthcare systems, universities, financial services firms, advanced manufacturing, and a growing technology sector. Pittsburgh's healthcare and robotics sectors complement Philadelphia's biotech and financial services industries.",
+      "Pennsylvania businesses value reliability and practical results. StackSpacer builds systems that are well-engineered, secure, and designed for long-term operation across the state's diverse economy.",
+    ],
+    majorCities: ["Philadelphia", "Pittsburgh", "Allentown", "Erie", "Reading"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Pennsylvania?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Pennsylvania, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Pennsylvania?", answer: "StackSpacer works with healthcare, education, finance, manufacturing, and technology across Pennsylvania." },
+      { question: "Can StackSpacer build systems for Pennsylvania's healthcare sector?", answer: "Yes. StackSpacer builds patient portals, scheduling systems, and data dashboards for Pennsylvania's major healthcare systems." },
+      { question: "How does StackSpacer support Pennsylvania's manufacturing sector?", answer: "StackSpacer builds operational dashboards, quality management systems, and supply chain platforms for Pennsylvania manufacturers." },
+    ],
+    relatedInsights: ["when-ai-automation-makes-sense", "machine-learning-for-business"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Pennsylvania healthcare, finance, and manufacturing companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for patient access, field operations, and enterprise use in Pennsylvania." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for healthcare workflows, financial processing, and manufacturing operations in Pennsylvania." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for healthcare outcomes, financial risk, and manufacturing efficiency in Pennsylvania." },
+    ],
+    seoTitle: "Software Development in Pennsylvania | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Pennsylvania.",
+  },
+  {
+    slug: "rhode-island",
+    name: "Rhode Island",
+    type: "state",
+    stateCode: "RI",
+    heroTitle: "Software Development in Rhode Island ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Rhode Island. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Rhode Island's economy includes healthcare, education, tourism, financial services, and a growing technology sector. Providence anchors the state's economic activity, while the coast supports tourism and maritime industries.",
+    ],
+    marketContext: [
+      "The Rhode Island business landscape includes major healthcare systems, universities, insurance companies, tourism operators, and a small but growing technology sector. Brown University and Rhode Island Hospital are among the state's largest employers.",
+      "Rhode Island businesses value personal relationships and responsive service. StackSpacer builds systems that are reliable, well-supported, and designed to grow with each client's needs.",
+    ],
+    majorCities: ["Providence", "Warwick", "Cranston", "Pawtucket", "East Providence"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Rhode Island?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Rhode Island, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Rhode Island?", answer: "StackSpacer works with healthcare, education, tourism, insurance, and technology across Rhode Island." },
+      { question: "Can StackSpacer build systems for Rhode Island's healthcare sector?", answer: "Yes. StackSpacer builds patient portals, telehealth platforms, and scheduling systems for Rhode Island's healthcare providers." },
+      { question: "How does StackSpacer support Rhode Island tourism businesses?", answer: "StackSpacer builds booking platforms, visitor apps, and operational tools for Rhode Island's hospitality and tourism sector." },
+    ],
+    relatedInsights: ["react-native-vs-flutter", "what-nextjs-production-ready"],
+    relatedProjects: ["mobile-app-dashboard", "business-website-system"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Rhode Island healthcare, education, and tourism companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for patient access, tourism services, and enterprise use in Rhode Island." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for healthcare workflows, guest services, and administrative operations in Rhode Island." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models for healthcare analytics and tourism demand forecasting in Rhode Island." },
+    ],
+    seoTitle: "Software Development in Rhode Island | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Rhode Island.",
+  },
+  {
+    slug: "south-carolina",
+    name: "South Carolina",
+    type: "state",
+    stateCode: "SC",
+    heroTitle: "Software Development in South Carolina ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across South Carolina. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "South Carolina's economy includes manufacturing, aerospace, healthcare, tourism, and a growing technology sector. The state has attracted significant international investment, particularly in automotive and aviation manufacturing.",
+    ],
+    marketContext: [
+      "The South Carolina business landscape includes automotive manufacturing (BMW), aerospace and aviation (Boeing), healthcare systems, tourism and hospitality, and a growing number of technology companies. Charleston and Columbia are the state's primary commercial centers.",
+      "South Carolina businesses value practical technology solutions that support growth and competitiveness. StackSpacer builds systems that help South Carolina companies modernize operations and serve their markets more effectively.",
+    ],
+    majorCities: ["Charleston", "Columbia", "North Charleston", "Mount Pleasant", "Greer"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in South Carolina?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across South Carolina, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in South Carolina?", answer: "StackSpacer works with manufacturing, aerospace, healthcare, tourism, and technology across South Carolina." },
+      { question: "Can StackSpacer build systems for South Carolina's manufacturing sector?", answer: "Yes. StackSpacer builds operational dashboards, quality management systems, and supply chain platforms for South Carolina manufacturers." },
+      { question: "How does StackSpacer support South Carolina's aerospace industry?", answer: "StackSpacer builds data management systems, parts tracking platforms, and operational tools for South Carolina's aerospace and aviation companies." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for South Carolina manufacturing, aerospace, and healthcare companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations, quality control, and healthcare access in South Carolina." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for manufacturing workflows, aerospace operations, and healthcare scheduling in South Carolina." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for equipment maintenance, healthcare outcomes, and operational analytics in South Carolina." },
+    ],
+    seoTitle: "Software Development in South Carolina | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across South Carolina.",
+  },
+  {
+    slug: "south-dakota",
+    name: "South Dakota",
+    type: "state",
+    stateCode: "SD",
+    heroTitle: "Software Development in South Dakota ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across South Dakota. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "South Dakota's economy includes healthcare, agriculture, finance, tourism, and a growing technology sector. The state has become a notable destination for financial services and data center operations.",
+    ],
+    marketContext: [
+      "The South Dakota business landscape includes healthcare systems, agriculture and food processing, banking and financial services, tourism (notably Mount Rushmore and the Black Hills), and technology companies. Sioux Falls is the state's largest city and primary business center.",
+      "South Dakota businesses value straightforward, effective technology partnerships. StackSpacer builds systems that are reliable, affordable, and designed to improve operations across the state.",
+    ],
+    majorCities: ["Sioux Falls", "Rapid City", "Aberdeen", "Brookings", "Watertown"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in South Dakota?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across South Dakota, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in South Dakota?", answer: "StackSpacer works with healthcare, agriculture, finance, tourism, and technology across South Dakota." },
+      { question: "Can StackSpacer build systems for South Dakota's healthcare sector?", answer: "Yes. StackSpacer builds patient portals, telehealth platforms, and scheduling systems for South Dakota healthcare providers." },
+      { question: "How does StackSpacer support South Dakota agriculture businesses?", answer: "StackSpacer builds precision agriculture tools, supply chain platforms, and farm management systems for South Dakota's agricultural sector." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for South Dakota healthcare, agriculture, and finance companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for patient access, field operations, and tourism services in South Dakota." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for healthcare workflows, agricultural operations, and tourism management in South Dakota." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for crop yields, healthcare outcomes, and operational analytics in South Dakota." },
+    ],
+    seoTitle: "Software Development in South Dakota | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across South Dakota.",
+  },
+  {
+    slug: "tennessee",
+    name: "Tennessee",
+    type: "state",
+    stateCode: "TN",
+    heroTitle: "Software Development in Tennessee ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Tennessee. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Tennessee's economy spans healthcare, music and entertainment, logistics, manufacturing, and tourism. Nashville and Memphis are the state's primary commercial centers, each with distinct industry strengths.",
+    ],
+    marketContext: [
+      "The Tennessee business landscape includes healthcare systems, music and entertainment companies, logistics and distribution (Amazon, FedEx), automotive manufacturing, and a growing technology sector. Nashville is a major healthcare and music industry hub, while Memphis anchors global logistics operations.",
+      "Tennessee businesses value practical technology solutions that deliver measurable results. StackSpacer builds systems that support Tennessee's diverse economy from healthcare to logistics to creative industries.",
+    ],
+    majorCities: ["Nashville", "Memphis", "Knoxville", "Chattanooga", "Clarksville"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Tennessee?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Tennessee, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Tennessee?", answer: "StackSpacer works with healthcare, music and entertainment, logistics, manufacturing, and technology across Tennessee." },
+      { question: "Can StackSpacer build systems for Tennessee's music and entertainment industry?", answer: "Yes. StackSpacer builds artist management platforms, ticketing systems, and audience engagement tools for Tennessee's entertainment sector." },
+      { question: "How does StackSpacer support Tennessee's logistics sector?", answer: "StackSpacer builds warehouse management systems, shipment tracking platforms, and routing optimization tools for Tennessee's logistics companies." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Tennessee healthcare, entertainment, and logistics companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for patient access, event management, and logistics operations in Tennessee." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for healthcare workflows, creative production, and distribution operations in Tennessee." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for healthcare outcomes, event attendance, and supply chain optimization in Tennessee." },
+    ],
+    seoTitle: "Software Development in Tennessee | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Tennessee.",
+  },
+  {
+    slug: "texas",
+    name: "Texas",
+    type: "state",
+    stateCode: "TX",
+    heroTitle: "Software Development in Texas ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Texas. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Texas has the second-largest economy in the United States, with strengths in energy, technology, healthcare, finance, and aerospace. Major metros including Houston, Dallas, Austin, San Antonio, and El Paso each contribute uniquely to the state's economic diversity.",
+    ],
+    marketContext: [
+      "The Texas business ecosystem includes energy companies, technology firms, healthcare systems, financial services, aerospace and defense contractors, and a rapidly growing startup scene. Austin has become a major tech hub, while Houston anchors energy and healthcare innovation. Dallas-Fort Worth is a center for finance and telecommunications.",
+      "Texas-based businesses range from energy giants to fast-growing startups. StackSpacer serves organizations of all sizes with solutions that are practical, scalable, and built for the pace of Texas business.",
+    ],
+    majorCities: ["Houston", "Dallas", "Austin", "San Antonio", "Fort Worth", "El Paso"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Texas?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Texas, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Texas?", answer: "StackSpacer works with energy, technology, healthcare, finance, aerospace, and professional services across Texas." },
+      { question: "Can StackSpacer build systems for Texas energy companies?", answer: "Yes. StackSpacer builds operational dashboards, data platforms, and automation tools for Texas energy and petroleum companies." },
+      { question: "How does StackSpacer support Texas technology companies?", answer: "StackSpacer builds web applications, mobile apps, and AI automation systems for Texas technology startups and enterprise companies." },
+    ],
+    relatedInsights: ["when-ai-automation-makes-sense", "machine-learning-for-business", "what-nextjs-production-ready"],
+    relatedProjects: ["ai-automation-suite", "ml-prediction-system", "business-website-system"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Texas energy, technology, and healthcare companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations, enterprise use, and consumer services across Texas." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for energy operations, tech workflows, and healthcare scheduling in Texas." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for energy production, tech analytics, and healthcare outcomes in Texas." },
+    ],
+    seoTitle: "Software Development in Texas | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Texas.",
+  },
+  {
+    slug: "utah",
+    name: "Utah",
+    type: "state",
+    stateCode: "UT",
+    heroTitle: "Software Development in Utah ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Utah. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Utah has one of the fastest-growing technology sectors in the United States, anchored by Salt Lake City and the Silicon Slopes corridor. The state also has strong presence in healthcare, outdoor recreation, and professional services.",
+    ],
+    marketContext: [
+      "The Utah business landscape includes technology companies, healthcare systems, outdoor recreation brands, financial services, and education. Salt Lake City and Provo form the core of Utah's tech ecosystem, with companies spanning SaaS, fintech, and health tech.",
+      "Utah businesses value hard work, innovation, and practical results. StackSpacer builds systems that match Utah's entrepreneurial energy with professional-grade execution.",
+    ],
+    majorCities: ["Salt Lake City", "Provo", "West Valley City", "Ogden", "Park City"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Utah?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Utah, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Utah?", answer: "StackSpacer works with technology, healthcare, outdoor recreation, financial services, and education across Utah." },
+      { question: "Can StackSpacer build systems for Utah's technology sector?", answer: "Yes. StackSpacer builds web applications, data platforms, and automation tools for Utah's technology companies and startups." },
+      { question: "How does StackSpacer support Utah outdoor recreation brands?", answer: "StackSpacer builds e-commerce platforms, booking systems, and mobile apps for Utah's outdoor recreation and tourism companies." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "rag-vs-ai-agents"],
+    relatedProjects: ["developer-portfolio", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Utah's technology, healthcare, and outdoor recreation sectors." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for consumer and enterprise use across Utah's tech and lifestyle brands." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for software development, healthcare workflows, and customer service in Utah." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models and analytics dashboards for Utah's technology and healthcare companies." },
+    ],
+    seoTitle: "Software Development in Utah | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Utah.",
+  },
+  {
+    slug: "vermont",
+    name: "Vermont",
+    type: "state",
+    stateCode: "VT",
+    heroTitle: "Software Development in Vermont ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Vermont. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Vermont's economy includes healthcare, education, agriculture, tourism, and a growing technology sector. The state is known for its small business culture, environmental consciousness, and quality of life.",
+    ],
+    marketContext: [
+      "The Vermont business landscape includes healthcare systems, universities, agriculture and food production, tourism and hospitality, and a small but growing technology sector. Burlington is the state's largest city and primary commercial center.",
+      "Vermont businesses value sustainability, community, and practical solutions. StackSpacer builds systems that align with Vermont's values while delivering professional-grade results.",
+    ],
+    majorCities: ["Burlington", "Plattsburgh", "Rutland", "Brattleboro", "Montpelier"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Vermont?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Vermont, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Vermont?", answer: "StackSpacer works with healthcare, education, agriculture, tourism, and technology across Vermont." },
+      { question: "Can StackSpacer build systems for Vermont's healthcare sector?", answer: "Yes. StackSpacer builds patient portals, telehealth platforms, and scheduling systems for Vermont healthcare providers." },
+      { question: "How does StackSpacer support Vermont agriculture and food businesses?", answer: "StackSpacer builds supply chain platforms, e-commerce tools, and farm management systems for Vermont's agricultural sector." },
+    ],
+    relatedInsights: ["react-native-vs-flutter", "what-nextjs-production-ready"],
+    relatedProjects: ["mobile-app-dashboard", "business-website-system"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Vermont healthcare, agriculture, and tourism companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for patient access, farm management, and tourism services in Vermont." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for healthcare workflows, agricultural operations, and guest services in Vermont." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models for healthcare analytics and agricultural optimization in Vermont." },
+    ],
+    seoTitle: "Software Development in Vermont | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Vermont.",
+  },
+  {
+    slug: "virginia",
+    name: "Virginia",
+    type: "state",
+    stateCode: "VA",
+    heroTitle: "Software Development in Virginia ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Virginia. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Virginia's economy is strongly influenced by its proximity to Washington, D.C., with major presence in government contracting, technology, healthcare, and defense. Northern Virginia is one of the largest technology employment markets in the United States.",
+    ],
+    marketContext: [
+      "The Virginia business landscape includes federal contractors, cybersecurity firms, healthcare systems, technology companies, and financial services. Arlington, Alexandria, and Tysons Corner form the NoVA tech corridor, while Hampton Roads anchors naval and maritime operations.",
+      "Virginia businesses often require technology solutions that meet federal security standards and support mission-critical operations. StackSpacer builds systems with security, reliability, and compliance as foundational requirements.",
+    ],
+    majorCities: ["Virginia Beach", "Norfolk", "Chesapeake", "Arlington", "Richmond"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Virginia?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Virginia, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Virginia?", answer: "StackSpacer works with government contracting, cybersecurity, healthcare, technology, and defense across Virginia." },
+      { question: "Can StackSpacer build systems that meet federal security requirements?", answer: "Yes. StackSpacer builds systems following federal security best practices. Projects involving government contracts are scoped to meet applicable compliance requirements during discovery." },
+      { question: "How does StackSpacer support Virginia's cybersecurity sector?", answer: "StackSpacer builds data security platforms, monitoring dashboards, and compliance tools for Virginia's cybersecurity companies." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Virginia's government contractors, cybersecurity, and healthcare companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for secure communications and field operations in Virginia's defense and tech sectors." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for compliance workflows, healthcare operations, and cybersecurity monitoring in Virginia." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models for threat detection, healthcare analytics, and operational security in Virginia." },
+    ],
+    seoTitle: "Software Development in Virginia | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Virginia.",
+  },
+  {
+    slug: "washington",
+    name: "Washington",
+    type: "state",
+    stateCode: "WA",
+    heroTitle: "Software Development in Washington ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Washington. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Washington State has a diverse economy anchored by technology, aerospace, agriculture, and international trade. Seattle is a major global technology center, while the state's ports and agricultural output support broader economic activity.",
+    ],
+    marketContext: [
+      "The Washington business landscape includes technology companies, aerospace and defense contractors, agriculture and food processing, retail and e-commerce, and healthcare. Seattle anchors the tech sector with Amazon, Microsoft, and countless startups, while Spokane and Tri-Cities support manufacturing and agriculture.",
+      "Washington-based businesses expect high technical standards and reliable execution. StackSpacer builds systems that meet Washington's expectations with clean architecture, thorough testing, and clear documentation.",
+    ],
+    majorCities: ["Seattle", "Spokane", "Tacoma", "Vancouver", "Bellevue"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Washington?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Washington, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Washington?", answer: "StackSpacer works with technology, aerospace, agriculture, retail, and healthcare across Washington." },
+      { question: "Can StackSpacer build systems for Washington's technology companies?", answer: "Yes. StackSpacer builds web applications, cloud platforms, and data systems for Washington's technology sector." },
+      { question: "How does StackSpacer support Washington's aerospace industry?", answer: "StackSpacer builds operational dashboards, parts tracking systems, and collaboration platforms for Washington's aerospace and aviation companies." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Washington's technology, aerospace, and retail companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for enterprise operations, agriculture, and healthcare access in Washington." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for software development, aerospace operations, and retail workflows in Washington." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models and analytics platforms for Washington's technology and aerospace sectors." },
+    ],
+    seoTitle: "Software Development in Washington | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Washington.",
+  },
+  {
+    slug: "west-virginia",
+    name: "West Virginia",
+    type: "state",
+    stateCode: "WV",
+    heroTitle: "Software Development in West Virginia ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across West Virginia. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "West Virginia's economy includes healthcare, education, tourism, manufacturing, and a growing technology sector. The state is undergoing economic diversification beyond its traditional energy and manufacturing bases.",
+    ],
+    marketContext: [
+      "The West Virginia business landscape includes healthcare systems, universities, tourism and outdoor recreation, manufacturing, and a small but growing technology sector. Charleston is the state capital and primary business center.",
+      "West Virginia businesses value practical technology solutions that support economic diversification and community development. StackSpacer builds systems that help West Virginia organizations modernize and compete more effectively.",
+    ],
+    majorCities: ["Charleston", "Huntington", "Morgantown", "Parkersburg", "Wheeling"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in West Virginia?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across West Virginia, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in West Virginia?", answer: "StackSpacer works with healthcare, education, tourism, manufacturing, and technology across West Virginia." },
+      { question: "Can StackSpacer build systems for West Virginia's healthcare sector?", answer: "Yes. StackSpacer builds patient portals, telehealth platforms, and scheduling systems for West Virginia healthcare providers." },
+      { question: "How does StackSpacer support West Virginia tourism businesses?", answer: "StackSpacer builds booking platforms, visitor apps, and operational tools for West Virginia's tourism and outdoor recreation sector." },
+    ],
+    relatedInsights: ["react-native-vs-flutter", "what-nextjs-production-ready"],
+    relatedProjects: ["mobile-app-dashboard", "business-website-system"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for West Virginia healthcare, tourism, and education organizations." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for patient access, tourism services, and campus operations in West Virginia." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for healthcare workflows, visitor services, and administrative operations in West Virginia." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models for healthcare analytics and tourism demand forecasting in West Virginia." },
+    ],
+    seoTitle: "Software Development in West Virginia | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across West Virginia.",
+  },
+  {
+    slug: "wisconsin",
+    name: "Wisconsin",
+    type: "state",
+    stateCode: "WI",
+    heroTitle: "Software Development in Wisconsin ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Wisconsin. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Wisconsin's economy spans manufacturing, healthcare, agriculture, insurance, and a growing technology sector. Milwaukee and Madison are the state's primary commercial centers, with Madison anchoring state government and education.",
+    ],
+    marketContext: [
+      "The Wisconsin business landscape includes advanced manufacturing, healthcare systems, agriculture and food processing, insurance companies, and technology firms. Milwaukee anchors manufacturing and healthcare, while Madison serves as a center for government, education, and biotech.",
+      "Wisconsin businesses value reliability, quality, and practical solutions. StackSpacer builds systems that reflect these Wisconsin values dependable, well-engineered, and built to last.",
+    ],
+    majorCities: ["Milwaukee", "Madison", "Green Bay", "Appleton", "Racine"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Wisconsin?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Wisconsin, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Wisconsin?", answer: "StackSpacer works with manufacturing, healthcare, agriculture, insurance, and technology across Wisconsin." },
+      { question: "Can StackSpacer build systems for Wisconsin's manufacturing sector?", answer: "Yes. StackSpacer builds operational dashboards, quality management systems, and supply chain platforms for Wisconsin manufacturers." },
+      { question: "How does StackSpacer support Wisconsin healthcare organizations?", answer: "StackSpacer builds patient portals, scheduling systems, and data dashboards for Wisconsin hospitals and healthcare networks." },
+    ],
+    relatedInsights: ["what-nextjs-production-ready", "when-ai-automation-makes-sense"],
+    relatedProjects: ["business-website-system", "ai-automation-suite"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Wisconsin manufacturing, healthcare, and insurance companies." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations, patient access, and enterprise use in Wisconsin." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for manufacturing workflows, healthcare scheduling, and insurance processing in Wisconsin." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Prediction models for equipment maintenance, healthcare outcomes, and operational efficiency in Wisconsin." },
+    ],
+    seoTitle: "Software Development in Wisconsin | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Wisconsin.",
+  },
+  {
+    slug: "wyoming",
+    name: "Wyoming",
+    type: "state",
+    stateCode: "WY",
+    heroTitle: "Software Development in Wyoming ",
+    introParagraphs: [
+      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across Wyoming. Project communication, demonstrations, reviews, and delivery are coordinated online throughout the engagement.",
+      "Wyoming's economy is shaped by energy production, agriculture, tourism, and healthcare. The state's vast landscapes draw tourists year-round, while energy and agriculture remain economic foundations.",
+    ],
+    marketContext: [
+      "The Wyoming business landscape includes energy and mining, agriculture and ranching, tourism and hospitality, healthcare systems, and a small technology sector. Cheyenne is the state capital and primary business center, while Jackson draws tourism and remote workers.",
+      "Wyoming businesses value independence, practicality, and self-reliance. StackSpacer builds systems that are straightforward, reliable, and designed to work in Wyoming's unique environment.",
+    ],
+    majorCities: ["Cheyenne", "Casper", "Laramie", "Gillette", "Jackson"],
+    faqs: [
+      { question: "Can StackSpacer work with businesses in Wyoming?", answer: "Yes. StackSpacer provides web, mobile, AI automation, and machine learning services for businesses across Wyoming, coordinated entirely online." },
+      { question: "What industries does StackSpacer serve in Wyoming?", answer: "StackSpacer works with energy, agriculture, tourism, healthcare, and professional services across Wyoming." },
+      { question: "Can StackSpacer build systems for Wyoming's energy sector?", answer: "Yes. StackSpacer builds operational dashboards, monitoring systems, and data platforms for Wyoming's energy and mining companies." },
+      { question: "How does StackSpacer support Wyoming tourism businesses?", answer: "StackSpacer builds booking platforms, visitor information systems, and operational tools for Wyoming's hospitality and tourism sector." },
+    ],
+    relatedInsights: ["react-native-vs-flutter", "what-nextjs-production-ready"],
+    relatedProjects: ["mobile-app-dashboard", "business-website-system"],
+    serviceUseCases: [
+      { service: "Web Development", slug: "web-development", desc: "Web platforms for Wyoming's energy, tourism, and healthcare sectors." },
+      { service: "Mobile App Development", slug: "mobile-app-development", desc: "Mobile apps for field operations, tourism services, and remote workforce management in Wyoming." },
+      { service: "AI Automation", slug: "ai-automation", desc: "Automation tools for energy operations, guest services, and healthcare scheduling in Wyoming." },
+      { service: "Machine Learning", slug: "machine-learning", desc: "Data models for energy production forecasting and tourism demand in Wyoming." },
+    ],
+    seoTitle: "Software Development in Wyoming | StackSpacer",
+    seoDescription: "Remote web development, mobile app development, AI automation, and machine learning services for businesses across Wyoming.",
+  },
+];
+
+export const getAllLocations = (): LocationData[] => {
+  return [...cities, ...states];
+};
+
+export const getLocationBySlug = (slug: string): LocationData | undefined => {
+  return getAllLocations().find((loc) => loc.slug === slug);
+};
+
 export const getCityBySlug = (slug: string): CityData | undefined => {
   return cities.find((city) => city.slug === slug);
+};
+
+export const getStateBySlug = (slug: string): StateData | undefined => {
+  return states.find((state) => state.slug === slug);
 };
