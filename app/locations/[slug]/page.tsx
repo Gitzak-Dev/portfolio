@@ -17,21 +17,15 @@ export function generateStaticParams() {
   return [...cities, ...states].map((loc) => ({ slug: loc.slug }));
 }
 
-const insightTitles: Record<string, string> = {
-  "what-nextjs-production-ready": "What Makes a Next.js Application Production-Ready",
-  "react-native-vs-flutter": "React Native vs Flutter: Choosing the Right Framework",
-  "when-ai-automation-makes-sense": "When AI Automation Makes Sense (And When It Doesn't)",
-  "rag-vs-ai-agents": "RAG vs AI Agents: Architecture Choices",
-  "machine-learning-for-business": "Machine Learning for Business: From Data to Decisions",
-};
+const insightMap: Record<string, string> = {};
+for (const ins of insights) {
+  insightMap[ins.slug] = ins.title;
+}
 
-const projectTitles: Record<string, string> = {
-  "mobile-app-dashboard": "Mobile App Dashboard",
-  "ai-automation-suite": "AI Automation Suite",
-  "ml-prediction-system": "ML Prediction System",
-  "developer-portfolio": "Developer Portfolio",
-  "business-website-system": "Business Website System",
-};
+const projectMap: Record<string, string> = {};
+for (const proj of projects) {
+  projectMap[proj.slug] = proj.title;
+}
 
 export async function generateMetadata({
   params,
@@ -53,8 +47,8 @@ export async function generateMetadata({
     title = location.seoTitle;
     description = location.seoDescription;
   } else {
-    title = `Software Development in ${location.name} | StackSpacer`;
-    description = `StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses in ${location.name}, ${location.state}.`;
+    title = `Software Development in ${location.cityName}, ${location.stateName}`;
+    description = location.seoDescription;
   }
 
   return {
@@ -88,33 +82,48 @@ export default async function LocationPage({ params }: PageProps) {
   }
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://stackspacer.com";
-
-  const locationName = location.name;
   const isState = location.type === "state";
+  const cityName = isState ? "" : location.cityName;
+  const stateName = isState ? location.name : location.stateName;
+  const locationLabel = isState
+    ? location.stateCode
+    : `${location.cityName}, ${location.stateCode}`;
+
+  // Breadcrumb: Home > Locations > [State] > [City]
+  const breadcrumbItems: { name: string; item: string }[] = [
+    { name: "Home", item: baseUrl },
+    { name: "Locations", item: `${baseUrl}/locations` },
+  ];
+
+  if (!isState) {
+    const stateSlug = location.stateSlug;
+    const stateExists = states.some((s) => s.slug === stateSlug);
+    if (stateExists) {
+      breadcrumbItems.push({
+        name: stateName,
+        item: `${baseUrl}/locations/${stateSlug}`,
+      });
+    }
+    breadcrumbItems.push({
+      name: cityName,
+      item: `${baseUrl}/locations/${location.slug}`,
+    });
+  } else {
+    breadcrumbItems.push({
+      name: location.name,
+      item: `${baseUrl}/locations/${location.slug}`,
+    });
+  }
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: baseUrl,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Locations",
-        item: `${baseUrl}/locations`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: locationName,
-        item: `${baseUrl}/locations/${location.slug}`,
-      },
-    ],
+    itemListElement: breadcrumbItems.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: item.item,
+    })),
   };
 
   const webPageSchema = {
@@ -122,10 +131,10 @@ export default async function LocationPage({ params }: PageProps) {
     "@type": "WebPage",
     name: isState
       ? location.seoTitle
-      : `Software Development in ${location.name} | StackSpacer`,
+      : `Software Development in ${cityName}, ${stateName} | StackSpacer`,
     description: isState
       ? location.seoDescription
-      : `StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses in ${location.name}, ${location.state}.`,
+      : `StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses in ${cityName}, ${stateName}.`,
     url: `${baseUrl}/locations/${location.slug}`,
     about: {
       "@type": "Organization",
@@ -141,27 +150,23 @@ export default async function LocationPage({ params }: PageProps) {
 
   // Parent state link for city pages
   let parentStateLink = null;
-  if (!isState && "state" in location) {
-    const stateSlug = location.state.toLowerCase().replace(/ /g, "-");
-    const stateExists = states.some((s) => s.slug === stateSlug);
+  if (!isState) {
+    const stateExists = states.some((s) => s.slug === location.stateSlug);
     if (stateExists) {
-      parentStateLink = { slug: stateSlug, name: location.state };
+      parentStateLink = { slug: location.stateSlug, name: stateName };
     }
   }
 
-  // Current service areas for state pages
-  let currentServiceAreas = null;
+  // Featured cities on state pages
+  let stateCities = null;
   if (isState) {
-    const stateSlug = location.slug;
-    const matchingCities = cities.filter(
-      (c) => c.state.toLowerCase() === location.name.toLowerCase()
+    const matching = cities.filter(
+      (c) => c.stateSlug === location.slug
     );
-    if (matchingCities.length > 0) {
-      currentServiceAreas = matchingCities;
+    if (matching.length > 0) {
+      stateCities = matching;
     }
   }
-
-  const locationLabel = isState ? location.stateCode : locationName;
 
   return (
     <main>
@@ -171,34 +176,32 @@ export default async function LocationPage({ params }: PageProps) {
 
       <div className={styles.container}>
         <header className={styles.hero}>
-          <div className={styles.label}>{"// " + locationLabel}</div>
+          <div className={styles.label}>
+            {"// "}
+            {!isState
+              ? `${locationLabel}`
+              : location.name}
+          </div>
           <h1>
             Software Development in <br />
-            <span>{locationName}</span>
+            <span>
+              {isState ? location.name : `${cityName}, ${stateName}`}
+            </span>
           </h1>
-          {!isState && (
-            <div className={styles.cityMeta}>
-              <span>
-                {locationName},{" "}
-                {("state" in location ? location.state : "")}
-              </span>
-              <span>United States</span>
-            </div>
-          )}
-          {isState && (
-            <div className={styles.cityMeta}>
-              <span>{locationName}</span>
-              <span>United States</span>
-            </div>
-          )}
+          <div className={styles.locationTags}>
+            <span className={styles.tag}>{stateName}</span>
+            <span className={styles.tag}>United States</span>
+          </div>
           {location.introParagraphs.map((para, i) => (
-            <p key={i} className={styles.heroDesc}>{para}</p>
+            <p key={i} className={styles.heroDesc}>
+              {para}
+            </p>
           ))}
           {parentStateLink && (
             <div className={styles.parentStateLink}>
               <Link href={`/locations/${parentStateLink.slug}`}>
-                {"← "}
-                {parentStateLink.name}
+                <span className={styles.exploreLabel}>EXPLORE</span>{" "}
+                {parentStateLink.name} &rarr;
               </Link>
             </div>
           )}
@@ -210,8 +213,8 @@ export default async function LocationPage({ params }: PageProps) {
           <h2>Our Services</h2>
           <p className={styles.sectionIntro}>
             StackSpacer provides four core development services for businesses in{" "}
-            {locationName}. Each service page below contains detailed information
-            about our approach and capabilities.
+            {isState ? stateName : cityName}. Each service page below contains
+            detailed information about our approach and capabilities.
           </p>
 
           <div className={styles.servicesGrid}>
@@ -223,7 +226,7 @@ export default async function LocationPage({ params }: PageProps) {
               >
                 <h3>{svc.service}</h3>
                 <p>{svc.desc}</p>
-                <span className={styles.cardLink}>Learn more →</span>
+                <span className={styles.cardLink}>Learn more &rarr;</span>
               </Link>
             ))}
           </div>
@@ -231,52 +234,44 @@ export default async function LocationPage({ params }: PageProps) {
 
         <div className={styles.divider} />
 
-        {isState && (
-          <>
-            <section className={styles.section}>
-              <h2>About {locationName}</h2>
-              {location.marketContext.map((para, i) => (
-                <p key={i} className={styles.businessContext}>{para}</p>
-              ))}
-            </section>
-            <div className={styles.divider} />
-          </>
-        )}
+        <section className={styles.section}>
+          <h2>
+            {isState ? `About ${location.name}` : "Local Market Context"}
+          </h2>
+          {(isState ? location.marketContext : location.marketContext).map(
+            (para, i) => (
+              <p key={i} className={styles.businessContext}>
+                {para}
+              </p>
+            )
+          )}
+        </section>
 
-        {!isState && (
-          <>
-            <section className={styles.section}>
-              <h2>About {locationName}</h2>
-              {location.industryContext.map((para, i) => (
-                <p key={i} className={styles.businessContext}>{para}</p>
-              ))}
-            </section>
-            <div className={styles.divider} />
-          </>
-        )}
+        <div className={styles.divider} />
 
-        {currentServiceAreas && currentServiceAreas.length > 0 && (
+        {stateCities && stateCities.length > 0 && (
           <>
             <section className={styles.section}>
-              <h2>Featured Cities</h2>
+              <h2>Cities We Serve</h2>
               <p className={styles.sectionIntro}>
                 StackSpacer currently serves businesses in the following cities
-                across {locationName}.
+                across {stateName}.
               </p>
               <div className={styles.cityGrid}>
-                {currentServiceAreas.map((city) => (
+                {stateCities.map((city) => (
                   <Link
                     key={city.slug}
                     href={`/locations/${city.slug}`}
                     className={styles.cityCard}
                   >
-                    <div className={styles.cityName}>
-                      <span>{city.name}</span>
-                      <span className={styles.cityState}>{city.stateAbbrev}</span>
+                    <div className={styles.cityNameRow}>
+                      <span className={styles.cityNameText}>{city.cityName}</span>
+                      <span className={styles.cityStateBadge}>{city.stateCode}</span>
                     </div>
                     <p className={styles.cityPreview}>
                       {city.introParagraphs[0].slice(0, 100)}...
                     </p>
+                    <span className={styles.cardArrow}>&rarr;</span>
                   </Link>
                 ))}
               </div>
@@ -286,13 +281,15 @@ export default async function LocationPage({ params }: PageProps) {
         )}
 
         <section className={styles.section}>
-          <h2>How We Work</h2>
+          <h2>Why Businesses Work With StackSpacer</h2>
           <div className={styles.deliveryNote}>
             <p>
               StackSpacer provides all development services for businesses in{" "}
-              {locationName} and across the United States. Project communication,
-              demonstrations, reviews, and delivery are coordinated online
-              throughout the engagement.
+              {isState ? stateName : cityName} and across the United States.
+              Project communication, demonstrations, reviews, and delivery are
+              coordinated online throughout the engagement. We work as a
+              developer-led extension of your team — writing clean, well
+              documented code that you can review, extend, and maintain.
             </p>
           </div>
         </section>
@@ -314,30 +311,65 @@ export default async function LocationPage({ params }: PageProps) {
         <div className={styles.divider} />
 
         <section className={styles.section}>
-          <h2>Related Reading</h2>
-          <div className={styles.relatedLinks}>
-            {location.relatedInsights.map((insightSlug) => (
-              <Link
-                key={insightSlug}
-                href={`/insights/${insightSlug}`}
-                className={styles.relatedLink}
-              >
-                {insightTitles[insightSlug] ?? `${insightSlug} →`}
-              </Link>
-            ))}
-            {location.relatedProjects.map((projectSlug) => (
-              <Link
-                key={projectSlug}
-                href={`/projects/${projectSlug}`}
-                className={styles.relatedLink}
-              >
-                {projectTitles[projectSlug] ?? `${projectSlug} →`}
-              </Link>
-            ))}
+          <h2>Related Projects</h2>
+          <div className={styles.relatedGrid}>
+            {location.relatedProjects.map((projectSlug) => {
+              const proj = projects.find((p) => p.slug === projectSlug);
+              if (!proj) return null;
+              return (
+                <Link
+                  key={projectSlug}
+                  href={`/projects/${projectSlug}`}
+                  className={styles.relatedCard}
+                >
+                  <span className={styles.relatedType}>PROJECT</span>
+                  <span className={styles.relatedTitle}>{proj.title}</span>
+                  <span className={styles.relatedArrow}>&rarr;</span>
+                </Link>
+              );
+            })}
           </div>
         </section>
 
         <div className={styles.divider} />
+
+        <section className={styles.section}>
+          <h2>Related Reading</h2>
+          <div className={styles.relatedGrid}>
+            {location.relatedInsights.map((insightSlug) => {
+              const ins = insights.find((i) => i.slug === insightSlug);
+              if (!ins) return null;
+              return (
+                <Link
+                  key={insightSlug}
+                  href={`/insights/${insightSlug}`}
+                  className={styles.relatedCard}
+                >
+                  <span className={styles.relatedType}>INSIGHT</span>
+                  <span className={styles.relatedTitle}>{ins.title}</span>
+                  <span className={styles.relatedArrow}>&rarr;</span>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+
+        <div className={styles.divider} />
+
+        {parentStateLink && (
+          <>
+            <section className={styles.section}>
+              <h2>Explore {stateName}</h2>
+              <Link
+                href={`/locations/${parentStateLink.slug}`}
+                className={styles.stateExploreLink}
+              >
+                <span>{stateName} &rarr;</span>
+              </Link>
+            </section>
+            <div className={styles.divider} />
+          </>
+        )}
 
         <section className={styles.ctaSection}>
           <h2>Start Your Project</h2>
@@ -346,7 +378,7 @@ export default async function LocationPage({ params }: PageProps) {
             hours.
           </p>
           <Link href="/#contact" className={styles.ctaButton}>
-            Discuss Your Project <span>↗</span>
+            Discuss Your Project <span>&#8599;</span>
           </Link>
         </section>
       </div>

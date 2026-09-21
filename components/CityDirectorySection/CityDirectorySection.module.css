@@ -1,0 +1,168 @@
+.cityDirectory {
+  position: relative;
+  padding: 80px 5% 90px;
+  background: #050505;
+  border-top: 1px solid rgba(226, 180, 32, 0.1);
+}
+
+.cityDirectoryInner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cityDirectoryHeader {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.sectionLabel {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #e2b420;
+  font-family: var(--font-space-grotesk), sans-serif;
+}
+
+.cityDirectoryHeader h2 {
+  margin: 0 0 14px;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-weight: 900;
+}
+
+.cityDirectoryHeader h2 span {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.sectionDesc {
+  max-width: 480px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: var(--font-plus-jakarta), sans-serif;
+}
+
+.directoryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.stateGroup {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.stateGroup[open] {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.stateSummary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  cursor: pointer;
+  list-style: none;
+  transition: background 0.2s ease;
+}
+
+.stateSummary::-webkit-details-marker {
+  display: none;
+}
+
+.stateSummary:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.stateSummaryName {
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  flex: 1;
+}
+
+.stateSummaryCount {
+  color: rgba(255, 255, 255, 0.25);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 2px 7px;
+  border-radius: 100px;
+}
+
+.stateSummaryArrow {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.7rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.stateGroup[open] .stateSummaryArrow {
+  transform: rotate(90deg);
+  color: #d8af25;
+}
+
+.stateCityLinks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  padding: 4px 12px 12px 16px;
+}
+
+.cityLink {
+  display: block;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 0.82rem;
+  text-decoration: none;
+  padding: 7px 10px;
+  border-radius: 6px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.cityLink:hover {
+  color: #d8af25;
+  background: rgba(216, 175, 37, 0.06);
+}
+
+@media (max-width: 1100px) {
+  .directoryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .directoryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cityDirectory {
+    padding: 60px 5% 70px;
+  }
+
+  .cityDirectoryHeader {
+    text-align: left;
+    margin-bottom: 36px;
+  }
+
+  .sectionDesc {
+    margin: 0;
+  }
+
+  .stateCityLinks {
+    grid-template-columns: 1fr;
+    padding-left: 12px;
+  }
+}

@@ -1,6 +1,9 @@
 .page {
   position: relative;
-  padding: 100px 8% 0;
+  padding-top: calc(86px + 48px);
+  padding-right: 8%;
+  padding-left: 8%;
+  padding-bottom: 0;
   min-height: 100vh;
 }
 
@@ -27,10 +30,10 @@
 .hero h1 {
   color: #fff;
   font-family: var(--font-plus-jakarta), sans-serif;
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
   font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: -0.05em;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
   margin-bottom: 24px;
 }
 
@@ -40,46 +43,58 @@
 
 .heroDesc {
   color: rgba(255, 255, 255, 0.65);
-  font-size: 1.1rem;
+  font-size: 1.08rem;
   line-height: 1.7;
   max-width: 680px;
   font-family: var(--font-plus-jakarta), sans-serif;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
-.cityMeta {
+.locationTags {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 28px;
+  gap: 10px;
+  margin-bottom: 24px;
   flex-wrap: wrap;
 }
 
-.cityMeta span {
+.tag {
   color: rgba(255, 255, 255, 0.45);
   font-family: var(--font-space-grotesk), sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  padding: 6px 14px;
+  padding: 5px 14px;
   border-radius: 100px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .parentStateLink {
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
 .parentStateLink a {
   color: rgba(255, 255, 255, 0.4);
   font-family: var(--font-space-grotesk), sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
+  font-weight: 600;
   text-decoration: none;
   transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .parentStateLink a:hover {
   color: #d8af25;
+}
+
+.exploreLabel {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .intro {
@@ -100,9 +115,10 @@
 .section h2 {
   color: #fff;
   font-family: var(--font-plus-jakarta), sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 800;
   margin-bottom: 28px;
+  letter-spacing: -0.02em;
 }
 
 .sectionIntro {
@@ -127,12 +143,13 @@
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.07);
   text-decoration: none;
-  transition: border-color 0.3s ease, transform 0.3s ease;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .serviceCard:hover {
   border-color: rgba(216, 175, 37, 0.35);
   transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(216, 175, 37, 0.08);
 }
 
 .serviceCard h3 {
@@ -182,18 +199,21 @@
   font-size: 0.95rem;
   line-height: 1.7;
   font-family: var(--font-plus-jakarta), sans-serif;
-  margin-top: 28px;
 }
 
 .faq {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 0;
 }
 
 .faqItem {
-  padding-bottom: 28px;
+  padding: 24px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.faqItem:first-child {
+  padding-top: 0;
 }
 
 .faqItem:last-child {
@@ -207,6 +227,7 @@
   font-size: 1.05rem;
   font-weight: 700;
   margin-bottom: 10px;
+  line-height: 1.4;
 }
 
 .faqItem p {
@@ -217,33 +238,147 @@
   margin: 0;
 }
 
-.relatedLinks {
+.relatedGrid {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
-.relatedLink {
-  display: inline-flex;
+.relatedCard {
+  display: flex;
   align-items: center;
-  gap: 10px;
-  color: #d8af25;
-  font-size: 0.92rem;
-  font-weight: 600;
-  text-decoration: none;
-  font-family: var(--font-space-grotesk), sans-serif;
-  padding: 14px 18px;
+  gap: 14px;
+  padding: 16px 20px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
+  text-decoration: none;
   transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
 }
 
-.relatedLink:hover {
-  color: #e2b418;
+.relatedCard:hover {
   border-color: rgba(216, 175, 37, 0.3);
   background: rgba(216, 175, 37, 0.04);
   transform: translateX(4px);
+}
+
+.relatedType {
+  color: rgba(255, 255, 255, 0.3);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  min-width: 68px;
+}
+
+.relatedTitle {
+  color: #d8af25;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  flex: 1;
+}
+
+.relatedArrow {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.relatedCard:hover .relatedArrow {
+  color: #d8af25;
+}
+
+.stateExploreLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #d8af25;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 16px 24px;
+  border-radius: 12px;
+  background: rgba(216, 175, 37, 0.06);
+  border: 1px solid rgba(216, 175, 37, 0.2);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.stateExploreLink:hover {
+  background: rgba(216, 175, 37, 0.1);
+  border-color: rgba(216, 175, 37, 0.4);
+}
+
+.cityGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.cityCard {
+  position: relative;
+  display: block;
+  padding: 22px 24px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  text-decoration: none;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.cityCard:hover {
+  border-color: rgba(216, 175, 37, 0.35);
+  transform: translateY(-2px);
+}
+
+.cityNameRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.cityNameText {
+  color: #fff;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.cityStateBadge {
+  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.cityPreview {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  padding-right: 24px;
+  margin-bottom: 8px;
+}
+
+.cardArrow {
+  position: absolute;
+  bottom: 22px;
+  right: 24px;
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.cityCard:hover .cardArrow {
+  color: #d8af25;
 }
 
 .ctaSection {
@@ -255,7 +390,7 @@
 }
 
 .ctaSection h2 {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   margin-bottom: 12px;
 }
 
@@ -291,20 +426,28 @@
   .servicesGrid {
     grid-template-columns: 1fr;
   }
+
+  .cityGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 700px) {
   .page {
-    padding: 80px 6% 0;
+    padding-top: calc(68px + 40px);
+    padding-right: 6%;
+    padding-left: 6%;
   }
 
   .hero h1 {
-    font-size: clamp(1.8rem, 7vw, 2.8rem);
+    font-size: clamp(1.7rem, 7vw, 2.6rem);
   }
 
-  .cityMeta {
-    flex-direction: column;
-    align-items: flex-start;
+  .cityGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .locationTags {
     gap: 8px;
   }
 }

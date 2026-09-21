@@ -6,9 +6,9 @@ import { cities, states } from "@/data/locations";
 import styles from "./LocationsPage.module.css";
 
 export const metadata: Metadata = {
-  title: "Software Development Across the United States | StackSpacer",
+  title: "Software Development Across the United States",
   description:
-    "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across the United States. Explore our city service areas and state coverage.",
+    "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across the United States. Explore our city and state service areas.",
   alternates: {
     canonical: "/locations",
   },
@@ -17,35 +17,23 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/locations",
     siteName: "StackSpacer",
-    title: "Software Development Across the United States | StackSpacer",
+    title: "Software Development Across the United States",
     description:
       "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across the United States.",
   },
 };
 
 const services = [
-  {
-    name: "Web Development",
-    slug: "web-development",
-  },
-  {
-    name: "Mobile App Development",
-    slug: "mobile-app-development",
-  },
-  {
-    name: "AI Automation",
-    slug: "ai-automation",
-  },
-  {
-    name: "Machine Learning",
-    slug: "machine-learning",
-  },
+  { name: "Web Development", slug: "web-development" },
+  { name: "Mobile App Development", slug: "mobile-app-development" },
+  { name: "AI Automation", slug: "ai-automation" },
+  { name: "Machine Learning", slug: "machine-learning" },
 ];
 
 const locationSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  name: "Locations | StackSpacer",
+  name: "Locations",
   description:
     "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across the United States.",
   url: "https://stackspacer.com/locations",
@@ -84,36 +72,6 @@ export default function LocationsPage() {
         <div className={styles.divider} />
 
         <section className={styles.section}>
-          <h2>Featured Cities</h2>
-          <p className={styles.sectionIntro}>
-            StackSpacer currently serves businesses in the following United
-            States cities. Each city page describes how our services apply to
-            businesses in that market.
-          </p>
-
-          <div className={styles.cityGrid}>
-            {cities.map((city) => (
-              <Link
-                key={city.slug}
-                href={`/locations/${city.slug}`}
-                className={styles.cityCard}
-              >
-                <div className={styles.cityName}>
-                  <span>{city.name}</span>
-                  <span className={styles.cityState}>{city.stateAbbrev}</span>
-                </div>
-                <p className={styles.cityPreview}>
-                  {city.introParagraphs[0].slice(0, 110)}...
-                </p>
-                <span className={styles.cardArrow}>→</span>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <div className={styles.divider} />
-
-        <section className={styles.section}>
           <h2>Explore by State</h2>
           <p className={styles.sectionIntro}>
             StackSpacer provides remote software development services to
@@ -130,9 +88,86 @@ export default function LocationsPage() {
               >
                 <span className={styles.stateName}>{state.name}</span>
                 <span className={styles.stateCode}>{state.stateCode}</span>
-                <span className={styles.stateArrow}>→</span>
+                <span className={styles.stateArrow}>&rarr;</span>
               </Link>
             ))}
+          </div>
+        </section>
+
+        <div className={styles.divider} />
+
+        <section className={styles.section}>
+          <h2>Featured Cities</h2>
+          <p className={styles.sectionIntro}>
+            StackSpacer currently serves businesses in the following prominent
+            United States cities. Each city page describes how our services
+            apply to businesses in that market.
+          </p>
+
+          <div className={styles.cityGrid}>
+            {cities.map((city) => (
+              <Link
+                key={city.slug}
+                href={`/locations/${city.slug}`}
+                className={styles.cityCard}
+              >
+                <div className={styles.cityNameRow}>
+                  <span className={styles.cityNameText}>{city.cityName}</span>
+                  <span className={styles.cityStateBadge}>{city.stateCode}</span>
+                </div>
+                <p className={styles.cityPreview}>
+                  {city.introParagraphs[0].slice(0, 100)}...
+                </p>
+                <span className={styles.cardArrow}>&rarr;</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <div className={styles.divider} />
+
+        <section className={styles.section}>
+          <h2>Explore Cities</h2>
+          <p className={styles.sectionIntro}>
+            Browse all serviceable cities across the United States, organized by
+            state.
+          </p>
+
+          <div className={styles.cityDirectory}>
+            {(() => {
+              const byState = new Map<string, typeof cities>();
+              for (const city of cities) {
+                const existing = byState.get(city.stateName) || [];
+                existing.push(city);
+                byState.set(city.stateName, existing);
+              }
+              const sortedStates = [...byState.entries()].sort(
+                (a, b) => a[0].localeCompare(b[0])
+              );
+              return sortedStates.map(([stateName, stateCities]) => (
+                <details key={stateName} className={styles.stateGroup}>
+                  <summary className={styles.stateSummary}>
+                    <span className={styles.stateSummaryName}>{stateName}</span>
+                    <span className={styles.stateSummaryCount}>{stateCities.length}</span>
+                    <span className={styles.stateSummaryArrow}>&rarr;</span>
+                  </summary>
+                  <nav
+                    className={styles.stateCityLinks}
+                    aria-label={`Cities in ${stateName}`}
+                  >
+                    {stateCities.map((city) => (
+                      <Link
+                        key={city.slug}
+                        href={`/locations/${city.slug}`}
+                        className={styles.cityLink}
+                      >
+                        {city.cityName}
+                      </Link>
+                    ))}
+                  </nav>
+                </details>
+              ));
+            })()}
           </div>
         </section>
 
@@ -153,7 +188,7 @@ export default function LocationsPage() {
                 className={styles.serviceLink}
               >
                 <span className={styles.serviceName}>{service.name}</span>
-                <span className={styles.serviceArrow}>→</span>
+                <span className={styles.serviceArrow}>&rarr;</span>
               </Link>
             ))}
           </div>
@@ -168,7 +203,7 @@ export default function LocationsPage() {
             hours.
           </p>
           <Link href="/#contact" className={styles.ctaButton}>
-            Discuss Your Project <span>↗</span>
+            Discuss Your Project <span>&#8599;</span>
           </Link>
         </section>
       </div>
