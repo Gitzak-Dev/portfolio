@@ -1,23 +1,23 @@
-.cityDirectory {
+.directory {
   position: relative;
-  padding: 80px 5% 90px;
+  padding: 96px 5% 100px;
   background: #050505;
   border-top: 1px solid rgba(226, 180, 32, 0.1);
 }
 
-.cityDirectoryInner {
+.inner {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.cityDirectoryHeader {
+.header {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 56px;
 }
 
-.sectionLabel {
+.label {
   display: inline-block;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.28em;
@@ -26,103 +26,129 @@
   font-family: var(--font-space-grotesk), sans-serif;
 }
 
-.cityDirectoryHeader h2 {
-  margin: 0 0 14px;
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+.header h2 {
+  margin: 0 0 16px;
+  font-size: clamp(2rem, 4vw, 3.2rem);
   line-height: 1.1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.05em;
   color: #ffffff;
   font-family: var(--font-plus-jakarta), sans-serif;
   font-weight: 900;
 }
 
-.cityDirectoryHeader h2 span {
+.header h2 span {
   color: rgba(255, 255, 255, 0.35);
 }
 
-.sectionDesc {
-  max-width: 480px;
+.desc {
+  max-width: 520px;
   margin: 0 auto;
   color: rgba(255, 255, 255, 0.55);
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.65;
   font-family: var(--font-plus-jakarta), sans-serif;
 }
 
-.directoryGrid {
+.grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  align-items: start;
 }
 
-.stateGroup {
+.group {
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.06);
   background: rgba(255, 255, 255, 0.02);
+  align-self: start;
 }
 
-.stateGroup[open] {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.08);
+.group[open] {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
-.stateSummary {
+.summary {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   padding: 14px 16px;
   cursor: pointer;
   list-style: none;
   transition: background 0.2s ease;
 }
 
-.stateSummary::-webkit-details-marker {
+.summary::-webkit-details-marker {
   display: none;
 }
 
-.stateSummary:hover {
+.summary:hover {
   background: rgba(255, 255, 255, 0.04);
 }
 
-.stateSummaryName {
+.sName {
   color: rgba(255, 255, 255, 0.8);
   font-family: var(--font-plus-jakarta), sans-serif;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 600;
   flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.stateSummaryCount {
-  color: rgba(255, 255, 255, 0.25);
+.sCode {
+  color: rgba(255, 255, 255, 0.3);
   font-family: var(--font-space-grotesk), sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
-  background: rgba(255, 255, 255, 0.06);
-  padding: 2px 7px;
-  border-radius: 100px;
+  flex-shrink: 0;
 }
 
-.stateSummaryArrow {
+.sArrow {
   color: rgba(255, 255, 255, 0.2);
-  font-size: 0.7rem;
+  font-size: 0.8rem;
+  flex-shrink: 0;
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.stateGroup[open] .stateSummaryArrow {
+.group[open] .sArrow {
   transform: rotate(90deg);
   color: #d8af25;
 }
 
-.stateCityLinks {
+.expandedContent {
+  padding: 8px 12px 14px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stateNavLink {
+  display: block;
+  color: rgba(216, 175, 37, 0.8);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 6px 0 10px 0;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+}
+
+.stateNavLink:hover {
+  color: #d8af25;
+}
+
+.cityGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2px;
-  padding: 4px 12px 12px 16px;
 }
 
 .cityLink {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   color: rgba(255, 255, 255, 0.45);
   font-family: var(--font-plus-jakarta), sans-serif;
   font-size: 0.82rem;
@@ -130,6 +156,7 @@
   padding: 7px 10px;
   border-radius: 6px;
   transition: color 0.2s ease, background 0.2s ease;
+  gap: 8px;
 }
 
 .cityLink:hover {
@@ -137,32 +164,48 @@
   background: rgba(216, 175, 37, 0.06);
 }
 
-@media (max-width: 1100px) {
-  .directoryGrid {
-    grid-template-columns: repeat(2, 1fr);
+.cityArrow {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media (max-width: 768px) {
-  .directoryGrid {
+@media (max-width: 950px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .directory {
+    padding: 72px 5% 80px;
+  }
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .cityGrid {
     grid-template-columns: 1fr;
   }
 
-  .cityDirectory {
+  .directory {
     padding: 60px 5% 70px;
   }
 
-  .cityDirectoryHeader {
+  .header {
     text-align: left;
-    margin-bottom: 36px;
+    margin-bottom: 40px;
   }
 
-  .sectionDesc {
+  .desc {
     margin: 0;
-  }
-
-  .stateCityLinks {
-    grid-template-columns: 1fr;
-    padding-left: 12px;
   }
 }

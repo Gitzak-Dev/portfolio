@@ -2,7 +2,8 @@
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
 import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
-import { cities, states } from "@/data/locations";
+import StateCityDirectorySection from "@/components/StateCityDirectorySection/StateCityDirectorySection";
+import { cities } from "@/data/locations";
 import styles from "./LocationsPage.module.css";
 
 export const metadata: Metadata = {
@@ -71,28 +72,7 @@ export default function LocationsPage() {
 
         <div className={styles.divider} />
 
-        <section className={styles.section}>
-          <h2>Explore by State</h2>
-          <p className={styles.sectionIntro}>
-            StackSpacer provides remote software development services to
-            businesses in all 50 states. Click any state to learn how our
-            services apply.
-          </p>
-
-          <div className={styles.stateGrid}>
-            {states.map((state) => (
-              <Link
-                key={state.slug}
-                href={`/locations/${state.slug}`}
-                className={styles.stateCard}
-              >
-                <span className={styles.stateName}>{state.name}</span>
-                <span className={styles.stateCode}>{state.stateCode}</span>
-                <span className={styles.stateArrow}>&rarr;</span>
-              </Link>
-            ))}
-          </div>
-        </section>
+        <StateCityDirectorySection variant="locations" />
 
         <div className={styles.divider} />
 
@@ -121,53 +101,6 @@ export default function LocationsPage() {
                 <span className={styles.cardArrow}>&rarr;</span>
               </Link>
             ))}
-          </div>
-        </section>
-
-        <div className={styles.divider} />
-
-        <section className={styles.section}>
-          <h2>Explore Cities</h2>
-          <p className={styles.sectionIntro}>
-            Browse all serviceable cities across the United States, organized by
-            state.
-          </p>
-
-          <div className={styles.cityDirectory}>
-            {(() => {
-              const byState = new Map<string, typeof cities>();
-              for (const city of cities) {
-                const existing = byState.get(city.stateName) || [];
-                existing.push(city);
-                byState.set(city.stateName, existing);
-              }
-              const sortedStates = [...byState.entries()].sort(
-                (a, b) => a[0].localeCompare(b[0])
-              );
-              return sortedStates.map(([stateName, stateCities]) => (
-                <details key={stateName} className={styles.stateGroup}>
-                  <summary className={styles.stateSummary}>
-                    <span className={styles.stateSummaryName}>{stateName}</span>
-                    <span className={styles.stateSummaryCount}>{stateCities.length}</span>
-                    <span className={styles.stateSummaryArrow}>&rarr;</span>
-                  </summary>
-                  <nav
-                    className={styles.stateCityLinks}
-                    aria-label={`Cities in ${stateName}`}
-                  >
-                    {stateCities.map((city) => (
-                      <Link
-                        key={city.slug}
-                        href={`/locations/${city.slug}`}
-                        className={styles.cityLink}
-                      >
-                        {city.cityName}
-                      </Link>
-                    ))}
-                  </nav>
-                </details>
-              ));
-            })()}
           </div>
         </section>
 
