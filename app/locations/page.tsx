@@ -50,7 +50,7 @@ const locationSchema = {
 
 export default function LocationsPage() {
   return (
-    <main>
+    <main className={styles.page}>
       <JsonLd data={locationSchema} />
       <PageBackHeader href="/" label="Home" />
 

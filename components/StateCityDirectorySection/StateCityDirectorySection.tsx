@@ -1,24 +1,42 @@
 import Link from "next/link";
 import { states, cities } from "@/data/locations";
 import styles from "./StateCityDirectorySection.module.css";
+import StateCityDirectoryAccordion from "./StateCityDirectoryAccordion";
 
 type Props = {
   variant?: "home" | "locations";
 };
 
-export default function StateCityDirectorySection({
-  variant = "home",
-}: Props) {
-  const byState = new Map<string, typeof cities>();
+// Derive compact navigation data on the server — no heavy content shipped to client
+const buildNavGroups = () => {
+  const byState = new Map<string, { slug: string; cityName: string }[]>();
   for (const city of cities) {
     const existing = byState.get(city.stateName) || [];
-    existing.push(city);
+    existing.push({ slug: city.slug, cityName: city.cityName });
     byState.set(city.stateName, existing);
   }
 
   const sortedStates = [...byState.entries()].sort(
     (a, b) => a[0].localeCompare(b[0])
   );
+
+  return states.map((state) => {
+    const stateCities = (byState.get(state.name) || []).sort((a, b) =>
+      a.cityName.localeCompare(b.cityName)
+    );
+    return {
+      slug: state.slug,
+      name: state.name,
+      stateCode: state.stateCode,
+      cities: stateCities,
+    };
+  });
+};
+
+export default function StateCityDirectorySection({
+  variant = "home",
+}: Props) {
+  const navGroups = buildNavGroups();
 
   return (
     <section className={styles.directory}>
@@ -49,47 +67,7 @@ export default function StateCityDirectorySection({
           </p>
         </div>
 
-        <nav className={styles.grid} aria-label="States and cities">
-          {states.map((state) => {
-            const stateCities = (byState.get(state.name) || []).sort((a, b) =>
-              a.cityName.localeCompare(b.cityName)
-            );
-            return (
-              <details key={state.slug} className={styles.group}>
-                <summary className={styles.summary}>
-                  <span className={styles.sName}>{state.name}</span>
-                  <span className={styles.sCode}>{state.stateCode}</span>
-                  <span className={styles.sArrow}>&rarr;</span>
-                </summary>
-                <div className={styles.expandedContent}>
-                  <Link
-                    href={`/locations/${state.slug}`}
-                    className={styles.stateNavLink}
-                  >
-                    View {state.name} &rarr;
-                  </Link>
-                  {stateCities.length > 0 && (
-                    <nav
-                      className={styles.cityGrid}
-                      aria-label={`Cities in ${state.name}`}
-                    >
-                      {stateCities.map((city) => (
-                        <Link
-                          key={city.slug}
-                          href={`/locations/${city.slug}`}
-                          className={styles.cityLink}
-                        >
-                          {city.cityName}
-                          <span className={styles.cityArrow}>&rarr;</span>
-                        </Link>
-                      ))}
-                    </nav>
-                  )}
-                </div>
-              </details>
-            );
-          })}
-        </nav>
+        <StateCityDirectoryAccordion groups={navGroups} />
       </div>
     </section>
   );

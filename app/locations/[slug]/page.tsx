@@ -169,7 +169,7 @@ export default async function LocationPage({ params }: PageProps) {
   }
 
   return (
-    <main>
+    <main className={styles.page}>
       <JsonLd data={webPageSchema} />
       <JsonLd data={breadcrumbSchema} />
       <PageBackHeader href="/locations" label="Locations" />
