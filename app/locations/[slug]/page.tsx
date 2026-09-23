@@ -157,12 +157,12 @@ export default async function LocationPage({ params }: PageProps) {
     }
   }
 
-  // Featured cities on state pages
+  // State cities derived from canonical data
   let stateCities = null;
   if (isState) {
-    const matching = cities.filter(
-      (c) => c.stateSlug === location.slug
-    );
+    const matching = cities
+      .filter((c) => c.stateSlug === location.slug)
+      .sort((a, b) => a.cityName.localeCompare(b.cityName));
     if (matching.length > 0) {
       stateCities = matching;
     }
@@ -210,6 +210,52 @@ export default async function LocationPage({ params }: PageProps) {
         <div className={styles.divider} />
 
         <section className={styles.section}>
+          <h2>
+            {isState ? `About ${location.name}` : "Local Market Context"}
+          </h2>
+          {(isState ? location.marketContext : location.marketContext).map(
+            (para, i) => (
+              <p key={i} className={styles.businessContext}>
+                {para}
+              </p>
+            )
+          )}
+        </section>
+
+        <div className={styles.divider} />
+
+        {stateCities && stateCities.length > 0 && (
+          <>
+            <section className={styles.section}>
+              <h2>Cities in {stateName}</h2>
+              <nav
+                className={styles.stateCityList}
+                aria-label={`Cities in ${stateName}`}
+              >
+                {stateCities.map((city) => (
+                  <Link
+                    key={city.slug}
+                    href={`/locations/${city.slug}`}
+                    className={styles.stateCityLink}
+                  >
+                    <span className={styles.stateCityName}>
+                      {city.cityName}
+                    </span>
+                    <span
+                      className={styles.stateCityArrow}
+                      aria-hidden="true"
+                    >
+                      &rarr;
+                    </span>
+                  </Link>
+                ))}
+              </nav>
+            </section>
+            <div className={styles.divider} />
+          </>
+        )}
+
+        <section className={styles.section}>
           <h2>Our Services</h2>
           <p className={styles.sectionIntro}>
             StackSpacer provides four core development services for businesses in{" "}
@@ -236,52 +282,10 @@ export default async function LocationPage({ params }: PageProps) {
 
         <section className={styles.section}>
           <h2>
-            {isState ? `About ${location.name}` : "Local Market Context"}
+            {isState
+              ? `Why Businesses in ${stateName} Work With StackSpacer`
+              : "Why Businesses Work With StackSpacer"}
           </h2>
-          {(isState ? location.marketContext : location.marketContext).map(
-            (para, i) => (
-              <p key={i} className={styles.businessContext}>
-                {para}
-              </p>
-            )
-          )}
-        </section>
-
-        <div className={styles.divider} />
-
-        {stateCities && stateCities.length > 0 && (
-          <>
-            <section className={styles.section}>
-              <h2>Cities We Serve</h2>
-              <p className={styles.sectionIntro}>
-                StackSpacer currently serves businesses in the following cities
-                across {stateName}.
-              </p>
-              <div className={styles.cityGrid}>
-                {stateCities.map((city) => (
-                  <Link
-                    key={city.slug}
-                    href={`/locations/${city.slug}`}
-                    className={styles.cityCard}
-                  >
-                    <div className={styles.cityNameRow}>
-                      <span className={styles.cityNameText}>{city.cityName}</span>
-                      <span className={styles.cityStateBadge}>{city.stateCode}</span>
-                    </div>
-                    <p className={styles.cityPreview}>
-                      {city.introParagraphs[0].slice(0, 100)}...
-                    </p>
-                    <span className={styles.cardArrow}>&rarr;</span>
-                  </Link>
-                ))}
-              </div>
-            </section>
-            <div className={styles.divider} />
-          </>
-        )}
-
-        <section className={styles.section}>
-          <h2>Why Businesses Work With StackSpacer</h2>
           <div className={styles.deliveryNote}>
             <p>
               StackSpacer provides all development services for businesses in{" "}

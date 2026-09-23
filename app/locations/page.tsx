@@ -3,7 +3,6 @@ import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
 import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import StateCityDirectorySection from "@/components/StateCityDirectorySection/StateCityDirectorySection";
-import { cities } from "@/data/locations";
 import styles from "./LocationsPage.module.css";
 
 export const metadata: Metadata = {
@@ -73,36 +72,6 @@ export default function LocationsPage() {
         <div className={styles.divider} />
 
         <StateCityDirectorySection variant="locations" />
-
-        <div className={styles.divider} />
-
-        <section className={styles.section}>
-          <h2>Featured Cities</h2>
-          <p className={styles.sectionIntro}>
-            StackSpacer currently serves businesses in the following prominent
-            United States cities. Each city page describes how our services
-            apply to businesses in that market.
-          </p>
-
-          <div className={styles.cityGrid}>
-            {cities.map((city) => (
-              <Link
-                key={city.slug}
-                href={`/locations/${city.slug}`}
-                className={styles.cityCard}
-              >
-                <div className={styles.cityNameRow}>
-                  <span className={styles.cityNameText}>{city.cityName}</span>
-                  <span className={styles.cityStateBadge}>{city.stateCode}</span>
-                </div>
-                <p className={styles.cityPreview}>
-                  {city.introParagraphs[0].slice(0, 100)}...
-                </p>
-                <span className={styles.cardArrow}>&rarr;</span>
-              </Link>
-            ))}
-          </div>
-        </section>
 
         <div className={styles.divider} />
 
