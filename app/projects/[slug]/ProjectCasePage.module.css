@@ -966,17 +966,24 @@
 /* Final CTA */
 
 .finalSection {
-  text-align: center;
   border-bottom: 0;
 }
 
-.finalSection h2 {
+.finalCtaBand {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 120px 8% 100px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(var(--case-accent-rgb), 0.09), transparent 55%);
+}
+
+.finalCtaBand h2 {
   max-width: 680px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.finalSection p {
+.finalCtaBand p {
   max-width: 620px;
   margin: 24px auto 0;
   color: rgba(255, 255, 255, 0.56);
@@ -985,48 +992,63 @@
   line-height: 1.6;
 }
 
-.ctaButton {
+.finalCtaBand .ctaButton {
   margin-top: 34px;
-  min-height: 58px;
-  padding: 0 42px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  color: #000;
-  background: var(--case-accent);
+}
+
+.finalDivider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.finalRelatedBand {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 56px 8% 120px;
+}
+
+.finalRelatedLabel {
+  color: rgba(255, 255, 255, 0.3);
   font-family: var(--font-space-grotesk), sans-serif;
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0.18em;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  margin-bottom: 24px;
 }
 
-.ctaButton:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 50px rgba(var(--case-accent-rgb), 0.26);
+.finalRelatedGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 32px;
+  align-items: start;
 }
-
-/* Related Service below final CTA */
 
 .serviceLink {
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 7px;
+  padding: 24px 28px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.3s ease, background 0.3s ease;
+  height: 100%;
+}
+
+.serviceLink:hover {
+  border-color: rgba(var(--case-accent-rgb), 0.35);
+  background: rgba(var(--case-accent-rgb), 0.04);
 }
 
 .serviceLabel {
   display: block;
-  color: rgba(255, 255, 255, 0.42);
+  color: rgba(255, 255, 255, 0.35);
   font-family: var(--font-space-grotesk), sans-serif;
-  font-size: 0.62rem;
-  font-weight: 900;
+  font-size: 0.6rem;
+  font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -1036,12 +1058,11 @@
   align-items: center;
   color: var(--case-accent);
   font-family: var(--font-plus-jakarta), sans-serif;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.4;
-  transition:
-    color 0.3s ease,
-    transform 0.3s ease;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .serviceLinkButton:hover {
@@ -1049,7 +1070,64 @@
   transform: translateY(-2px);
 }
 
-/* Responsive */
+.insightLink {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.insightLinks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.insightCard {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--case-accent);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  text-align: left;
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+.insightCard:hover {
+  border-color: rgba(var(--case-accent-rgb), 0.35);
+  background: rgba(var(--case-accent-rgb), 0.06);
+  transform: translateY(-2px);
+}
+
+.insightCard:focus-visible {
+  outline: 2px solid var(--case-accent);
+  outline-offset: 2px;
+}
+
+.insightCardTitle {
+  flex: 1;
+  min-width: 0;
+}
+
+.insightCardArrow {
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: transform 0.3s ease;
+  color: var(--case-accent);
+  font-size: 1.1em;
+}
+
+.insightCard:hover .insightCardArrow {
+  transform: translateX(4px);
+}
 
 @media (max-width: 1200px) {
   .heroSection {
@@ -1403,87 +1481,63 @@
   }
 }
 
-.serviceLink {
-  margin-top: 18px;
-  gap: 6px;
+
+/* Final Section Responsive */
+@media (max-width: 950px) {
+  .finalCtaBand {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  .finalRelatedBand {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  .finalRelatedGrid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
 }
 
-.serviceLabel {
-  font-size: 0.54rem;
-}
+@media (max-width: 640px) {
+  .finalCtaBand {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 72px;
+    padding-bottom: 60px;
+  }
 
-.serviceLinkButton {
-  font-size: 0.82rem;
-}
+  .finalRelatedBand {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 40px;
+    padding-bottom: 72px;
+  }
 
-.insightLink {
-  margin-top: 12px;
-}
+  .finalDivider {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
 
-.insightLink .serviceLinkButton {
-  color: #d8af25;
-}
+  .finalRelatedLabel {
+    margin-bottom: 18px;
+  }
 
-.insightLink .serviceLinkButton:hover {
-  color: #e2b418;
-}
+  .finalRelatedGrid {
+    gap: 24px;
+  }
 
-.insightLinks {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+  .serviceLink {
+    padding: 20px 22px;
+  }
 
-/* Related Insight Cards */
-.insightCard {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 14px 18px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--case-accent);
-  font-family: var(--font-plus-jakarta), sans-serif;
-  font-size: 0.88rem;
-  font-weight: 600;
-  line-height: 1.4;
-  text-decoration: none;
-  text-align: left;
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
-  transition:
-    border-color 0.3s ease,
-    background 0.3s ease,
-    transform 0.3s ease;
-}
+  .insightLinks {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 
-.insightCard:hover {
-  border-color: rgba(var(--case-accent-rgb), 0.35);
-  background: rgba(var(--case-accent-rgb), 0.06);
-  transform: translateY(-2px);
-}
-
-.insightCard:focus-visible {
-  outline: 2px solid var(--case-accent);
-  outline-offset: 2px;
-}
-
-.insightCardTitle {
-  flex: 1;
-  min-width: 0;
-}
-
-.insightCardArrow {
-  flex-shrink: 0;
-  margin-top: 2px;
-  transition: transform 0.3s ease;
-  color: var(--case-accent);
-  font-size: 1.1em;
-}
-
-.insightCard:hover .insightCardArrow {
-  transform: translateX(4px);
+  .insightCard {
+    padding: 14px 16px;
+  }
 }

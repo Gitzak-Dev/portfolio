@@ -394,50 +394,59 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
       </section>
 
       <section className={styles.finalSection}>
-        <span className={styles.sectionLabel}>Start Yours</span>
+        <div className={styles.finalCtaBand}>
+          <span className={styles.sectionLabel}>Start Your Project</span>
 
-        <h2>{project.finalCta.title}</h2>
-        <p>{project.finalCta.text}</p>
+          <h2>{project.finalCta.title}</h2>
+          <p>{project.finalCta.text}</p>
 
-        <Link href="/#contact" className={styles.ctaButton} data-cursor="dark">
-          Start a Project <span>→</span>
-        </Link>
+          <Link href="/#contact" className={styles.ctaButton} data-cursor="dark">
+            Start a Project <span>→</span>
+          </Link>
+        </div>
 
-        {serviceMap[project.theme] && (
-          <div className={styles.serviceLink}>
-            <span className={styles.serviceLabel}>Related Service</span>
-            <Link
-              href={serviceMap[project.theme]}
-              className={styles.serviceLinkButton}
-            >
-              {project.category} →
-            </Link>
+        <div className={styles.finalDivider} />
+
+        <div className={styles.finalRelatedBand}>
+          <div className={styles.finalRelatedLabel}>Related to this project</div>
+          <div className={styles.finalRelatedGrid}>
+            {serviceMap[project.theme] && (
+              <div className={styles.serviceLink}>
+                <span className={styles.serviceLabel}>Related Service</span>
+                <Link
+                  href={serviceMap[project.theme]}
+                  className={styles.serviceLinkButton}
+                >
+                  {project.category} →
+                </Link>
+              </div>
+            )}
+
+            {project.insightSlugs && project.insightSlugs.length > 0 && (
+              <div className={styles.insightLink}>
+                <span className={styles.serviceLabel}>Related Reading</span>
+                <div className={styles.insightLinks}>
+                  {project.insightSlugs
+                    .map((slug) => {
+                      const title = insightById.get(slug);
+                      if (!title) return null;
+                      return (
+                        <Link
+                          key={slug}
+                          href={`/insights/${slug}`}
+                          className={styles.insightCard}
+                        >
+                          <span className={styles.insightCardTitle}>{title}</span>
+                          <span className={styles.insightCardArrow}>→</span>
+                        </Link>
+                      );
+                    })
+                    .filter(Boolean)}
+                </div>
+              </div>
+            )}
           </div>
-        )}
-
-        {project.insightSlugs && project.insightSlugs.length > 0 && (
-          <div className={styles.insightLink}>
-            <span className={styles.serviceLabel}>Related Reading</span>
-            <div className={styles.insightLinks}>
-              {project.insightSlugs
-                .map((slug) => {
-                  const title = insightById.get(slug);
-                  if (!title) return null;
-                  return (
-                    <Link
-                      key={slug}
-                      href={`/insights/${slug}`}
-                      className={styles.insightCard}
-                    >
-                      <span className={styles.insightCardTitle}>{title}</span>
-                      <span className={styles.insightCardArrow}>→</span>
-                    </Link>
-                  );
-                })
-                .filter(Boolean)}
-            </div>
-          </div>
-        )}
+        </div>
       </section>
     </main>
   );
