@@ -2,6 +2,7 @@
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
 import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
+import FaqAccordion from "@/components/FaqAccordion/FaqAccordion";
 import styles from "./MLPage.module.css";
 
 export const metadata: Metadata = {
@@ -200,31 +201,27 @@ export default function MLPage() {
 
         <section className={styles.section}>
           <h2>Common Questions</h2>
-          <div className={styles.faq}>
-            {[
+          <FaqAccordion
+            items={[
               {
-                q: "What types of ML projects does StackSpacer handle?",
-                a: "StackSpacer builds prediction models, classification systems, data dashboards, and ML pipelines. Each project is scoped based on the data available and the business questions being asked.",
+                question: "What types of ML projects does StackSpacer handle?",
+                answer: "StackSpacer builds prediction models, classification systems, data dashboards, and ML pipelines. Each project is scoped based on the data available and the business questions being asked.",
               },
               {
-                q: "Do I need a large dataset to start?",
-                a: "Not necessarily. The required dataset size depends on the type of model and the complexity of the predictions. StackSpacer can assess your data during the discovery phase and recommend the best approach.",
+                question: "Do I need a large dataset to start?",
+                answer: "Not necessarily. The required dataset size depends on the type of model and the complexity of the predictions. StackSpacer can assess your data during the discovery phase and recommend the best approach.",
               },
               {
-                q: "Can ML models be integrated with our existing systems?",
-                a: "Yes. StackSpacer can connect ML models to existing APIs, databases, and business tools through structured integration endpoints.",
+                question: "Can ML models be integrated with our existing systems?",
+                answer: "Yes. StackSpacer can connect ML models to existing APIs, databases, and business tools through structured integration endpoints.",
               },
               {
-                q: "How long does an ML project take?",
-                a: "Timeline depends on data quality, model complexity, and dashboard requirements. A focused prediction model with a clean interface can take a few weeks, while a full pipeline with ongoing training may take longer.",
+                question: "How long does an ML project take?",
+                answer: "Timeline depends on data quality, model complexity, and dashboard requirements. A focused prediction model with a clean interface can take a few weeks, while a full pipeline with ongoing training may take longer.",
               },
-            ].map((item, i) => (
-              <article key={i} className={styles.faqItem}>
-                <h3>{item.q}</h3>
-                <p>{item.a}</p>
-              </article>
-            ))}
-          </div>
+            ]}
+            ariaLabel="Frequently asked questions about Machine Learning"
+          />
         </section>
 
         <div className={styles.ctaSection}>

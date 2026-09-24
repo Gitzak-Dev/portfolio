@@ -2,6 +2,7 @@
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
 import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
+import FaqAccordion from "@/components/FaqAccordion/FaqAccordion";
 import styles from "./MobileAppPage.module.css";
 
 export const metadata: Metadata = {
@@ -203,31 +204,27 @@ export default function MobileAppPage() {
 
         <section className={styles.section}>
           <h2>Common Questions</h2>
-          <div className={styles.faq}>
-            {[
+          <FaqAccordion
+            items={[
               {
-                q: "What platforms does StackSpacer build for?",
-                a: "StackSpacer builds cross-platform apps for both iOS and Android using React Native, delivering a single codebase that runs on both platforms.",
+                question: "What platforms does StackSpacer build for?",
+                answer: "StackSpacer builds cross-platform apps for both iOS and Android using React Native, delivering a single codebase that runs on both platforms.",
               },
               {
-                q: "How long does a mobile app project take?",
-                a: "Timeline depends on feature complexity, design requirements, and backend integrations. A basic app may take a few weeks, while a full-featured product can take several months.",
+                question: "How long does a mobile app project take?",
+                answer: "Timeline depends on feature complexity, design requirements, and backend integrations. A basic app may take a few weeks, while a full-featured product can take several months.",
               },
               {
-                q: "Do you handle app store submission?",
-                a: "Yes. StackSpacer can guide the app through Apple App Store and Google Play Store submission processes, including required assets and metadata preparation.",
+                question: "Do you handle app store submission?",
+                answer: "Yes. StackSpacer can guide the app through Apple App Store and Google Play Store submission processes, including required assets and metadata preparation.",
               },
               {
-                q: "Can you work with an existing backend or API?",
-                a: "Yes. StackSpacer can integrate with existing backend systems, REST APIs, Firebase, or any documented API endpoint.",
+                question: "Can you work with an existing backend or API?",
+                answer: "Yes. StackSpacer can integrate with existing backend systems, REST APIs, Firebase, or any documented API endpoint.",
               },
-            ].map((item, i) => (
-              <article key={i} className={styles.faqItem}>
-                <h3>{item.q}</h3>
-                <p>{item.a}</p>
-              </article>
-            ))}
-          </div>
+            ]}
+            ariaLabel="Frequently asked questions about Mobile App Development"
+          />
         </section>
 
         <div className={styles.ctaSection}>

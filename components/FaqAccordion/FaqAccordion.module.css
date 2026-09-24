@@ -1,0 +1,146 @@
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.025);
+  overflow: hidden;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.row:hover {
+  border-color: rgba(216, 175, 37, 0.25);
+  background: rgba(216, 175, 37, 0.04);
+}
+
+.rowOpen {
+  border-color: rgba(216, 175, 37, 0.35);
+  background: rgba(216, 175, 37, 0.05);
+}
+
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 18px 24px;
+  min-height: 56px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  text-align: left;
+  transition: background 0.2s ease;
+}
+
+.question:focus-visible {
+  outline: 2px solid #d8af25;
+  outline-offset: -2px;
+}
+
+.questionText {
+  color: #ffffff;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.icon {
+  flex-shrink: 0;
+  color: #d8af25;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.25s ease;
+  width: 20px;
+  text-align: center;
+}
+
+.iconOpen {
+  transform: rotate(45deg);
+}
+
+.answerWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.answerWrapOpen {
+  grid-template-rows: 1fr;
+}
+
+.answerInner {
+  overflow: hidden;
+}
+
+.answerInner p {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.7;
+  margin: 0;
+  padding: 0 24px 20px 24px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .question {
+    padding: 16px 20px;
+  }
+
+  .answerInner p {
+    padding: 0 20px 16px 20px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .question {
+    padding: 16px 18px;
+    min-height: 48px;
+  }
+
+  .questionText {
+    font-size: 0.88rem;
+  }
+
+  .answerInner p {
+    font-size: 0.84rem;
+    padding: 0 18px 14px 18px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 430px) {
+  .questionText {
+    font-size: 0.82rem;
+  }
+
+  .answerInner p {
+    font-size: 0.78rem;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .answerWrap {
+    transition: none !important;
+  }
+
+  .row,
+  .question,
+  .icon {
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/seo/JsonLd";
 import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
+import FaqAccordion from "@/components/FaqAccordion/FaqAccordion";
 import { getLocationBySlug, cities, states } from "@/data/locations";
 import type { CityData, StateData, LocationData } from "@/data/locations";
 import Link from "next/link";
@@ -302,14 +303,10 @@ export default async function LocationPage({ params }: PageProps) {
 
         <section className={styles.section}>
           <h2>Common Questions</h2>
-          <div className={styles.faq}>
-            {location.faqs.map((faq, i) => (
-              <article key={i} className={styles.faqItem}>
-                <h3>{faq.question}</h3>
-                <p>{faq.answer}</p>
-              </article>
-            ))}
-          </div>
+          <FaqAccordion
+            items={location.faqs}
+            ariaLabel={`Frequently asked questions about ${isState ? stateName : cityName}`}
+          />
         </section>
 
         <div className={styles.divider} />

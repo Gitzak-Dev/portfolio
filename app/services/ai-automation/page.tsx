@@ -2,6 +2,7 @@
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
 import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
+import FaqAccordion from "@/components/FaqAccordion/FaqAccordion";
 import styles from "./AiAutomationPage.module.css";
 
 export const metadata: Metadata = {
@@ -207,31 +208,27 @@ export default function AiAutomationPage() {
 
         <section className={styles.section}>
           <h2>Common Questions</h2>
-          <div className={styles.faq}>
-            {[
+          <FaqAccordion
+            items={[
               {
-                q: "What types of AI automation can StackSpacer build?",
-                a: "StackSpacer builds AI chatbots, workflow automation systems, prompt-driven tools, and AI-integrated dashboards. Each solution is designed around the specific tasks and processes your business handles manually.",
+                question: "What types of AI automation can StackSpacer build?",
+                answer: "StackSpacer builds AI chatbots, workflow automation systems, prompt-driven tools, and AI-integrated dashboards. Each solution is designed around the specific tasks and processes your business handles manually.",
               },
               {
-                q: "Does AI automation replace human work?",
-                a: "AI automation is designed to handle repetitive tasks so your team can focus on higher-value work. It complements existing processes rather than replacing them entirely.",
+                question: "Does AI automation replace human work?",
+                answer: "AI automation is designed to handle repetitive tasks so your team can focus on higher-value work. It complements existing processes rather than replacing them entirely.",
               },
               {
-                q: "How long does an AI automation project take?",
-                a: "Timeline depends on the complexity of the workflows, number of integrations, and the scope of AI capabilities required. A simple chatbot may take a few weeks, while a complex multi-step automation system can take longer.",
+                question: "How long does an AI automation project take?",
+                answer: "Timeline depends on the complexity of the workflows, number of integrations, and the scope of AI capabilities required. A simple chatbot may take a few weeks, while a complex multi-step automation system can take longer.",
               },
               {
-                q: "Can AI automation connect to our existing tools?",
-                a: "Yes. StackSpacer can integrate AI systems with your existing APIs, databases, and business tools through structured connectors and workflow triggers.",
+                question: "Can AI automation connect to our existing tools?",
+                answer: "Yes. StackSpacer can integrate AI systems with your existing APIs, databases, and business tools through structured connectors and workflow triggers.",
               },
-            ].map((item, i) => (
-              <article key={i} className={styles.faqItem}>
-                <h3>{item.q}</h3>
-                <p>{item.a}</p>
-              </article>
-            ))}
-          </div>
+            ]}
+            ariaLabel="Frequently asked questions about AI Automation"
+          />
         </section>
 
         <div className={styles.ctaSection}>

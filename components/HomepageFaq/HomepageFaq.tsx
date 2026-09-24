@@ -1,6 +1,4 @@
-"use client";
-
-import { useState } from "react";
+import FaqAccordion from "@/components/FaqAccordion/FaqAccordion";
 import styles from "./HomepageFaq.module.css";
 
 type FaqItem = {
@@ -32,61 +30,18 @@ const faqs: FaqItem[] = [
 ];
 
 export default function HomepageFaq() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const toggle = (index: number) => {
-    setOpenIndex((prev) => (prev === index ? null : index));
-  };
-
   return (
-    <section
-      className={styles.faqSection}
-      id="faq"
-      aria-label="Frequently asked questions"
-    >
+    <section className={styles.faqSection} id="faq" aria-label="Frequently asked questions">
       <div className={styles.bgGrid} />
       <div className={styles.container}>
         <div className={styles.header}>
           <span className={styles.eyebrow}>// FAQ</span>
           <h2>Common Questions</h2>
         </div>
-        <div className={styles.faqList}>
-          {faqs.map((item, i) => {
-            const isOpen = openIndex === i;
-            return (
-              <article
-                key={i}
-                className={`${styles.faqItem}${isOpen ? ` ${styles.faqItemOpen}` : ""}`}
-              >
-                <button
-                  type="button"
-                  className={styles.faqQuestion}
-                  onClick={() => toggle(i)}
-                  aria-expanded={isOpen}
-                  aria-controls={`faq-answer-${i}`}
-                >
-                  <span className={styles.faqQuestionText}>{item.q}</span>
-                  <span
-                    className={`${styles.faqIcon}${isOpen ? ` ${styles.faqIconOpen}` : ""}`}
-                    aria-hidden="true"
-                  >
-                    +
-                  </span>
-                </button>
-                <div
-                  id={`faq-answer-${i}`}
-                  className={`${styles.faqAnswerWrap}${isOpen ? ` ${styles.faqAnswerWrapOpen}` : ""}`}
-                  role="region"
-                  aria-labelledby={`faq-question-${i}`}
-                >
-                  <div className={styles.faqAnswer}>
-                    <p>{item.a}</p>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+        <FaqAccordion
+          items={faqs.map((f) => ({ question: f.q, answer: f.a }))}
+          ariaLabel="Frequently asked questions about StackSpacer"
+        />
       </div>
     </section>
   );

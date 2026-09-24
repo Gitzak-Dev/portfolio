@@ -2,6 +2,7 @@
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
 import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
+import FaqAccordion from "@/components/FaqAccordion/FaqAccordion";
 import styles from "./WebDevPage.module.css";
 
 export const metadata: Metadata = {
@@ -217,31 +218,27 @@ export default function WebDevPage() {
 
         <section className={styles.section}>
           <h2>Common Questions</h2>
-          <div className={styles.faq}>
-            {[
+          <FaqAccordion
+            items={[
               {
-                q: "What types of websites does StackSpacer build?",
-                a: "StackSpacer builds landing pages, business websites, dashboards, web applications, and portfolio sites. Each project is custom-built based on the specific requirements and goals.",
+                question: "What types of websites does StackSpacer build?",
+                answer: "StackSpacer builds landing pages, business websites, dashboards, web applications, and portfolio sites. Each project is custom-built based on the specific requirements and goals.",
               },
               {
-                q: "How long does a web development project take?",
-                a: "Timeline depends on scope, design complexity, integrations, and content requirements. A simple landing page may take a few days, while a full business website typically takes a few weeks.",
+                question: "How long does a web development project take?",
+                answer: "Timeline depends on scope, design complexity, integrations, and content requirements. A simple landing page may take a few days, while a full business website typically takes a few weeks.",
               },
               {
-                q: "Do you handle hosting and deployment?",
-                a: "Yes. StackSpacer can deploy projects to hosting platforms such as Vercel, Hostinger, or other providers. Deployment and ongoing hosting setup are discussed during the project kickoff.",
+                question: "Do you handle hosting and deployment?",
+                answer: "Yes. StackSpacer can deploy projects to hosting platforms such as Vercel, Hostinger, or other providers. Deployment and ongoing hosting setup are discussed during the project kickoff.",
               },
               {
-                q: "Will the website be mobile-friendly?",
-                a: "Every project is built with a mobile-first approach. All pages are tested across desktop, tablet, and mobile devices to ensure a consistent experience.",
+                question: "Will the website be mobile-friendly?",
+                answer: "Every project is built with a mobile-first approach. All pages are tested across desktop, tablet, and mobile devices to ensure a consistent experience.",
               },
-            ].map((item, i) => (
-              <article key={i} className={styles.faqItem}>
-                <h3>{item.q}</h3>
-                <p>{item.a}</p>
-              </article>
-            ))}
-          </div>
+            ]}
+            ariaLabel="Frequently asked questions about Web Development"
+          />
         </section>
 
         <div className={styles.ctaSection}>

@@ -2,6 +2,7 @@
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/seo/JsonLd";
 import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
+import FaqAccordion from "@/components/FaqAccordion/FaqAccordion";
 import { getPublishedInsightBySlug, getStaticInsights, getPublishedDbInsights } from "@/lib/insightsRepository";
 import { projects as canonicalProjects } from "@/data/projects";
 import styles from "./InsightPage.module.css";
@@ -194,12 +195,10 @@ export default async function InsightPage({ params }: PageProps) {
         {insight.faqs && insight.faqs.length > 0 && (
           <section className={styles.faqSection}>
             <h2>Common Questions</h2>
-            {insight.faqs.map((faq, index) => (
-              <article key={index} className={styles.faqItem}>
-                <h3>{faq.question}</h3>
-                <p>{faq.answer}</p>
-              </article>
-            ))}
+            <FaqAccordion
+              items={insight.faqs}
+              ariaLabel="Frequently asked questions about this article"
+            />
           </section>
         )}
 
