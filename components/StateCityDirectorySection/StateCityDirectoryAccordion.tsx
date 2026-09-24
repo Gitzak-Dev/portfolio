@@ -1,7 +1,8 @@
 "use client";
 
+import { useState, useRef, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
-import { useRef, useEffect, useCallback } from "react";
 import styles from "./StateCityDirectorySection.module.css";
 
 type NavCity = {
@@ -21,36 +22,45 @@ type Props = {
 };
 
 export default function StateCityDirectoryDrawer({ groups }: Props) {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const triggerRef = useRef<HTMLButtonElement | null>(null);
-  const openSlug = useRef<string | null>(null);
+  const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const previousBodyOverflow = useRef<string | null>(null);
+  const triggerRef = useRef<Map<string, HTMLButtonElement>>(new Map());
 
-  const getSelected = useCallback(() => {
-    return groups.find((g) => g.slug === openSlug.current) || null;
-  }, [groups]);
+  const selected =
+    groups.find((g) => g.slug === selectedSlug) ?? null;
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
 
   const openDrawer = useCallback(
-    (slug: string, button: HTMLButtonElement) => {
-      triggerRef.current = button;
-      openSlug.current = slug;
-      const dialog = dialogRef.current;
-      if (!dialog) return;
-      dialog.showModal();
+    (slug: string, btn: HTMLButtonElement) => {
+      triggerRef.current.set(slug, btn);
+      setSelectedSlug(slug);
     },
     []
   );
 
   const closeDrawer = useCallback(() => {
-    openSlug.current = null;
-    triggerRef.current = null;
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-    dialog.close();
-  }, []);
+    if (previousBodyOverflow.current !== null) {
+      document.body.style.overflow = previousBodyOverflow.current;
+      previousBodyOverflow.current = null;
+    }
+    const slug = selectedSlug;
+    setSelectedSlug(null);
+    const btn = triggerRef.current.get(slug ?? "") ?? null;
+    if (btn) {
+      btn.focus();
+    }
+  }, [selectedSlug]);
 
   useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
+    if (!mounted || !selectedSlug) return;
+
+    previousBodyOverflow.current = document.body.style.overflow ?? "";
+    document.body.style.overflow = "hidden";
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -59,24 +69,28 @@ export default function StateCityDirectoryDrawer({ groups }: Props) {
       }
     };
 
-    dialog.addEventListener("keydown", handleKeyDown);
-    return () => dialog.removeEventListener("keydown", handleKeyDown);
-  }, [closeDrawer]);
-
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-
-    const handleClose = () => {
-      openSlug.current = null;
-      triggerRef.current?.focus();
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      if (selectedSlug === null && previousBodyOverflow.current !== null) {
+        document.body.style.overflow = previousBodyOverflow.current;
+        previousBodyOverflow.current = null;
+      }
     };
+  }, [mounted, selectedSlug, closeDrawer]);
 
-    dialog.addEventListener("close", handleClose);
-    return () => dialog.removeEventListener("close", handleClose);
-  }, []);
+  const handleBackdropClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if ((e.target as HTMLElement).classList.contains(styles.drawerOverlay)) {
+        closeDrawer();
+      }
+    },
+    [closeDrawer]
+  );
 
-  const selected = getSelected();
+  const handleLinkNavigate = useCallback(() => {
+    closeDrawer();
+  }, [closeDrawer]);
 
   return (
     <>
@@ -85,15 +99,24 @@ export default function StateCityDirectoryDrawer({ groups }: Props) {
           <button
             key={group.slug}
             type="button"
-            className={`${styles.group}${selected?.slug === group.slug ? ` ${styles.groupActive}` : ""}`}
-            onClick={(e) => openDrawer(group.slug, e.currentTarget)}
-            aria-expanded={selected?.slug === group.slug}
-            aria-controls="state-directory-drawer"
+            ref={(el) => {
+              if (el) {
+                triggerRef.current.set(group.slug, el);
+              } else {
+                triggerRef.current.delete(group.slug);
+              }
+            }}
+            className={`${styles.group}${selectedSlug === group.slug ? ` ${styles.groupActive}` : ""}`}
+            onClick={(e) =>
+              openDrawer(group.slug, e.currentTarget as HTMLButtonElement)
+            }
+            aria-expanded={selectedSlug === group.slug}
+            aria-controls="state-location-drawer"
           >
             <span className={styles.sName}>{group.name}</span>
             <span className={styles.sCode}>{group.stateCode}</span>
             <span
-              className={`${styles.sArrow}${selected?.slug === group.slug ? ` ${styles.sArrowOpen}` : ""}`}
+              className={`${styles.sArrow}${selectedSlug === group.slug ? ` ${styles.sArrowOpen}` : ""}`}
               aria-hidden="true"
             >
               →
@@ -102,68 +125,82 @@ export default function StateCityDirectoryDrawer({ groups }: Props) {
         ))}
       </nav>
 
-      <dialog
-        ref={dialogRef}
-        id="state-directory-drawer"
-        className={styles.drawer}
-        aria-label={`Cities in ${selected?.name ?? ""}`}
-      >
-        <div className={styles.drawerInner}>
-          <div className={styles.drawerHeader}>
-            <div>
-              <span className={styles.drawerStateName}>
-                {selected?.name ?? ""}
-              </span>
-              <span className={styles.drawerStateCode}>
-                {selected?.stateCode ?? ""}
-              </span>
-            </div>
-            <button
-              type="button"
-              className={styles.drawerClose}
-              onClick={closeDrawer}
-              aria-label="Close directory"
+      {mounted && selectedSlug && selected &&
+        createPortal(
+          <>
+            <div
+              className={styles.drawerOverlay}
+              onClick={handleBackdropClick}
+              aria-hidden="true"
+            />
+            <div
+              id="state-location-drawer"
+              className={styles.drawerPanel}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="state-location-drawer-title"
             >
-              ✕
-            </button>
-          </div>
-
-          {selected && (
-            <>
-              <Link
-                href={`/locations/${selected.slug}`}
-                className={styles.drawerStateLink}
-                onClick={closeDrawer}
-              >
-                View {selected.name} →
-              </Link>
-
-              {selected.cities.length > 0 && (
-                <div className={styles.drawerBody}>
-                  <p className={styles.drawerSectionLabel}>Cities</p>
-                  <div className={styles.cityList}>
-                    {selected.cities.map((city) => (
-                      <Link
-                        key={city.slug}
-                        href={`/locations/${city.slug}`}
-                        className={styles.cityRow}
-                        onClick={closeDrawer}
-                      >
-                        <span className={styles.cityName}>
-                          {city.cityName}
-                        </span>
-                        <span className={styles.cityArrow} aria-hidden="true">
-                          →
-                        </span>
-                      </Link>
-                    ))}
+              <div className={styles.drawerInner}>
+                <div className={styles.drawerHeader}>
+                  <div>
+                    <h2 id="state-location-drawer-title">
+                      {selected.name}
+                    </h2>
+                    <span className={styles.drawerStateCode}>
+                      {selected.stateCode}
+                    </span>
                   </div>
+                  <button
+                    type="button"
+                    className={styles.drawerClose}
+                    onClick={closeDrawer}
+                    aria-label="Close locations drawer"
+                  >
+                    ×
+                  </button>
                 </div>
-              )}
-            </>
-          )}
-        </div>
-      </dialog>
+
+                <Link
+                  href={`/locations/${selected.slug}`}
+                  className={styles.drawerStateLink}
+                  onClick={handleLinkNavigate}
+                >
+                  View {selected.name} →
+                </Link>
+
+                {selected.cities.length > 0 && (
+                  <div className={styles.drawerBody}>
+                    <p className={styles.drawerSectionLabel}>Cities</p>
+                    <nav
+                      className={styles.cityList}
+                      aria-label={`Cities in ${selected.name}`}
+                    >
+                      {selected.cities.map((city) => (
+                        <Link
+                          key={city.slug}
+                          href={`/locations/${city.slug}`}
+                          className={styles.cityRow}
+                          onClick={handleLinkNavigate}
+                        >
+                          <span className={styles.cityName}>
+                            {city.cityName}
+                          </span>
+                          <span
+                            className={styles.cityArrow}
+                            aria-hidden="true"
+                          >
+                            →
+                          </span>
+                        </Link>
+                      ))}
+                    </nav>
+                  </div>
+                )}
+              </div>
+            </div>
+          </>,
+          document.body
+        )}
     </>
   );
 }

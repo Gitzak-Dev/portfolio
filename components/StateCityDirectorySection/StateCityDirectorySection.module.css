@@ -123,68 +123,62 @@
 }
 
 /* =====================
-   DRAWER (native dialog)
+   BACKDROP OVERLAY
 ===================== */
 
-.drawer {
+.drawerOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.40);
+  z-index: 1090;
+  animation: overlayFadeIn 0.25s ease forwards;
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* =====================
+   DRAWER PANEL (portal)
+===================== */
+
+.drawerPanel {
   position: fixed;
   top: 0;
   right: 0;
+  bottom: 0;
+  left: auto;
   width: clamp(320px, 34vw, 440px);
   height: 100dvh;
   max-height: 100dvh;
-  padding: 0;
-  margin: 0;
   z-index: 1100;
-  background: #0a0a0a;
-  border: 1px solid rgba(216, 175, 37, 0.18);
-  border-left: none;
-  border-radius: 0;
-  box-shadow: -24px 0 60px rgba(0, 0, 0, 0.55);
+  background: #090909;
+  border-left: 1px solid rgba(216, 175, 37, 0.18);
+  box-shadow: -24px 0 60px rgba(0, 0, 0, 0.50);
   color: #fff;
   font-family: inherit;
   overflow-y: auto;
   overscroll-behavior: contain;
-  transform: translateX(0);
   animation: drawerSlideIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.drawer::-webkit-scrollbar {
+.drawerPanel::-webkit-scrollbar {
   width: 4px;
 }
 
-.drawer::-webkit-scrollbar-track {
+.drawerPanel::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.drawer::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+.drawerPanel::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.10);
   border-radius: 2px;
 }
 
-.drawer::backdrop {
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  animation: backdropFadeIn 0.28s ease forwards;
-}
-
 @keyframes drawerSlideIn {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-@keyframes backdropFadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
 }
 
 .drawerInner {
@@ -203,8 +197,8 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.drawerStateName {
-  display: block;
+.drawerHeader h2 {
+  margin: 0;
   font-family: var(--font-plus-jakarta), sans-serif;
   font-size: 1.35rem;
   font-weight: 800;
@@ -218,7 +212,7 @@
   font-family: var(--font-space-grotesk), sans-serif;
   font-size: 0.72rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.30);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-top: 4px;
@@ -226,24 +220,24 @@
 
 .drawerClose {
   flex: 0 0 auto;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.50);
+  font-size: 1.2rem;
   cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-  margin-top: 2px;
+  line-height: 1;
 }
 
 .drawerClose:hover {
-  background: rgba(216, 175, 37, 0.1);
-  border-color: rgba(216, 175, 37, 0.35);
+  background: rgba(216, 175, 37, 0.10);
+  border-color: rgba(216, 175, 37, 0.40);
   color: #d8af25;
 }
 
@@ -281,7 +275,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.28);
-  margin-bottom: 2px;
+  margin: 0 0 2px 0;
 }
 
 .cityList {
@@ -314,12 +308,15 @@
   background: rgba(216, 175, 37, 0.06);
 }
 
+.cityRow:focus-visible {
+  outline: 2px solid #d8af25;
+  outline-offset: -2px;
+}
+
 .cityName {
   flex: 1;
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  word-break: break-word;
 }
 
 .cityArrow {
@@ -352,7 +349,7 @@
     padding: 72px 5% 80px;
   }
 
-  .drawer {
+  .drawerPanel {
     width: clamp(280px, 50vw, 400px);
   }
 }
@@ -376,7 +373,7 @@
     margin: 0;
   }
 
-  .drawer {
+  .drawerPanel {
     width: 100%;
     right: auto;
     left: 0;
@@ -391,12 +388,8 @@
   }
 
   @keyframes drawerBottomIn {
-    from {
-      transform: translateY(100%);
-    }
-    to {
-      transform: translateY(0);
-    }
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
   }
 
   .drawerInner {
@@ -415,8 +408,8 @@
 ===================== */
 
 @media (prefers-reduced-motion: reduce) {
-  .drawer,
-  .drawer::backdrop {
+  .drawerOverlay,
+  .drawerPanel {
     animation: none !important;
     transition-duration: 0.01ms !important;
   }
