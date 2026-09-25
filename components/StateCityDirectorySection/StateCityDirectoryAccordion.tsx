@@ -26,6 +26,8 @@ export default function StateCityDirectoryDrawer({ groups }: Props) {
   const [mounted, setMounted] = useState(false);
   const previousBodyOverflow = useRef<string | null>(null);
   const triggerRef = useRef<Map<string, HTMLButtonElement>>(new Map());
+  const drawerPanelRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   const selected =
     groups.find((g) => g.slug === selectedSlug) ?? null;
@@ -62,15 +64,55 @@ export default function StateCityDirectoryDrawer({ groups }: Props) {
     previousBodyOverflow.current = document.body.style.overflow ?? "";
     document.body.style.overflow = "hidden";
 
+    // Move initial focus into the dialog (close button).
+    const raf = requestAnimationFrame(() => {
+      closeBtnRef.current?.focus();
+    });
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         e.preventDefault();
         closeDrawer();
+        return;
+      }
+
+      if (e.key !== "Tab") return;
+
+      const panel = drawerPanelRef.current;
+      if (!panel) return;
+
+      const focusable = Array.from(
+        panel.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((el) => el.offsetParent !== null || el === document.activeElement);
+
+      if (focusable.length === 0) {
+        e.preventDefault();
+        panel.setAttribute("tabindex", "-1");
+        panel.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     };
 
     document.addEventListener("keydown", handleKeyDown);
     return () => {
+      cancelAnimationFrame(raf);
       document.removeEventListener("keydown", handleKeyDown);
       if (selectedSlug === null && previousBodyOverflow.current !== null) {
         document.body.style.overflow = previousBodyOverflow.current;
@@ -135,6 +177,7 @@ export default function StateCityDirectoryDrawer({ groups }: Props) {
             />
             <div
               id="state-location-drawer"
+              ref={drawerPanelRef}
               className={styles.drawerPanel}
               role="dialog"
               aria-modal="true"
@@ -151,6 +194,7 @@ export default function StateCityDirectoryDrawer({ groups }: Props) {
                     </span>
                   </div>
                   <button
+                    ref={closeBtnRef}
                     type="button"
                     className={styles.drawerClose}
                     onClick={closeDrawer}

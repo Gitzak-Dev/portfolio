@@ -48,7 +48,7 @@ export async function generateMetadata({
     title = location.seoTitle;
     description = location.seoDescription;
   } else {
-    title = `Software Development in ${location.cityName}, ${location.stateName}`;
+    title = `Software Development in ${location.cityName}, ${location.stateName} | StackSpacer`;
     description = location.seoDescription;
   }
 

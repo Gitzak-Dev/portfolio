@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 
   title: {
     default: "StackSpacer | Web, Mobile App, AI & ML Development",
-    template: "%s | StackSpacer",
+    template: "%s",
   },
 
   description:
@@ -79,7 +79,6 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <head>
-        <link rel="preload" as="image" href="/character-1.webp" />
         {/* STEP 3 — Set consent defaults BEFORE GTM */}
         <Script
           id="google-consent-defaults"

@@ -6,7 +6,7 @@ import StateCityDirectorySection from "@/components/StateCityDirectorySection/St
 import styles from "./LocationsPage.module.css";
 
 export const metadata: Metadata = {
-  title: "Software Development Across the United States",
+  title: "Software Development Across the United States | StackSpacer",
   description:
     "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across the United States. Explore our city and state service areas.",
   alternates: {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/locations",
     siteName: "StackSpacer",
-    title: "Software Development Across the United States",
+    title: "Software Development Across the United States | StackSpacer",
     description:
       "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across the United States.",
   },
