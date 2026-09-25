@@ -11,7 +11,7 @@ export const siteConfig = {
   description:
     "StackSpacer builds mobile apps, AI automation systems, machine learning solutions, and modern web applications for startups and businesses.",
 
-  email: "hanidev@gmail.com",
+  email: "stackspacer@gmail.com",
 
   services: [
     {

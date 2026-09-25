@@ -25,7 +25,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: "How can I contact StackSpacer?",
-    a: "You can reach StackSpacer through the contact form on this page or by email at hanidev@gmail.com.",
+    a: "You can reach StackSpacer through the contact form on this page or by email at stackspacer@gmail.com.",
   },
 ];
 

@@ -98,7 +98,7 @@ const faqPageSchema = {
       name: "How can I contact StackSpacer?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "You can reach StackSpacer through the contact form on this page or by email at hanidev@gmail.com.",
+        text: "You can reach StackSpacer through the contact form on this page or by email at stackspacer@gmail.com.",
       },
     },
   ],

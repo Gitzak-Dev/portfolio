@@ -5,6 +5,7 @@ import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import FaqAccordion from "@/components/FaqAccordion/FaqAccordion";
 import { getPublishedInsightBySlug, getStaticInsights, getPublishedDbInsights } from "@/lib/insightsRepository";
 import { projects as canonicalProjects } from "@/data/projects";
+import { siteConfig } from "@/config/site";
 import styles from "./InsightPage.module.css";
 
 const SERVICE_LABELS: Record<string, string> = {
@@ -109,7 +110,7 @@ export default async function InsightPage({ params }: PageProps) {
     "@id": `${baseUrl}/#organization`,
     name: "StackSpacer",
     url: baseUrl,
-    email: "hanidev@gmail.com",
+    email: siteConfig.email,
     description:
       "StackSpacer builds mobile apps, AI automation systems, machine learning solutions, and modern web applications for startups and businesses.",
     areaServed: {
