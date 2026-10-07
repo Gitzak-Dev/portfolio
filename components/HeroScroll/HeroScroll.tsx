@@ -55,6 +55,8 @@ type HeroItem = {
   badge: string;
   desc: string;
   image: string;
+  width: number;
+  height: number;
   headline: HeadlineLine[];
   stats: StatItem[];
   icons: FloatingIconItem[];
@@ -66,6 +68,8 @@ const HERO_DATA: HeroItem[] = [
     badge: "MOBILE APP DEVELOPMENT",
     desc: "Mobile experiences designed for clear navigation and everyday use.\nResponsive interfaces built around practical user flows.",
     image: "/character-1.webp",
+    width: 440,
+    height: 567,
     headline: [
       [
         { text: "StackSpacer ", tone: "white" },
@@ -161,6 +165,8 @@ const HERO_DATA: HeroItem[] = [
     badge: "AI DEVELOPMENT",
     desc: "AI tools and automated workflows for practical business tasks.\nChatbots and automation designed around how teams work.",
     image: "/character-2.webp",
+    width: 377,
+    height: 662,
     headline: [
       [
         { text: "StackSpacer ", tone: "white" },
@@ -248,6 +254,8 @@ const HERO_DATA: HeroItem[] = [
     badge: "MACHINE LEARNING",
     desc: "Machine learning for prediction, analysis, and decision support.\nModels that turn business data into useful signals.",
     image: "/character-3.webp",
+    width: 385,
+    height: 648,
     headline: [
       [
         { text: "StackSpacer ", tone: "white" },
@@ -568,6 +576,8 @@ export default function HeroScroll() {
                   key={activeItem.id}
                   src={activeItem.image}
                   alt={activeItem.badge}
+                  width={activeItem.width}
+                  height={activeItem.height}
                   className={styles.characterImage}
                   initial={{ opacity: 1, scale: 0.92, y: 30, rotate: -2 }}
                   animate={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
