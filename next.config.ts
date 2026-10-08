@@ -63,6 +63,17 @@ const nextConfig: NextConfig = {
         destination: "/locations/miami-florida",
         permanent: true,
       },
+      {
+        has: [
+          {
+            type: "host",
+            value: "www.stackspacer.com",
+          },
+        ],
+        source: "/:path*",
+        destination: "https://stackspacer.com/:path*",
+        permanent: true,
+      },
     ];
   },
 

@@ -57,12 +57,60 @@ const breadcrumbSchema = {
     })),
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What types of AI automation can StackSpacer build?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "StackSpacer builds AI chatbots, workflow automation systems, prompt-driven tools, and AI-integrated dashboards. Each solution is designed around the specific tasks and processes your business handles manually.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Does AI automation replace human work?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "AI automation is designed to handle repetitive tasks so your team can focus on higher-value work. It complements existing processes rather than replacing them entirely.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How long does an AI automation project take?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Timeline depends on the complexity of the workflows, number of integrations, and the scope of AI capabilities required. A simple chatbot may take a few weeks, while a complex multi-step automation system can take longer.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can AI automation connect to our existing tools?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. StackSpacer can integrate AI systems with your existing APIs, databases, and business tools through structured connectors and workflow triggers.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What affects the cost of an AI automation project?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Project cost is shaped by workflow complexity, number of integrations, AI model requirements, prompt engineering depth, testing scope, deployment environment, and ongoing maintenance needs. StackSpacer provides a project-specific estimate after the workflow audit.",
+      },
+    },
+  ],
+};
+
 export default function AiAutomationPage() {
   return (
     <main className={styles.page}>
       <PageBackHeader href="/services" />
       <JsonLd data={serviceSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={faqSchema} />
 
       <div className={styles.container}>
         <header className={styles.hero}>
@@ -82,7 +130,8 @@ export default function AiAutomationPage() {
           <p className={styles.heroDesc}>
             StackSpacer provides AI automation services for businesses across
             the United States, with project communication and delivery
-            coordinated online.
+            coordinated online. You work directly with the developer — not an
+            account manager or a rotating team.
           </p>
           <Link href="/#contact" className={styles.ctaButton}>
             Discuss Your Project <span>↗</span>
@@ -202,6 +251,28 @@ export default function AiAutomationPage() {
               RAG vs AI Agents: Architecture Choices for Different Problems →
             </Link>
           </div>
+        </section>
+
+        <div className={styles.divider} />
+
+        <section className={styles.section}>
+          <h2>Cost &amp; Scope</h2>
+          <p className={styles.costIntro}>
+            Every AI automation project is scoped individually. The following
+            factors shape timeline and investment:
+          </p>
+          <ul className={styles.costList}>
+            <li>Workflow complexity and number of automation steps</li>
+            <li>Third-party integrations and API connections</li>
+            <li>AI model requirements and prompt engineering depth</li>
+            <li>Data access and security requirements</li>
+            <li>Testing scope and edge-case coverage</li>
+            <li>Deployment environment and ongoing maintenance</li>
+          </ul>
+          <p className={styles.costNote}>
+            Tell us what you want to build and StackSpacer can provide a
+            project-specific estimate.
+          </p>
         </section>
 
         <div className={styles.divider} />

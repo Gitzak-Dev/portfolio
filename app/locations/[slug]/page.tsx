@@ -149,6 +149,21 @@ export default async function LocationPage({ params }: PageProps) {
     breadcrumb: breadcrumbSchema,
   };
 
+  const faqPageSchema = !isState
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: location.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      }
+    : null;
+
   // Parent state link for city pages
   let parentStateLink = null;
   if (!isState) {
@@ -173,6 +188,7 @@ export default async function LocationPage({ params }: PageProps) {
     <main className={styles.page}>
       <JsonLd data={webPageSchema} />
       <JsonLd data={breadcrumbSchema} />
+      {faqPageSchema && <JsonLd data={faqPageSchema} />}
       <PageBackHeader href="/locations" label="Locations" />
 
       <div className={styles.container}>

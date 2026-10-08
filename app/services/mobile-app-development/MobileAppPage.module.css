@@ -262,6 +262,52 @@
   color: #e2b418;
 }
 
+.costIntro {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.costList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 24px;
+}
+
+.costList li {
+  position: relative;
+  padding-left: 18px;
+
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.costList li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+
+  background: var(--gold);
+}
+
+.costNote {
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  font-style: italic;
+}
+
 @media (max-width: 700px) {
   .page {
     padding: 76px 6% 0;

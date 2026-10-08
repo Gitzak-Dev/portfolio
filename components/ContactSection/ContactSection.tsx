@@ -71,8 +71,8 @@ export default function ContactSection() {
       // Personal form information is NOT included in this event.
       pushToDataLayer({
         event: "generate_lead",
-        lead_source: "contact_form",
-        form_name: "main_contact_form",
+        form_name: "contact",
+        page_path: typeof window !== "undefined" ? window.location.pathname : "",
       });
 
       setStatus("success");

@@ -57,12 +57,60 @@ const breadcrumbSchema = {
     })),
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What platforms does StackSpacer build for?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "StackSpacer builds cross-platform apps for both iOS and Android using React Native, delivering a single codebase that runs on both platforms.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How long does a mobile app project take?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Timeline depends on feature complexity, design requirements, and backend integrations. A basic app may take a few weeks, while a full-featured product can take several months.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do you handle app store submission?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. StackSpacer can guide the app through Apple App Store and Google Play Store submission processes, including required assets and metadata preparation.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can you work with an existing backend or API?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. StackSpacer can integrate with existing backend systems, REST APIs, Firebase, or any documented API endpoint.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What affects the cost of a mobile app project?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Project cost is shaped by feature scope, screen count, third-party integrations, authentication requirements, backend complexity, design depth, testing scope, app store submission, and ongoing maintenance needs. StackSpacer provides a project-specific estimate after discovery.",
+      },
+    },
+  ],
+};
+
 export default function MobileAppPage() {
   return (
     <main className={styles.page}>
       <PageBackHeader href="/services" />
       <JsonLd data={serviceSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={faqSchema} />
 
       <div className={styles.container}>
         <header className={styles.hero}>
@@ -82,7 +130,8 @@ export default function MobileAppPage() {
           <p className={styles.heroDesc}>
             StackSpacer provides mobile app development services for businesses
             across the United States, with project communication and delivery
-            coordinated online.
+            coordinated online. You work directly with the developer — not an
+            account manager or a rotating team.
           </p>
           <Link href="/#contact" className={styles.ctaButton}>
             Discuss Your Project <span>↗</span>
@@ -198,6 +247,29 @@ export default function MobileAppPage() {
             <Link href="/insights/react-native-vs-flutter" className={styles.relatedReadingLink}>
             React Native vs Flutter: Choosing the Right Framework →
             </Link>
+        </section>
+
+        <div className={styles.divider} />
+
+        <section className={styles.section}>
+          <h2>Cost &amp; Scope</h2>
+          <p className={styles.costIntro}>
+            Every mobile app project is scoped individually. The following
+            factors shape timeline and investment:
+          </p>
+          <ul className={styles.costList}>
+            <li>Feature scope and number of screens</li>
+            <li>Third-party integrations and API connections</li>
+            <li>Authentication and user access requirements</li>
+            <li>Backend complexity and data requirements</li>
+            <li>Design depth and interaction requirements</li>
+            <li>Testing scope and app store submission</li>
+            <li>Ongoing maintenance and support needs</li>
+          </ul>
+          <p className={styles.costNote}>
+            Tell us what you want to build and StackSpacer can provide a
+            project-specific estimate.
+          </p>
         </section>
 
         <div className={styles.divider} />

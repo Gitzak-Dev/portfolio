@@ -57,12 +57,60 @@ const breadcrumbSchema = {
     })),
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What types of websites does StackSpacer build?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "StackSpacer builds landing pages, business websites, dashboards, web applications, and portfolio sites. Each project is custom-built based on the specific requirements and goals.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How long does a web development project take?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Timeline depends on scope, design complexity, integrations, and content requirements. A simple landing page may take a few days, while a full business website typically takes a few weeks.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do you handle hosting and deployment?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. StackSpacer can deploy projects to hosting platforms such as Vercel, Hostinger, or other providers. Deployment and ongoing hosting setup are discussed during the project kickoff.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Will the website be mobile-friendly?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Every project is built with a mobile-first approach. All pages are tested across desktop, tablet, and mobile devices to ensure a consistent experience.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What affects the cost of a web development project?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Project cost is shaped by scope, the number of screens and features, third-party integrations, authentication requirements, data or dashboard complexity, design requirements, testing depth, deployment environment, and ongoing maintenance needs. StackSpacer provides a project-specific estimate after the discovery phase.",
+      },
+    },
+  ],
+};
+
 export default function WebDevPage() {
   return (
     <main className={styles.page}>
       <PageBackHeader href="/services" />
       <JsonLd data={serviceSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={faqSchema} />
 
       <div className={styles.container}>
         <header className={styles.hero}>
@@ -82,7 +130,8 @@ export default function WebDevPage() {
           <p className={styles.heroDesc}>
             StackSpacer provides web development services for businesses across
             the United States, with project communication and delivery
-            coordinated online.
+            coordinated online. You work directly with the developer — not an
+            account manager or a rotating team.
           </p>
           <Link href="/#contact" className={styles.ctaButton}>
             Discuss Your Project <span>↗</span>
@@ -212,6 +261,29 @@ export default function WebDevPage() {
             <Link href="/insights/what-nextjs-production-ready" className={styles.relatedReadingLink}>
             What Makes a Next.js Application Production-Ready →
             </Link>
+        </section>
+
+        <div className={styles.divider} />
+
+        <section className={styles.section}>
+          <h2>Cost &amp; Scope</h2>
+          <p className={styles.costIntro}>
+            Every project is scoped individually. The following factors shape
+            timeline and investment:
+          </p>
+          <ul className={styles.costList}>
+            <li>Project scope and number of screens or pages</li>
+            <li>Third-party integrations and API connections</li>
+            <li>Authentication and user access requirements</li>
+            <li>Data complexity and dashboard requirements</li>
+            <li>Design depth and motion/interaction requirements</li>
+            <li>Testing scope and deployment environment</li>
+            <li>Ongoing maintenance and support needs</li>
+          </ul>
+          <p className={styles.costNote}>
+            Tell us what you want to build and StackSpacer can provide a
+            project-specific estimate.
+          </p>
         </section>
 
         <div className={styles.divider} />

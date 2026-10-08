@@ -6,9 +6,9 @@ import FaqAccordion from "@/components/FaqAccordion/FaqAccordion";
 import styles from "./MLPage.module.css";
 
 export const metadata: Metadata = {
-  title: "Machine Learning | StackSpacer",
-  description:
-    "Machine learning models and data-driven dashboards that turn raw data into clear predictions and actionable business insight.",
+      title: "Machine Learning Development Services | StackSpacer",
+      description:
+        "Machine learning development services for businesses across the United States. Prediction models, classification systems, data dashboards, and ML pipelines — delivered remotely by a developer.",
   alternates: {
     canonical: "/services/machine-learning",
   },
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/services/machine-learning",
     siteName: "StackSpacer",
-    title: "Machine Learning | StackSpacer",
+    title: "Machine Learning Development Services | StackSpacer",
     description:
-      "Machine learning models and data-driven dashboards that turn raw data into clear predictions and actionable business insight.",
+      "Machine learning development services for businesses across the United States. Prediction models, classification systems, data dashboards, and ML pipelines — delivered remotely by a developer.",
   },
 };
 
@@ -57,12 +57,60 @@ const breadcrumbSchema = {
     })),
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What types of ML projects does StackSpacer handle?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "StackSpacer builds prediction models, classification systems, data dashboards, and ML pipelines. Each project is scoped based on the data available and the business questions being asked.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do I need a large dataset to start?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Not necessarily. The required dataset size depends on the type of model and the complexity of the predictions. StackSpacer can assess your data during the discovery phase and recommend the best approach.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can ML models be integrated with our existing systems?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. StackSpacer can connect ML models to existing APIs, databases, and business tools through structured integration endpoints.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How long does an ML project take?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Timeline depends on data quality, model complexity, and dashboard requirements. A focused prediction model with a clean interface can take a few weeks, while a full pipeline with ongoing training may take longer.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What affects the cost of an ML project?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Project cost is shaped by data quality and preparation needs, model complexity, dashboard requirements, integration depth, testing scope, deployment environment, and ongoing maintenance. StackSpacer provides a project-specific estimate after the data review phase.",
+      },
+    },
+  ],
+};
+
 export default function MLPage() {
   return (
     <main className={styles.page}>
       <PageBackHeader href="/services" />
       <JsonLd data={serviceSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={faqSchema} />
 
       <div className={styles.container}>
         <header className={styles.hero}>
@@ -81,7 +129,8 @@ export default function MLPage() {
           <p className={styles.heroDesc}>
             StackSpacer provides machine learning development services for
             businesses across the United States, with project communication and
-            delivery coordinated online.
+            delivery coordinated online. You work directly with the developer —
+            not an account manager or a rotating team.
           </p>
           <Link href="/#contact" className={styles.ctaButton}>
             Discuss Your Project <span>↗</span>
@@ -170,6 +219,28 @@ export default function MLPage() {
               </article>
             ))}
           </div>
+        </section>
+
+        <div className={styles.divider} />
+
+        <section className={styles.section}>
+          <h2>Cost &amp; Scope</h2>
+          <p className={styles.costIntro}>
+            Every machine learning project is scoped individually. The following
+            factors shape timeline and investment:
+          </p>
+          <ul className={styles.costList}>
+            <li>Data quality, preparation, and availability</li>
+            <li>Model complexity and prediction type</li>
+            <li>Dashboard requirements and visualization depth</li>
+            <li>Integration with existing systems and APIs</li>
+            <li>Testing scope and validation requirements</li>
+            <li>Deployment environment and ongoing maintenance</li>
+          </ul>
+          <p className={styles.costNote}>
+            Tell us about your data and goals and StackSpacer can provide a
+            project-specific estimate.
+          </p>
         </section>
 
         <div className={styles.divider} />

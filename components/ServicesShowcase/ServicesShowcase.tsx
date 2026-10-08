@@ -103,15 +103,14 @@ export default function ServicesShowcase() {
               const isActive = activeIndex === index;
 
               return (
-                <button
+                <Link
                   key={service.id}
-                  type="button"
+                  href={service.link}
                   className={`${styles.serviceItem} ${
                     isActive ? styles.activeService : ""
                   }`}
                   onMouseEnter={() => setActiveIndex(index)}
                   onFocus={() => setActiveIndex(index)}
-                  onClick={() => setActiveIndex(index)}
                   aria-pressed={isActive}
                   aria-controls="service-preview-panel"
                 >
@@ -120,7 +119,7 @@ export default function ServicesShowcase() {
                   <span className={styles.serviceTitle}>{service.title}</span>
 
                   <span className={styles.serviceArrow}>↗</span>
-                </button>
+                </Link>
               );
             })}
           </div>
