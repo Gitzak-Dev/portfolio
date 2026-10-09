@@ -183,6 +183,12 @@
   resize: vertical;
 }
 
+/* Fix native option list visibility in dark theme */
+.searchBoxInput select option {
+  color: #fff;
+  background: #0e0e0e;
+}
+
 .searchForm button,
 .clearButton {
   height: 48px;
