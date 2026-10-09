@@ -12,7 +12,7 @@ A common misconception is that software development has a standard price list. I
 
 This is why estimates vary so much between developers and agencies. Some quote for a narrow definition of the project. Others include testing, deployment, security hardening, and post-launch support in their initial numbers. Understanding what goes into a estimate is the first step toward budgeting accurately.
 
-The wide range you see in industry reports — from a few thousand dollars to well over six figures — reflects this variation in scope, not inconsistency in pricing. A project that starts as a simple workflow tool can grow into a multi-module platform if requirements expand during development. Clear scoping up front is the most effective way to control costs.
+Simple internal tools may require a relatively limited scope, while complex multi-role platforms, integrations, data systems, and AI capabilities can require substantially more development effort.
 
 ---
 
@@ -72,7 +72,7 @@ Some projects can run on modest shared hosting. Others require managed cloud inf
 
 Post-launch support is a real cost that some estimates omit. Bugs need fixing. Dependencies need updating. Security patches need applying. Feature requests accumulate. A maintenance agreement or retained development hours ensure the application stays current and secure.
 
-Annual maintenance typically ranges from 15–20% of the original development cost for applications that receive ongoing updates. For applications that are stable and rarely changed, the cost is lower. This is worth considering when comparing total cost of ownership against off-the-shelf software, which also has subscription fees and limited customization.
+Ongoing maintenance costs vary with the size and complexity of the application, how frequently it changes, the integrations it depends on, and the level of monitoring, security, and support required. This is worth considering when comparing total cost of ownership against off-the-shelf software, which also has subscription fees and limited customization.
 
 ---
 
