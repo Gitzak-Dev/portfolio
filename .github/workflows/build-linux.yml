@@ -103,16 +103,18 @@ jobs:
         run: |
           TIMESTAMP=$(date -u +%Y%m%d-%H%M%S)
           echo "TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
-          mkdir -p artifact-build
-          cp -r .next artifact-build/.next
-          cp package.json artifact-build/
-          cp package-lock.json artifact-build/
-          cp -r node_modules/@prisma/client artifact-build/node_modules/@prisma/client
-          cp -r prisma artifact-build/prisma
-          # Copy Linux Prisma query engine binaries
+          mkdir -p artifact-build/.next
           mkdir -p artifact-build/node_modules/.prisma/client
-          find node_modules/.prisma/client -name "query_engine-linux*" -exec cp {} artifact-build/node_modules/.prisma/client/ \;
-          find node_modules/.prisma/client -name "query_engine-rhel*" -exec cp {} artifact-build/node_modules/.prisma/client/ \;
+          mkdir -p artifact-build/node_modules/@prisma
+          mkdir -p artifact-build/prisma
+          cp -r .next/. artifact-build/.next/
+          cp package.json package-lock.json artifact-build/
+          cp -r node_modules/@prisma/client/. artifact-build/node_modules/@prisma/client/
+          cp -r prisma/. artifact-build/prisma/
+          # Copy Linux Prisma query engine binaries to top-level client dir
+          for f in node_modules/.prisma/client/query_engine-linux*.node node_modules/.prisma/client/query_engine-rhel*.node; do
+            [ -f "$f" ] && cp "$f" artifact-build/node_modules/.prisma/client/
+          done
           cd artifact-build
           tar -czf ../stackspacer-linux-build-${TIMESTAMP}.tar.gz .
           cd ..
