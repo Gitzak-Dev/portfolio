@@ -103,13 +103,19 @@ jobs:
         run: |
           TIMESTAMP=$(date -u +%Y%m%d-%H%M%S)
           echo "TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
-          tar -czf stackspacer-linux-build-${TIMESTAMP}.tar.gz \
-            .next/ \
-            package.json \
-            package-lock.json \
-            node_modules/.prisma/client/query_engine-linux*.node \
-            node_modules/@prisma/client/ \
-            prisma/
+          mkdir -p artifact-build
+          cp -r .next artifact-build/.next
+          cp package.json artifact-build/
+          cp package-lock.json artifact-build/
+          cp -r node_modules/@prisma/client artifact-build/node_modules/@prisma/client
+          cp -r prisma artifact-build/prisma
+          # Copy Linux Prisma query engine binaries
+          mkdir -p artifact-build/node_modules/.prisma/client
+          find node_modules/.prisma/client -name "query_engine-linux*" -exec cp {} artifact-build/node_modules/.prisma/client/ \;
+          find node_modules/.prisma/client -name "query_engine-rhel*" -exec cp {} artifact-build/node_modules/.prisma/client/ \;
+          cd artifact-build
+          tar -czf ../stackspacer-linux-build-${TIMESTAMP}.tar.gz .
+          cd ..
           ls -lh stackspacer-linux-build-${TIMESTAMP}.tar.gz
 
       - name: Upload build artifact
