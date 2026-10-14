@@ -1,0 +1,133 @@
+name: Linux Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Upload artifact for deployment'
+        type: boolean
+        required: true
+        default: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      NODE_VERSION: '22'
+      DATABASE_URL: 'file:./dev.db'
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create build-only SQLite database
+        run: |
+          mkdir -p prisma-build
+          touch prisma-build/dev.db
+          npx prisma db push --skip-generate --force-reset 2>/dev/null || true
+
+      - name: Generate Prisma Client (Linux)
+        env:
+          DATABASE_URL: 'file:./prisma-build/dev.db'
+        run: npx prisma generate
+
+      - name: Verify no Windows binaries
+        run: |
+          echo "=== Checking for Windows Prisma binaries ==="
+          if grep -r "query_engine-windows" .next/ node_modules/.prisma/client/ 2>/dev/null; then
+            echo "ERROR: Windows binary found!"
+            exit 1
+          fi
+          echo "=== Checking .nft.json traces ==="
+          if grep -rl "query_engine-windows" .next/ 2>/dev/null; then
+            echo "ERROR: Windows reference found in .nft.json files!"
+            exit 1
+          fi
+          echo "=== Checking for Windows paths ==="
+          if grep -rl "C:\\\\Users" .next/ 2>/dev/null; then
+            echo "ERROR: Windows paths found in build artifacts!"
+            exit 1
+          fi
+          echo "PASS: No Windows binaries or paths detected"
+          echo ""
+          echo "=== Prisma client binaries ==="
+          ls -la node_modules/.prisma/client/query_engine*.node 2>/dev/null || echo "No .node binaries in .prisma/client"
+          echo ""
+          echo "=== Linux Prisma binary ==="
+          ls -la node_modules/.prisma/client/ | grep -i linux || true
+
+      - name: Next.js production build
+        env:
+          DATABASE_URL: 'file:./prisma-build/dev.db'
+          NODE_ENV: production
+        run: npx next build
+
+      - name: Capture BUILD_ID
+        run: cat .next/BUILD_ID
+
+      - name: Verify build artifacts
+        run: |
+          echo "=== Build verification ==="
+          test -f .next/BUILD_ID && echo "BUILD_ID: $(cat .next/BUILD_ID)" || echo "MISSING: BUILD_ID"
+          test -d .next/server && echo "PASS: .next/server exists" || echo "FAIL: .next/server missing"
+          test -d .next/static && echo "PASS: .next/static exists" || echo "FAIL: .next/static missing"
+          test -d .next/static/css && echo "PASS: .next/static/css exists" || echo "FAIL: .next/static/css missing"
+          test -d .next/static/chunks && echo "PASS: .next/static/chunks exists" || echo "FAIL: .next/static/chunks missing"
+          echo ""
+          echo "=== Checking .nft.json for Windows references ==="
+          WINDOWS_COUNT=$(grep -rl "query_engine-windows\|C:\\\\Users" .next/ 2>/dev/null | wc -l)
+          echo "Windows references in .next: ${WINDOWS_COUNT}"
+          if [ "${WINDOWS_COUNT}" -gt "0" ]; then
+            echo "ERROR: Found Windows references in build artifacts"
+            grep -rl "query_engine-windows\|C:\\\\Users" .next/ 2>/dev/null
+            exit 1
+          fi
+          echo "PASS: No Windows references in build artifacts"
+          echo ""
+          echo "=== Prisma engine files in build ==="
+          grep -rl "query_engine" .next/ 2>/dev/null | head -5 || true
+          grep "query_engine" .next/server/.next/server/app/insights/page.js.nft.json 2>/dev/null | head -3 || true
+
+      - name: Package build artifact
+        run: |
+          TIMESTAMP=$(date -u +%Y%m%d-%H%M%S)
+          echo "TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
+          tar -czf stackspacer-linux-build-${TIMESTAMP}.tar.gz \
+            .next/ \
+            package.json \
+            package-lock.json \
+            node_modules/.prisma/client/query_engine-linux*.node \
+            node_modules/@prisma/client/ \
+            prisma/
+          ls -lh stackspacer-linux-build-${TIMESTAMP}.tar.gz
+
+      - name: Upload build artifact
+        if: github.event.inputs.deploy == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: stackspacer-linux-build-${{ env.TIMESTAMP }}
+          path: stackspacer-linux-build-${{ env.TIMESTAMP }}.tar.gz
+          retention-days: 7
+
+      - name: Output deployment instructions
+        if: github.event.inputs.deploy == 'true'
+        run: |
+          echo "=== BUILD COMPLETE ==="
+          echo "BUILD_ID: $(cat .next/BUILD_ID)"
+          echo "Artifact: stackspacer-linux-build-${{ env.TIMESTAMP }}.tar.gz"
+          echo ""
+          echo "DEPLOYMENT STEPS:"
+          echo "1. Download artifact from GitHub Actions artifacts tab"
+          echo "2. SSH to production: ssh u318730766@stackspacer.com"
+          echo "3. Run deploy script on production (see deploy-linux.sh)"
