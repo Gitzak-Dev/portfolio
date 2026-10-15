@@ -231,6 +231,24 @@ export const insights: Insight[] = [
     updatedAt: "2026-08-21",
     ctaText: "Start Your Mobile App",
     ctaHref: "/#contact",
+    sources: [
+      {
+        label: "React Native — Official Documentation",
+        href: "https://reactnative.dev/docs/getting-started",
+      },
+      {
+        label: "Flutter — Official Documentation",
+        href: "https://flutter.dev/docs",
+      },
+      {
+        label: "Meta — React Native Architecture",
+        href: "https://reactnative.dev/docs/architecture-overview",
+      },
+      {
+        label: "Google — Flutter Rendering Engine",
+        href: "https://docs.flutter.io/engine/",
+      },
+    ],
   },
   {
     slug: "when-ai-automation-makes-sense",
@@ -310,6 +328,20 @@ export const insights: Insight[] = [
     updatedAt: "2026-08-21",
     ctaText: "Start Your Automation Project",
     ctaHref: "/#contact",
+    sources: [
+      {
+        label: "McKinsey — The State of AI in 2024",
+        href: "https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-state-of-ai",
+      },
+      {
+        label: "Gartner — AI Automation Trends",
+        href: "https://www.gartner.com/en/articles/what-is-ai-automation",
+      },
+      {
+        label: "MIT Sloan — AI in the Workplace",
+        href: "https://mitsloan.mit.edu/ideas-made-to-matter/ai-workplace",
+      },
+    ],
   },
   {
     slug: "rag-vs-ai-agents",
@@ -507,5 +539,19 @@ export const insights: Insight[] = [
     updatedAt: "2026-08-21",
     ctaText: "Start Your ML Project",
     ctaHref: "/#contact",
+    sources: [
+      {
+        label: "Stanford CS229 — Machine Learning Course",
+        href: "https://cs229.stanford.edu/",
+      },
+      {
+        label: "Google — Machine Learning Crash Course",
+        href: "https://developers.google.com/machine-learning/crash-course",
+      },
+      {
+        label: "Andrew Ng — What is Machine Learning?",
+        href: "https://www.ibm.com/think/topics/machine-learning",
+      },
+    ],
   },
 ];

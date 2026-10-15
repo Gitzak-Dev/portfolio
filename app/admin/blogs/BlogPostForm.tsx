@@ -508,9 +508,17 @@ export default function BlogPostForm({
   };
 
   const hasContent = sections.some((s) => s.heading.trim() || s.paragraphs.some((p) => p.trim()));
+  const hasSources = sources.length > 0 && sources.some((s) => s.label.trim() && s.href.trim());
 
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+      {/* SOURCES HINT */}
+      {!hasSources && (
+        <div style={{ padding: "14px 18px", borderRadius: "12px", background: "rgba(255,193,7,0.06)", border: "1px solid rgba(255,193,7,0.25)", color: "rgba(255,193,7,0.9)", fontFamily: "var(--font-plus-jakarta), sans-serif", fontSize: "0.88rem", lineHeight: "1.5" }}>
+          <strong>References are required for publication.</strong> Drafts can be saved without sources, but published articles must include at least one verified reference.
+        </div>
+      )}
+
       {/* ARTICLE BASICS */}
       <Panel label="Article Basics">
         <FieldRow label="Title" required htmlFor={titleId}>

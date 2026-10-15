@@ -101,6 +101,21 @@ async function validateContentFields(data: z.infer<typeof blogPostSchema>) {
   return { sections, faqs, sources, relatedProjects, relatedInsights };
 }
 
+export async function validateForPublish(id: string): Promise<{ success: boolean; error?: string }> {
+  const existing = await prisma.blogPost.findUnique({ where: { id } });
+  if (!existing) return { success: false, error: "Post not found." };
+  if (existing.status === "published") return { success: true };
+
+  const sources = parseJsonSafe<Array<{ label?: string; href?: string }>>(existing.sourcesJson, []);
+  const hasSources = Array.isArray(sources) && sources.length > 0;
+
+  if (!hasSources) {
+    return { success: false, error: "Add at least one verified reference before publishing." };
+  }
+
+  return { success: true };
+}
+
 export async function createBlogPost(formData: FormData) {
   await requireAdmin();
 
@@ -271,6 +286,13 @@ export async function publishBlogPost(formData: FormData) {
   const existing = await prisma.blogPost.findUnique({ where: { id } });
   if (!existing) redirect("/admin/blogs");
   if (existing.status === "published") redirect("/admin/blogs");
+
+  const validation = await validateForPublish(id);
+  if (!validation.success) {
+    const cookieStore = await cookies();
+    cookieStore.set("blog_error", validation.error ?? "", { path: "/" });
+    redirect(`/admin/blogs/${id}/edit`);
+  }
 
   try {
     await setBlogPostPublished(existing);
@@ -524,6 +546,11 @@ export async function publishBlogPostById(id: string) {
   const existing = await prisma.blogPost.findUnique({ where: { id } });
   if (!existing) return { success: false, error: "Post not found." };
   if (existing.status === "published") return { success: true };
+
+  const validation = await validateForPublish(id);
+  if (!validation.success) {
+    return { success: false, error: validation.error ?? "Add at least one verified reference before publishing." };
+  }
 
   try {
     await setBlogPostPublished(existing);

@@ -456,10 +456,19 @@ export default function BlogEditForm({ initialPost, isPublished, excludeInsightS
   }, [initialPost.id, title, slug, category, description, standfirst, seoTitle, seoDescription, sections, faqs, sources, relatedService, relatedProjects, relatedInsights]);
 
   const hasContent = sections.some((s) => s.heading.trim() || s.paragraphs.some((p) => p.trim()));
+  const hasSources = sources.length > 0 && sources.some((s) => s.label.trim() && s.href.trim());
+  const publishWarning = !isPublished && !hasSources;
 
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
       <input type="hidden" name="id" value={initialPost.id} />
+
+      {/* PUBLISH WARNING */}
+      {publishWarning && (
+        <div style={{ padding: "14px 18px", borderRadius: "12px", background: "rgba(255,193,7,0.06)", border: "1px solid rgba(255,193,7,0.25)", color: "rgba(255,193,7,0.9)", fontFamily: "var(--font-plus-jakarta), sans-serif", fontSize: "0.88rem", lineHeight: "1.5" }}>
+          <strong>Publication requires references.</strong> Add at least one verified source in the Sources section below before publishing this article.
+        </div>
+      )}
 
       {/* ARTICLE BASICS */}
       <Panel label="Article Basics">
