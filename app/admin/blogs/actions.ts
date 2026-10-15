@@ -38,7 +38,7 @@ const blogPostSchema = z.object({
   seoDescription: z.string().max(300).optional().default(""),
 });
 
-function parseJsonSafe<T>(value: string, fallback: T): T {
+function parseJsonSafe<T>(value: string | null, fallback: T): T {
   if (!value || value.trim() === "") return fallback;
   try {
     return JSON.parse(value) as T;
