@@ -120,13 +120,24 @@ jobs:
           cd ..
           ls -lh stackspacer-linux-build-${TIMESTAMP}.tar.gz
 
+      - name: Verify artifact exists before upload
+        run: |
+          echo "=== Artifact verification ==="
+          echo "TIMESTAMP: ${TIMESTAMP}"
+          ls -lh stackspacer-linux-build-${TIMESTAMP}.tar.gz
+          test -f stackspacer-linux-build-${TIMESTAMP}.tar.gz || (echo "ERROR: Artifact file not found for upload" && exit 1)
+          echo "=== Verifying .next/BUILD_ID inside tar.gz ==="
+          tar -tzf stackspacer-linux-build-${TIMESTAMP}.tar.gz | grep -q "./.next/BUILD_ID" && echo "PASS: .next/BUILD_ID present in artifact" || (echo "ERROR: .next/BUILD_ID missing from artifact" && exit 1)
+          tar -xzf stackspacer-linux-build-${TIMESTAMP}.tar.gz -O ./.next/BUILD_ID 2>/dev/null | head -c 50 && echo ""
+          echo "=== Artifact verification complete ==="
+
       - name: Upload build artifact
-        if: github.event.inputs.deploy == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: stackspacer-linux-build-${{ env.TIMESTAMP }}
           path: stackspacer-linux-build-${{ env.TIMESTAMP }}.tar.gz
           retention-days: 7
+          if-no-files-found: error
 
       - name: Output deployment instructions
         if: github.event.inputs.deploy == 'true'
