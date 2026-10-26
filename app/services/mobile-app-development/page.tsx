@@ -6,9 +6,9 @@ import FaqAccordion from "@/components/FaqAccordion/FaqAccordion";
 import styles from "./MobileAppPage.module.css";
 
 export const metadata: Metadata = {
-  title: "Mobile App Development | StackSpacer",
+  title: "Mobile App Development Company | StackSpacer",
   description:
-    "Cross-platform mobile apps for iOS and Android using React Native. Clean UI, reliable APIs, and scalable architecture.",
+    "Cross-platform mobile app development for US businesses. React Native apps for iOS and Android built for speed, usability, and business outcomes.",
   alternates: {
     canonical: "/services/mobile-app-development",
   },
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/services/mobile-app-development",
     siteName: "StackSpacer",
-    title: "Mobile App Development | StackSpacer",
+    title: "Mobile App Development Company | StackSpacer",
     description:
-      "Cross-platform mobile apps for iOS and Android using React Native. Clean UI, reliable APIs, and scalable architecture.",
+      "Cross-platform mobile app development for US businesses. React Native apps for iOS and Android built for speed, usability, and business outcomes.",
   },
 };
 
@@ -245,7 +245,7 @@ export default function MobileAppPage() {
         <section className={styles.section}>
           <h2>Related Reading</h2>
             <Link href="/insights/react-native-vs-flutter" className={styles.relatedReadingLink}>
-            React Native vs Flutter: Choosing the Right Framework →
+            React Native vs Flutter: Choosing the Right Framework for Mobile Development →
             </Link>
         </section>
 

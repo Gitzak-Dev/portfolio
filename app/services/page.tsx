@@ -4,9 +4,9 @@ import PageBackHeader from "@/components/PageBackHeader/PageBackHeader";
 import styles from "./ServicesPage.module.css";
 
 export const metadata: Metadata = {
-  title: "Custom Software Development Services | StackSpacer",
+  title: "Custom Software Development Company | StackSpacer",
   description:
-    "Custom web development, mobile apps, AI automation, and machine learning systems. StackSpacer builds digital products for startups and businesses.",
+    "Custom software development for US businesses. Web development, mobile app development, AI automation, and machine learning services with direct collaboration and modern technology.",
   alternates: {
     canonical: "/services",
   },
@@ -15,9 +15,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/services",
     siteName: "StackSpacer",
-    title: "Custom Software Development Services | StackSpacer",
+    title: "Custom Software Development Company | StackSpacer",
     description:
-      "Custom web development, mobile apps, AI automation, and machine learning systems. StackSpacer builds digital products for startups and businesses.",
+      "Custom software development for US businesses. Web development, mobile app development, AI automation, and machine learning services with direct collaboration and modern technology.",
   },
 };
 

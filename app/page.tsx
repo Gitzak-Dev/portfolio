@@ -19,17 +19,17 @@ import AnswerBlock from "@/components/AnswerBlock/AnswerBlock";
 import HomepageFaq from "@/components/HomepageFaq/HomepageFaq";
 
 export const metadata: Metadata = {
-  title: "StackSpacer | Web, Mobile App, AI & ML Development for US Businesses",
+  title: "StackSpacer | Custom Software Development Company for US Businesses",
   description:
-    "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across the United States.",
+    "Custom software development for US businesses. Web development, mobile app development, AI automation, and machine learning services with direct collaboration and measurable business outcomes.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     siteName: siteConfig.name,
-    title: "StackSpacer | Web, Mobile App, AI & ML Development for US Businesses",
+    title: "StackSpacer | Custom Software Development Company for US Businesses",
     description:
-      "StackSpacer provides web development, mobile app development, AI automation, and machine learning services for businesses across the United States.",
+      "Custom software development for US businesses. Web development, mobile app development, AI automation, and machine learning services with direct collaboration and measurable business outcomes.",
   },
 };
 

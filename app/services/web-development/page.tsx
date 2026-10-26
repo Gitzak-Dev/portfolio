@@ -6,9 +6,9 @@ import FaqAccordion from "@/components/FaqAccordion/FaqAccordion";
 import styles from "./WebDevPage.module.css";
 
 export const metadata: Metadata = {
-  title: "Web Development | StackSpacer",
+  title: "Web Development Company | StackSpacer",
   description:
-    "Custom web applications built with Next.js, React, and TypeScript. Performance-focused development for landing pages, dashboards, and business websites.",
+    "Custom web development for US businesses. Next.js, React, and TypeScript applications built for performance, SEO, and business outcomes.",
   alternates: {
     canonical: "/services/web-development",
   },
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/services/web-development",
     siteName: "StackSpacer",
-    title: "Web Development | StackSpacer",
+    title: "Web Development Company | StackSpacer",
     description:
-      "Custom web applications built with Next.js, React, and TypeScript. Performance-focused development for landing pages, dashboards, and business websites.",
+      "Custom web development for US businesses. Next.js, React, and TypeScript applications built for performance, SEO, and business outcomes.",
   },
 };
 

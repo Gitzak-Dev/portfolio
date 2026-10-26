@@ -6,9 +6,9 @@ import FaqAccordion from "@/components/FaqAccordion/FaqAccordion";
 import styles from "./AiAutomationPage.module.css";
 
 export const metadata: Metadata = {
-  title: "AI Automation | StackSpacer",
+  title: "AI Automation Services | StackSpacer",
   description:
-    "AI-powered automation systems, chatbots, and workflow tools that reduce manual work and improve business efficiency.",
+    "AI automation for US businesses. Workflow automation, AI agents, and intelligent systems that cut costs and streamline operations.",
   alternates: {
     canonical: "/services/ai-automation",
   },
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/services/ai-automation",
     siteName: "StackSpacer",
-    title: "AI Automation | StackSpacer",
+    title: "AI Automation Services | StackSpacer",
     description:
-      "AI-powered automation systems, chatbots, and workflow tools that reduce manual work and improve business efficiency.",
+      "AI automation for US businesses. Workflow automation, AI agents, and intelligent systems that cut costs and streamline operations.",
   },
 };
 
@@ -245,10 +245,10 @@ export default function AiAutomationPage() {
           <h2>Related Reading</h2>
           <div className={styles.relatedReadingLinks}>
             <Link href="/insights/when-ai-automation-makes-sense" className={styles.relatedReadingLink}>
-              When AI Automation Makes Sense (And When It Doesn&apos;t) →
+              When AI Automation Makes Sense (And When It Doesn&apos;t) ?
             </Link>
             <Link href="/insights/rag-vs-ai-agents" className={styles.relatedReadingLink}>
-              RAG vs AI Agents: Architecture Choices for Different Problems →
+              RAG vs AI Agents: Architecture Choices for Different Problems ?
             </Link>
           </div>
         </section>
